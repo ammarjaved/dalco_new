@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+
         <script type="importmap">
             {
               "imports": {
@@ -18,6 +19,7 @@
       
 
         <title>DALCO</title>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
         <script type="module">
             import '@material/web/all.js';
             import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
