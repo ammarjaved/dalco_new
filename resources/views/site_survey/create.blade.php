@@ -59,53 +59,7 @@
             @method('PUT')
         @endif
 
-
-        <md-tabs id="myTab">
-            <md-primary-tab id="tab1-tab" active>Site Survey Info</md-primary-tab>
-            <md-primary-tab id="tab2-tab">Site Survey Pic</md-primary-tab>
-            <md-primary-tab id="tab3-tab">Tool Box Talk</md-primary-tab>
-        </md-tabs>
-
-
-        {{-- <div class="tab-content">
-            <div id="tab1-content" class="active">
-                <h2>Site Survey Info</h2>
-                <p>Content for Site Survey Info goes here.</p>
-            </div>
-            <div id="tab2-content">
-                <h2>Site Survey Pic</h2>
-                <p>Content for Site Survey Pic goes here.</p>
-            </div>
-            <div id="tab3-content">
-                <h2>Tool Box Talk</h2>
-                <p>Content for Tool Box Talk goes here.</p>
-            </div>
-        </div> --}}
-
-        {{-- <md-tabs id="myTab" role="tablist">
-            <!-- First Tab: Site Survey Info -->
-            <md-primary-tab>
-                <a  active id="tab1-tab" onclick="updateButtonsfromTabs(0)" data-toggle="tab" href="#tab1" role="tab">
-                Site Survey Info
-                </a>
-            </md-primary-tab>
-        
-            <!-- Second Tab: Site Survey Pic -->
-            <md-primary-tab >
-                <a id="tab2-tab" onclick="updateButtonsfromTabs(1)" data-toggle="tab" href="#tab2" role="tab">
-                Site Survey Pic
-                </a>
-            </md-primary-tab>
-        
-            <!-- Third Tab: Tool Box Talk -->
-            <md-primary-tab>
-                <a id="tab3-tab" onclick="updateButtonsfromTabs(2)" data-toggle="tab" href="#tab3" role="tab">
-                Tool Box Talk
-                </a>
-            </md-primary-tab>
-        </md-tabs> --}}
-
-    {{-- <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
         <a class="nav-link active" id="tab1-tab" onclick="updateButtonsfromTabs(0)" data-toggle="tab" href="#tab1" role="tab">Site Survey Info</a>
       </li>
@@ -117,14 +71,11 @@
         <a class="nav-link" id="tab3-tab" onclick="updateButtonsfromTabs(2)" data-toggle="tab" href="#tab3" role="tab">Tool Box Talk</a>
       </li>
      
-    </ul> --}}
-
-
-
+    </ul>
 
 
     <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active"  id="tab1-content" role="tabpanel">
+      <div class="tab-pane fade show active" id="tab1" role="tabpanel">
     <h3 class="mt-3">Site Survey Information</h3>
         <div class="row">
             <div class="col-md-4">
@@ -142,28 +93,12 @@
                     <div id="kawasan_error" class="text-danger" style="display: none;">Please fill this field.</div>
                 </div>
             </div>
-
-
-            <div class="col-md-4">
-                <div  class="label" style="margin-bottom: 15px; flex-direction:row">
-                    <md-label style="display: block; margin-bottom: 5px;">Peparit:</md-label>
-            
-                    <md-radio-group>
-            
-                        <!-- Yes Radio Button with Label -->
-                        <md-radio value="yes" name="peparit" {{ (old('peparit', $siteSurvey->peparit ?? '') == 'yes') ? 'checked' : '' }}></md-radio>
-                        <md-label for="peparit-yes" style="margin-right: 15px;">Yes</md-label>
-            
-                        <!-- No Radio Button with Label -->
-                        <md-radio value="no" name="peparit" {{ (old('peparit', $siteSurvey->peparit ?? '') == 'no') ? 'checked' : '' }}></md-radio>
-                        <md-label  for="peparit-no">No</md-label>
-            
-                    </md-radio-group>
-                </div>
-            </div>
-    
-
-
+        <div class="col-md-4">
+        <div class="form-group">
+            <!-- <label for="fl">FL</label> -->
+            <md-outlined-text-field label="FL" id="fl" class="label" name="fl" value="{{ $siteSurvey->fl ?? old('fl') }}"/>
+        </div>
+        </div>
         <div class="col-md-4">
         <div class="form-group">
             {{-- <label for="jenis">PE Jenis</label> --}}
@@ -179,11 +114,23 @@
 
         
         <div class="col-md-4">
-            <div class="form-group">
-                <!-- <label for="fl">FL</label> -->
-                <md-outlined-text-field label="FL" id="fl" class="label" name="fl" value="{{ $siteSurvey->fl ?? old('fl') }}"/>
+            <div  class="label" style="margin-bottom: 15px; flex-direction:row">
+                <md-label style="display: block; margin-bottom: 5px;">Peparit:</md-label>
+        
+                <md-radio-group>
+        
+                    <!-- Yes Radio Button with Label -->
+                    <md-radio value="yes" name="peparit" {{ (old('peparit', $siteSurvey->peparit ?? '') == 'yes') ? 'checked' : '' }}></md-radio>
+                    <md-label for="peparit-yes" style="margin-right: 15px;">Yes</md-label>
+        
+                    <!-- No Radio Button with Label -->
+                    <md-radio value="no" name="peparit" {{ (old('peparit', $siteSurvey->peparit ?? '') == 'no') ? 'checked' : '' }}></md-radio>
+                    <md-label  for="peparit-no">No</md-label>
+        
+                </md-radio-group>
             </div>
-            </div>
+        </div>
+
 
         <div class="col-md-4">
                 <div class="form-group">
@@ -331,11 +278,24 @@
         
 
         <div class="col-md-4">
-            <div class="form-group">
-                {{-- <label for="bacaan_beban">Bacaan Beban</label> --}}
-                <md-outlined-text-field class="label" type="text" label="Bacaan Beban"   id="bacaan_beban" name="bacaan_beban" value="{{ $siteSurvey->bacaan_beban ?? old('bacaan_beban') }}">
+            <div class="label" style="margin-bottom: 15px; flex-direction:row;">
+                <!-- SCADA Status Label -->
+                <md-label style="display: block; margin-bottom: 5px;">SCADA Status:</md-label>
+        
+                <!-- Radio Group for SCADA Status -->
+                <md-radio-group>
+                    <!-- Yes Radio Button -->
+                    <md-radio value="yes" name="scada_status" {{ (old('scada_status', $siteSurvey->scada_status ?? '') == 'yes') ? 'checked' : '' }}>
+                    </md-radio>
+                    <md-label for="scada_status-yes" style="margin-right: 15px;">Yes</md-label>
+        
+                    <!-- No Radio Button -->
+                    <md-radio value="no" name="scada_status" {{ (old('scada_status', $siteSurvey->scada_status ?? '') == 'no') ? 'checked' : '' }}>
+                    </md-radio>
+                    <md-label for="scada_status-no">No</md-label>
+                </md-radio-group>
             </div>
-            </div>
+        </div>
 
 
 
@@ -362,68 +322,47 @@
 
 
         <div class="col-md-4">
-            <div class="label" style="margin-bottom: 15px; flex-direction:row;">
-                <!-- SCADA Status Label -->
-                <md-label style="display: block; margin-bottom: 5px;">SCADA Status:</md-label>
-        
-                <!-- Radio Group for SCADA Status -->
-                <md-radio-group>
-                    <!-- Yes Radio Button -->
-                    <md-radio value="yes" name="scada_status" {{ (old('scada_status', $siteSurvey->scada_status ?? '') == 'yes') ? 'checked' : '' }}>
-                    </md-radio>
-                    <md-label for="scada_status-yes" style="margin-right: 15px;">Yes</md-label>
-        
-                    <!-- No Radio Button -->
-                    <md-radio value="no" name="scada_status" {{ (old('scada_status', $siteSurvey->scada_status ?? '') == 'no') ? 'checked' : '' }}>
-                    </md-radio>
-                    <md-label for="scada_status-no">No</md-label>
-                </md-radio-group>
-            </div>
-        </div>
-
-
-
-        <div class="col-md-4">
-            <div class="label" style="margin-bottom: 15px; flex-direction:row;">
-                <!-- Jenis LVDB Label -->
-                <md-label style="display: block; margin-bottom: 5px;">Jenis LVDB:</md-label>
-        
-                <!-- Radio Group for Jenis LVDB -->
-                <md-radio-group>
-                    <!-- DIN Radio Button -->
-                    <md-radio value="DIN" name="jenis_lvdb" {{ (old('jenis_lvdb', $siteSurvey->jenis_lvdb ?? '') == 'DIN') ? 'checked' : '' }}>
-                    </md-radio>
-                    <md-label for="jenis_lvdb-din" style="margin-right: 15px;">DIN</md-label>
-        
-                    <!-- BS Radio Button -->
-                    <md-radio value="BS" name="jenis_lvdb" {{ (old('jenis_lvdb', $siteSurvey->jenis_lvdb ?? '') == 'BS') ? 'checked' : '' }}>
-                    </md-radio>
-                    <md-label for="jenis_lvdb-bs">BS</md-label>
-                </md-radio-group>
-            </div>
-        </div>
-
-        
-        <div class="col-md-4">
-            <div class="form-group">
-                {{-- <label for="genset">Genset</label> --}}
-                <md-outlined-text-field class="label" type="text" label="Genset"  id="genset" name="genset" value="{{ $siteSurvey->genset ?? old('genset') }}">
-            </div>
-            </div>
-    
-
-
-
-        <div class="col-md-4">
         <div class="form-group">
-            {{-- <label for="keperluan_khas_kerja">Keperluan Khas Kerja</label> --}}
-            <md-outlined-text-field class="label" type="text" label="Keperluan Khas Kerja"  id="keperluan_khas_kerja" name="keperluan_khas_kerja" value="{{ $siteSurvey->keperluan_khas_kerja ?? old('keperluan_khas_kerja') }}">
+            {{-- <label for="bacaan_beban">Bacaan Beban</label> --}}
+            <md-outlined-text-field class="label" type="text" label=""class="form-control" id="bacaan_beban" name="bacaan_beban" value="{{ $siteSurvey->bacaan_beban ?? old('bacaan_beban') }}">
         </div>
         </div>
 
 
 
-
+        <div class="col-md-6">
+        <div class="form-group">
+            <label for="genset">Genset</label>
+            <md-outlined-text-field class="label" type="text" label=""class="form-control" id="genset" name="genset" value="{{ $siteSurvey->genset ?? old('genset') }}">
+        </div>
+        </div>
+        <div class="col-md-6">
+        <div class="form-group">
+            <label for="jenis_lvdb">Jenis LVDB</label>
+            <!-- <input type="text" class="form-control" id="jenis_lvdb" name="jenis_lvdb" value="{{ $siteSurvey->jenis_lvdb ?? old('jenis_lvdb') }}"> -->
+            <label style="display: inline-block; margin-right: 15px;">
+        <input type="radio" name="jenis_lvdb" value="DIN" {{ (old('jenis_lvdb', $siteSurvey->jenis_lvdb ?? '') == 'DIN') ? 'checked' : '' }} style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;">
+            DIN
+        </label>
+        <label style="display: inline-block;">
+            <input type="radio" name="jenis_lvdb" value="BS" {{ (old('jenis_lvdb', $siteSurvey->jenis_lvdb ?? '') == 'BS') ? 'checked' : '' }} style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;">
+            BS
+        </label>
+        </div>
+        </div>
+        <div class="col-md-6">
+        <div class="form-group">
+            <label for="keperluan_khas_kerja">Keperluan Khas Kerja</label>
+            <md-outlined-text-field class="label" type="text" label=""class="form-control" id="keperluan_khas_kerja" name="keperluan_khas_kerja" value="{{ $siteSurvey->keperluan_khas_kerja ?? old('keperluan_khas_kerja') }}">
+        </div>
+        </div>
+        <div class="col-md-6">
+        <div class="form-group">
+            <label for="susun">Susun</label>
+            <md-outlined-text-field class="label" type="text" label=""class="form-control" id="susun" name="susun" value="{{ $siteSurvey->susun ?? old('susun') }}">
+        </div>
+        </div>
+        </div>
         <div class="row">
             <div class="col-5">
                 <input type="text" hidden  class="form-control" placeholder="lat" value="{{ $location->y ?? old('') }}" name="lat" id="lat" readonly>
@@ -439,7 +378,7 @@
 
 
     
-    <div class="tab-pane fade" id="tab2-content" role="tabpanel">
+    <div class="tab-pane fade" id="tab2" role="tabpanel">
         <h3 class="mt-3">Site Pictures</h3>
     
         @php
@@ -489,7 +428,7 @@
     
     
         
-       <div class="tab-pane fade" id="tab3-content" role="tabpanel">
+       <div class="tab-pane fade" id="tab3" role="tabpanel">
     <h3 class="mt-3">ToolBoxTalk</h3> 
     
        <div class="row">
@@ -978,23 +917,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         document.getElementById('lng').value = e.latlng.lng;
                     });
                 });
-
-
-                document.addEventListener('DOMContentLoaded', function() {
-            const tabs = document.querySelector('md-tabs');
-            const tabContents = document.querySelectorAll('.tab-content > div');
-
-            tabs.addEventListener('change', (event) => {
-                const activeTabIndex = event.target.activeTabIndex;
-                tabContents.forEach((content, index) => {
-                    if (index === activeTabIndex) {
-                        content.classList.add('active');
-                    } else {
-                        content.classList.remove('active');
-                    }
-                });
-            });
-        });
 
 </script>
 
