@@ -156,6 +156,20 @@ table.dataTable thead .sorting_desc:after {
     content: "\f0dd";
 }
 
+.dataTables_length {
+    margin-bottom: 15px;
+}
+.dataTables_length label {
+    display: flex;
+    align-items: center;
+}
+.dataTables_length select {
+    margin: 0 10px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
 </style>
 
 
@@ -188,6 +202,24 @@ table = $('.data-table').DataTable({
     // columnDefs: [
     //     { orderable: false, targets: [4] } // Disable sorting on the SAT column (index 4)
     // ]
+
+    lengthChange: true,
+    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+    initComplete: function(settings, json) {
+      // Replace the default select with a Material select
+      $('.dataTables_length select').each(function() {
+        const select = $(this);
+        const mdSelect = document.createElement('md-select');
+        mdSelect.setAttribute('label', 'Show entries');
+        select.find('option').each(function() {
+          const mdOption = document.createElement('md-option');
+          mdOption.value = $(this).val();
+          mdOption.textContent = $(this).text();
+          mdSelect.appendChild(mdOption);
+        });
+        select.replaceWith(mdSelect);
+      });
+    }
 
                
                
