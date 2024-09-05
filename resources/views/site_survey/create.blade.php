@@ -641,6 +641,8 @@
 </div>
 
 </div>
+<button type="submit" class="btn btn-success" id="submitBtn">{{ isset($siteSurvey) ? 'Update' : 'Create' }}</button>
+
         </div>
     </div>
 
@@ -650,9 +652,8 @@
 
 
     <div class="mt-3">
-      <button type="button" class="btn btn-secondary" id="prevBtn" onclick="navigate(-1)">Previous</button>
-      <button type="button" class="btn btn-primary" id="nextBtn" onclick="navigate(1)">Next</button>
-      <button type="submit" class="btn btn-success" id="submitBtn" style="display:none;">{{ isset($siteSurvey) ? 'Update' : 'Create' }}</button>
+      <!-- <button type="button" class="btn btn-secondary" id="prevBtn" onclick="navigate(-1)">Previous</button> -->
+      <!-- <button type="button" class="btn btn-primary" id="nextBtn" onclick="navigate(1)">Next</button> -->
 
     </div>
 
@@ -846,24 +847,43 @@ document.addEventListener('DOMContentLoaded', function() {
             return; // Prevent navigation if validation fails
         }
         currentTabIndex += direction;
-       
-        if (currentTabIndex >= 0 && currentTabIndex < tabs.length) {
-            
-            const tabElement = document.querySelector(`a[href="${tabs[currentTabIndex]}"]`);
-            if (tabElement && typeof bootstrap !== 'undefined') {
-                const tab = new bootstrap.Tab(tabElement);
-                tab.show();
-            } else {
-                console.error('Tab element not found or Bootstrap is not available');
+
+        const tabs = document.querySelector('md-tabs');
+        const tabContents = document.querySelectorAll('.tab-content > div');
+
+        function showTabContent(index) {
+                tabContents.forEach((content, i) => {
+                    if (i === index) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
             }
+
+           // tabs.addEventListener('change', (event) => {
+                showTabContent(currentTabIndex);
+              //  updateButtons();
+
+           // });
+       
+        // if (currentTabIndex >= 0 && currentTabIndex < tabs.length) {
+            
+        //     const tabElement = document.querySelector(`a[href="${tabs[currentTabIndex]}"]`);
+        //     if (tabElement && typeof bootstrap !== 'undefined') {
+        //         const tab = new bootstrap.Tab(tabElement);
+        //         tab.show();
+        //     } else {
+        //         console.error('Tab element not found or Bootstrap is not available');
+        //     }
          
-            updateButtons();
-        }
+        //     updateButtons();
+        // }
       
     }
 
     // Initialize button states
-    updateButtons();
+   // updateButtons();
 
     // Add event listener for tab changes
     document.querySelectorAll('a[data-toggle="tab"]').forEach(function(tabElement) {
