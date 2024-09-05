@@ -409,9 +409,9 @@
                                 </md-label>
                                 <input type="file" onselect="console.log(document.getElementById('{{ $field }}_image{{ $i }}'))" hidden class="form-control-file" id="{{ $field }}_image{{ $i }}" name="{{ $field }}_image{{ $i }}">
                                 @if (isset($siteSurvey1) && $siteSurvey1->{"{$field}_image{$i}"})
-                                    <img onclick="document.getElementById('{{ $field }}_image{{ $i }}').click();" src="{{ asset($siteSurvey1->{"{$field}_image{$i}"}) }}" id="img_{{ $field }}_{{ $i }}" alt="{{ ucwords(str_replace('_', ' ', $field)) }} Image {{ $i }}" class="img-thumbnail mt-2" style="max-width: 200px;">
+                                    <img onclick="document.getElementById('{{ $field }}_image{{ $i }}').click();" src="{{ asset($siteSurvey1->{"{$field}_image{$i}"}) }}" id="img_{{ $field }}{{ $i }}" alt="{{ ucwords(str_replace('_', ' ', $field)) }} Image {{ $i }}" class="img-thumbnail mt-2" style="max-width: 200px;">
                                 @else
-                                    <img onclick="document.getElementById('{{ $field }}_image{{ $i }}').click();" src="{{ URL::asset('assets/web-images/download.png') }}" id="img_{{ $field }}_{{ $i }}" alt="{{ ucwords(str_replace('_', ' ', $field)) }} Image {{ $i }}" class="img-thumbnail mt-2" style="max-width: 200px;">
+                                    <img onclick="document.getElementById('{{ $field }}_image{{ $i }}').click();" src="{{ URL::asset('assets/web-images/download.png') }}" id="img_{{ $field }}{{ $i }}" alt="{{ ucwords(str_replace('_', ' ', $field)) }} Image {{ $i }}" class="img-thumbnail mt-2" style="max-width: 200px;">
                                 @endif
                             </div>
                         @endfor
