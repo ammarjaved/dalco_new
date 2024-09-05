@@ -76,12 +76,28 @@
                     <div id="kawasan_error" class="text-danger" style="display: none;">Please fill this field.</div>
                 </div>
             </div>
-        <div class="col-md-4">
-        <div class="form-group">
-            <!-- <label for="fl">FL</label> -->
-            <md-outlined-text-field label="FL" id="fl" class="label" name="fl" value="{{ $siteSurvey->fl ?? old('fl') }}"/>
-        </div>
-        </div>
+
+
+            <div class="col-md-4">
+                <div  class="label" style="margin-bottom: 15px; flex-direction:row">
+                    <md-label style="display: block; margin-bottom: 5px;">Peparit:</md-label>
+            
+                    <md-radio-group>
+            
+                        <!-- Yes Radio Button with Label -->
+                        <md-radio value="yes" name="peparit" {{ (old('peparit', $siteSurvey->peparit ?? '') == 'yes') ? 'checked' : '' }}></md-radio>
+                        <md-label for="peparit-yes" style="margin-right: 15px;">Yes</md-label>
+            
+                        <!-- No Radio Button with Label -->
+                        <md-radio value="no" name="peparit" {{ (old('peparit', $siteSurvey->peparit ?? '') == 'no') ? 'checked' : '' }}></md-radio>
+                        <md-label  for="peparit-no">No</md-label>
+            
+                    </md-radio-group>
+                </div>
+            </div>
+    
+
+
         <div class="col-md-4">
         <div class="form-group">
             {{-- <label for="jenis">PE Jenis</label> --}}
@@ -97,23 +113,11 @@
 
         
         <div class="col-md-4">
-            <div  class="label" style="margin-bottom: 15px; flex-direction:row">
-                <md-label style="display: block; margin-bottom: 5px;">Peparit:</md-label>
-        
-                <md-radio-group>
-        
-                    <!-- Yes Radio Button with Label -->
-                    <md-radio value="yes" name="peparit" {{ (old('peparit', $siteSurvey->peparit ?? '') == 'yes') ? 'checked' : '' }}></md-radio>
-                    <md-label for="peparit-yes" style="margin-right: 15px;">Yes</md-label>
-        
-                    <!-- No Radio Button with Label -->
-                    <md-radio value="no" name="peparit" {{ (old('peparit', $siteSurvey->peparit ?? '') == 'no') ? 'checked' : '' }}></md-radio>
-                    <md-label  for="peparit-no">No</md-label>
-        
-                </md-radio-group>
+            <div class="form-group">
+                <!-- <label for="fl">FL</label> -->
+                <md-outlined-text-field label="FL" id="fl" class="label" name="fl" value="{{ $siteSurvey->fl ?? old('fl') }}"/>
             </div>
-        </div>
-
+            </div>
 
         <div class="col-md-4">
                 <div class="form-group">
@@ -261,24 +265,11 @@
         
 
         <div class="col-md-4">
-            <div class="label" style="margin-bottom: 15px; flex-direction:row;">
-                <!-- SCADA Status Label -->
-                <md-label style="display: block; margin-bottom: 5px;">SCADA Status:</md-label>
-        
-                <!-- Radio Group for SCADA Status -->
-                <md-radio-group>
-                    <!-- Yes Radio Button -->
-                    <md-radio value="yes" name="scada_status" {{ (old('scada_status', $siteSurvey->scada_status ?? '') == 'yes') ? 'checked' : '' }}>
-                    </md-radio>
-                    <md-label for="scada_status-yes" style="margin-right: 15px;">Yes</md-label>
-        
-                    <!-- No Radio Button -->
-                    <md-radio value="no" name="scada_status" {{ (old('scada_status', $siteSurvey->scada_status ?? '') == 'no') ? 'checked' : '' }}>
-                    </md-radio>
-                    <md-label for="scada_status-no">No</md-label>
-                </md-radio-group>
+            <div class="form-group">
+                {{-- <label for="bacaan_beban">Bacaan Beban</label> --}}
+                <md-outlined-text-field class="label" type="text" label="Bacaan Beban"   id="bacaan_beban" name="bacaan_beban" value="{{ $siteSurvey->bacaan_beban ?? old('bacaan_beban') }}">
             </div>
-        </div>
+            </div>
 
 
 
@@ -305,47 +296,68 @@
 
 
         <div class="col-md-4">
+            <div class="label" style="margin-bottom: 15px; flex-direction:row;">
+                <!-- SCADA Status Label -->
+                <md-label style="display: block; margin-bottom: 5px;">SCADA Status:</md-label>
+        
+                <!-- Radio Group for SCADA Status -->
+                <md-radio-group>
+                    <!-- Yes Radio Button -->
+                    <md-radio value="yes" name="scada_status" {{ (old('scada_status', $siteSurvey->scada_status ?? '') == 'yes') ? 'checked' : '' }}>
+                    </md-radio>
+                    <md-label for="scada_status-yes" style="margin-right: 15px;">Yes</md-label>
+        
+                    <!-- No Radio Button -->
+                    <md-radio value="no" name="scada_status" {{ (old('scada_status', $siteSurvey->scada_status ?? '') == 'no') ? 'checked' : '' }}>
+                    </md-radio>
+                    <md-label for="scada_status-no">No</md-label>
+                </md-radio-group>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4">
+            <div class="label" style="margin-bottom: 15px; flex-direction:row;">
+                <!-- Jenis LVDB Label -->
+                <md-label style="display: block; margin-bottom: 5px;">Jenis LVDB:</md-label>
+        
+                <!-- Radio Group for Jenis LVDB -->
+                <md-radio-group>
+                    <!-- DIN Radio Button -->
+                    <md-radio value="DIN" name="jenis_lvdb" {{ (old('jenis_lvdb', $siteSurvey->jenis_lvdb ?? '') == 'DIN') ? 'checked' : '' }}>
+                    </md-radio>
+                    <md-label for="jenis_lvdb-din" style="margin-right: 15px;">DIN</md-label>
+        
+                    <!-- BS Radio Button -->
+                    <md-radio value="BS" name="jenis_lvdb" {{ (old('jenis_lvdb', $siteSurvey->jenis_lvdb ?? '') == 'BS') ? 'checked' : '' }}>
+                    </md-radio>
+                    <md-label for="jenis_lvdb-bs">BS</md-label>
+                </md-radio-group>
+            </div>
+        </div>
+
+        
+        <div class="col-md-4">
+            <div class="form-group">
+                {{-- <label for="genset">Genset</label> --}}
+                <md-outlined-text-field class="label" type="text" label="Genset"  id="genset" name="genset" value="{{ $siteSurvey->genset ?? old('genset') }}">
+            </div>
+            </div>
+    
+
+
+
+        <div class="col-md-4">
         <div class="form-group">
-            {{-- <label for="bacaan_beban">Bacaan Beban</label> --}}
-            <md-outlined-text-field class="label" type="text" label=""class="form-control" id="bacaan_beban" name="bacaan_beban" value="{{ $siteSurvey->bacaan_beban ?? old('bacaan_beban') }}">
+            {{-- <label for="keperluan_khas_kerja">Keperluan Khas Kerja</label> --}}
+            <md-outlined-text-field class="label" type="text" label="Keperluan Khas Kerja"  id="keperluan_khas_kerja" name="keperluan_khas_kerja" value="{{ $siteSurvey->keperluan_khas_kerja ?? old('keperluan_khas_kerja') }}">
         </div>
         </div>
         </div>
 
 
-        <div class="col-md-6">
-        <div class="form-group">
-            <label for="genset">Genset</label>
-            <md-outlined-text-field class="label" type="text" label=""class="form-control" id="genset" name="genset" value="{{ $siteSurvey->genset ?? old('genset') }}">
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="form-group">
-            <label for="jenis_lvdb">Jenis LVDB</label>
-            <!-- <input type="text" class="form-control" id="jenis_lvdb" name="jenis_lvdb" value="{{ $siteSurvey->jenis_lvdb ?? old('jenis_lvdb') }}"> -->
-            <label style="display: inline-block; margin-right: 15px;">
-        <input type="radio" name="jenis_lvdb" value="DIN" {{ (old('jenis_lvdb', $siteSurvey->jenis_lvdb ?? '') == 'DIN') ? 'checked' : '' }} style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;">
-            DIN
-        </label>
-        <label style="display: inline-block;">
-            <input type="radio" name="jenis_lvdb" value="BS" {{ (old('jenis_lvdb', $siteSurvey->jenis_lvdb ?? '') == 'BS') ? 'checked' : '' }} style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;">
-            BS
-        </label>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="form-group">
-            <label for="keperluan_khas_kerja">Keperluan Khas Kerja</label>
-            <md-outlined-text-field class="label" type="text" label=""class="form-control" id="keperluan_khas_kerja" name="keperluan_khas_kerja" value="{{ $siteSurvey->keperluan_khas_kerja ?? old('keperluan_khas_kerja') }}">
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="form-group">
-            <label for="susun">Susun</label>
-            <md-outlined-text-field class="label" type="text" label=""class="form-control" id="susun" name="susun" value="{{ $siteSurvey->susun ?? old('susun') }}">
-        </div>
-        </div>
-        </div>
+
         <div class="row">
             <div class="col-md-6">
                 <input type="text" hidden  class="form-control" placeholder="lat" value="{{ $location->y ?? old('') }}" name="lat" id="lat" readonly>
@@ -366,44 +378,50 @@
             ];
         @endphp
 
-        <div id="tab2-content">
-            <div class="row">
-            @foreach ($pictureFields as $field)
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>{{ ucwords(str_replace('_', ' ', $field)) }}:</label>
-                        <div style="margin-bottom: 15px;">
-                            <label style="display: inline-block; margin-right: 15px;">
-                                <input type="radio" name="{{ $field }}" value="yes" onclick="toggleFileUpload('{{ $field }}', true)" {{ isset($siteSurvey1) && $siteSurvey1->$field == 'yes' ? 'checked' : '' }} style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;">
-                                Yes
-                            </label>
-                            <label style="display: inline-block;">
-                                <input type="radio" name="{{ $field }}" value="no" onclick="toggleFileUpload('{{ $field }}', false)" {{ !isset($siteSurvey1) || $siteSurvey1->$field == 'no' ? 'checked' : '' }} style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;">
-                                No
-                            </label>
-                        </div>
-                        <div id="{{ $field }}_images" style="{{ (isset($siteSurvey1) && $siteSurvey1->$field == 'yes') ? '' : 'display: none;' }}">
-                            @for ($i = 1; $i <= ($field == 'other' ? 4 : 2); $i++)
-                                <div class="form-group">
-                                    <label for="{{ $field }}image{{ $i }}">{{ ucwords(str_replace('', ' ', $field)) }} Image {{ $i }}</label>
-                                    <input type="file" class="form-control-file" id="{{ $field }}_image{{ $i }}" name="{{ $field }}_image{{ $i }}">
-                                    @if (isset($siteSurvey1) && $siteSurvey1->{ "{$field}_image{$i}"})
-                                        <img src="{{ asset($siteSurvey1->{"{$field}image{$i}"}) }}" id='img{{$field}}{{$i}}' alt="{{ ucwords(str_replace('_', ' ', $field)) }} Image {{ $i }}" class="img-thumbnail mt-2" style="max-width: 200px;">
-                                    @else
-                                        <img src="{{ URL::asset('assets/web-images/download.png') }}" 
-                                        id='img_{{$field}}{{$i}}' alt="{{ ucwords(str_replace('_', ' ', $field)) }} Image {{ $i }}" class="img-thumbnail mt-2" style="max-width: 200px;">
+<div id="tab2-content">
+    <div class="row">
+        @foreach ($pictureFields as $field)
+            <div class="col-md-6">
+                <div class="form-group">
+                    <md-label style="display: block; margin-bottom: 5px;">
+                        {{ ucwords(str_replace('_', ' ', $field)) }}:
+                    </md-label>
+                    <md-tabs id="tab-{{$field}}">
+                        <!-- Yes Radio Button -->
+                        <md-secondary-tab onclick="toggleFileUpload('{{ $field }}', true)" {{ isset($siteSurvey1) && $siteSurvey1->$field == 'yes' ? 'active' : '' }}>
+                            Yes
+                            <input type="radio" name="{{ $field }}" value="yes" style="display:none;" {{ isset($siteSurvey1) && $siteSurvey1->$field == 'yes' ? 'checked' : '' }}>
+                        </md-secondary-tab>
 
-                                    @endif
-                                </div>
-                            @endfor
-                        </div>
+                        <!-- No Radio Button -->
+                        <md-secondary-tab onclick="toggleFileUpload('{{ $field }}', false)" {{ !isset($siteSurvey1) || $siteSurvey1->$field == 'no' ? 'active' : '' }}>
+                            No
+                            <input type="radio" name="{{ $field }}" value="no" style="display:none;" {{ !isset($siteSurvey1) || $siteSurvey1->$field == 'no' ? 'checked' : '' }}>
+                        </md-secondary-tab>
+                    </md-tabs>
+
+                    <!-- Image Uploads Section -->
+                    <div id="{{ $field }}_images" style="{{ (isset($siteSurvey1) && $siteSurvey1->$field == 'yes') ? '' : 'display: none;' }}">
+                        @for ($i = 1; $i <= ($field == 'other' ? 4 : 2); $i++)
+                            <div class="form-group">
+                                <md-label for="{{ $field }}_image{{ $i }}">
+                                    {{ ucwords(str_replace('_', ' ', $field)) }} Image {{ $i }}
+                                </md-label>
+                                <input type="file" onselect="console.log(document.getElementById('{{ $field }}_image{{ $i }}'))" hidden class="form-control-file" id="{{ $field }}_image{{ $i }}" name="{{ $field }}_image{{ $i }}">
+                                @if (isset($siteSurvey1) && $siteSurvey1->{"{$field}_image{$i}"})
+                                    <img onclick="document.getElementById('{{ $field }}_image{{ $i }}').click();" src="{{ asset($siteSurvey1->{"{$field}_image{$i}"}) }}" id="img_{{ $field }}_{{ $i }}" alt="{{ ucwords(str_replace('_', ' ', $field)) }} Image {{ $i }}" class="img-thumbnail mt-2" style="max-width: 200px;">
+                                @else
+                                    <img onclick="document.getElementById('{{ $field }}_image{{ $i }}').click();" src="{{ URL::asset('assets/web-images/download.png') }}" id="img_{{ $field }}_{{ $i }}" alt="{{ ucwords(str_replace('_', ' ', $field)) }} Image {{ $i }}" class="img-thumbnail mt-2" style="max-width: 200px;">
+                                @endif
+                            </div>
+                        @endfor
                     </div>
-
                 </div>
-                @endforeach
-        </div>
+            </div>
+        @endforeach
+    </div>
+</div>
         
-        </div>
         <div id="tab3-content">
         <h3 class="mt-3">ToolBoxTalk</h3> 
     
@@ -716,7 +734,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
 
-
+    validateImageUploads();
 
     function validateImageUploads() {
         let isValid = true;
@@ -757,11 +775,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+
+
     }
     }
+
+
+   
    
 
         
+    
 
         if(status==''){
         pictureFields.forEach(field => {
@@ -804,6 +828,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         return isValid;
     }
+
+
+
+    
 
     function validateFields() {
         const namaPe = document.getElementById('nama_pe').value.trim();
@@ -870,6 +898,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
                     let map = L.map('map').setView([3.2888784335929744,102.06586684019376], 8);
 
@@ -903,6 +934,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const tabs = document.querySelector('md-tabs');
             const tabContents = document.querySelectorAll('.tab-content > div');
 
+            
             function showTabContent(index) {
                 tabContents.forEach((content, i) => {
                     if (i === index) {
@@ -912,6 +944,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
             }
+            
 
             tabs.addEventListener('change', (event) => {
                 showTabContent(event.target.activeTabIndex);
