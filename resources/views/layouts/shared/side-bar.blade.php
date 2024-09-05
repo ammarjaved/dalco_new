@@ -1,9 +1,21 @@
-<aside class="main-sidebar sidebar-dark-primary" style="background-color:#558772">
+<aside class="main-sidebar sidebar-dark-primary" style="background-color:#8e44ad">
+
+
+    <style>
+
+  .nav-form{
+    background-color: #8e44ad;
+    
+    
+  }
+
+
+    </style>
 
     <a href="{{ route('site_survey.index') }}" class="brand-link">
         <img src="{{ asset('assets/web-images/main-logo-sm.png') }}" alt="AdminLTE Logo" class="brand-image "
             style="opacity: .8">
-        <span class="brand-text font-weight-light" style="font-size: 19px !important">DALCO</span>
+        <span class="brand-text font-weight-light" style="font-size: 19px !important; color:#f8f9f9;">DALCO</span>
     </a>
 
 
@@ -28,8 +40,8 @@
 
 
                 <li
-                        class="nav-item">
-                        <a href="{{ route('delco-summary') }} " class="nav-link">
+                        class="nav-item" >
+                        <a href="{{ route('delco-summary') }} " class="nav-link nav-form" >
                             <i class="fa fa-book"></i>
                             <p>
                                 Dalco Summary

@@ -1,9 +1,9 @@
 @if(Auth::user()->type==true)
 <nav class="main-header navbar navbar-expand navbar-light d-flex justify-content-between"
-    style="background-color: #558772">
+    style="background-color:#8e44ad">
 @else
 <nav class="main-header navbar navbar-expand navbar-light d-flex justify-content-between"
-    style="background-color: #558772;margin-left:10px;">
+    style="background-color:#8e44ad;margin-left:10px;">
 @endif    
     
     <!-- Left navbar links -->
