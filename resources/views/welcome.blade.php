@@ -24,6 +24,16 @@
         animation: slideIn 2s forwards;
     }
 
+    .lift-on-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lift-on-hover:hover {
+    transform: translateY(-5px); /* Lift the button */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow to enhance the lift effect */
+}
+
+
 
     .container .btn {
         animation: btnSlide 1s forwards;
@@ -65,12 +75,13 @@
     }
 </style>
 
-<body style="background-color:#E0EEE0;">
+<body style="background-color:white;">
     <div class="container" >
         <h4 style=" font-family: Arial, sans-serif italic;font-size: 100px;font-style: italic; ;"><span  style="color:#D5212D;">D</span><span style="color:#767BBC;">A</span><span style="color:#D5212D">LCO</span></h4>
         <img src="{{ URL::asset('assets/web-images/main-logo.png') }}" alt="" height="265">
         <a href="{{ route('delco-summary') }}">
-            <button class="btn  btn-success mt-4"> GOTO MAIN</button>
+            <md-filled-tonal-button class="btn mt-4 lift-on-hover" style="background-color: green; color:white">GOTO MAIN</md-filled-tonal-button>
+
         </a>
     </div>
 </body>

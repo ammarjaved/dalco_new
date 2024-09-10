@@ -77,6 +77,7 @@ class SiteSurveyController extends Controller
     public function store(Request $request)
     {
 
+    // return $request;
          try {
             $pe_check=SiteSurvey::where('nama_pe',$request->nama_pe)->first();
 

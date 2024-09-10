@@ -1,7 +1,30 @@
-@extends('layouts.app')
+ @extends('layouts.app')
 
 
 @section('content')
+
+
+<style>
+    md-filled-text-field {
+      resize: horizontal;
+    }
+  </style>
+
+<section class="content-header" >
+    <div class="container-  ">
+        <div class="row mb-2" style="flex-wrap:nowrap">
+            <div class="col-sm-6">
+                <h3 style="color: #8e44ad;">Material Selection</h3>
+            </div>
+            <div class="col-sm-6 text-right">
+                <ol class="breadcrumb float-right" >
+                    <li class="breadcrumb-item"><a href="{{ route('material-selection.index') }}" style="color: #8e44ad;">index</a></li>
+                    <li class="breadcrumb-item active" style="color: #8e44ad;">create</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
 <div class="container">
     <h2>Material Selection</h2>
 
@@ -12,21 +35,38 @@
     @endif
 
         <!-- <div class="input-group"> -->
-            <input type="text" name="search" id="search_input1" class="form-control typeahead" placeholder="Search by material" >
-            <button type="button"  class="btn btn-primary" onclick="addData()">Add</button>
+            
+
+                <div class="row">
+                    <div style="background-color: white" >
+                        <md-outlined-text-field  type="text" label="Search" style=" min-width: 500px;margin:2px"  name="search" id="search_input1"  placeholder="Search by material"></md-outlined-text-field>
+                        
+                    </div>
+        
+                    <div class="col-sm-1">
+                        
+                        <md-filled-tonal-button style="horizontal-align: center; margin:5px" type="button" onclick="addData()">Add</md-filled-tonal-button>
+                     </div>
+        
+                    </div>
+
+            
+            
+            
+            
         <!-- </div> -->
  
     <!-- Use the dynamic siteSurvey ID -->
     <form action="{{ route('material-selection.save', ['id' => $siteSurvey->id]) }}" method="POST">
         @csrf
         
-        <table class="table" style="background-color:#E0EEE0;">
+        <table class="table" style="background-color:#fef7ff;">
             <thead>
                 <tr>
                     <th>Id</th>
                     <th>Material Code</th>
                     <th>Description</th>
-                    <th>BUn</th>
+                    <th>Bun</th>
                     <th>Quantity</th>
                 </tr>
             </thead>
@@ -39,13 +79,16 @@
             </tbody>
         </table>
 
-        <button type="submit" class="btn btn-success">Save Selections</button>
+        <md-filled-tonal-button type="submit">Save Selections</md-filled-tonal-button>
     </form>
 </div>
 
 <style>
    .twitter-typeahead {
     width: 80%;
+    border: none;
+    
+    
 }
 
 /* Input field styling */
@@ -66,7 +109,7 @@
 
 /* Dropdown menu styling */
 .tt-dropdown-menu {
-    width: 80%;
+    width: 100%;
     padding: 3px 0;
     margin-top: 2px;
     background-color: #fff;
@@ -144,3 +187,6 @@ $.ajax({
 
 
 
+
+
+ 

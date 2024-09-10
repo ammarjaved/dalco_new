@@ -1,5 +1,60 @@
 @extends('layouts.app', ['page_title' => 'Upload Files'])
 
+
+<style>
+
+.file-upload-wrapper {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    border: 2px dashed #8e44ad;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #e8def8;
+    transition: all 0.3s ease;
+    margin-top: 2px;
+}
+
+.file-upload-wrapper:hover {
+    background-color: #DBEAFE;
+}
+
+.file-upload-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.file-upload-text {
+    color: black;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 10px;
+}
+.thead-purple {
+    background-color: #8e44ad; /* Purple background */
+    color: white; /* White text for better contrast */
+}
+
+
+
+
+
+
+
+</style>
+
 @section('content')
 <div class="container mt-3"> <!-- Adjusted margin-top to reduce space at the top -->
     <h3 class="mb-3">Upload Files for SAT #{{ $siteSurvey->id }} (Nama PE: {{ $siteSurvey->nama_pe }})</h3> <!-- Reduced bottom margin -->
@@ -10,14 +65,20 @@
             @csrf
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <label for="site_file" class="form-label">Upload Your File</label>
-                    <input type="file" id="site_file" name="site_file" class="form-control" accept="image/*" required>
-                </div> 
+                    <md-label for="site_file" class="form-label">Upload Your File</md-label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="site_file" name="site_file" class="file-upload-input" required>
+                        <span class="file-upload-text">Choose a file or drag it here</span>
+                    </div>
+                    <!-- Optional: Add a small text if needed -->
+                    <!-- <small class="form-text text-muted">Leave empty if you do not want to change the file.</small> -->
+                </div>
+                
                 <div class="col-md-6 mb-2" >
-                    <label for="description" class="form-label">Description</label>
+                    <md-label for="description" class="form-label">Description</md-label>
                     <textarea style="height: 41px;" id="description" name="description" class="form-control" rows="3" required></textarea>
                 </div>
-                <button style="    height: 40px;margin-top: 30px;" type="submit" class="btn btn-primary">Upload</button>
+                <md-filled-tonal-button style="    height: 40px;margin-top: 20px;" type="submit">Upload</md-filled-tonal-button>
             </div>
             
         </form>
@@ -31,7 +92,7 @@
     @else
        
     <table id="myTable" class="table table-bordered table-hover data-table">
-                <thead class="thead-dark">
+                <thead class="thead-purple">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Nama PE</th>
@@ -48,15 +109,15 @@
                             <td><a href="{{ asset($file->file_path) }}" target="_blank">{{ $file->file_name }}</a></td>
                             <td>{{ $file->description }}</td>
                             <td>
-                                <a href="{{ asset($file->file_path) }}" target="_blank" class="btn btn-info btn-sm">
+                                <md-filled-tonal-button href="{{ asset($file->file_path) }}" target="_blank" >
                                     <i class="fas fa-eye"></i> view
-                                </a>
+                                </md-filled-tonal-button>
                                 <form action="{{ route('sat-attachments.destroy', $file->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure you want to delete this file?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">
+                                    <md-filled-tonal-button type="submit" style="margin-top:-16px">
                                         <i class="fas fa-trash-alt"></i> Delete
-                                    </button>
+                                    </md-filled-tonal-button>
                                 </form>
                             </td>
                         </tr>
@@ -152,8 +213,26 @@ table = $('.data-table').DataTable({
 
                
                
-})
-})
+});
+
+
+var fileInput = document.getElementById('site_file');
+var fileText = document.querySelector('.file-upload-text');
+
+if (fileInput) {
+    fileInput.addEventListener('change', function(e) {
+        if (e.target.files.length > 0) {
+            var fileName = e.target.files[0].name;
+            fileText.textContent = fileName;
+            fileText.title = fileName; // Show full filename on hover
+        } else {
+            fileText.textContent = 'Choose a file or drag it here';
+            fileText.title = ''; // Clear title when no file is selected
+        }
+    });
+}
+
+});
 
 </script>
 

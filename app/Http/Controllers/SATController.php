@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Exception;
 use App\Repositories\SiteVisitRepository;
 use App\Models\ToolBoxTalk;
-
+use Illuminate\Support\Facades\Storage;
 
 class SATController extends Controller
 {
@@ -91,24 +91,76 @@ class SATController extends Controller
     }
 }
 
+public function edit($id)
+{
+    // Find the SAT record by ID
+    $satRecord = SAT::findOrFail($id);
 
+    // Pass the SAT record to the 'SAT.edit' view
+    return view('SAT.edit', compact('satRecord'));
+}
 
-    public function destroy($id)
-    {
-        $file = SAT::findOrFail($id);
+public function update(Request $request, $id)
+{
+    try {
+        // Validate the request
+        $request->validate([
+            'image_name' => 'required|string|max:255',
+            'image_url' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
+            'image_type' => 'required|string|in:before,during,after',
+            'site_survey_id' => 'required|integer|exists:site_surveys,id',
+        ]);
 
+        // Find the SAT record by ID
+        $satRecord = SAT::findOrFail($id);
 
-        // Delete the file from the storage
-        if (file_exists(public_path($file->file_path))) {
-            unlink(public_path($file->file_path));
+        // Update the SAT record
+        $satRecord->image_name = $request->image_name;
+        $satRecord->image_type = $request->image_type;
+        $satRecord->site_survey_id = $request->site_survey_id;
+
+        // Handle image upload if a new image is provided
+        if ($request->hasFile('image_url')) {
+            // Delete old image if exists
+            if ($satRecord->image_url && Storage::exists($satRecord->image_url)) {
+                Storage::delete($satRecord->image_url);
+            }
+
+            // Store new image
+            $filePath = $request->file('image_url')->store('images', 'public');
+            $satRecord->image_url = $filePath;
         }
 
-        // Delete the record from the database
-        $file->delete();
+        $satRecord->save();
 
-        return redirect()->back()->with('success', 'File deleted successfully.');
+        return redirect()->route('sat.index')->with('success', 'SAT record updated successfully!');
+
+    } catch (Exception $e) {
+        return redirect()->back()->with('failed', 'Request Failed: ' . $e->getMessage());
     }
+}
 
+
+
+public function destroy($id)
+{
+    try {
+        // Find the SAT record by ID
+        $satRecord = SAT::findOrFail($id);
+
+        // Check if the file exists and delete it
+        if ($satRecord->image_url && Storage::exists($satRecord->image_url)) {
+            Storage::delete($satRecord->image_url);
+        }
+
+        // Delete the SAT record from the database
+        $satRecord->delete();
+
+        return redirect()->back()->with('success', 'Record and associated file successfully deleted.');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('failed', 'Failed to delete record: ' . $e->getMessage());
+    }
+}
 
     public function createToolboxTalk($id)
     {

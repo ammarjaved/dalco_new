@@ -180,6 +180,7 @@ table.dataTable thead .sorting_desc:after {
 <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
+<script src="{{ asset('assets/js/generate-qr.js') }}"></script>
 
 <script>
 

@@ -135,10 +135,28 @@ table.dataTable thead .sorting_desc:after {
 @endsection
 
 @section('content')
-<div class="container">
-    <h3>Material Selection</h3>
 
-    <div class="card" style="background-color:#E0EEE0;">
+
+<section class="content-header">
+    <div class="container-fluid  ">
+        <div class="row mb-2" style="flex-wrap:nowrap">
+            <div class="col-sm-6">
+                <h3 style="color: #8e44ad">Material Selection</h3>
+            </div>
+            <div class="col-sm-6 text-right">
+                <ol class="breadcrumb float-right">
+
+                    <li  style="color: #8e44ad;" class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li style="color: #8e44ad;" class="breadcrumb-item active">index</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+   
+
+    <div class="card" style="background-color:#fef7ff; margin-top:-35px">
         <div class="card-body">
             <div class="table-responsive">
                 <table id="myTable" class="table table-bordered table-hover data-table">
@@ -159,8 +177,8 @@ table.dataTable thead .sorting_desc:after {
                             <td>{{ $survey->kawasan }}</td>
                             <td>
                                 <div class="dropdown">
-                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#E0B0FF'" onmouseout="this.style.backgroundColor='#fef7ff'">
+                                        <img src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}" alt="Menu" style="width: 16px; height: 16px;">
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="{{ route('material-selection.index', ['id' => $survey->id]) }}">

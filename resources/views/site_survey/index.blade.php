@@ -109,13 +109,13 @@ table.dataTable thead .sorting_desc:after {
         <div class="container-fluid  ">
             <div class="row mb-2" style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>Site Data</h3>
+                    <h3 style="color: #8e44ad">Site Data</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
 
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">index</li>
+                        <li  style="color: #8e44ad;" class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li style="color: #8e44ad;" class="breadcrumb-item active">index</li>
                     </ol>
                 </div>
             </div>
@@ -143,11 +143,11 @@ table.dataTable thead .sorting_desc:after {
             @endif
         <div class="row">
                 <div class="col-12">
-                    <div class="card" style="background-color:#E0EEE0;">
+                    <div class="card" style="background-color: #fef7ff;">
                         <div class="card-header">
                             <div class="card-title">
                                 <a href="{{ route('site_survey.create') }}" class="btn  btn-sm"
-                                    style="background-color: #367FA9; border-radius:0px; color:white">Add new</a>
+                                    style="background-color: #8e44ad; border-radius:0px; color:white">Add new</a>
                             </div>
 
                         </div>
@@ -174,15 +174,14 @@ table.dataTable thead .sorting_desc:after {
                     <td>{{ $survey->nama_pe }}</td>
                     <td>{{ $survey->kawasan }}</td>
                     <td class="text-center">
-                        <button type="button" class="btn  " data-toggle="dropdown">
-                            <img
-                                src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}">
+                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#E0B0FF'" onmouseout="this.style.backgroundColor='#fef7ff'">
+                            <img src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}" alt="Menu" style="width: 16px; height: 16px;">
                         </button>
-                        <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" href="{{ route('site_survey.show', $survey) }}">
+<div class="dropdown-menu" role="menu">
+<a class="dropdown-item" href="{{ route('site_survey.show', $survey) }}">
 <i class="fas fa-eye"></i> Show
 </a>
-                            <a class="dropdown-item" href="{{ route('site_survey.edit', $survey) }}">
+<a class="dropdown-item" href="{{ route('site_survey.edit', $survey) }}">
 <i class="fas fa-edit"></i> Edit
 </a>
 <a class="dropdown-item" href="{{ route('siteFileUploadView.index', ['id' => $survey->id]) }}">

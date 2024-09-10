@@ -160,8 +160,10 @@ Route::get('/SAT-toolboxtalkedit/{id}',[SATController::class,'editToolboxTalk'])
  Route::post('/SAT-toolboxtalk-store', [SATController::class, 'storeToolboxtalk'])->name('SAT.toolboxtalk.store');
  Route::post('/SAT-toolboxtalk-update/{id}', [SATController::class, 'updateToolboxtalk'])->name('SAT.toolboxtalk.update');
  Route::delete('/toolbox-talks/{id}', [SATController::class, 'destroyToolboxTalk'])->name('toolbox-talks.destroy');
-
+ Route::delete('/sat/{id}', [SATController::class, 'destroy'])->name('sat.destroy');
  Route::resource('sat-attachments', SATAttachmentsController::class);
+
+Route::resource('sat', SATController::class);
 
 
  Route::get('/sat-attachment/{id}/index', [SATAttachmentsController::class, 'index'])->name('sat-attachment.index');
@@ -172,6 +174,11 @@ Route::get('/sat', [SATController::class, 'index'])->name('sat.index');
 
 // Show the form for creating a new SAT
 Route::get('/sat/create/{id}', [SATController::class, 'create'])->name('sat.create');
+Route::get('/sat/{id}/edit', [SATController::class, 'edit'])->name('sat.edit');
+
+Route::put('/sat/{id}', [SATController::class, 'update'])->name('sat.update');
+
+
 
 // Store a new SAT record
 Route::post('sat-store', [SATController::class, 'store'])->name('sat.store');

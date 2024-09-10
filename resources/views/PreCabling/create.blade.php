@@ -1,5 +1,22 @@
 @extends('layouts.app', ['page_title' => 'Create'])
 
+<style>
+
+.label{
+    min-width: 300px;
+    max-width: 300px;
+    
+}
+.toggle-btn {
+      border-width: 2px;
+      margin: auto;
+      border: 3px solid transparent;
+      border-radius: 15px;
+}
+
+
+</style>
+
 @section('content')
     <section class="content-header">
         <div class="container-  ">
@@ -36,74 +53,124 @@
                         <div class="col-md4"></div>
                     </div> --}}
                     
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="nama_pe">Kontraktor PIW  </label>
-                            <input type="text" class="form-control" readonly id="kontraktor_piw" name="kontraktor_piw" value="{{!isset($site_survey_id) ? $piw->kontraktor_piw : Auth::user()->project }}" required>
-                           
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <md-outlined-text-field 
+                                    label="Kontraktor PIW" 
+                                    type="text"  
+                                     class="label"
+                                    id="kontraktor_piw" 
+                                    name="kontraktor_piw" 
+                                    value="{{!isset($site_survey_id) ? $piw->kontraktor_piw : Auth::user()->project }}" 
+                                    readonly 
+                                    required>
+                                </md-outlined-text-field>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <md-outlined-text-field 
+                                    type="text" 
+                                     class="label"
+                                    label="Kontraktor RTU" 
+                                    id="kontraktor_rtu" 
+                                    name="kontraktor_rtu" 
+                                    value="{{!isset($site_survey_id) ? $piw->kontraktor_rtu : Auth::user()->vendor }}" 
+                                    readonly 
+                                    required>
+                                </md-outlined-text-field>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <md-outlined-text-field  
+                                    type="text" 
+                                    label="Nama PE" 
+                                     class="label"
+                                    id="nama_pe" 
+                                    name="pe_name" 
+                                    value="{{!isset($site_survey_id) ? $piw->pe_name : $nama_pe }}" 
+                                    readonly 
+                                    required>
+                                </md-outlined-text-field>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <md-outlined-text-field 
+                                    type="date"  
+                                    class="label"
+                                    label="Date" 
+                                    id="tarikh" 
+                                    name="tarikh" 
+                                    value="{{!isset($site_survey_id) ? date('Y-m-d',strtotime($piw->tarikh)) : now() }}" 
+                                    required>
+                                </md-outlined-text-field>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="kontraktor_rtu">Kontraktor RTU  </label>
-                            <input type="text" class="form-control" id="kontraktor_rtu" readonly name="kontraktor_rtu" value="{{!isset($site_survey_id) ? $piw->kontraktor_rtu : Auth::user()->vendor }}" required>
-                           
-                        </div>
-                    </div>
+                    <input type="hidden" name="site_survey_id" value="{{ isset($site_survey_id) ? $site_survey_id : $piw->site_survey_id }}">
 
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="nama_pe">Nama PE </label>
-                            <input type="text" class="form-control" id="nama_pe" readonly name="pe_name" value="{{!isset($site_survey_id) ? $piw->pe_name : $nama_pe }}" required>
-                           
-                        </div>
-                    </div>
-
-            
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="nama_pe">Date  </label>
-                            <input type="date" class="form-control" id="tarikh" name="tarikh" value="{{!isset($site_survey_id) ? date('Y-m-d',strtotime($piw->tarikh)) : now() }}" required>
-                           
-                        </div>
-                    </div>
-
-                    <input type="hidden" name="site_survey_id" value="{{isset($site_survey_id) ? $site_survey_id: $piw->site_survey_id}}">
-
-                    @foreach (['lokasi_efi' => 'Lokasi EFI Seteah Dipasang', 'lokasi_rcb' => 'Lokasi RCB Seteah Dipasang', 'connection_rcb' => 'Connection RCB', 'lokasi_battary' => 'Lokasi Battery Charger Setelah Dipasang', 'plate_battary' => 'Plate Battery Charger / Serial No', 'lokasi_rtu' => 'Lokasi RTU Setelah Dipasang', 'connection_rtu' => 'Connection RTU', 'plate_rtu' => 'Plate RTU / Serial No', 'laluan_cable_piw' => 'Laluan Cable (PIW)', 'laluan_cable' => 'Laulan Cable'] as $key => $field)
-                        <div class="row">
-
-                            <div class="col-md-6">
+                    <div class="row">
+                        @foreach ([
+                            'lokasi_efi' => 'Lokasi EFI Seteah Dipasang',
+                            'lokasi_rcb' => 'Lokasi RCB Seteah Dipasang',
+                            'connection_rcb' => 'Connection RCB',
+                            'lokasi_battary' => 'Lokasi Battery Charger Setelah Dipasang',
+                            'plate_battary' => 'Plate Battery Charger / Serial No',
+                            'lokasi_rtu' => 'Lokasi RTU Setelah Dipasang',
+                            'connection_rtu' => 'Connection RTU',
+                            'plate_rtu' => 'Plate RTU / Serial No',
+                            'laluan_cable_piw' => 'Laluan Cable (PIW)',
+                            'laluan_cable' => 'Laulan Cable'
+                        ] as $key => $field)
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="{{ $key }}">{{ $field }}</label><br>
-
-                                    <label for="{{ $key }}_yes">
-                                        <input type="radio" id="{{ $key }}_yes" name="{{$key}}" value="yes"
-                                            style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;"
-                                            {{ ($piw->$key ?? old($key)) === 'yes' ? 'checked' : '' }}>
-                                        Yes
-                                    </label>
-                                    <label for="{{ $key }}_no">
-                                        <input type="radio" id="{{ $key }}_no" name="{{$key}}" value="no"
-                                            style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;"
-                                            {{ ($piw->$key ?? old($key)) === 'no' ? 'checked' : '' }}>
-                                        No
-                                    </label>
+                                    <md-label for="{{ $key }}">{{ $field }}</label><br>
+                    
+                                    <!-- Hidden input to ensure 'no' is submitted by default if nothing is selected -->
+                                    <input type="hidden" name="{{ $key }}" value="no">
+                    
+                                    <!-- Tabs for Yes/No -->
+                                    <md-tabs id="tab-{{ $key }}" class="toggle-btn">
+                                        <!-- Yes Tab -->
+                                        <md-secondary-tab 
+                                            value="yes" 
+                                            id="tab-{{ $key }}-yes"
+                                            onclick="document.getElementById('{{ $key }}_yes').checked = true"
+                                            {{ ($piw->$key ?? old($key, 'no')) === 'yes' ? 'active' : '' }}
+                                        >
+                                            Yes
+                                        </md-secondary-tab>
+                    
+                                        <!-- No Tab -->
+                                        <md-secondary-tab 
+                                            value="no" 
+                                            id="tab-{{ $key }}-no"
+                                            onclick="document.getElementById('{{ $key }}_no').checked = true"
+                                            {{ ($piw->$key ?? old($key, 'no')) === 'no' ? 'active' : '' }}
+                                        >
+                                            No
+                                        </md-secondary-tab>
+                                    </md-tabs>
+                    
+                                    <!-- Hidden radio buttons to maintain functionality -->
+                                    <input type="radio" id="{{ $key }}_yes" name="{{ $key }}" value="yes" style="display:none;" 
+                                        {{ ($piw->$key ?? old($key)) === 'yes' ? 'checked' : '' }}>
+                                    <input type="radio" id="{{ $key }}_no" name="{{ $key }}" value="no" style="display:none;" 
+                                        {{ ($piw->$key ?? old($key)) === 'no' ? 'checked' : '' }}>
                                 </div>
                             </div>
-
-                        </div>
-                    @endforeach
-
-
-
-
-
-
-
-
+                        @endforeach
+                    </div>
+                    
 
 
 
@@ -112,12 +179,12 @@
                     <div class="text-center">
                         @if (isset($piw))
                         <a href="{{route('pre-cabling-piw.delete', $piw->id)}}">
-                            <button type="button" class="btn btn-danger mt-4" style="cursor: pointer !important"
-                                type="submit">Remove</button>
+                            <md-filled-tonal-button type="button" 
+                                type="submit">Remove</md-filled-tonal-button>
                             </a>
                         @endif
-                            <button class="btn btn-success mt-4" style="cursor: pointer !important"
-                                type="submit">{{ isset($piw) ? 'Update' : 'Create' }}</button>
+                            <md-filled-tonal-button 
+                                type="submit">{{ isset($piw) ? 'Update' : 'Create' }}</md-filled-tonal-button>
                     </div>
 
                 </form>

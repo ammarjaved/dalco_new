@@ -121,7 +121,7 @@ table.dataTable thead .sorting_desc:after {
             @endif
             <div class="row">
                 <div class="col-12">
-                    <div class="card" style="background-color:#E0EEE0;">
+                    <div class="card" style="background-color:#fef7ff;">
                         <div class="card-header">
                             <div class="card-title">
                                 <h3>Pre Cabling</h3>
@@ -154,8 +154,8 @@ table.dataTable thead .sorting_desc:after {
                                                 <td>{{ $survey->kawasan }}</td>
                                                 <td>
                                                     <div class="dropdown" style="position: relative;">
-                                                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="fas fa-ellipsis-v"></i>
+                                                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#E0B0FF'" onmouseout="this.style.backgroundColor='#fef7ff'">
+                                                            <img src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}" alt="Menu" style="width: 16px; height: 16px;">
                                                         </button>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                             @if ($survey->PreCabling)

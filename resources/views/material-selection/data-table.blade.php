@@ -1,11 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
+
+
+<section class="content-header">
+    <div class="container-fluid  ">
+        <div class="row mb-2" style="flex-wrap:nowrap">
+            <div class="col-sm-6">
+                <h3 style="color: #8e44ad">Material Selection</h3>
+            </div>
+            <div class="col-sm-6 text-right">
+                <ol class="breadcrumb float-right">
+
+                    <li  style="color: #8e44ad;" class="breadcrumb-item"><a href="#">index</a></li>
+                    <li style="color: #8e44ad;" class="breadcrumb-item active">Show</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
 <div class="container">
     <h2>Data Table</h2>
     
    
-        <table id="myTable"  style="background-color:#E0EEE0;" class="table table-bordered table-hover data-table">
+        <table id="myTable"  style="background-color:#fef7ff;" class="table table-bordered table-hover data-table">
 
         <thead>
             <tr>

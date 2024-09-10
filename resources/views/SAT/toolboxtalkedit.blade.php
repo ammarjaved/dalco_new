@@ -1,6 +1,39 @@
 @extends('layouts.app', ['page_title' => 'Create'])
 
+<style>
+    .label{
+    min-width: 300px;
+    max-width: 300px;
+}
+
+
+.toggle-btn {
+      border-width: 2px;
+      margin: auto;
+      border: 3px solid transparent;
+      border-radius: 15px;
+    }
+
+
+</style>
+
 @section('content')
+
+<section class="content-header" >
+    <div class="container-  ">
+        <div class="row mb-2" style="flex-wrap:nowrap">
+            <div class="col-sm-6">
+                <h3 style="color: #8e44ad;">Pre Cabling</h3>
+            </div>
+            <div class="col-sm-6 text-right">
+                <ol class="breadcrumb float-right" >
+                    <li class="breadcrumb-item"><a href="{{ route('sat.index') }}" style="color: #8e44ad;">index</a></li>
+                    <li class="breadcrumb-item active" style="color: #8e44ad;">edit</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
 <div class="container">
 <h3 class="mt-3">ToolBoxTalk</h3> 
 
@@ -14,229 +47,306 @@
      <input type="text" value="{{$toolboxtalk->site_survey_id}}" name="site_survey_id"/>
 </div>     
 
-       <div class="row">
-        {{-- <div class="col-md-6">
-
-            <div class="form-group">
-                <label for="lokasi">Lokasi</label><br>
-                <input type="text" id="lokasi" name="lokasi" class="form-control" value="{{ $toolboxtalk->lokasi ?? old('lokasi') }}">
-            </div>
-            
-</div> --}}
-
-<div class="col-md-6">
-    <div class="form-group">
-            <label for="tarikh">Tarikh</label>
-            <input type="date" class="form-control" id="tarikh" name="tarikh" value="{{ $toolboxtalk->tarikh}}" required>
-        </div>
-
-
-    </div>
-
-</div>
-    
 <div class="row">
-    {{-- <div class="col-md-6"> --}}
-    {{-- <div class="form-group">
-        <label for="cfs">CFS</label><br>
-        <label for="cfs_yes">
-            <input type="radio" id="cfs_yes" name="cfs" value="yes" style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;" {{ ($toolboxtalk->cfs ?? old('cfs')) === 'yes' ? 'checked' : '' }}>
-            Yes
-        </label>
-        <label for="cfs_no">
-            <input type="radio" id="cfs_no" name="cfs" value="no" style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;" {{ ($toolboxtalk->cfs ?? old('cfs','no')) === 'no' ? 'checked' : '' }}>
-            No
-        </label>
-    </div> --}}
-{{-- </div> --}}
-
+    <div class="col-md-6">
+        <div class="form-group">
+                {{-- <label for="tarikh">Tarikh</label> --}}
+                <md-outlined-text-field label="Tarikh" class="label" type="date" class="form-control" id="tarikh" name="tarikh" value="{{ $toolboxtalk->tarikh}}" required>
+            </div>
     
-<div class="col-md-6">
-    <div class="form-group">
-        <label for="skop_kerja">Skop Kerja</label><br>
-        <input type="text" id="skop_kerja" name="skop_kerja" class="form-control" value="SAT" readonly>
+    
+        </div>
+    
+    
+         
+    <div class="col-md-6">
+        <div class="form-group">
+            {{-- <label for="skop_kerja">Skop Kerja</label><br> --}}
+            <md-outlined-text-field label="Skop Kerja" class="label" type="text" id="skop_kerja" name="skop_kerja" class="form-control" value="SAT" readonly>
+        </div>
     </div>
-</div>
-
-
-</div>
+    
+    </div>
 
 
    
     <!-- PPD Safety fields -->
+    <h4><span style="background-color: #fef7ff; color: #8e44ad; padding: 0 5px;">PPD</span></h4>
     <div class="row">
-    @foreach(['ppd_safety_helment', 'ppd_safety_vest', 'ppd_safety_shoes', 'ppd_safety'] as $field)
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="{{ $field }}">{{ ucwords(str_replace('_', ' ', $field)) }}</label><br>
-            <label for="{{ $field }}_yes">
-                <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;" {{ ($toolboxtalk->$field ?? old($field,'no')) === 'yes' ? 'checked' : '' }}>
-                Yes
-            </label>
-            <label for="{{ $field }}_no">
-                <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;" {{ ($toolboxtalk->$field ?? old($field,'no')) === 'no' ? 'checked' : '' }}>
-                No
-            </label>
+        @foreach(['ppd_safety_helment', 'ppd_safety_vest', 'ppd_safety_shoes', 'ppd_safety'] as $field)
+        <div class="col-md-6">
+            <div class="form-group">
+                <md-label style="display: block; margin-bottom: 5px;">
+                    {{ ucwords(str_replace('_', ' ', $field)) }}:
+                </md-label>
+                <md-tabs id="tab-{{ $field }}" class="toggle-btn">
+                    <!-- Yes Radio Button -->
+                    <md-secondary-tab 
+                        value="yes" 
+                        id="val-tab-{{ $field }}_yes"
+                        onclick="setRadioValue('{{ $field }}', 'yes')"
+                        {{ ($toolboxtalk->$field ?? old($field,'no')) === 'yes' ? 'active' : '' }}
+                    >
+                        Yes
+                        <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="display:none;" {{ ($toolboxtalk->$field ?? old($field,'no')) === 'yes' ? 'checked' : '' }}>
+                    </md-secondary-tab>
+    
+                    <!-- No Radio Button -->
+                    <md-secondary-tab 
+                        value="no" 
+                        id="val-tab-{{ $field }}_no"
+                        onclick="setRadioValue('{{ $field }}', 'no')"
+                        {{ ($toolboxtalk->$field ?? old($field,'no')) === 'no' ? 'active' : '' }}
+                    >
+                        No
+                        <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="display:none;" {{ ($toolboxtalk->$field ?? old($field,'no')) === 'no' ? 'checked' : '' }}>
+                    </md-secondary-tab>
+                </md-tabs>
+            </div>
         </div>
+        @endforeach
     </div>
-    @endforeach
-</div>
+    <br>
+
 
     <!-- Equipment fields -->
+   <h4><span style="background-color: #fef7ff; color: #8e44ad; padding: 0 5px;">EQUIPMENT & INSTRUMENT</span></h4>
     <div class="row">
-    @foreach(['equipment_condition','instrument_condition', 'instrument_kit_condition'] as $field)
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="{{ $field }}">{{ ucwords(str_replace('_', ' ', $field)) }}</label><br>
-            <label for="{{ $field }}_yes">
-                <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;" {{ ($toolboxtalk->$field ?? old($field,'no')) === 'yes' ? 'checked' : '' }}>
-                Yes
-            </label>
-            <label for="{{ $field }}_no">
-                <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;" {{ ($toolboxtalk->$field ?? old($field,'no')) === 'no' ? 'checked' : '' }}>
-                No
-            </label>
+        @foreach(['equipment_condition', 'instrument_condition', 'instrument_kit_condition'] as $field)
+        <div class="col-md-6">
+            <div class="form-group">
+                <md-label style="display: block; margin-bottom: 5px;">
+                    {{ ucwords(str_replace('_', ' ', $field)) }}:
+                </md-label>
+                <md-tabs id="tab-{{ $field }}" class="toggle-btn">
+                    <!-- Yes Radio Button -->
+                    <md-secondary-tab 
+                        value="yes" 
+                        id="val-tab-{{ $field }}_yes"
+                        onclick="setRadioValue('{{ $field }}', 'yes')"
+                        {{ ($toolboxtalk->$field ?? old($field,'no')) === 'yes' ? 'active' : '' }}
+                    >
+                        Yes
+                        <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="display:none;" {{ ($toolboxtalk->$field ?? old($field,'no')) === 'yes' ? 'checked' : '' }}>
+                    </md-secondary-tab>
+    
+                    <!-- No Radio Button -->
+                    <md-secondary-tab 
+                        value="no" 
+                        id="val-tab-{{ $field }}_no"
+                        onclick="setRadioValue('{{ $field }}', 'no')"
+                        {{ ($toolboxtalk->$field ?? old($field,'no')) === 'no' ? 'active' : '' }}
+                    >
+                        No
+                        <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="display:none;" {{ ($toolboxtalk->$field ?? old($field,'no')) === 'no' ? 'checked' : '' }}>
+                    </md-secondary-tab>
+                </md-tabs>
+            </div>
         </div>
+        @endforeach
     </div>
-    @endforeach
-</div>
+    <br>
+    
 
     <!-- Vehicle fields -->
+    <h4><span style="background-color: #fef7ff; color: #8e44ad; padding: 0 5px;">VEHICLE</span></h4>
     <div class="row">
-    @foreach(['vehicle_fire_extinguisher', 'vehicle_condition'] as $field)
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="{{ $field }}">{{ ucwords(str_replace('_', ' ', $field)) }}</label><br>
-            <label for="{{ $field }}_yes">
-                <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;" {{ ($toolboxtalk->$field ?? old($field,'no')) === 'yes' ? 'checked' : '' }}>
-                Yes
-            </label>
-            <label for="{{ $field }}_no">
-                <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;" {{ ($toolboxtalk->$field ?? old($field,'no')) === 'no' ? 'checked' : '' }}>
-                No
-            </label>
+        @foreach(['vehicle_fire_extinguisher', 'vehicle_condition'] as $field)
+        <div class="col-md-6">
+            <div class="form-group">
+                <md-label style="display: block; margin-bottom: 5px;">
+                    {{ ucwords(str_replace('_', ' ', $field)) }}:
+                </md-label>
+                <md-tabs id="tab-{{ $field }}" class="toggle-btn">
+                    <!-- Yes Radio Button -->
+                    <md-secondary-tab 
+                        value="yes" 
+                        id="val-tab-{{ $field }}_yes"
+                        onclick="setRadioValue('{{ $field }}', 'yes')"
+                        {{ ($toolboxtalk->$field ?? old($field, 'no')) === 'yes' ? 'active' : '' }}
+                    >
+                        Yes
+                        <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="display:none;" {{ ($toolboxtalk->$field ?? old($field, 'no')) === 'yes' ? 'checked' : '' }}>
+                    </md-secondary-tab>
+    
+                    <!-- No Radio Button -->
+                    <md-secondary-tab 
+                        value="no" 
+                        id="val-tab-{{ $field }}_no"
+                        onclick="setRadioValue('{{ $field }}', 'no')"
+                        {{ ($toolboxtalk->$field ?? old($field, 'no')) === 'no' ? 'active' : '' }}
+                    >
+                        No
+                        <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="display:none;" {{ ($toolboxtalk->$field ?? old($field, 'no')) === 'no' ? 'checked' : '' }}>
+                    </md-secondary-tab>
+                </md-tabs>
+            </div>
         </div>
+        @endforeach
     </div>
-    @endforeach
-</div>
+    <br>
+    
 
     <!-- Traffic fields -->
+    <h4><span style="background-color: #fef7ff; color: #8e44ad; padding: 0 5px;">TRAFFIC</span></h4>
     <div class="row">
-    @foreach(['traffic_safety_kon', 'traffic_sign_board', 'traffic_chargeman'] as $field)
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="{{ $field }}">{{ ucwords(str_replace('_', ' ', $field)) }}</label><br>
-            <label for="{{ $field }}_yes">
-                <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;" {{ ($toolboxtalk->$field ?? old($field,'no')) === 'yes' ? 'checked' : '' }}>
-                Yes
-            </label>
-            <label for="{{ $field }}_no">
-                <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;" {{ ($toolboxtalk->$field ?? old($field,'no')) === 'no' ? 'checked' : '' }}>
-                No
-            </label>
+        @foreach(['traffic_safety_kon', 'traffic_sign_board', 'traffic_chargeman'] as $field)
+        <div class="col-md-6">
+            <div class="form-group">
+                <md-label style="display: block; margin-bottom: 5px;">
+                    {{ ucwords(str_replace('_', ' ', $field)) }}:
+                </md-label>
+                <md-tabs id="tab-{{ $field }}" class="toggle-btn">
+                    <!-- Yes Radio Button -->
+                    <md-secondary-tab 
+                        value="yes" 
+                        id="val-tab-{{ $field }}_yes"
+                        onclick="setRadioValue('{{ $field }}', 'yes')"
+                        {{ ($toolboxtalk->$field ?? old($field, 'no')) === 'yes' ? 'active' : '' }}
+                    >
+                        Yes
+                        <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="display:none;" {{ ($toolboxtalk->$field ?? old($field, 'no')) === 'yes' ? 'checked' : '' }}>
+                    </md-secondary-tab>
+    
+                    <!-- No Radio Button -->
+                    <md-secondary-tab 
+                        value="no" 
+                        id="val-tab-{{ $field }}_no"
+                        onclick="setRadioValue('{{ $field }}', 'no')"
+                        {{ ($toolboxtalk->$field ?? old($field, 'no')) === 'no' ? 'active' : '' }}
+                    >
+                        No
+                        <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="display:none;" {{ ($toolboxtalk->$field ?? old($field, 'no')) === 'no' ? 'checked' : '' }}>
+                    </md-secondary-tab>
+                </md-tabs>
+            </div>
         </div>
+        @endforeach
     </div>
-    @endforeach
-
-</div>
+    <br>
+    
 
 
     <!-- Team fields -->
+    <h4><span style="background-color: #fef7ff; color: #8e44ad; padding: 0 5px;">TEAM</span></h4>
     <div class="row">
-    @foreach(['team_ap_tnp', 'team_cp_tnb'] as $field)
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="{{ $field }}">{{ ucwords(str_replace('_', ' ', $field)) }}</label><br>
-            <label for="{{ $field }}_yes">
-                <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;" {{ ($toolboxtalk->$field ?? old($field,'no')) === 'yes' ? 'checked' : '' }}>
-                Yes
-            </label>
-            <label for="{{ $field }}_no">
-                <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;" {{ ($toolboxtalk->$field ?? old($field,'no')) === 'no' ? 'checked' : '' }}>
-                No
-            </label>
+        @foreach(['team_ap_tnp', 'team_cp_tnb'] as $field)
+        <div class="col-md-6">
+            <div class="form-group">
+                <md-label style="display: block; margin-bottom: 5px;">
+                    {{ ucwords(str_replace('_', ' ', $field)) }}:
+                </md-label>
+                <md-tabs id="tab-{{ $field }}" class="toggle-btn">
+                    <!-- Yes Radio Button -->
+                    <md-secondary-tab 
+                        value="yes" 
+                        id="val-tab-{{ $field }}_yes"
+                        onclick="setRadioValue('{{ $field }}', 'yes')"
+                        {{ ($toolboxtalk->$field ?? old($field, 'no')) === 'yes' ? 'active' : '' }}
+                    >
+                        Yes
+                        <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="display:none;" {{ ($toolboxtalk->$field ?? old($field, 'no')) === 'yes' ? 'checked' : '' }}>
+                    </md-secondary-tab>
+    
+                    <!-- No Radio Button -->
+                    <md-secondary-tab 
+                        value="no" 
+                        id="val-tab-{{ $field }}_no"
+                        onclick="setRadioValue('{{ $field }}', 'no')"
+                        {{ ($toolboxtalk->$field ?? old($field, 'no')) === 'no' ? 'active' : '' }}
+                    >
+                        No
+                        <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="display:none;" {{ ($toolboxtalk->$field ?? old($field, 'no')) === 'no' ? 'checked' : '' }}>
+                    </md-secondary-tab>
+                </md-tabs>
+            </div>
         </div>
+        @endforeach
     </div>
-    @endforeach
-</div>
+    <br>
 
     <!-- NIOSH fields -->
+    <h4><span style="background-color: #fef7ff; color: #8e44ad; padding: 0 5px;">NIOS & PERMIT</span></h4>
     <div class="row">
-    @foreach(['niosh_staff_ntsp', 'permit_special','permit_work'] as $field)
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="{{ $field }}">{{ ucwords(str_replace('_', ' ', $field)) }}</label><br>
-            <label for="{{ $field }}_yes">
-                <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;" {{ ($toolboxtalk->$field ?? old($field,'no')) === 'yes' ? 'checked' : '' }}>
-                Yes
-            </label>
-            <label for="{{ $field }}_no">
-                <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;" {{ ($toolboxtalk->$field ?? old($field,'no')) === 'no' ? 'checked' : '' }}>
-                No
-            </label>
+        @foreach(['niosh_staff_ntsp', 'permit_special', 'permit_work'] as $field)
+        <div class="col-md-6">
+            <div class="form-group">
+                <md-label style="display: block; margin-bottom: 5px;">
+                    {{ ucwords(str_replace('_', ' ', $field)) }}:
+                </md-label>
+                <md-tabs id="tab-{{ $field }}" class="toggle-btn">
+                    <!-- Yes Tab -->
+                    <md-secondary-tab 
+                        value="yes" 
+                        id="val-tab-{{ $field }}_yes"
+                        onclick="setRadioValue('{{ $field }}', 'yes')"
+                        {{ ($toolboxtalk->$field ?? old($field, 'no')) === 'yes' ? 'active' : '' }}
+                    >
+                        Yes
+                        <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="display:none;" {{ ($toolboxtalk->$field ?? old($field, 'no')) === 'yes' ? 'checked' : '' }}>
+                    </md-secondary-tab>
+    
+                    <!-- No Tab -->
+                    <md-secondary-tab 
+                        value="no" 
+                        id="val-tab-{{ $field }}_no"
+                        onclick="setRadioValue('{{ $field }}', 'no')"
+                        {{ ($toolboxtalk->$field ?? old($field, 'no')) === 'no' ? 'active' : '' }}
+                    >
+                        No
+                        <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="display:none;" {{ ($toolboxtalk->$field ?? old($field, 'no')) === 'no' ? 'checked' : '' }}>
+                    </md-secondary-tab>
+                </md-tabs>
+            </div>
+        </div>
+        @endforeach
+    </div>
+    <br>
+    
+
+    <h4><span style="background-color: #fef7ff; color: #8e44ad; padding: 0 5px;">TOOLBOX PICTURE</span></h4>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <md-label style="display: block; margin-bottom: 5px;">
+                    Picture During Toolbox:
+                </md-label>
+                <md-tabs id="tab-picture_during_toolbox" class="toggle-btn">
+                    <!-- Yes Radio Button -->
+                    <md-secondary-tab value="yes" id="val-tab-picture_during_toolbox" onclick="toggleToolboxImageUpload('picture_during_toolbox', true, 'yes')" {{ isset($toolboxTalk) && $toolboxTalk->picture_during_toolbox == 'yes' ? 'active' : '' }}>
+                        Yes
+                        <input type="radio" id="yes-picture_during_toolbox" name="picture_during_toolbox" value="yes" style="display:none;" {{ isset($toolboxTalk) && $toolboxTalk->picture_during_toolbox == 'yes' ? 'checked' : '' }}>
+                    </md-secondary-tab>
+    
+                    <!-- No Radio Button -->
+                    <md-secondary-tab value="no" id="val-tab-picture_during_toolbox" onclick="toggleToolboxImageUpload('picture_during_toolbox', false, 'no')" {{ !isset($toolboxTalk) || $toolboxTalk->picture_during_toolbox == 'no' ? 'active' : '' }}>
+                        No
+                        <input type="radio" id="no-picture_during_toolbox" name="picture_during_toolbox" value="no" style="display:none;" {{ !isset($toolboxTalk) || $toolboxTalk->picture_during_toolbox == 'no' ? 'checked' : '' }}>
+                    </md-secondary-tab>
+                </md-tabs>
+    
+                <!-- Image Uploads Section -->
+                <div id="picture_during_toolbox_images" style="{{ (isset($toolboxTalk) && $toolboxTalk->picture_during_toolbox == 'yes') ? '' : 'display: none;' }}">
+                    @for ($i = 1; $i <= 2; $i++)
+                        <div class="form-group">
+                            <md-label for="toolbox_image{{ $i }}">
+                                Toolbox Image {{ $i }}
+                            </md-label>
+                            <input type="file" onchange="previewImage(this, 'img_toolbox{{ $i }}')" hidden class="form-control-file" id="toolbox_image{{ $i }}" name="toolbox_image{{ $i }}">
+                            @if (isset($toolboxTalk) && $toolboxTalk->{"toolbox_image{$i}"})
+                                <img onclick="document.getElementById('toolbox_image{{ $i }}').click();" src="{{ asset($toolboxTalk->{"toolbox_image{$i}"}) }}" id="img_toolbox{{ $i }}" alt="Toolbox Image {{ $i }}" class="img-thumbnail mt-2" style="max-width: 200px;">
+                            @else
+                                <img onclick="document.getElementById('toolbox_image{{ $i }}').click();" src="{{ URL::asset('assets/web-images/download.png') }}" id="img_toolbox{{ $i }}" alt="Toolbox Image {{ $i }}" class="img-thumbnail mt-2" style="max-width: 200px;">
+                            @endif
+                        </div>
+                    @endfor
+                </div>
+            </div>
         </div>
     </div>
-    @endforeach
-</div>
-
-<div class="row">
-    <div class="col-md-6">
-    <div class="form-group">
-        <label for="picture_during_toolbox">Picture During Toolbox</label><br>
-        <label for="picture_during_toolbox_yes">
-            <input type="radio" id="picture_during_toolbox_yes" name="picture_during_toolbox" value="yes"  onclick="toggleImageInputs(true)" style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;" {{ ($toolboxtalk->picture_during_toolbox ?? old('picture_during_toolbox', 'no')) === 'yes' ? 'checked' : '' }}>
-            Yes
-        </label>
-        <label for="picture_during_toolbox_no">
-            <input type="radio" id="picture_during_toolbox_no" name="picture_during_toolbox" value="no"  onclick="toggleImageInputs(false)" style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;" {{ ($toolboxtalk->picture_during_toolbox ?? old('picture_during_toolbox', 'no')) === 'no' ? 'checked' : '' }}>
-            No
-        </label>
-    </div>
-</div>
-</div>
-
-       <!-- Toolbox Image 1-->
-       
-{{-- <div class="row">
-    <div class="col-md-6">
-       <div class="form-group">
-        <label for="upload_images">Toolbox Images</label><br>
-        <label for="upload_images_yes">
-            <input type="radio" id="upload_images_yes" name="upload_images" value="yes"  style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;" onclick="toggleImageInputs(true)">
-            Yes
-        </label>
-        <label for="upload_images_no">
-            <input type="radio" id="upload_images_no" name="upload_images" value="no"  style="appearance: radio; -webkit-appearance: radio; -moz-appearance: radio; width: auto; display: inline-block; margin-right: 5px;"onclick="toggleImageInputs(false)" checked>
-            No
-        </label>
-    </div>
-    </div>
-</div> --}}
-
-    <!-- Conditional Image Inputs -->
-    <div class="row">
-        <div class="col-md-6">
-<div id="image_inputs" style="display: none;">
-    <div class="form-group">
-        <label for="toolbox_image1">Toolbox Image 1</label>
-        <input type="file" class="form-control-file" id="toolbox_image1" name="toolbox_image1">
-        @if(isset($toolboxtalk->toolbox_image1) && $toolboxtalk->toolbox_image1)
-            <img src="{{ asset($toolboxtalk->toolbox_image1) }}" alt="Toolbox Image 1" class="img-thumbnail mt-2" style="max-width: 200px;">
-        @endif
-    </div>
-    
-    <div class="form-group">
-        <label for="toolbox_image2">Toolbox Image 2</label>
-        <input type="file" class="form-control-file" id="toolbox_image2" name="toolbox_image2">
-        @if(isset($toolboxtalk->toolbox_image2) && $toolboxtalk->toolbox_image2)
-            <img src="{{ asset($toolboxtalk->toolbox_image2) }}" alt="Toolbox Image 2" class="img-thumbnail mt-2" style="max-width: 200px;">
-        @endif
-    </div>
-</div>
- </div>
 
  <div class="mt-3" id="button-container">
-      <button type="submit" class="btn btn-success" id="submitBtn" >Update</button>
+      <md-filled-tonal-button type="submit"  id="submitBtn" >Update</md-filled-tonal-button>
     </div>
 
     </form> 
@@ -244,13 +354,19 @@
     <form action="{{ route('toolbox-talks.destroy', $toolboxtalk->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this Toolbox Talk?');">
         @csrf
         @method('DELETE')
-        <button type="submit" class="btn btn-danger">Delete</button>
+        <md-filled-tonal-button type="submit" >Delete</md-filled-tonal-button>
     </form>
     
     
  @endsection 
 
  <script>
+
+function setRadioValue(fieldName, value) {
+    document.getElementById(fieldName + '_' + value).checked = true;
+}
+
+
     function toggleImageInputs(show) {
         const imageInputs = document.getElementById('image_inputs');
         const updateButton = document.getElementById('submitBtn');
@@ -268,5 +384,37 @@
             }
         }
     }
+
+
+    function toggleToolboxImageUpload(fieldName, show, value) {
+    var imagesDiv = document.getElementById(fieldName + '_images');
+    var yesRadio = document.getElementById('yes-' + fieldName);
+    var noRadio = document.getElementById('no-' + fieldName);
+
+    if (show) {
+        imagesDiv.style.display = '';
+        yesRadio.checked = true;
+    } else {
+        imagesDiv.style.display = 'none';
+        noRadio.checked = true;
+    }
+}
+
+function previewImage(input, imgId) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById(imgId).src = e.target.result;
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var isYes = document.querySelector('input[name="picture_during_toolbox"]:checked')?.value === 'yes';
+    toggleImageInputs(isYes);
+});
+
+
 </script>
   

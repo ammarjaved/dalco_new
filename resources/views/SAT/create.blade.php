@@ -1,5 +1,60 @@
 @extends('layouts.app')
 
+<style>
+    .thead-purple {
+  background-color: #8e44ad; /* Purple background */
+  color: white; /* White text for better contrast */
+}
+
+.label{
+  min-width: 300px;
+  max-width: 300px;
+}
+.file-upload-wrapper {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border: 2px dashed #8e44ad;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ece0f0;
+    transition: background-color 0.3s ease;
+}
+
+.file-upload-wrapper:hover {
+    background-color: #f8f8ff;
+}
+
+.file-upload-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.file-upload-text {
+    color: #333;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 10px;
+}
+
+.form-text.text-muted {
+    margin-top: 8px;
+}
+
+
+</style>
+
 @section('content')
 <section class="content-header">
     <div class="container-fluid">
@@ -25,31 +80,35 @@
                             <div class="form-group row">
                                 <!-- Image Name -->
                                 <div class="col-md-4">
-                                    <label for="image_name">Image Name</label>
-                                    <input type="text" class="form-control" id="image_name" name="image_name" required>
+                                    {{-- <label for="image_name">Image Name</label> --}}
+                                    <md-outlined-text-field class="label" label="Image Name" type="text"  id="image_name" name="image_name" required>
                                 </div>
 
                                 <!-- Upload Image -->
-                                <div class="col-md-4">
-                                    <label for="image_url">Upload Image</label>
-                                    <input type="file" class="form-control" id="image_url" name="image_url" required>
+                                <div class="col-md-4 mb-3" style="margin-top: -20px">
+                                    <md-label for="image_url" class="form-label">Upload New Image</md-label>
+                                    <div class="file-upload-wrapper">
+                                        <input type="file" class="file-upload-input" id="image_url" name="image_url" accept="image/*">
+                                        <span class="file-upload-text">Choose an image or drag it here</span>
+                                    </div>
+                                    <small class="form-text text-muted">Leave empty if you do not want to change the image.</small>
                                 </div>
-
+                                
                                 <!-- Image Type -->
                                 <div class="col-md-4">
-                                    <label for="image_type">Image Type</label>
-                                    <select class="form-control" id="image_type" name="image_type" required>
-                                        <option value="" disabled selected>Select Type</option>
-                                        <option value="before">Before</option>
-                                        <option value="during">During</option>
-                                        <option value="after">After</option>
-                                    </select>
+                                    {{-- <label for="image_type">Image Type</label> --}}
+                                    <md-outlined-select label="Image Type"  class="label" id="image_type" name="image_type" required>
+                                       
+                                        <md-select-option value="before">Before</md-select-option>
+                                        <md-select-option value="during">During</md-select-option>
+                                        <md-select-option value="after">After</md-select-option>
+                                    </md-outlined-select>
                                 </div>
                             </div>
 
                             <!-- Submit and Cancel Buttons -->
-                            <button type="submit" class="btn btn-success mt-3">Save</button>
-                            <a href="{{ url()->previous() }}" class="btn btn-secondary mt-3">Cancel</a>
+                            <md-filled-tonal-button type="submit" class=" mt-3">Save</md-filled-tonal-button>
+                            {{-- <a href="{{ url()->previous() }}" class="btn btn-secondary mt-3">Cancel</a> --}}
                         </form>
 
                         <!-- Table of Saved SAT Images -->
@@ -59,7 +118,7 @@
                         @else
                            
                         <table id="myTable" class="table table-bordered table-hover data-table">
-                                    <thead>
+                                    <thead class=" thead-purple">
                                         <tr>
                                             <th>ID</th>
                                             <th>Image Name</th>
@@ -76,19 +135,19 @@
                                                 <td>{{ $satRecord->image_type }}</td>
                                                 <td>
                                                     @if($satRecord->image_url)
-                                                        <a href="{{ asset('storage/' . $satRecord->image_url) }}" target="_blank" class="btn btn-info btn-sm">
-                                                            View
-                                                        </a>
-                                                    @else
+    <md-filled-tonal-button href="{{ asset('storage/' . $satRecord->image_url) }}" target="_blank">
+        View
+    </md-filled-tonal-button>
+@else
                                                         No image
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('image-shutdown.edit', $satRecord->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                                    <form action="{{ route('image-shutdown.destroy', $satRecord->id) }}" method="POST" style="display:inline;">
+                                                    <md-filled-tonal-button href="{{ route('sat.edit', $satRecord->id) }}">Edit</md-filled-tonal-button> 
+                                                    <form action="{{ route('sat.destroy', $satRecord->id) }}" method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                        <md-filled-tonal-button type="submit" >Delete</md-filled-tonal-button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -189,8 +248,26 @@ table = $('.data-table').DataTable({
 
                
                
-})
-})
+});
+
+
+var fileInput = document.getElementById('image_url');
+var fileText = document.querySelector('.file-upload-text');
+
+if (fileInput) {
+    fileInput.addEventListener('change', function(e) {
+        if (e.target.files.length > 0) {
+            var fileName = e.target.files[0].name;
+            fileText.textContent = fileName;
+            fileText.title = fileName; // Show full filename on hover
+        } else {
+            fileText.textContent = 'Choose an image or drag it here';
+            fileText.title = ''; // Clear title when no file is selected
+        }
+    });
+}
+
+});
 
 </script>
 
