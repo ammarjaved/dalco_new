@@ -102,45 +102,40 @@ public function edit($id)
 
 public function update(Request $request, $id)
 {
-    try {
-        // Validate the request
-        $request->validate([
-            'image_name' => 'required|string|max:255',
-            'image_url' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
-            'image_type' => 'required|string|in:before,during,after',
-            'site_survey_id' => 'required|integer|exists:site_surveys,id',
-        ]);
+    // Dump the request data (for debugging purposes, remove in production)
+    // dd($request->all());
 
-        // Find the SAT record by ID
-        $satRecord = SAT::findOrFail($id);
+    // Validate the request
+    $request->validate([
+        'image_name' => 'required|string',
+        'image_type' => 'required|string',
+        'image_url' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048', // Adjust validation for optional file
+    ]);
 
-        // Update the SAT record
-        $satRecord->image_name = $request->image_name;
-        $satRecord->image_type = $request->image_type;
-        $satRecord->site_survey_id = $request->site_survey_id;
-
-        // Handle image upload if a new image is provided
-        if ($request->hasFile('image_url')) {
-            // Delete old image if exists
-            if ($satRecord->image_url && Storage::exists($satRecord->image_url)) {
-                Storage::delete($satRecord->image_url);
-            }
-
-            // Store new image
-            $filePath = $request->file('image_url')->store('images', 'public');
-            $satRecord->image_url = $filePath;
-        }
-
-        $satRecord->save();
-
-        return redirect()->route('sat.index')->with('success', 'SAT record updated successfully!');
-
-    } catch (Exception $e) {
-        return redirect()->back()->with('failed', 'Request Failed: ' . $e->getMessage());
+    // Find the record
+    $satRecord = SAT::find($id);
+    if (!$satRecord) {
+        return redirect()->route('sat.index')->with('error', 'Record not found');
     }
+
+    // Process the file upload
+    if ($request->hasFile('image_url')) {
+        $file = $request->file('image_url');
+        $filename = time() . '-' . $file->getClientOriginalName();
+        $filePath = $file->storeAs('uploads', $filename, 'public'); // Save file in 'public/uploads'
+
+        // Update the image_url field with the new file path
+        $satRecord->image_url = $filePath;
+    }
+
+    // Update other fields
+    $satRecord->image_name = $request->input('image_name');
+    $satRecord->image_type = $request->input('image_type');
+    // No need to set image_url here if no new file is uploaded
+    $satRecord->save();
+
+    return redirect()->route('sat.index')->with('success', 'Record updated successfully');
 }
-
-
 
 public function destroy($id)
 {

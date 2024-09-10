@@ -19,40 +19,35 @@ class MaterialSelectionController extends Controller
 {
     public function index(Request $request)
     {
+        // Fetch the Site Survey
         $siteSurvey = SiteSurvey::find($request->id);
-
-        // return $siteSurvey;
     
-        // Handle the case where SiteSurvey is not found
-        // if (!$siteSurvey) {
-        //     return redirect()->route('material-selection.index')->with('error', 'Site Survey not found.');
-        // }
+        // Fetch the materials data (this can be from the `showData` method or similar)
+        $data = DB::select(DB::raw("
+            WITH foo AS (SELECT * FROM project_material)
+            SELECT a.id, c.nama_pe, mat_desc, mat_code, bun, a.quantity
+            FROM material b
+            JOIN foo a ON a.material_id = b.id
+            JOIN tbl_site_survey c ON a.site_survey_id = c.id
+            WHERE c.id = ?
+        "), [$request->id]);
     
-        // $query = material::query();
-    
-        // if ($request->has('search')) {
-        //     $search = $request->input('search');
-        //     $query->where('mat_code', 'LIKE', "%{$search}%")
-        //           ->orWhere('mat_desc', 'LIKE', "%{$search}%");
-    
-        // $materials = $query->get();
-    
-        //  return view('material-selection.index', compact('materials', 'siteSurvey'));
-        // }else{
-            return view('material-selection.index',compact('siteSurvey'));
- 
-     //   }
+        // Pass both siteSurvey and data to the view
+        return view('material-selection.index', compact('siteSurvey', 'data'));
     }
-
+    
     public function searchMaterial(Request $request){
+
         $query = material::query();
+        
         if ($request->has('search')) {
             $search = $request->input('search');
             $query->where('mat_desc', 'LIKE', "%{$search}%");
                  // ->orWhere('mat_desc', 'LIKE', "%{$search}%");
         }
-    
-        return $materials = $query->limit(100)->pluck('mat_desc')->toArray();
+        
+        // return $materials = $query->limit(100)->pluck('mat_desc')->toArray();
+       return  response()->json($query->limit(5)->pluck('mat_desc'));
     }
 
     public function materialData(Request $request){
@@ -143,7 +138,7 @@ public function showData($id)
            // }
         }
     
-        return redirect()->route('material-selection.format', ['id' => $id])->with('success', 'Selections saved successfully.');
+        return redirect()->route('material-selection.index', ['id' => $id])->with('success', 'Selections saved successfully.');
     }
 
     public function destroy($id)

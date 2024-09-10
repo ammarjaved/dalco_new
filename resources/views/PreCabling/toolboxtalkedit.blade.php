@@ -427,4 +427,6 @@ document.addEventListener('DOMContentLoaded', function() {
     toggleToolboxImageUpload('picture_during_toolbox', isYes, isYes ? 'yes' : 'no');
 });
 
+
+
 </script>

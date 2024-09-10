@@ -1,54 +1,52 @@
 @extends('layouts.app')
+
 <style>
-.label{
-  min-width: 300px;
-  max-width: 300px;
-}
+    .label {
+        min-width: 300px;
+        max-width: 300px;
+    }
 
+    .file-upload-wrapper {
+        position: relative;
+        width: 100%;
+        height: 50px;
+        border: 2px dashed #8e44ad;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f8ff;
+        transition: background-color 0.3s ease;
+    }
 
-.file-upload-wrapper {
-    position: relative;
-    width: 100%;
-    height: 50px;
-    border: 2px dashed #8e44ad;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f8f8ff;
-    transition: background-color 0.3s ease;
-}
+    .file-upload-wrapper:hover {
+        background-color: #ece0f0;
+    }
 
-.file-upload-wrapper:hover {
-    background-color: #ece0f0;
-}
+    .file-upload-input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+        opacity: 0;
+    }
 
-.file-upload-input {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    cursor: pointer;
-    opacity: 0;
-}
+    .file-upload-text {
+        color: #333;
+        font-weight: 600;
+        width: 100%;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 0 10px;
+    }
 
-.file-upload-text {
-    color: #333;
-    font-weight: 600;
-    width: 100%;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 0 10px;
-}
-
-.form-text.text-muted {
-    margin-top: 0.5rem; /* Adjust margin to ensure spacing is consistent */
-}
-
-
+    .form-text.text-muted {
+        margin-top: 0.5rem;
+    }
 </style>
 
 @section('content')
@@ -64,17 +62,16 @@
                 <div class="row">
                     <!-- Image Name -->
                     <div class="col-md-4 form-group">
-                        {{-- <label for="image_name">Image Name</label> --}}
-                        <md-outlined-text-field class="label" label="Image Name" type="text" class="form-control" id="image_name" name="image_name" value="{{ $satRecord->image_name }}" required>
+                        <md-outlined-text-field class="label" label="Image Name" type="text" class="form-control" id="image_name" name="image_name" value="{{ old('image_name', $satRecord->image_name) }}" required>
+                        </md-outlined-text-field>
                     </div>
 
                     <!-- Image Type -->
                     <div class="col-md-4 form-group">
-                        {{-- <label for="image_type">Image Type</label> --}}
                         <md-outlined-select class="label" label="Image Type" id="image_type" name="image_type" required>
-                            <md-select-option value="before" {{ $satRecord->image_type == 'before' ? 'selected' : '' }}>Before</md-select-option>
-                            <md-select-option value="during" {{ $satRecord->image_type == 'during' ? 'selected' : '' }}>During</md-select-option>
-                            <md-select-option value="after" {{ $satRecord->image_type == 'after' ? 'selected' : '' }}>After</md-select-option>
+                            <md-select-option value="before" {{ old('image_type', $satRecord->image_type) == 'before' ? 'selected' : '' }}>Before</md-select-option>
+                            <md-select-option value="during" {{ old('image_type', $satRecord->image_type) == 'during' ? 'selected' : '' }}>During</md-select-option>
+                            <md-select-option value="after" {{ old('image_type', $satRecord->image_type) == 'after' ? 'selected' : '' }}>After</md-select-option>
                         </md-outlined-select>
                     </div>
 
@@ -94,11 +91,15 @@
                 <div class="form-group">
                     <label for="existing_image">Existing Image</label>
                     <br>
-                    <img src="{{ asset($satRecord->image_url) }}" alt="Existing Image" class="img-fluid" style="max-width: 300px;">
+                    @if($satRecord->image_url && Storage::disk('public')->exists($satRecord->image_url))
+                        <img src="{{ asset('storage/' . $satRecord->image_url) }}" alt="Existing Image" class="img-fluid" style="max-width: 300px;">
+                    @else
+                        <p>No image available</p>
+                    @endif
                 </div>
 
-                <!-- Submit and Cancel Buttons -->
-                <md-filled-tonal-button type="submit" >Update</md-filled-tonal-button>
+                <!-- Submit Button -->
+                <md-filled-tonal-button type="submit">Update</md-filled-tonal-button>
                 {{-- <a href="{{ url()->previous() }}" class="btn btn-secondary">Cancel</a> --}}
             </form>
         </div>
@@ -110,21 +111,20 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var fileInput = document.getElementById('image_url');
-var fileText = document.querySelector('.file-upload-text');
+    var fileText = document.querySelector('.file-upload-text');
 
-if (fileInput) {
-    fileInput.addEventListener('change', function(e) {
-        if (e.target.files.length > 0) {
-            var fileName = e.target.files[0].name;
-            fileText.textContent = fileName;
-            fileText.title = fileName; // Show full filename on hover
-        } else {
-            fileText.textContent = 'Choose an image or drag it here';
-            fileText.title = ''; // Clear title when no file is selected
-        }
-    });
-}
-
+    if (fileInput) {
+        fileInput.addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                var fileName = e.target.files[0].name;
+                fileText.textContent = fileName;
+                fileText.title = fileName; // Show full filename on hover
+            } else {
+                fileText.textContent = 'Choose an image or drag it here';
+                fileText.title = ''; // Clear title when no file is selected
+            }
+        });
+    }
 });
 </script>
 @endsection

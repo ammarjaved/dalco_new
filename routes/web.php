@@ -177,6 +177,8 @@ Route::get('/sat/create/{id}', [SATController::class, 'create'])->name('sat.crea
 Route::get('/sat/{id}/edit', [SATController::class, 'edit'])->name('sat.edit');
 
 Route::put('/sat/{id}', [SATController::class, 'update'])->name('sat.update');
+Route::put('/sat/{id}', [SATController::class, 'update'])->name('sat.update');
+
 
 
 

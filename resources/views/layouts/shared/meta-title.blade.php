@@ -6,6 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Scada Johor</title>
 
+
+
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
@@ -29,12 +31,15 @@
 <!-- summernote -->
 {{-- <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}"> --}}
 <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-<link rel="stylesheet" href="{{ URL::asset('assets/dist/css/lightbox.min.css') }}">
+
 
 <script src="{{ URL::asset('assets/dist/js/lightbox-plus-jquery.min.js') }}"></script>
 <link rel="shortcut icon" href="{{ asset('assets/web-images/main-logo.ico') }}">
 
+
+
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+{{-- <link rel="stylesheet" href="{{ URL::asset('assets/dist/css/lightbox.min.css') }}"> --}}
  
   <script type="module">
     import '@material/web/all.js';
