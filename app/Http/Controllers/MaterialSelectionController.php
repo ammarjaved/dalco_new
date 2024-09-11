@@ -36,6 +36,14 @@ class MaterialSelectionController extends Controller
         return view('material-selection.index', compact('siteSurvey', 'data'));
     }
     
+    // public function index(Request $request)
+    // {
+    //  //   return $request->id;
+    //     $siteSurvey = SiteSurvey::find($request->id);
+    //         return view('material-selection.index',compact('siteSurvey'));
+    // }
+
+
     public function searchMaterial(Request $request){
 
         $query = material::query();

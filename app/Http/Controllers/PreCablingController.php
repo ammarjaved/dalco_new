@@ -156,6 +156,7 @@ class PreCablingController extends Controller
     public function edit($id)
     {
         //
+        //return $id;
         $piw = PreCabling::find($id);
         return $piw ? view('PreCabling.create', ['piw' => $piw]) : abort(404);
     }

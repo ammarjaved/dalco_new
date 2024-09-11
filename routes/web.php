@@ -33,6 +33,7 @@ use App\Http\Controllers\SATController;
 use App\Http\Controllers\LKSController;
 use App\Http\Controllers\ImageShutdownAttachmentsController;
 use App\Http\Controllers\SATAttachmentsController;
+use App\Http\Controllers\TopnavbarController;
 
 use App\Http\Controllers\Materialshow;
 use App\Http\Controllers\PreCablingAttachmentsController;
@@ -65,12 +66,14 @@ Route::middleware('auth')->group(function () {
     Route::resource('site_survey', SiteSurveyController::class);
     Route::resource('toolbox_talks', ToolboxTalkController::class);
 
-    Route::get('/material-selection', [MaterialSelectionController::class, 'index'])->name('material-selection.index');
+    // Route::get('/material-selection', [MaterialSelectionController::class, 'index'])->name('material-selection.index');
     Route::post('/material-selection/{id}', [MaterialSelectionController::class, 'saveSelections'])->name('material-selection.save');
     // Route::get('/material-show', [MaterialSelectionController::class, 'showData'])->name('material-selection.show');
 
     Route::get('/material-selection/show/{id}', [MaterialSelectionController::class, 'showData'])->name('material-selection.show');
     Route::get('/search_material', [MaterialSelectionController::class, 'searchMaterial'])->name('search.material');
+    
+    Route::get('/material-selection/index/{id}', [MaterialSelectionController::class, 'index'])->name('material-selection.index');
 
     Route::get('/data_material', [MaterialSelectionController::class, 'materialData'])->name('data.material');
 
@@ -80,7 +83,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/material-selection/delete-all/{siteSurveyId}', [MaterialSelectionController::class, 'deleteAll'])->name('material-selection.delete-all');
 
 
-    Route::get('/material-selection/index', [MaterialSelectionController::class, 'index'])->name('material-selection.index');
+    // Route::get('/material-selection/index', [MaterialSelectionController::class, 'index'])->name('material-selection.index');
 
     Route::get('/material-selection', [MaterialSelectionController::class, 'format'])->name('material-selection.format');
 
@@ -201,6 +204,8 @@ Route::get('/LKS/create/{id}', [LKSController::class, 'create'])->name('LKS.crea
     Route::resource('site-data-collection', siteDateCollection::class);
     Route::view('site-data/create-mobile','siteDataCollections.create-mobile');
     Route::resource('update-site-data-images', updateSiteDataImages::class);
+    Route::get('topnavbar/{id}', [TopnavbarController::class, 'index']);
+
     // Route::resource('estimation-work', estimationWork::class);
     // Route::post('update-site-data-images/{id}/edit/{status}', [updateSiteDataImages::class, 'edit']);
 

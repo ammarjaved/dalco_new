@@ -29,17 +29,8 @@
 
 <body class="hold-transition sidebar-mini layout-fixed" >
     <div class="wrapper">
-        @include('layouts.shared.nav-bar')
-
-        @if(Auth::user()->type==true)
-        @include('layouts.shared.side-bar')
-        @endif
-
-        @if(Auth::user()->type==true)
-        <div class="content-wrapper" >
-        @else
+      
         <div class="content-wrapper" style="margin-left:5px;!important">
-        @endif     
 
             <div id="overlay">
                 <div class="loading-spinner"></div>
