@@ -6,9 +6,9 @@
     </ul>
 
     <div class="d-flex">
-
+        
         <a href="{{ route('delco-summary') }}" style="text-decoration: none;">
-            <md-filled-button style="margin-top:17px">
+            <md-filled-button style="margin-top:17px;margin: 16px;">
                 ◄ Delco Summary
             </md-filled-button>
         </a>

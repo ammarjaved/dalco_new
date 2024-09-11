@@ -53,45 +53,35 @@ class SATController extends Controller
     }
 
     // Method to store a new SAT record
-    public function store(Request $request)
-{
-    //dd($request->all()); // Debug the incoming request data
-    try {
-        // Validate the incoming request
-        // $request->validate([
-        //     'image_name' => 'required|string|max:255',
-        //     'image_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        //     'image_type' => 'required|string|in:before,during,after',
-        //     'site_survey_id' => 'required|integer|exists:site_surveys,id',
-        // ]);
-
-        // Store the uploaded image in the 'images' directory within the 'public' disk
-        $filePath = $request->file('image_url')->store('images', 'public');
-
-        // Create a new SAT record in the database
-
-        $sat_data=[
-            'image_name' => $request->image_name,
-            'image_url' => $filePath,
-            'image_type' => $request->image_type,
-            'site_survey_id' => $request->site_survey_id,
-            'created_by' => \Auth::user()->email,
-        ];
-
-         $sat_data;
-
-        SAT::create($sat_data);
-
-        // Redirect back to the SAT index page with a success message
-        return redirect()->route('sat.index')->with('success', 'Image shutdown added successfully!');
-    } catch (Exception $e) {
-
-     //   return $e->getMessage();
-        // Redirect back with an error message
-        return redirect()->route('sat.create', ['id' => $request->site_survey_id])
-            ->with('failed', 'Request Failed: ' . $e->getMessage());
+    public function store(Request $request) 
+    {
+        try {
+    
+            // Store the uploaded image in the 'images' directory within the 'public' disk
+            $filePath = $request->file('image_url')->store('images', 'public');
+    
+            // Prepare data for creating a new SAT record
+            $sat_data = [
+                'image_name' => $request->image_name,
+                'image_url' => $filePath,
+                'image_type' => $request->image_type,
+                'site_survey_id' => $request->site_survey_id,
+                'created_by' => \Auth::user()->email,
+            ];
+    
+            // Create a new SAT record in the database
+            SAT::create($sat_data);
+    
+            // Redirect to the sat.create route with the site_survey_id and a success message
+            return redirect()->route('sat.create', ['id' => $request->site_survey_id])
+                             ->with('success', 'Image shutdown added successfully!');
+        } catch (Exception $e) {
+            // Redirect back to the create page with an error message
+            return redirect()->route('sat.create', ['id' => $request->site_survey_id])
+                             ->with('failed', 'Request Failed: ' . $e->getMessage());
+        }
     }
-}
+    
 
 public function edit($id)
 {
@@ -106,9 +96,6 @@ public function edit($id)
 
 public function update(Request $request, $id)
 {
-    // Dump the request data (for debugging purposes, remove in production)
-    // dd($request->all());
-
     // Validate the request
     $request->validate([
         'image_name' => 'required|string',
@@ -138,7 +125,9 @@ public function update(Request $request, $id)
     // No need to set image_url here if no new file is uploaded
     $satRecord->save();
 
-    return redirect()->route('sat.index')->with('success', 'Record updated successfully');
+    // Redirect to the sat.create route with the site_survey_id from the updated record
+    return redirect()->route('sat.create', ['id' => $satRecord->site_survey_id])
+                     ->with('success', 'Record updated successfully');
 }
 
 public function destroy($id)
@@ -194,50 +183,49 @@ public function destroy($id)
      * @return \Illuminate\Http\Response
      */
 
-    public function storeToolboxtalk(Request $request)
-    {
-        try {
-
-
-            $usr_info= \Auth::user();
-        //    return $request;
-
-            $toolbox=$this->siteRepository->addToolBoxTalk($request,$request->site_survey_id,$request->nama_pe,$usr_info);
-            
-            //  return $toolbox;
-            ToolBoxTalk::create($toolbox);
-
-
-        } catch (\Throwable $th) {
-            // return $th;
-          return redirect()->route('sat.index')->with('failed', 'Request Failed');
-            
-        }
-
-        return redirect()->route('sat.index')->with('success', 'Request Success');
-    }
-
-    public function updateToolboxtalk(Request $request,$id)
-    {
-        try {
-
-            $usr_info= \Auth::user();
-          //  return $request;
-            $toolbox=$this->siteRepository->updateToolBoxTalk($request,$id,$usr_info);
-
-           // return $toolbox;
-            ToolBoxTalk::updateOrCreate(
-                ['id' =>$id],
-                $toolbox
-            );     
-
-        } catch (\Throwable $th) {
-            return redirect()->route('sat.index')->with('failed', 'Request Failed');
-        }
-
-        return redirect()->route('sat.index')->with('success', 'Request Success');
-    }
-
+     public function storeToolboxtalk(Request $request)
+     {
+         try {
+             $usr_info = \Auth::user();
+     
+             // Add the toolbox talk using the repository
+             $toolbox = $this->siteRepository->addToolBoxTalk($request, $request->site_survey_id, $request->nama_pe, $usr_info);
+             
+             // Create the toolbox talk record
+             $newToolboxTalk = ToolBoxTalk::create($toolbox);
+     
+             // Redirect to the SAT.toolboxtalkedit route with the new toolbox talk ID
+             return redirect()->route('SAT.toolboxtalkedit', ['id' => $newToolboxTalk->id])
+                              ->with('success', 'Request Success');
+         } catch (\Throwable $th) {
+             // Redirect back with a failure message
+             return redirect()->route('sat.index')->with('failed', 'Request Failed');
+         }
+     }
+     
+     public function updateToolboxtalk(Request $request, $id)
+     {
+         try {
+             $usr_info = \Auth::user();
+             
+             // Update the toolbox talk using the repository
+             $toolbox = $this->siteRepository->updateToolBoxTalk($request, $id, $usr_info);
+     
+             // Update or create the toolbox talk record
+             ToolBoxTalk::updateOrCreate(
+                 ['id' => $id],
+                 $toolbox
+             );
+     
+             
+             return redirect()->route('SAT.toolboxtalkedit', ['id' => $id])
+                              ->with('success', 'Request Success');
+         } catch (\Throwable $th) {
+             // Redirect back with a failure message if something goes wrong
+             return redirect()->route('sat.index')->with('failed', 'Request Failed');
+         }
+     }
+     
       /**
      * Display the specified resource.
      *
@@ -245,24 +233,27 @@ public function destroy($id)
      * @return \Illuminate\Http\Response
      */
     public function destroyToolboxTalk($id)
-    {
-        try {
-            // Find the Toolbox Talk by ID
-            $toolboxtalk = ToolBoxTalk::findOrFail($id);
-            
-            // Delete the Toolbox Talk record from the database
-            $toolboxtalk->delete();
-    
-            // Redirect to the specified route with a success message
-            return redirect()->route('sat.index')
-                             ->with('success', 'Toolbox Talk deleted successfully.');
-        } catch (\Exception $e) {
-            // Redirect back with an error message if something goes wrong
-            return redirect()->route('sat.index')
-                             ->with('failed', 'Deletion failed: ' . $e->getMessage());
-        }
+{
+    try {
+        // Find the Toolbox Talk by ID
+        $toolboxtalk = ToolBoxTalk::findOrFail($id);
+        
+        // Retrieve the site_survey_id from the Toolbox Talk record
+        $siteSurveyId = $toolboxtalk->site_survey_id;
+        
+        // Delete the Toolbox Talk record from the database
+        $toolboxtalk->delete();
+
+        // Redirect to the SAT.toolboxtalk route with the site_survey_id
+        return redirect()->route('SAT.toolboxtalk', ['id' => $siteSurveyId])
+                         ->with('success', 'Toolbox Talk deleted successfully.');
+    } catch (\Exception $e) {
+        // Redirect back with an error message if something goes wrong
+        return redirect()->route('SAT.toolboxtalk', ['id' => $siteSurveyId])
+                         ->with('failed', 'Deletion failed: ' . $e->getMessage());
     }
-    
+}
+
     
 
 }

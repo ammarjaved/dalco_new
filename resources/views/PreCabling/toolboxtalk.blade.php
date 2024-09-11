@@ -29,6 +29,7 @@
     );
 @endphp
 {!! $navContent !!}
+
 <section class="content-header">
     <div class="container-  ">
         <div class="row mb-2" style="flex-wrap:nowrap">
@@ -74,6 +75,7 @@
 
 </div>
 
+
    
     <!-- PPD Safety fields -->
     <h4><span style="background-color: #fef7ff; color: #8e44ad; padding: 0 5px;">PPD</span></h4>
@@ -112,6 +114,7 @@
                 <!-- Hidden radio buttons to maintain functionality -->
                 <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="display:none;" 
                     {{ ($toolboxTalk->$field ?? old($field)) === 'yes' ? 'checked' : '' }}>
+
                 <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="display:none;" 
                     {{ ($toolboxTalk->$field ?? old($field)) === 'no' ? 'checked' : '' }}>
             </div>
@@ -380,9 +383,12 @@
                     <input type="radio" id="picture_during_toolbox_no" name="picture_during_toolbox" value="no" style="display:none;" {{ ($toolboxTalk->picture_during_toolbox ?? old('picture_during_toolbox', 'no')) === 'no' ? 'checked' : '' }}>
                 </md-secondary-tab>
             </md-tabs>
+            
         </div>
     </div>
 </div>
+
+{!!$toolboxTalk!!}
 
 <!-- Conditional Image Inputs -->
 <div class="row">

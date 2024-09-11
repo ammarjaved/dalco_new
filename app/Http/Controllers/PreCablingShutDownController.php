@@ -44,14 +44,14 @@ class PreCablingShutDownController extends Controller
             //code...
 
             $request['created_by'] = Auth::user()->name;
-            PreCablingShutDown::create($request->all());
+            $preshutdown_id= PreCablingShutDown::create($request->all());
 
         } catch (\Throwable $th) {
             return redirect()->route('pre-cabling.index')->with('failed', 'Request Failed');
 
         }
 
-        return redirect()->route('pre-cabling.index')->with('success', 'Request Success');
+        return redirect()->route('pre-cabling-shut-down.edit',$preshutdown_id->id)->with('success', 'Request Success');
     }
 
     /**
@@ -100,7 +100,7 @@ class PreCablingShutDownController extends Controller
  
          }
  
-         return redirect()->route('pre-cabling.index')->with('success', 'Request Success');
+         return redirect()->route('pre-cabling-shut-down.edit', $preCabling->id)->with('success', 'Request Success');
     }
 
     /**
@@ -110,15 +110,21 @@ class PreCablingShutDownController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
-        try {
-            $shutDown = PreCablingShutDown::findOrFail($id);
-            $shutDown->delete();
-        } catch (\Throwable $th) {
-            return redirect()->route('pre-cabling.index')->with('failed', 'Request Failed');
-        }
+{
+    try {
+        // Find the record and get the site_survey_id before deleting
+        $shutDown = PreCablingShutDown::findOrFail($id);
+        $siteSurveyId = $shutDown->site_survey_id; // Save the site survey ID
 
-        return redirect()->route('pre-cabling.index')->with('success', 'Request Success');
+        // Delete the shutdown record
+        $shutDown->delete();
+    } catch (\Throwable $th) {
+        return redirect()->route('pre-cabling.index')->with('failed', 'Request Failed');
     }
+
+    // Redirect using the site_survey_id instead of the deleted shutdown id
+    return redirect()->route('pre-cabling-shut-down.create', $siteSurveyId)->with('success', 'Request Success');
+}
+
+    
 }

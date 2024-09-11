@@ -160,49 +160,51 @@ class ImageShutdownController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function storeToolboxtalk(Request $request)
-    {
-        try {
+     public function storeToolboxtalk(Request $request)
+     {
+         try {
+             // Get the current authenticated user
+             $usr_info = \Auth::user();
+             
+             // Add the toolbox talk using the repository method
+             $toolbox = $this->siteRepository->addToolBoxTalk($request, $request->site_survey_id, $request->nama_pe, $usr_info);
+     
+             // Create a new ToolBoxTalk record and capture the instance
+             $toolboxTalk = ToolBoxTalk::create($toolbox);
+     
+             // Redirect to the image_shutdown.toolboxtalkedit route with the ID of the created toolbox talk
+             return redirect()->route('image_shutdown.toolboxtalkedit', ['id' => $toolboxTalk->id])
+                              ->with('success', 'Request Success');
+         } catch (\Throwable $th) {
+             // If there's an error, redirect to image-shutdown.index with a failure message
+             return redirect()->route('image-shutdown.index')->with('failed', 'Request Failed');
+         }
+     }
+     
 
-
-            $usr_info= \Auth::user();
-        //  return $request;
-
-            $toolbox=$this->siteRepository->addToolBoxTalk($request,$request->site_survey_id,$request->nama_pe,$usr_info);
-            
-            //  return $toolbox;
-            ToolBoxTalk::create($toolbox);
-
-
-        } catch (\Throwable $th) {
-            // return $th;
-          return redirect()->route('image-shutdown.index')->with('failed', 'Request Failed');
-            
-        }
-
-        return redirect()->route('image-shutdown.index')->with('success', 'Request Success');
-    }
-
-    public function updateToolboxtalk(Request $request,$id)
-    {
-        try {
-
-            $usr_info= \Auth::user();
-          //  return $request;
-            $toolbox=$this->siteRepository->updateToolBoxTalk($request,$id,$usr_info);
-
-           // return $toolbox;
-            ToolBoxTalk::updateOrCreate(
-                ['id' =>$id],
-                $toolbox
-            );     
-
-        } catch (\Throwable $th) {
-            return redirect()->route('image-shutdown.index')->with('failed', 'Request Failed');
-        }
-
-        return redirect()->route('image-shutdown.index')->with('success', 'Request Success');
-    }
+     public function updateToolboxtalk(Request $request, $id)
+     {
+         try {
+             $usr_info = \Auth::user();
+             
+             // Update the toolbox talk using the repository method
+             $toolbox = $this->siteRepository->updateToolBoxTalk($request, $id, $usr_info);
+     
+             // Update or create the toolbox talk record
+             ToolBoxTalk::updateOrCreate(
+                 ['id' => $id],
+                 $toolbox
+             );     
+     
+             // Redirect to the image_shutdown.toolboxtalkedit route with the updated toolbox talk ID
+             return redirect()->route('image_shutdown.toolboxtalkedit', ['id' => $id])
+                              ->with('success', 'Request Success');
+         } catch (\Throwable $th) {
+             // If there's an error, redirect to image-shutdown.index with a failure message
+             return redirect()->route('image-shutdown.index')->with('failed', 'Request Failed');
+         }
+     }
+     
 
       /**
      * Display the specified resource.
@@ -213,13 +215,20 @@ class ImageShutdownController extends Controller
 
      public function destroyToolboxTalk($id)
      {
-         $toolboxtalk = ToolBoxTalk::findOrFail($id);
-         $toolboxtalk->delete();
- 
-         return redirect()->route('image-shutdown.index')
-                          ->with('success', 'Toolbox Talk deleted successfully.');
+         try {
+             // Find and delete the ToolBoxTalk by ID
+             $toolboxtalk = ToolBoxTalk::findOrFail($id);
+             $toolboxtalk->delete();
+     
+             // Redirect to the image_shutdown.toolboxtalk route with the ID of the deleted toolbox talk
+             return redirect()->route('image_shutdown.toolboxtalk', ['id' => $id])
+                              ->with('success', 'Toolbox Talk deleted successfully.');
+         } catch (\Throwable $th) {
+             // If there's an error, redirect to the image-shutdown.index with a failure message
+             return redirect()->route('image-shutdown.index')->with('failed', 'Failed to delete Toolbox Talk.');
+         }
      }
-
+     
 
 
 

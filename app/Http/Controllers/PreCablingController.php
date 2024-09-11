@@ -65,7 +65,7 @@ class PreCablingController extends Controller
     public function editToolboxTalk($id)
     {
         $toolboxtalk = ToolBoxTalk::find($id);
-        // return  $toolboxtalk;
+        //   return  $toolboxtalk;
         $site_survey=$toolboxtalk->site_survey_id;
 
        // return $toolboxtalk;
@@ -106,43 +106,47 @@ class PreCablingController extends Controller
     public function storeToolboxtalk(Request $request)
     {
         try {
+            $usr_info = Auth::user();
+            // Add the toolboxtalk using the repository method
+            $toolbox = $this->siteRepository->addToolBoxTalk($request, $request->site_survey_id, $request->nama_pe, $usr_info);
+    
+            // Create the toolboxtalk record
+            $toolboxTalk = ToolBoxTalk::create($toolbox);
 
-            $usr_info= Auth::user();
-          //  return $request;
-            $toolbox=$this->siteRepository->addToolBoxTalk($request,$request->site_survey_id,$request->nama_pe,$usr_info);
-
-            //return $toolbox;
-            ToolBoxTalk::create($toolbox);
-
-
+     
+            // Redirect to the PreCabling.toolboxtalkedit route with the ID of the created toolbox talk
+            return redirect()->route('PreCabling.toolboxtalkedit', ['id' => $toolboxTalk->id])
+                             ->with('success', 'Request Success');
         } catch (\Throwable $th) {
+            // If there's an error, redirect to pre-cabling.index with a failure message
             return redirect()->route('pre-cabling.index')->with('failed', 'Request Failed');
         }
-
-        return redirect()->route('pre-cabling.index')->with('success', 'Request Success');
     }
 
 
-    public function updateToolboxtalk(Request $request,$id)
-    {
-        try {
+    public function updateToolboxtalk(Request $request, $id)
+{
+    try {
+        $usr_info = Auth::user();
+        
+        // Update the toolbox talk using the repository method
+        $toolbox = $this->siteRepository->updateToolBoxTalk($request, $id, $usr_info);
 
-            $usr_info= Auth::user();
-          //  return $request;
-            $toolbox=$this->siteRepository->updateToolBoxTalk($request,$id,$usr_info);
+        // Update or create the toolbox talk
+        ToolBoxTalk::updateOrCreate(
+            ['id' => $id],
+            $toolbox
+        );     
 
-           // return $toolbox;
-            ToolBoxTalk::updateOrCreate(
-                ['id' =>$id],
-                $toolbox
-            );     
-
-        } catch (\Throwable $th) {
-            return redirect()->route('pre-cabling.index')->with('failed', 'Request Failed');
-        }
-
-        return redirect()->route('pre-cabling.index')->with('success', 'Request Success');
+        // Redirect to the PreCabling.toolboxtalkedit route with the updated toolbox talk ID
+        return redirect()->route('PreCabling.toolboxtalkedit', ['id' => $id])
+                         ->with('success', 'Request Success');
+    } catch (\Throwable $th) {
+        // If there's an error, redirect to pre-cabling.index with a failure message
+        return redirect()->route('pre-cabling.index')->with('failed', 'Request Failed');
     }
+}
+
     /**
      * Display the specified resource.
      *
@@ -179,6 +183,7 @@ class PreCablingController extends Controller
     {
         try {
             $preCabling = PreCabling::find($id);
+            
             if (!$preCabling) {
                 abort(404);
             }
@@ -187,7 +192,7 @@ class PreCablingController extends Controller
             return redirect()->route('pre-cabling.index')->with('failed', 'Request Failed');
         }
 
-        return redirect()->route('pre-cabling.index')->with('success', 'Request Success');
+        return redirect()->route('pre-cabling.edit',$preCabling->id)->with('success', 'Request Success');
     }
 
     /**
@@ -218,12 +223,18 @@ class PreCablingController extends Controller
     public function destroyToolboxTalk($id)
 {
     try {
+        // Find and delete the ToolBoxTalk by ID
         $toolBoxTalk = ToolBoxTalk::findOrFail($id);
         $toolBoxTalk->delete();
-        return redirect()->route('pre-cabling.index')->with('success', 'ToolBoxTalk deleted successfully');
+
+        // Redirect to the PreCabling.toolboxtalk route with the same ID after deletion
+        return redirect()->route('PreCabling.toolboxtalk', ['id' => $id])
+                         ->with('success', 'ToolBoxTalk deleted successfully');
     } catch (\Throwable $th) {
+        // Handle any failure in deletion
         return redirect()->route('pre-cabling.index')->with('failed', 'Failed to delete ToolBoxTalk');
     }
 }
+
 
 }
