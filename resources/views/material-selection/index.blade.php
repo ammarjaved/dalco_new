@@ -1,223 +1,20 @@
- {{-- @extends('layouts.app')
-
-
- 
-
-
-@section('content')
-
-
-<style>
-    md-filled-text-field {
-      resize: horizontal;
-    }
-
-    #search-results {
-    border: 1px solid #ddd;
-    max-height: 200px;
-    overflow-y: auto;
-}
-   .search-item {
-    padding: 5px;
-    cursor: pointer;
-}
-  .search-item:hover {
-    background-color: #f0f0f0;
-}
-  </style>
-
-<section class="content-header" >
-    <div class="container-  ">
-        <div class="row mb-2" style="flex-wrap:nowrap">
-            <div class="col-sm-6">
-                <h3 style="color: #8e44ad;">Material Selection</h3>
-            </div>
-            <div class="col-sm-6 text-right">
-                <ol class="breadcrumb float-right" >
-                    <li class="breadcrumb-item"><a href="{{ route('material-selection.index') }}" style="color: #8e44ad;">index</a></li>
-                    <li class="breadcrumb-item active" style="color: #8e44ad;">create</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</section>
-<div class="container">
-    <h2>Material Selection</h2>
-
-    @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
-
-        <!-- <div class="input-group"> -->
-            
-
-                <div class="row">
-                    <div style="background-color: white" >
-
-                        <md-outlined-text-field  type="text" label="Search" style=" min-width: 500px;margin:2px"  name="search" id="search_input1"  placeholder="Search by material"></md-outlined-text-field>
-                        
-                        
-                    </div>
-                   
-
-                    
-        
-                    <div class="col-sm-1">
-                        
-                        <md-filled-tonal-button style="horizontal-align: center; margin:5px" type="button" onclick="addData()">Add</md-filled-tonal-button>
-                     </div>
-        
-                    </div>
-                   
-                    <div class="row">
-
-                    <div id="search-results"></div>
-
-                    </div>
-
-            
-            
-            
-            
-        <!-- </div> -->
- 
-    <!-- Use the dynamic siteSurvey ID -->
-    <form action="{{ route('material-selection.save', ['id' => $siteSurvey->id]) }}" method="POST">
-        @csrf
-        
-        <table class="table" style="background-color:#fef7ff;">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Material Code</th>
-                    <th>Description</th>
-                    <th>Bun</th>
-                    <th>Quantity</th>
-                </tr>
-            </thead>
-            <tbody id='mat_sel'>
-
-               
-                 
-            
-
-            </tbody>
-        </table>
-
-        <md-filled-tonal-button type="submit">Save Selections</md-filled-tonal-button>
-    </form>
-</div>
-
-<style>
-  
- </style>   
-@endsection
-
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-   
-
-
-<script>
-
-
-
-$(document).ready(function() {
-    const $search = $('#search_input1');
-const $searchResults = $('#search-results');
-
-    $('#search_input1').on('keyup', function() {
-
-        var query = $(this).val();
-        
-        if (query.length >= 2) {
-            $.ajax({
-                url: "{{ route('search.material') }}",
-                method: 'GET',
-                data: {query:query},
-                success: function(data) {
-                    $('#search-results').empty();
-                    $.each(data, function(index, item) {
-                        // console.log(item);
-                      
-                        $searchResults.append('<div class="search-item" data-name="' + item + '">' + item + '</div>');
-                    });
-                }
-            });
-        } else {
-            $('#search-results').empty();
-        }
-
-
-
-    });
-
-    $searchResults.on('click', '.search-item', function() {
-        const selectedName = $(this).data('name');
-        $search.val(selectedName);
-        $searchResults.empty();
-    });
-
-    // Close search results when clicking outside
-    $(document).on('click', function(event) {
-        if (!$(event.target).closest('#search, #search-results').length) {
-            $searchResults.empty();
-        }
-    });
-
-
-});
-
-
-var i=0;    
-function addData(){
-var myval=$('#search_input1').val();
-if(myval!=''){
-var searchMaterialUrl = 'http://121.121.232.54:9191/data_material';
-
-$.ajax({
-        url: searchMaterialUrl+'?desc='+myval,
-        dataType: 'JSON',
-        //data: data,
-        method: 'GET',
-        async: false,
-        success: function callback(data) {
-            
-        var str='<tr><td><input type="text"  name="data['+i+'][id]" value="'+data[0].id+'"'+ 
-        '/></td><td><input type="text"  name="data['+i+'][mat_code]" value="'+data[0].mat_code+'"'+ 
-        '/></td><td><input type="text"  name="data['+i+'][mat_desc]" value="'+data[0].mat_desc+'" />'+
-       '</td><td><input type="text"  name="data['+i+'][bun]" value="'+data[0].bun+'" /></td>'+
-        '<td><input type="text"  name="data['+i+'][quantity]" value="0"/></td></tr>'   
-         $("#mat_sel").append(str);
-         $('#search_input1').val('');
-         i++;
-        }
-    });
-}else{
-    alert("please select material first")
-}
-
-}
-
-
-
-</script> 
-
-
-
-
-
-
-
-  --}}
 
 
   @extends('layouts.app')
 
 @section('content')
+
+@php
+    $navContent = Blade::render(
+        '@include("nav.index", ["survey" => $survey, "id" => $id])', 
+        [
+            'survey' => app(\App\Http\Controllers\TopnavbarController::class)->index($siteSurvey->id)->getData()['survey'],
+            'id' => $siteSurvey->id
+        ]
+    );
+@endphp
+{!! $navContent !!}
+
 <style>
     md-filled-text-field {
       resize: horizontal;
@@ -288,12 +85,12 @@ table.dataTable thead .sorting_desc:after {
             <div class="col-sm-6">
                 <h3 style="color: #8e44ad;">Material Selection</h3>
             </div>
-            <div class="col-sm-6 text-right">
+            {{--<div class="col-sm-6 text-right">
                 <ol class="breadcrumb float-right">
                     <li class="breadcrumb-item"><a href="{{ route('material-selection.index') }}" style="color: #8e44ad;">index</a></li>
                     <li class="breadcrumb-item active" style="color: #8e44ad;">create</li>
                 </ol>
-            </div>
+            </div>--}}
         </div>
     </div>
 </section>
