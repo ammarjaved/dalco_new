@@ -1,4 +1,4 @@
-<nav class="main-header navbar navbar-expand navbar-light d-flex justify-content-between" style="background-color: #558772;margin-left:1px;">
+<nav class="main-header navbar navbar-expand navbar-light d-flex justify-content-between" style="background-color: #8e44ad;margin-left:1px;">
     <ul class="navbar-nav">
         <li class="nav-item d-sm-inline-block">
             <img src="{{ asset('assets/web-images/main-logo.png') }}" height="35" alt="">
@@ -32,7 +32,7 @@
 </script>
         <!-- <md-menu-button id="pre-cabling-menu"> -->
         <div style="margin: 16px;">
-          <md-filled-button id="usage-document-anchor1">PreCabling</md-filled-button>
+          <md-filled-button id="usage-document-anchor1">PreCabling </md-filled-button>
         </div>
             <md-menu positioning="document" id="usage-document1" anchor="usage-document-anchor1">
                 @if ($survey->PreCabling)
@@ -95,12 +95,12 @@
               Add Image Shutdown Attachments
           </md-menu-item>
 
-          @if ($survey->ToolBoxTalkSAT)
-              <md-menu-item href="{{ route('SAT.toolboxtalkedit', $survey->ToolBoxTalkSAT->id) }}">
+          @if ($survey->toolBoxTalkOutage)
+              <md-menu-item href="{{ route('image_shutdown.toolboxtalkedit', $survey->toolBoxTalkOutage->id) }}">
                   Edit Toolbox Talk
               </md-menu-item>
           @else
-              <md-menu-item href="{{ route('SAT.toolboxtalk', ['id' => $id]) }}">
+              <md-menu-item href="{{ route('image_shutdown.toolboxtalk', ['id' => $id]) }}">
                   Toolbox Talk
               </md-menu-item>
           @endif
@@ -207,7 +207,7 @@ anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
         margin-left: 20px;
     }
     md-filled-tonal-button, md-filled-button {
-        --md-sys-color-primary: #558772;
+        --md-sys-color-primary: #D7b4f3;
         --md-sys-color-on-primary: white;
     }
 </style>

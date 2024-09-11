@@ -23,8 +23,9 @@ class SATAttachmentsController  extends Controller
         }
     
         $files = SATAttachments::where('site_survey_id', $id)->get();
+        $site_survey=$id;
     
-        return view('SATAttachments.index', compact('siteSurvey', 'files'));
+        return view('SATAttachments.index', compact('siteSurvey', 'files','site_survey'));
     }
 
     /**

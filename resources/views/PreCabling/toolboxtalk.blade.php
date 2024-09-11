@@ -18,7 +18,17 @@
 </style>
 
 @section('content')
+@php
 
+    $navContent = Blade::render(
+        '@include("nav.index", ["survey" => $survey, "id" => $id])', 
+        [
+            'survey' => app(\App\Http\Controllers\TopnavbarController::class)->index($site_survey)->getData()['survey'],
+            'id' => $site_survey
+        ]
+    );
+@endphp
+{!! $navContent !!}
 <section class="content-header">
     <div class="container-  ">
         <div class="row mb-2" style="flex-wrap:nowrap">

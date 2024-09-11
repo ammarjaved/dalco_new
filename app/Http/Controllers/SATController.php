@@ -45,9 +45,11 @@ class SATController extends Controller
     
         // Retrieve all SAT records related to this site survey
         $satRecords = SAT::where('site_survey_id', $id)->get();
+
+        $site_survey=$id;
     
         // Pass the site survey and SAT records to the 'SAT.create' view
-        return view('SAT.create', compact('survey', 'satRecords'));
+        return view('SAT.create', compact('survey', 'satRecords','site_survey'));
     }
 
     // Method to store a new SAT record
@@ -95,9 +97,11 @@ public function edit($id)
 {
     // Find the SAT record by ID
     $satRecord = SAT::findOrFail($id);
+    $site_survey=$satRecord->site_survey_id;
+    
 
     // Pass the SAT record to the 'SAT.edit' view
-    return view('SAT.edit', compact('satRecord'));
+    return view('SAT.edit', compact('satRecord','site_survey'));
 }
 
 public function update(Request $request, $id)
@@ -160,16 +164,18 @@ public function destroy($id)
     public function createToolboxTalk($id)
     {
         $sitesurveydata = SiteSurvey::find($id);
+        $site_survey=$id;
         
 
       // return compact('sitesurveydata');
 
-        return view('SAT.toolboxtalk',compact('sitesurveydata'));
+        return view('SAT.toolboxtalk',compact('sitesurveydata','site_survey'));
     }
 
     public function editToolboxTalk($id)
     {
         $toolboxtalk = ToolBoxTalk::find($id);
+        $site_survey=$toolboxtalk->site_survey_id;
 
        // return $toolboxtalk;
 
@@ -179,7 +185,7 @@ public function destroy($id)
 
      // return  $toolboxtalk;
 
-        return view('SAT.toolboxtalkedit',compact('toolboxtalk'));
+        return view('SAT.toolboxtalkedit',compact('toolboxtalk','site_survey'));
     }
     /**
      * Store a newly created resource in storage.

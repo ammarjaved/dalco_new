@@ -53,16 +53,20 @@ class PreCablingController extends Controller
     public function createToolboxTalk($id)
     {
         $sitesurveydata = SiteSurvey::find($id);
+        $site_survey=$id;
+
 
       // return compact('sitesurveydata');
 
-        return view('PreCabling.toolboxtalk',compact('sitesurveydata'));
+        return view('PreCabling.toolboxtalk',compact('sitesurveydata','site_survey'));
     }
 
 
     public function editToolboxTalk($id)
     {
         $toolboxtalk = ToolBoxTalk::find($id);
+        // return  $toolboxtalk;
+        $site_survey=$toolboxtalk->site_survey_id;
 
        // return $toolboxtalk;
 
@@ -72,7 +76,7 @@ class PreCablingController extends Controller
 
      // return  $toolboxtalk;
 
-        return view('PreCabling.toolboxtalkedit',compact('toolboxtalk'));
+        return view('PreCabling.toolboxtalkedit',compact('toolboxtalk','site_survey'));
     }
 
     /**

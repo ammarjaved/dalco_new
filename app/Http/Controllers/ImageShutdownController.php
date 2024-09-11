@@ -30,7 +30,7 @@ class ImageShutdownController extends Controller
         $survey = SiteSurvey::findOrFail($id);
         $imageShutdowns = ImageShutdown::where('site_survey_id', $id)->get(); // Get related image shutdowns
 
-        return view('image_shutdown.create', ['survey' => $survey,'imageShutdowns' => $imageShutdowns  ]);
+        return view('image_shutdown.create', ['survey' => $survey,'site_survey' => $id,'imageShutdowns' => $imageShutdowns  ]);
     }
 
 
@@ -84,7 +84,8 @@ class ImageShutdownController extends Controller
     public function edit($id)
     {
         $imageShutdown = ImageShutdown::findOrFail($id);
-        return view('image_shutdown.edit', compact('imageShutdown'));
+        $site_survey=$imageShutdown->site_survey_id;
+        return view('image_shutdown.edit', compact('imageShutdown','site_survey'));
     }
 
     // Update the specified resource in storage
@@ -130,16 +131,17 @@ class ImageShutdownController extends Controller
     public function createToolboxTalk($id)
     {
         $sitesurveydata = SiteSurvey::find($id);
-        
+        $site_survey=$id;
 
       // return compact('sitesurveydata');
 
-        return view('image_shutdown.toolboxtalk',compact('sitesurveydata'));
+        return view('image_shutdown.toolboxtalk',compact('sitesurveydata','site_survey'));
     }
 
     public function editToolboxTalk($id)
     {
         $toolboxtalk = ToolBoxTalk::find($id);
+        $site_survey=$toolboxtalk->site_survey_id;
 
        // return $toolboxtalk;
 
@@ -149,7 +151,7 @@ class ImageShutdownController extends Controller
 
      // return  $toolboxtalk;
 
-        return view('image_shutdown.toolboxtalkedit',compact('toolboxtalk'));
+        return view('image_shutdown.toolboxtalkedit',compact('toolboxtalk','site_survey'));
     }
     /**
      * Store a newly created resource in storage.

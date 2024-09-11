@@ -52,6 +52,19 @@
 
 @section('content')
 
+
+@php
+
+    $navContent = Blade::render(
+        '@include("nav.index", ["survey" => $survey, "id" => $id])', 
+        [
+            'survey' => app(\App\Http\Controllers\TopnavbarController::class)->index($site_survey)->getData()['survey'],
+            'id' => $site_survey
+        ]
+    );
+@endphp
+{!! $navContent !!}
+
 <section class="content-header">
     <div class="container-  ">
         <div class="row mb-2" style="flex-wrap:nowrap">
@@ -94,9 +107,11 @@
 
     <h4 class="mt-4">Uploaded Files</h4> <!-- Adjusted top margin -->
     @if ($files->isEmpty())
-        <div class="alert alert-warning" role="alert">
+    <div>
+        <span style="background-color: #d7b4f3;">
             No files uploaded yet.
-        </div>
+        </span>
+    </div>
     @else
         
             

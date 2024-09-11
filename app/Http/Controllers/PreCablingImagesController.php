@@ -18,10 +18,13 @@ class PreCablingImagesController extends Controller
         //
         $survey = SiteSurvey::findOrFail($id);
         $imageShutdowns = PreCablingImages::where('site_survey_id', $id)->get(); // Get related image shutdowns
+        
 
         return view('PreCablingImages.index', [
             'survey' => $survey,
             'imageShutdowns' => $imageShutdowns,
+            'site_survey'=>$id
+            
         ]);
     }
 
@@ -103,7 +106,13 @@ class PreCablingImagesController extends Controller
     public function edit($id)
     {
         $imageShutdown = PreCablingImages::findOrFail($id);
-        return view('PreCablingImages.edit', compact('imageShutdown'));
+        // return  $imageShutdown->created_at;
+        $site_survey=$imageShutdown->site_survey_id;
+        
+        // $site_survey_id=$id;
+
+        return view('PreCablingImages.edit', compact('imageShutdown','site_survey'));
+
     }
 
     /**

@@ -23,8 +23,9 @@ class PreCablingAttachmentsController extends Controller
         }
     
         $files = PreCablingAttachments::where('site_survey_id', $id)->get();
+        $site_survey=$id;
     
-        return view('PreCablingAttachments.index', compact('siteSurvey', 'files'));
+        return view('PreCablingAttachments.index', compact('siteSurvey', 'files','site_survey'));
     }
 
     /**

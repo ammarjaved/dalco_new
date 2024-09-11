@@ -23,8 +23,9 @@ class ImageShutdownAttachmentsController  extends Controller
         }
     
         $files = ImageShutdownAttachments::where('site_survey_id', $id)->get();
+        $site_survey=$id;
     
-        return view('ImageShutdownAttachments.index', compact('siteSurvey', 'files'));
+        return view('ImageShutdownAttachments.index', compact('siteSurvey', 'files','site_survey'));
     }
 
     /**
