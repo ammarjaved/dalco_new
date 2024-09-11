@@ -44,9 +44,9 @@ class PreCablingController extends Controller
     {
         //
         $sitesurveydata = SiteSurvey::find($id);
-        return  $sitesurveydata;
+       // return  $sitesurveydata;
 
-        return view('PreCabling.create', ['site_survey_id' => $id,'nama_pe'=> $sitesurveydata->nama_pe]);
+        return view('PreCabling.create', ['site_survey_id' => $id,'site_survey' => $id,'nama_pe'=> $sitesurveydata->nama_pe]);
     }
 
 
@@ -159,7 +159,7 @@ class PreCablingController extends Controller
         //
         //return $id;
         $piw = PreCabling::find($id);
-        return $piw ? view('PreCabling.create', ['piw' => $piw]) : abort(404);
+        return $piw ? view('PreCabling.create', ['site_survey' => $piw->site_survey_id,'piw' => $piw]) : abort(404);
     }
 
     /**

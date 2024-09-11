@@ -28,7 +28,7 @@ class PreCablingShutDownController extends Controller
     {
         //
         $nama_pe = SiteSurvey::findOrFail($id)->nama_pe;
-        return view('PreCablingShutDown.create', ['site_survey_id' => $id,'nama_pe'=>$nama_pe]);
+        return view('PreCablingShutDown.create', ['site_survey_id' => $id,'site_survey' => $id,'nama_pe'=>$nama_pe]);
 
     }
 
@@ -75,7 +75,7 @@ class PreCablingShutDownController extends Controller
     public function edit($id)
     {
         $piw = PreCablingShutDown::find($id);
-        return $piw ? view('PreCablingShutDown.create',['piw'=>$piw]) : abort(404);
+        return $piw ? view('PreCablingShutDown.create',['site_survey' => $piw->site_survey_id,'piw'=>$piw]) : abort(404);
     }
 
     /**
