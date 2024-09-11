@@ -91,12 +91,14 @@ class PreCablingController extends Controller
             //code...
             //  return  $request;
             $request['created_by'] = Auth::user()->name;
-            PreCabling::create($request->all());
+           $precable_id= PreCabling::create($request->all());
+          
+            
         } catch (\Throwable $th) {
-            return redirect()->route('pre-cabling.index')->with('failed', 'Request Failed');
+            return redirect()->route('pre-cabling.create')->with('failed', 'Request Failed');
         }
 
-        return redirect()->route('pre-cabling.index')->with('success', 'Request Success');
+        return redirect()->route ('pre-cabling.edit',$precable_id->id)->with('success', 'Request Success');
     }
 
 
@@ -196,15 +198,21 @@ class PreCablingController extends Controller
      */
     public function destroy($id)
     {
+
+        
         //
         try {
             $piw = PreCabling::findOrFail($id); 
+           
             $piw->delete();
+            
+
         } catch (\Throwable $th) {
             return redirect()->route('pre-cabling.index')->with('failed', 'Request Failed');
         }
+        
 
-        return redirect()->route('pre-cabling.index')->with('success', 'Request Success');
+        return redirect()->route('pre-cabling-piw.create',$piw->site_survey_id)->with('success', 'Request Success');
     }
 
     public function destroyToolboxTalk($id)
