@@ -66,6 +66,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('site_survey', SiteSurveyController::class);
     Route::resource('toolbox_talks', ToolboxTalkController::class);
 
+   
+
+
     // Route::get('/material-selection', [MaterialSelectionController::class, 'index'])->name('material-selection.index');
     Route::post('/material-selection/{id}', [MaterialSelectionController::class, 'saveSelections'])->name('material-selection.save');
     // Route::get('/material-show', [MaterialSelectionController::class, 'showData'])->name('material-selection.show');
@@ -91,6 +94,9 @@ Route::middleware('auth')->group(function () {
 
     //DelcoSummary
     Route::get('/delco-summary', [SiteSurveyController::class, 'delcoSummary'])->name('delco-summary');
+    Route::delete('/delco-summary/{id}', [SiteSurveyController::class, 'deleteDelcoSummary'])->name('delco-summary.delete');
+
+
 
 
     // Route to handle the form submission

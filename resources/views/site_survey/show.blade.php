@@ -1,6 +1,60 @@
 @extends('layouts.app', ['page_title' => 'Create'])
 
 @section('content')
+
+<nav class="main-header navbar navbar-expand navbar-light d-flex justify-content-between" style="background-color: #8e44ad;margin-left:1px;">
+    <ul class="navbar-nav">
+        <li class="nav-item d-sm-inline-block">
+            <img src="{{ asset('assets/web-images/main-logo.png') }}" height="35" alt="">
+        </li>
+    </ul>
+
+    <div class="d-flex">
+
+        <a href="{{ route('delco-summary') }}" style="text-decoration: none;">
+            <md-filled-button style="margin-top:17px;margin: 16px;">
+                ◄ Delco Summary
+            </md-filled-button>
+        </a>
+
+       
+
+
+<div style="margin: 16px;">
+    <md-filled-button id="usage-document-anchor5">
+      {{ Auth::user()->name }}
+      <md-icon slot="trailing-icon">expand_more</md-icon>
+    </md-filled-button>
+  </div>
+  
+  <md-menu positioning="document" id="usage-document5" anchor="usage-document-anchor5">
+    <form method="POST" action="{{ route('logout') }}">
+      @csrf
+
+      <md-menu-item href="{{ route('profile.edit') }}">
+        {{ __('Profile') }}
+      </md-menu-item>
+
+      <md-menu-item href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
+        {{ __('Log Out') }}
+      </md-menu-item>
+  
+     
+    </form>
+  </md-menu>
+
+
+  
+  <script type="module">
+    const anchorEl5 = document.body.querySelector('#usage-document-anchor5');
+    const menuEl5 = document.body.querySelector('#usage-document5');
+    anchorEl5.addEventListener('click', () => { menuEl5.open = !menuEl5.open; });
+  </script>
+  
+  
+    </div>
+</nav>
+
   <style>
         .tab-content > div {
             display: none;
@@ -9,6 +63,35 @@
         .tab-content > div.active {
             display: block;
         }
+        .input-container {
+            position: relative;
+            margin-bottom: 10px;
+           
+        }
+        md-menu-button {
+        margin-left: 20px;
+    }
+    md-filled-tonal-button, md-filled-button {
+        --md-sys-color-primary: #D7b4f3;
+        --md-sys-color-on-primary: white;
+    }
+        
+        label {
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            color:black;
+            font-family: 'Roboto';
+            background-color: #F4F6F9;
+            padding: 0 5px;
+            font-size: 12px;
+            color: #666;
+        }
+        .ppd-safety {
+            color: #666;
+            font-size: 14px;
+        }
+
        
     </style>
 
@@ -491,8 +574,9 @@
     
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group">
-                    <md-outlined-text-field label="Tarikh" type="date" class="label" id="tarikh" name="tarikh" value="{{ $toolboxTalk->tarikh ?? old('tarikh') }}" required>
+                <div class="input-container" style="margin-top:5px">
+                    <input  disabled type="date" style=" height:50px !important;border-radius: 5px !important;width:60% !important;" id="tarikh" name="tarikh" value="{{ $toolboxTalk->tarikh ?? old('tarikh') }}" required>
+                    <label>Tarikh</label>
                 </div>
             </div>
             
@@ -785,7 +869,7 @@
     </div>
 </div>
 
-<md-filled-tonal-button type="submit"  id="submitBtn">{{ isset($siteSurvey) ? 'Update' : 'Create' }}</md-filled-tonal-button>
+{{-- <md-filled-tonal-button type="submit"  id="submitBtn">{{ isset($siteSurvey) ? 'Update' : 'Create' }}</md-filled-tonal-button> --}}
 
         </div>
     </div>

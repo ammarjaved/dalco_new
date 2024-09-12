@@ -35,10 +35,27 @@ class SiteSurveyController extends Controller
          $delcoSummary = SiteSurvey::with(['PreCablingStatus', 'ShutDownStatus','SATStatus'])->get();
 
         //  return  $data;
-     
+        
          // Pass the surveys to the 'DelcoSummary.DelcoSummary' view
          return view('DelcoSummary.DelcoSummary', compact('delcoSummary'));
      }
+
+     public function deleteDelcoSummary($id)
+     {
+         // Find the record by its ID
+         $siteSurvey = SiteSurvey::find($id);
+     
+         if ($siteSurvey) {
+             // Delete the record
+             $siteSurvey->delete();
+     
+             // Redirect with a success message
+             return redirect()->route('delco-summary')->with('success', 'Record deleted successfully.');
+         }
+     
+         return redirect()->route('delco-summary')->with('error', 'Record not found.');
+     }
+     
 
 
 
@@ -65,6 +82,7 @@ class SiteSurveyController extends Controller
      */
     public function create()
     {
+
         return view('site_survey.create');
     }
 
@@ -189,8 +207,8 @@ class SiteSurveyController extends Controller
 
        // });
     
-        return redirect()->route('site_survey.index')
-            ->with('success', 'Site survey and pictures created successfully.');
+       return redirect()->route('delco-summary')
+       ->with('success', 'Site survey and pictures created successfully.');
         }
 
         catch (Exception $e) {
@@ -337,7 +355,7 @@ class SiteSurveyController extends Controller
                   
        // });
     
-        return redirect()->route('site_survey.index')
+        return redirect()->route('delco-summary')
             ->with('success', 'Site survey and pictures updated successfully');
     
     }

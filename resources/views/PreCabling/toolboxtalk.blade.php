@@ -13,6 +13,28 @@
       border-radius: 15px;
     }
 
+    .input-container {
+            position: relative;
+            margin-bottom: 10px;
+           
+        }
+        
+        label {
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            color:black;
+            font-family: 'Roboto';
+            background-color: #F4F6F9;
+            padding: 0 5px;
+            font-size: 12px;
+            color: #666;
+        }
+        .ppd-safety {
+            color: #666;
+            font-size: 14px;
+        }
+
 
 
 </style>
@@ -59,9 +81,10 @@
 </div>     
 
 <div class="row">
-    <div class="col-md-6">
-        <div class="form-group">
-            <md-outlined-text-field label="Tarikh" type="date" class="label" id="tarikh" name="tarikh" value="{{ $toolboxTalk->tarikh ?? old('tarikh') }}" required></md-outlined-text-field>
+<div class="col-md-6">
+    <div class="input-container" style="margin-top:5px">
+        <input  type="date" id="tarikh" name="tarikh" style=" height:50px !important;border-radius: 5px !important;width:60% !important;" value="{{ $toolboxTalk->tarikh ?? old('tarikh') }}" required>
+        <label for="tarikh">Tarikh</label>
         </div>
     </div>
 

@@ -1,6 +1,50 @@
 @extends('layouts.app')
 
+
+
 @section('content')
+
+<style>
+
+    /* Three dots icon styling */
+/* Dropdown menu styling */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 100%; /* This positions the menu to the left of the icon */
+    top: 0;
+    display: none;
+    
+    
+    border-radius: 4px;
+    padding: 5px 0;
+    z-index: 1000; /* Ensures the menu appears above other elements */
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 5px 15px;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+   
+    border: 0;
+}
+
+
+.three-dots-icon{
+    cursor: pointer;
+}
+
+
+
+</style>
 
 <nav class="main-header navbar navbar-expand navbar-light d-flex justify-content-between" style="background-color: #8e44ad;margin-left:1px;">
     <ul class="navbar-nav">
@@ -58,7 +102,6 @@
 </style>
 
 
-
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -70,11 +113,18 @@
 </section>
 
 
+
+
+
+<md-filled-tonal-button href="{{ route('site_survey.create') }}" 
+style="background-color: #8e44ad;margin-left:20px; color:white">Add Site Survey</md-filled-tonal-button><br><br>
+
 <section class="content">
 
    
     <div class="row">
      <div class="col-md-6">
+        
     <table id="myTable" class="table table-bordered table-hover data-table">
 
 
@@ -86,6 +136,8 @@
             <th>PreCabling</th>
             <th>Shutdown</th>
             <th>SAT</th>
+            <th>Actions</th>
+
             {{-- <th>TYPE FEEDER</th> --}}
             
         </tr>
@@ -137,9 +189,56 @@
                             style="font-weight: 600; color: red;">&#x2715;</span>
                     @endif
                 </td>
-               
-               
-            </tr>
+
+
+                <td class="align-middle text-center">
+                    <div class="dropdown">
+                        <img src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}" class="three-dots-icon" alt="Options" onclick="toggleDropdown(this)">
+                        
+                        <div class="dropdown-menu">
+                           
+                            
+                            <div>
+
+                            @if ($data->nama_pe)
+    <a style="margin-left: 5px" href="{{ route('site_survey.edit', $data->id) }}" class="check-link">
+        <i class="fa fa-edit"></i> Edit Site Survey
+    </a>
+@else
+    <a href="{{ route('site_survey.create') }}" class="check-link">
+        Create Site Survey
+    </a>
+@endif
+
+</div>
+<div>
+
+    @if ($data->nama_pe)
+<a style="margin-left: 5px" href="{{ route('site_survey.show', $data->id) }}" class="check-link">
+    <i class="fa fa-eye"></i> Show Site Survey
+</a>
+@else
+<a href="{{ route('site_survey.create') }}" class="check-link">
+Create Site Survey
+</a>
+@endif
+
+</div>
+<form action="{{ route('delco-summary.delete', $data->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="dropdown-item" style="margin-left:-7px; margin-top: -2px;">
+        <i class="fas fa-trash-alt"></i> Delete Site Survey
+    </button>
+</form>
+
+
+</div>
+
+ </div>
+ </td>
+                
+ </tr>
         @endforeach
     </tbody>
 </table>
@@ -293,7 +392,21 @@ document.addEventListener('DOMContentLoaded', function () {
                         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     }).addTo(map);
 
-                });             
+                });     
+                
+                
+                // Toggle the display of the context menu
+                function toggleDropdown(icon) {
+    const dropdownMenu = icon.nextElementSibling;
+    dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+}
+
+document.addEventListener('click', function(event) {
+    const isClickInsideDropdown = event.target.closest('.dropdown');
+    if (!isClickInsideDropdown) {
+        document.querySelectorAll('.dropdown-menu').forEach(menu => menu.style.display = 'none');
+    }
+});
 </script>
 
 @endsection

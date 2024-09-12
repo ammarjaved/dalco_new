@@ -1,6 +1,71 @@
 @extends('layouts.app', ['page_title' => 'Create'])
 
 @section('content')
+
+<nav class="main-header navbar navbar-expand navbar-light d-flex justify-content-between" style="background-color: #8e44ad;margin-left:1px;">
+    <ul class="navbar-nav">
+        <li class="nav-item d-sm-inline-block">
+            <img src="{{ asset('assets/web-images/main-logo.png') }}" height="35" alt="">
+        </li>
+    </ul>
+
+    <div class="d-flex">
+
+        <a href="{{ route('delco-summary') }}" style="text-decoration: none;">
+            <md-filled-button style="margin-top:17px;margin: 16px;">
+                ◄ Delco Summary
+            </md-filled-button>
+        </a>
+
+       
+
+
+<div style="margin: 16px;">
+    <md-filled-button id="usage-document-anchor5">
+      {{ Auth::user()->name }}
+      <md-icon slot="trailing-icon">expand_more</md-icon>
+    </md-filled-button>
+  </div>
+  
+  <md-menu positioning="document" id="usage-document5" anchor="usage-document-anchor5">
+    <form method="POST" action="{{ route('logout') }}">
+      @csrf
+
+      <md-menu-item href="{{ route('profile.edit') }}">
+        {{ __('Profile') }}
+      </md-menu-item>
+
+      <md-menu-item href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
+        {{ __('Log Out') }}
+      </md-menu-item>
+  
+     
+    </form>
+  </md-menu>
+
+
+  
+  <script type="module">
+    const anchorEl5 = document.body.querySelector('#usage-document-anchor5');
+    const menuEl5 = document.body.querySelector('#usage-document5');
+    anchorEl5.addEventListener('click', () => { menuEl5.open = !menuEl5.open; });
+  </script>
+  
+  
+    </div>
+</nav>
+
+<style>
+    md-menu-button {
+        margin-left: 20px;
+    }
+    md-filled-tonal-button, md-filled-button {
+        --md-sys-color-primary: #D7b4f3;
+        --md-sys-color-on-primary: white;
+    }
+</style>
+
+
   <style>
         .tab-content > div {
             display: none;
@@ -16,6 +81,28 @@
       border: 3px solid transparent;
       border-radius: 15px;
         }
+        .input-container {
+            position: relative;
+            margin-bottom: 10px;
+           
+        }
+        
+        label {
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            color:black;
+            font-family: 'Roboto';
+            background-color: #F4F6F9;
+            padding: 0 5px;
+            font-size: 12px;
+            color: #666;
+        }
+        .ppd-safety {
+            color: #666;
+            font-size: 14px;
+        }
+
     </style>
 
 
@@ -147,7 +234,7 @@
         <div class="col-md-4">
                 <div class="form-group">
                     {{-- <label for="jenis_kompaun">Jenis Kompaun</label> --}}
-                    <md-outlined-select label="Jenis Kompaun" class="label" id="jenis_kompaun" name="jenis_kompaun">
+                    <md-outlined-select label="Jenis Kompaun" class="label" id="jenis_kompaun" name="jenis_kompaun" value="{{ $siteSurvey->jenis_kompaun ?? old('jenis_kompaun') }}" >
                 {{-- <md-select-option value="">Pilih Jenis Kompaun</md-select-option> --}}
                 <md-select-option value="SIMEN" {{ (old('jenis_kompaun', $siteSurvey->jenis_kompaun ?? '') == 'Simen') ? 'selected' : '' }}>Simen</md-select-option>
                 <md-select-option value="RUMPUT" {{ (old('jenis_kompaun', $siteSurvey->jenis_kompaun ?? '') == 'Rumput') ? 'selected' : '' }}>Rumput</md-select-option>
@@ -165,7 +252,7 @@
             <div class="form-group">
             {{-- <label for="jenis_perkakasuis">Jenis Perkakasuis</label> --}}
             <!-- <input type="text" class="form-control" id="jenis_perkakasuis" name="jenis_perkakasuis" value="{{ $siteSurvey->jenis_perkakasuis ?? old('jenis_perkakasuis') }}"> -->
-            <md-outlined-select  label="Jenis Perkakasuis" id="jenis_perkakasuis" class="label" name="jenis_perkakasuis" onchange="konfiDisable(this.value)">
+            <md-outlined-select  label="Jenis Perkakasuis" id="jenis_perkakasuis" class="label" name="jenis_perkakasuis" value="{{ $siteSurvey->jenis_perkakasuis ?? old('jenis_perkakasuis') }}" onchange="konfiDisable(this.value)">
                 {{-- <md-select-option value="">Jenis Perkakasuis</md-select-option> --}}
                 <md-select-option value="VCB" {{ (old('jenis_perkakasuis', $siteSurvey->jenis_perkakasuis ?? '') == 'VCB') ? 'selected' : '' }}>VCB</md-select-option>
                 <md-select-option value="RMU" {{ (old('jenis_perkakasuis', $siteSurvey->jenis_perkakasuis ?? '') == 'RMU') ? 'selected' : '' }}>RMU</md-select-option>
@@ -180,7 +267,7 @@
             <div class="form-group">
             {{-- <label for="konfigurasi">Konfigurasi</label> --}}
             <!-- <input type="text" class="form-control" id="konfigurasi" name="konfigurasi" value="{{ $siteSurvey->konfigurasi ?? old('konfigurasi') }}"> -->
-            <md-outlined-select label="Konfigurasi" class="label"  id="konfigurasi" name="konfigurasi" disabled>
+            <md-outlined-select label="Konfigurasi" class="label"  id="konfigurasi" name="konfigurasi" value="{{ $siteSurvey->konfigurasi ?? old('konfigurasi') }}"> 
                 {{-- <option value="">Jenis Perkakasuis</option> --}}
                 <md-select-option value="2S+1F" {{ (old('konfigurasi', $siteSurvey->jenis_perkakasuis ?? '') == '2S+1F') ? 'selected' : '' }}>2S+1F</md-select-option>
                 <md-select-option value="2S+2F" {{ (old('konfigurasi', $siteSurvey->jenis_perkakasuis ?? '') == '2S+2F') ? 'selected' : '' }}>2S+2F</md-select-option>
@@ -209,9 +296,11 @@
         </div>
         
         <div class="col-md-4">     
-                <div class="form-group">
+                
+    <div class="input-container" style="margin-top:5px">
                     {{-- <label for="tahun_pembinaan">Tahun Pembinaan</label> --}}
-                    <md-outlined-text-field label="Tahun Pembinaan" class="label" type="date"  id="tahun_pembinaan" name="tahun_pembinaan" value="{{ $siteSurvey->tahun_pembinaan ?? old('tahun_pembinaan') }}">
+                    <input   type="date"  id="tahun_pembinaan" style=" height:50px !important;border-radius: 5px !important;width:90% !important;" name="tahun_pembinaan" value="{{ $siteSurvey->tahun_pembinaan ?? old('tahun_pembinaan') }}">
+                    <label>Tahun Pembinaan</label>
                 </div>
         </div>
 
@@ -244,7 +333,7 @@
             <div class="form-group">
                 {{-- <label for="kabel_jenis{{ $i }}">Kabel Jenis {{ $i }}</label> --}}
                 <!-- <input type="text" class="form-control" id="kabel_jenis{{ $i }}" name="kabel_jenis{{ $i }}" value="{{ $siteSurvey->{"kabel_jenis{$i}"} ?? old("kabel_jenis{$i}") }}"> -->
-            <md-outlined-select class="label" label="Kabel Jenis {{ $i }}" id="kabel_jenis{{ $i }}" name="kabel_jenis{{ $i }}">
+            <md-outlined-select class="label" label="Kabel Jenis {{ $i }}" id="kabel_jenis{{ $i }}" name="kabel_jenis{{ $i }}"  value="{{ $siteSurvey->{"kabel_jenis{$i}"} ?? old("kabel_jenis{$i}") }}">
                 {{-- <option value="">Jenis Perkakasuis</option> --}}
                 <md-select-option value="PILC" {{ (old('kabel_jenis'.$i, $siteSurvey->{"kabel_jenis{$i}"} ?? '') == 'PILC') ? 'selected' : '' }}>PILC</md-select-option>
                 <md-select-option value="XLPE" {{ (old('kabel_jenis'.$i, $siteSurvey->{"kabel_jenis{$i}"} ?? '') == 'XLPE') ? 'selected' : '' }}>XLPE</md-select-option>
@@ -256,7 +345,7 @@
             <div class="form-group">
                         {{-- <label for="kabel_saiz{{ $i }}">Kabel Saiz {{ $i }}</label> --}}
                         <!-- <input type="text" class="form-control" id="kabel_saiz{{ $i }}" name="kabel_saiz{{ $i }}" value="{{ $siteSurvey->{"kabel_saiz{$i}"} ?? old("kabel_saiz{$i}") }}"> -->
-            <md-outlined-select class="label" label="Kabel Saiz {{ $i }}" id="kabel_saiz{{ $i }}" name="kabel_saiz{{ $i }}">
+            <md-outlined-select class="label" label="Kabel Saiz {{ $i }}" id="kabel_saiz{{ $i }}" name="kabel_saiz{{ $i }}" value="{{ $siteSurvey->{"kabel_saiz{$i}"} ?? old("kabel_saiz{$i}") }}">
                 {{-- <md-select-option value="">Jenis Perkakasuis</md-select-option> --}}
                 <md-select-option value="70MM" {{ (old('kabel_saiz'.$i, $siteSurvey->{"kabel_saiz{$i}"} ?? '') == '70MM') ? 'selected' : '' }}>70MM</md-select-option>
                 <md-select-option value="185MM" {{ (old('kabel_saiz'.$i, $siteSurvey->{"kabel_saiz{$i}"} ?? '') == '185MM') ? 'selected' : '' }}>185MM</md-select-option>
@@ -501,8 +590,9 @@
     
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group">
-                    <md-outlined-text-field label="Tarikh" type="date" class="label" id="tarikh" name="tarikh" value="{{ $toolboxTalk->tarikh ?? old('tarikh') }}" required>
+                <div class="input-container" style="margin-top:5px">
+                    <input  type="date" style=" height:50px !important;border-radius: 5px !important;width:60% !important;" id="tarikh" name="tarikh" value="{{ $toolboxTalk->tarikh ?? old('tarikh') }}" required>
+                    <label>Tarikh</label>
                 </div>
             </div>
             
