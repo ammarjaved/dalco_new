@@ -388,7 +388,6 @@
     </div>
 </div>
 
-{!!$toolboxTalk!!}
 
 <!-- Conditional Image Inputs -->
 <div class="row">

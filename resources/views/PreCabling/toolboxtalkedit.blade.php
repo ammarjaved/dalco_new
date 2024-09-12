@@ -2,7 +2,6 @@
 
 <style>
 
-<style>
     .label{
     min-width: 300px;
     max-width: 300px;
@@ -17,8 +16,25 @@
       border-radius: 15px;
     }
 
+    .input-container {
+            position: relative;
+            margin-bottom: 10px;
+        }
+        
+        label {
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background-color: white;
+            padding: 0 5px;
+            font-size: 12px;
+            color: #666;
+        }
+        .ppd-safety {
+            color: #666;
+            font-size: 14px;
+        }
 
-</style>
 
 </style>
 
@@ -65,15 +81,19 @@
 </div>     
 
 <div class="row">
-    <div class="col-md-6">
+    <!-- <div class="col-md-6">
         <div class="form-group">
                 {{-- <label for="tarikh">Tarikh</label> --}}
-                <md-outlined-text-field label="Tarikh" class="label" type="date" class="form-control" id="tarikh" name="tarikh" value="{{ $toolboxtalk->tarikh}}" required>
-            </div>
-    
-    
-        </div>
-    
+                <md-outlined-text-field label="Tarikh" class="label" type="date"  class="form-control" id="tarikh" name="tarikh" value="{{ $toolboxtalk->tarikh}}" required>
+
+      </div>
+</div> -->
+<div class="col-md-6">
+<div class="input-container" style="margin-top:5px">
+    <input type="date" id="tarikh"  style="border-radius: 5px !important;width:40% !important;" name="tarikh" value="{{ $toolboxtalk->tarikh }}" required>
+    <label for="tarikh">Tarikh*</label>
+</div>
+</div>    
     
          
     <div class="col-md-6">
@@ -330,10 +350,10 @@
                         value="yes" 
                         id="val-tab-picture_during_toolbox_yes"
                         onclick="toggleToolboxImageUpload('picture_during_toolbox', true, 'yes')"
-                        {{ isset($toolboxTalk) && $toolboxTalk->picture_during_toolbox == 'yes' ? 'active' : '' }}
+                        {{ isset($toolboxtalk) && $toolboxtalk->picture_during_toolbox == 'yes' ? 'active' : '' }}
                     >
                         Yes
-                        <input type="radio" id="yes-picture_during_toolbox" name="picture_during_toolbox" value="yes" style="display:none;" {{ isset($toolboxTalk) && $toolboxTalk->picture_during_toolbox == 'yes' ? 'checked' : '' }}>
+                        <input type="radio" id="yes-picture_during_toolbox" name="picture_during_toolbox" value="yes" style="display:none;" {{ isset($toolboxtalk) && $toolboxtalk->picture_during_toolbox == 'yes' ? 'checked' : '' }}>
                     </md-secondary-tab>
     
                     <!-- No Tab -->
@@ -341,23 +361,23 @@
                         value="no" 
                         id="val-tab-picture_during_toolbox_no"
                         onclick="toggleToolboxImageUpload('picture_during_toolbox', false, 'no')"
-                        {{ !isset($toolboxTalk) || $toolboxTalk->picture_during_toolbox == 'no' ? 'active' : '' }}
+                        {{ !isset($toolboxtalk) || $toolboxtalk->picture_during_toolbox == 'no' ? 'active' : '' }}
                     >
                         No
-                        <input type="radio" id="no-picture_during_toolbox" name="picture_during_toolbox" value="no" style="display:none;" {{ !isset($toolboxTalk) || $toolboxTalk->picture_during_toolbox == 'no' ? 'checked' : '' }}>
+                        <input type="radio" id="no-picture_during_toolbox" name="picture_during_toolbox" value="no" style="display:none;" {{ !isset($toolboxtalk) || $toolboxtalk->picture_during_toolbox == 'no' ? 'checked' : '' }}>
                     </md-secondary-tab>
                 </md-tabs>
     
                 <!-- Image Uploads Section -->
-                <div id="picture_during_toolbox_images" style="{{ (isset($toolboxTalk) && $toolboxTalk->picture_during_toolbox == 'yes') ? '' : 'display: none;' }}">
+                <div id="picture_during_toolbox_images" style="{{ (isset($toolboxtalk) && $toolboxtalk->picture_during_toolbox == 'yes') ? '' : 'display: none;' }}">
                     @for ($i = 1; $i <= 2; $i++)
                         <div class="form-group">
                             <md-label for="toolbox_image{{ $i }}">
                                 Toolbox Image {{ $i }}
                             </md-label>
                             <input type="file" onchange="previewImage(this, 'img_toolbox{{ $i }}')" hidden class="form-control-file" id="toolbox_image{{ $i }}" name="toolbox_image{{ $i }}">
-                            @if (isset($toolboxTalk) && $toolboxTalk->{"toolbox_image{$i}"} )
-                                <img onclick="document.getElementById('toolbox_image{{ $i }}').click();" src="{{ asset($toolboxTalk->{"toolbox_image{$i}"}) }}" id="img_toolbox{{ $i }}" alt="Toolbox Image {{ $i }}" class="img-thumbnail mt-2" style="max-width: 200px;">
+                            @if (isset($toolboxtalk) && $toolboxtalk->{"toolbox_image{$i}"} )
+                                <img onclick="document.getElementById('toolbox_image{{ $i }}').click();" src="{{ asset($toolboxtalk->{"toolbox_image{$i}"}) }}" id="img_toolbox{{ $i }}" alt="Toolbox Image {{ $i }}" class="img-thumbnail mt-2" style="max-width: 200px;">
                             @else
                                 <img onclick="document.getElementById('toolbox_image{{ $i }}').click();" src="{{ URL::asset('assets/web-images/download.png') }}" id="img_toolbox{{ $i }}" alt="Toolbox Image {{ $i }}" class="img-thumbnail mt-2" style="max-width: 200px;">
                             @endif
