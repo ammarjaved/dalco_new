@@ -65,7 +65,7 @@
     <div class="container-  ">
         <div class="row mb-2" style="flex-wrap:nowrap">
             <div class="col-sm-6">
-                <h3>Pre Cabling</h3>
+                <h3 style="color: #8e44ad;">Pre Cabling</h3>
             </div>
             <div class="col-sm-6 text-right">
                 <ol class="breadcrumb float-right">
@@ -77,7 +77,7 @@
     </div>
 </section>
 <div class="container">
-    <h3>Edit Image PreCabling</h3>
+    <h3 style="color: #8e44ad;">Edit Image PreCabling</h3>
 
     <div class="card">
         <div class="card-body">

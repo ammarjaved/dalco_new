@@ -70,7 +70,7 @@
     <div class="container-  ">
         <div class="row mb-2" style="flex-wrap:nowrap">
             <div class="col-sm-6">
-                <h3>Image Shutdown</h3>
+                <h3 style="color: #8e44ad;">Image Shutdown</h3>
             </div>
             <div class="col-sm-6 text-right">
                 <ol class="breadcrumb float-right">

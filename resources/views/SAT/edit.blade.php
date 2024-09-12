@@ -81,9 +81,9 @@
                     <!-- Image Type -->
                     <div class="col-md-4 form-group">
                         <md-outlined-select class="label" label="Image Type" id="image_type" name="image_type" required>
-                            <md-select-option value="before" {{ old('image_type', $satRecord->image_type) == 'before' ? 'selected' : '' }}>Before</md-select-option>
-                            <md-select-option value="during" {{ old('image_type', $satRecord->image_type) == 'during' ? 'selected' : '' }}>During</md-select-option>
-                            <md-select-option value="after" {{ old('image_type', $satRecord->image_type) == 'after' ? 'selected' : '' }}>After</md-select-option>
+                            <md-select-option value="BEFORE" {{ old('image_type', $satRecord->image_type) == 'BEFORE' ? 'selected' : '' }}>BEFORE</md-select-option>
+                            <md-select-option value="DURING" {{ old('image_type', $satRecord->image_type) == 'DURING' ? 'selected' : '' }}>DURING</md-select-option>
+                            <md-select-option value="AFTER" {{ old('image_type', $satRecord->image_type) == 'AFTER' ? 'selected' : '' }}>AFTER</md-select-option>
                         </md-outlined-select>
                     </div>
 
@@ -103,13 +103,13 @@
                 <div class="form-group">
                     <label for="existing_image">Existing Image</label>
                     <br>
-                    @if($satRecord->image_url && Storage::disk('public')->exists($satRecord->image_url))
-                        <img src="{{ asset('storage/' . $satRecord->image_url) }}" alt="Existing Image" class="img-fluid" style="max-width: 300px;">
+                    @if($satRecord->image_url && file_exists(public_path($satRecord->image_url)))
+                        <img src="{{ asset($satRecord->image_url) }}" alt="Existing Image" class="img-fluid" style="max-width: 300px;">
                     @else
                         <p>No image available</p>
                     @endif
                 </div>
-
+                
                 <!-- Submit Button -->
                 <md-filled-tonal-button type="submit">Update</md-filled-tonal-button>
                 {{-- <a href="{{ url()->previous() }}" class="btn btn-secondary">Cancel</a> --}}

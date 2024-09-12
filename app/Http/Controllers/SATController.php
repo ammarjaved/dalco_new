@@ -56,16 +56,31 @@ class SATController extends Controller
     public function store(Request $request) 
     {
         try {
+            // Validate the request
+            $request->validate([
+                'image_name' => 'required|string|max:255',
+                'image_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'image_type' => 'required|string',
+                'site_survey_id' => 'required|exists:tbl_site_survey,id',
+            ]);
     
-            // Store the uploaded image in the 'images' directory within the 'public' disk
-            $filePath = $request->file('image_url')->store('images', 'public');
+            // Handle the file upload
+            $imagePath = '';
+            $destinationPath = 'assets/images/';
+    
+            if ($request->hasFile('image_url')) {
+                $img_ext = $request->file('image_url')->getClientOriginalExtension();
+                $filename = 'image_url' . '-' . strtotime(now()) . '.' . $img_ext;
+                $request->file('image_url')->move($destinationPath, $filename);
+                $imagePath = $destinationPath . $filename;
+            }
     
             // Prepare data for creating a new SAT record
             $sat_data = [
-                'image_name' => $request->image_name,
-                'image_url' => $filePath,
-                'image_type' => $request->image_type,
-                'site_survey_id' => $request->site_survey_id,
+                'image_name' => $request->input('image_name'),
+                'image_url' => $imagePath,
+                'image_type' => $request->input('image_type'),
+                'site_survey_id' => $request->input('site_survey_id'),
                 'created_by' => \Auth::user()->email,
             ];
     
@@ -81,6 +96,7 @@ class SATController extends Controller
                              ->with('failed', 'Request Failed: ' . $e->getMessage());
         }
     }
+    
     
 
 public function edit($id)
@@ -98,37 +114,39 @@ public function update(Request $request, $id)
 {
     // Validate the request
     $request->validate([
-        'image_name' => 'required|string',
+        'image_name' => 'required|string|max:255',
         'image_type' => 'required|string',
-        'image_url' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048', // Adjust validation for optional file
+        'image_url' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048', // Optional image file
     ]);
 
-    // Find the record
-    $satRecord = SAT::find($id);
-    if (!$satRecord) {
-        return redirect()->route('sat.index')->with('error', 'Record not found');
-    }
+    // Find the SAT record
+    $satRecord = SAT::findOrFail($id);
+    
+    // Handle the file upload if a new image is provided
+    $imagePath = $satRecord->image_url; // Keep the old image path if no new image is uploaded
+    $destinationPath = 'assets/images/';
 
-    // Process the file upload
     if ($request->hasFile('image_url')) {
-        $file = $request->file('image_url');
-        $filename = time() . '-' . $file->getClientOriginalName();
-        $filePath = $file->storeAs('uploads', $filename, 'public'); // Save file in 'public/uploads'
+        $img_ext = $request->file('image_url')->getClientOriginalExtension();
+        $filename = 'image_url' . '-' . strtotime(now()) . '.' . $img_ext;
+        $request->file('image_url')->move($destinationPath, $filename);
 
-        // Update the image_url field with the new file path
-        $satRecord->image_url = $filePath;
+        // Set the new image path
+        $imagePath = $destinationPath . $filename;
     }
 
-    // Update other fields
-    $satRecord->image_name = $request->input('image_name');
-    $satRecord->image_type = $request->input('image_type');
-    // No need to set image_url here if no new file is uploaded
-    $satRecord->save();
+    // Update the SAT record with new data
+    $satRecord->update([
+        'image_name' => $request->input('image_name'),
+        'image_type' => $request->input('image_type'),
+        'image_url' => $imagePath, // Either the new or the existing image path
+    ]);
 
-    // Redirect to the sat.create route with the site_survey_id from the updated record
+    // Redirect to the sat.create route with a success message
     return redirect()->route('sat.create', ['id' => $satRecord->site_survey_id])
                      ->with('success', 'Record updated successfully');
 }
+
 
 public function destroy($id)
 {

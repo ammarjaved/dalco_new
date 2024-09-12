@@ -65,7 +65,7 @@
     <div class="container-  ">
         <div class="row mb-2" style="flex-wrap:nowrap">
             <div class="col-sm-6">
-                <h3>Image Shutdown</h3>
+                <h3 style="color: #8e44ad;">Image Shutdown</h3>
             </div>
             <div class="col-sm-6 text-right">
                 <ol class="breadcrumb float-right">
@@ -77,7 +77,7 @@
     </div>
 </section>
 <div class="container">
-    <h3>Edit Image Shutdown</h3>
+    <h3 style="color: #8e44ad;">Edit Image Shutdown</h3>
 
     <div class="card">
         <div class="card-body">
@@ -96,9 +96,9 @@
                     <div class="col-md-4 form-group">
                         <md-outlined-select class="label" label="Image Type" id="image_type" name="image_type" required>
                             
-                            <md-select-option value="before" {{ $imageShutdown->image_type == 'before' ? 'selected' : '' }}>Before</md-select-option>
-                            <md-select-option value="during" {{ $imageShutdown->image_type == 'during' ? 'selected' : '' }}>During</md-select-option>
-                            <md-select-option value="after" {{ $imageShutdown->image_type == 'after' ? 'selected' : '' }}>After</md-select-option>
+                            <md-select-option value="BEFORE" {{ $imageShutdown->image_type == 'BEFORE' ? 'selected' : '' }}>BEFORE</md-select-option>
+                            <md-select-option value="DURING" {{ $imageShutdown->image_type == 'DURING' ? 'selected' : '' }}>DURING</md-select-option>
+                            <md-select-option value="AFTER" {{ $imageShutdown->image_type == 'AFTER' ? 'selected' : '' }}>AFTER</md-select-option>
                         </md-outlined-select>
                     </div>
                     

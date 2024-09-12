@@ -74,7 +74,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Add SAT Image</h1>
+                <h1 style="color: #8e44ad;">Add SAT Image</h1>
             </div>
         </div>
     </div>
@@ -113,9 +113,9 @@
                                     {{-- <label for="image_type">Image Type</label> --}}
                                     <md-outlined-select label="Image Type"  class="label" id="image_type" name="image_type" required>
                                        
-                                        <md-select-option value="before">Before</md-select-option>
-                                        <md-select-option value="during">During</md-select-option>
-                                        <md-select-option value="after">After</md-select-option>
+                                        <md-select-option value="BEFORE">BEFORE</md-select-option>
+                                        <md-select-option value="DURING">DURING</md-select-option>
+                                        <md-select-option value="AFTER">AFTER</md-select-option>
                                     </md-outlined-select>
                                 </div>
                             </div>
@@ -149,9 +149,9 @@
                                                 <td>{{ $satRecord->image_type }}</td>
                                                 <td>
                                                     @if($satRecord->image_url)
-    <md-filled-tonal-button href="{{ asset('storage/' . $satRecord->image_url) }}" target="_blank">
-        View
-    </md-filled-tonal-button>
+                                                    <md-filled-tonal-button href="{{ asset($satRecord->image_url) }}" target="_blank">
+                                                        View
+                                                    </md-filled-tonal-button>
 @else
                                                         No image
                                                     @endif

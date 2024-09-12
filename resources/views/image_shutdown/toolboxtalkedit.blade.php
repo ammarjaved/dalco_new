@@ -398,7 +398,7 @@
         <form action="{{ route('toolbox-talk.destroy', $toolboxtalk->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this Toolbox Talk?');">
             @csrf
             @method('DELETE')
-            <md-filled-tonal-button type="submit" >Delete</md-filled-tonal-button>
+            <md-filled-tonal-button style="margin-left:260px; margin-top:-137px" type="submit" >Delete Toolbox</md-filled-tonal-button>
         </form>
     </div>
  @endsection 

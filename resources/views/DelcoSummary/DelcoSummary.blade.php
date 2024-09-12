@@ -42,6 +42,25 @@
     cursor: pointer;
 }
 
+/* Adjust the positioning of the dropdown to the right */
+.dropdown-menu {
+    right: -20px; /* Moves the dropdown more to the right */
+    position: absolute;
+}
+
+.dropdown-item:hover {
+    background-color: #e2e6ea;
+    border-radius: 5px;
+}
+
+.dropdown-menu {
+    min-width: 150px;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
 
 
 </style>
@@ -193,50 +212,47 @@ style="background-color: #8e44ad;margin-left:20px; color:white">Add Site Survey<
 
                 <td class="align-middle text-center">
                     <div class="dropdown">
-                        <img src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}" class="three-dots-icon" alt="Options" onclick="toggleDropdown(this)">
-                        
-                        <div class="dropdown-menu">
-                           
-                            
-                            <div>
-
-                            @if ($data->nama_pe)
-    <a style="margin-left: 5px" href="{{ route('site_survey.edit', $data->id) }}" class="check-link">
-        <i class="fa fa-edit"></i> Edit Site Survey
-    </a>
-@else
-    <a href="{{ route('site_survey.create') }}" class="check-link">
-        Create Site Survey
-    </a>
-@endif
-
-</div>
-<div>
-
-    @if ($data->nama_pe)
-<a style="margin-left: 5px" href="{{ route('site_survey.show', $data->id) }}" class="check-link">
-    <i class="fa fa-eye"></i> Show Site Survey
-</a>
-@else
-<a href="{{ route('site_survey.create') }}" class="check-link">
-Create Site Survey
-</a>
-@endif
-
-</div>
-<form action="{{ route('delco-summary.delete', $data->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="dropdown-item" style="margin-left:-7px; margin-top: -2px;">
-        <i class="fas fa-trash-alt"></i> Delete Site Survey
-    </button>
-</form>
-
-
-</div>
-
- </div>
- </td>
+                        <img src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}" class="three-dots-icon" alt="Options" onclick="toggleDropdown(this)" style="cursor: pointer;">
+                
+                        <div class="dropdown-menu dropdown-menu-right p-2 shadow" style="border-radius: 8px; background-color: #f8f9fa; min-width: 150px; right: -20px;">
+                            <!-- Edit Site Survey -->
+                            <div class="mb-2">
+                                @if ($data->nama_pe)
+                                    <a href="{{ route('site_survey.edit', $data->id) }}" class="dropdown-item text-dark d-flex align-items-center">
+                                        <i class="fa fa-edit mr-2"></i> Edit Site Survey
+                                    </a>
+                                @else
+                                    <a href="{{ route('site_survey.create') }}" class="dropdown-item text-dark d-flex align-items-center">
+                                        <i class="fa fa-plus-circle mr-2"></i> Create Site Survey
+                                    </a>
+                                @endif
+                            </div>
+                
+                            <!-- Show Site Survey -->
+                            <div class="mb-2">
+                                @if ($data->nama_pe)
+                                    <a href="{{ route('site_survey.show', $data->id) }}" class="dropdown-item text-dark d-flex align-items-center">
+                                        <i class="fa fa-eye mr-2"></i> Show Site Survey
+                                    </a>
+                                @else
+                                    <a href="{{ route('site_survey.create') }}" class="dropdown-item text-dark d-flex align-items-center">
+                                        <i class="fa fa-plus-circle mr-2"></i> Create Site Survey
+                                    </a>
+                                @endif
+                            </div>
+                
+                            <!-- Delete Site Survey -->
+                            <form action="{{ route('delco-summary.delete', $data->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="dropdown-item text-danger d-flex align-items-center" style="border: none; background-color: transparent;">
+                                    <i class="fas fa-trash-alt mr-2"></i> Delete Site Survey
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </td>
+                
                 
  </tr>
         @endforeach

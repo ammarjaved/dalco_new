@@ -72,7 +72,7 @@
     <div class="container-  ">
         <div class="row mb-2" style="flex-wrap:nowrap">
             <div class="col-sm-6">
-                <h3>Image Shutdown</h3>
+                <h3 style="color: #8e44ad;">Image Shutdown</h3>
             </div>
             <div class="col-sm-6 text-right">
                 <ol class="breadcrumb float-right">
@@ -87,7 +87,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Add Image Shutdown</h1>
+                <h1 style="color: #8e44ad;">Add Image Shutdown</h1>
             </div>
         </div>
     </div>
@@ -125,9 +125,9 @@
                                 <div class="col-md-4">
                                     <md-outlined-select class="label" label="Image Type" id="image_type" name="image_type" required>
                                         
-                                        <md-select-option value="before">Before</md-select-option>
-                                        <md-select-option value="during">During</md-select-option>
-                                        <md-select-option value="after">After</md-select-option>
+                                        <md-select-option value="BEFORE">BEFORE</md-select-option>
+                                        <md-select-option value="DURING">DURING</md-select-option>
+                                        <md-select-option value="AFTER">AFTER</md-select-option>
                                     </md-outlined-select>
                                 </div>
                                 

@@ -56,7 +56,7 @@
     <div class="container-  ">
         <div class="row mb-2" style="flex-wrap:nowrap">
             <div class="col-sm-6">
-                <h3>Pre Cabling</h3>
+                <h3 style="color: #8e44ad;">Pre Cabling</h3>
             </div>
             <div class="col-sm-6 text-right">
                 <ol class="breadcrumb float-right">
@@ -417,7 +417,7 @@
     <div class="col-md-6">
         <div id="picture_during_toolbox_images" style="{{ ($toolboxTalk->picture_during_toolbox ?? old('picture_during_toolbox', 'no')) === 'yes' ? '' : 'display: none;' }}">
             <div class="form-group">
-                <label for="toolbox_image1">Toolbox Image 1</label>
+                <md-label for="toolbox_image1">Toolbox Image 1</md-label>
                 <input type="file" class="form-control-file" id="toolbox_image1" name="toolbox_image1" onchange="previewImage(this, 'img_toolbox1')">
                 @if(isset($toolboxTalk->toolbox_image1) && $toolboxTalk->toolbox_image1)
                     <img src="{{ asset($toolboxTalk->toolbox_image1) }}" alt="Toolbox Image 1" class="img-thumbnail mt-2" id="img_toolbox1" style="max-width: 200px;" onclick="document.getElementById('toolbox_image1').click();">
@@ -427,7 +427,7 @@
             </div>
             
             <div class="form-group">
-                <label for="toolbox_image2">Toolbox Image 2</label>
+                <md-label for="toolbox_image2">Toolbox Image 2</md-label>
                 <input type="file" class="form-control-file" id="toolbox_image2" name="toolbox_image2" onchange="previewImage(this, 'img_toolbox2')">
                 @if(isset($toolboxTalk->toolbox_image2) && $toolboxTalk->toolbox_image2)
                     <img src="{{ asset($toolboxTalk->toolbox_image2) }}" alt="Toolbox Image 2" class="img-thumbnail mt-2" id="img_toolbox2" style="max-width: 200px;" onclick="document.getElementById('toolbox_image2').click();">

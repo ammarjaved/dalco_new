@@ -91,6 +91,11 @@
             color: #666;
             font-size: 14px;
         }
+        .disabled-tabs md-secondary-tab {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
 
        
     </style>
@@ -162,17 +167,17 @@
             </div>
 
            
-            <div  class="col-md-4">
+            <div  class="col-md-4" >
                 <div class="form-group"  >
                     <!-- Peparit Label -->
                     <md-label  style="display: block; margin-top: -20px;">Peparit:</md-label>
             
                     <!-- Tabs for Peparit -->
-                    <md-tabs  id="tab-peparit" ng-disabled="true">
+                    <md-tabs  id="tab-peparit" class="disabled-tabs">
                         <!-- Yes Tab -->
                         <md-secondary-tab 
                             value="yes" 
-                            ng-disabled="true"
+                            ng-disabled="true" 
                             id="val-tab-peparit-yes" 
                             onclick="updateFieldValue('peparit', 'yes')"
                             {{ ($siteSurvey->peparit ?? old('peparit', 'no')) === 'yes' ? 'active' : '' }}
@@ -185,7 +190,7 @@
                         <!-- No Tab -->
                         <md-secondary-tab 
                             value="no" 
-                            ng-disabled="true"
+                            ng-disabled="true" 
                             id="val-tab-peparit-no" 
                             onclick="updateFieldValue('peparit', 'no')"
                             {{ ($siteSurvey->peparit ?? old('peparit', 'no')) === 'no' ? 'active' : '' }}
@@ -382,7 +387,7 @@
                     <md-label style="display: block; margin-bottom: 5px;">Bekalan LV:</md-label>
             
                     <!-- Tabs for Bekalan LV -->
-                    <md-tabs id="tab-bekalan_lv">
+                    <md-tabs id="tab-bekalan_lv" class="disabled-tabs">
                         <!-- Yes Tab -->
                         <md-secondary-tab 
                             value="yes" 
@@ -419,7 +424,7 @@
                 <md-label style="display: block; margin-bottom: 5px;">SCADA Status:</md-label>
         
                 <!-- Tabs for SCADA Status -->
-                <md-tabs id="tab-scada_status">
+                <md-tabs id="tab-scada_status" class="disabled-tabs">
                     <!-- Yes Tab -->
                     <md-secondary-tab 
                         value="yes" 
@@ -455,7 +460,7 @@
                 <md-label style="display: block; margin-bottom: 5px;">Jenis LVDB:</md-label>
         
                 <!-- Tabs for Jenis LVDB -->
-                <md-tabs id="tab-jenis-lvdb">
+                <md-tabs id="tab-jenis-lvdb" class="disabled-tabs">
                     <!-- DIN Tab -->
                     <md-secondary-tab 
                         value="DIN" 
@@ -533,7 +538,7 @@
                     <md-label style="display: block; margin-bottom: 5px;">
                         {{ ucwords(str_replace('_', ' ', $field)) }}:
                     </md-label>
-                    <md-tabs id="tab-{{$field}}">
+                    <md-tabs id="tab-{{$field}}" class="disabled-tabs">
                         <!-- Yes Radio Button -->
                         <md-secondary-tab   value="yes" id="val-tab-{{$field}}" onclick="toggleFileUpload('{{ $field }}', true, 'yes')" {{ isset($siteSurvey1) && $siteSurvey1->$field == 'yes' ? 'active' : '' }}>
                             Yes
@@ -598,7 +603,7 @@
             <md-label style="display: block; margin-bottom: 5px;">
                 {{ ucwords(str_replace('_', ' ', $field)) }}:
             </md-label>
-            <md-tabs id="tab-{{ $field }}">
+            <md-tabs id="tab-{{ $field }}" class="disabled-tabs">
                 <!-- Yes Tab -->
                 <md-secondary-tab 
                     value="yes" 
@@ -638,7 +643,7 @@
             <md-label style="display: block; margin-bottom: 5px;">
                 {{ ucwords(str_replace('_', ' ', $field)) }}:
             </md-label>
-            <md-tabs id="tab-{{ $field }}">
+            <md-tabs id="tab-{{ $field }}" class="disabled-tabs">
                 <!-- Yes Tab -->
                 <md-secondary-tab 
                     value="yes" 
@@ -677,7 +682,7 @@
             <md-label style="display: block; margin-bottom: 5px;">
                 {{ ucwords(str_replace('_', ' ', $field)) }}:
             </md-label>
-            <md-tabs id="tab-{{ $field }}">
+            <md-tabs id="tab-{{ $field }}" class="disabled-tabs">
                 <!-- Yes Tab -->
                 <md-secondary-tab 
                     value="yes" 
@@ -716,7 +721,7 @@
             <md-label style="display: block; margin-bottom: 5px;">
                 {{ ucwords(str_replace('_', ' ', $field)) }}:
             </md-label>
-            <md-tabs id="tab-{{ $field }}">
+            <md-tabs id="tab-{{ $field }}" class="disabled-tabs">
                 <!-- Yes Tab -->
                 <md-secondary-tab 
                     value="yes" 
@@ -758,7 +763,7 @@
             <md-label style="display: block; margin-bottom: 5px;">
                 {{ ucwords(str_replace('_', ' ', $field)) }}:
             </md-label>
-            <md-tabs id="tab-{{ $field }}">
+            <md-tabs id="tab-{{ $field }}" class="disabled-tabs">
                 <!-- Yes Tab -->
                 <md-secondary-tab 
                     value="yes" 
@@ -798,7 +803,7 @@
             <md-label style="display: block; margin-bottom: 5px;">
                 {{ ucwords(str_replace('_', ' ', $field)) }}:
             </md-label>
-            <md-tabs id="tab-{{ $field }}">
+            <md-tabs id="tab-{{ $field }}" class="disabled-tabs">
                 <!-- Yes Tab -->
                 <md-secondary-tab 
                     value="yes" 
@@ -835,7 +840,7 @@
             <md-label style="display: block; margin-bottom: 5px;">
                 Picture During Toolbox:
             </md-label>
-            <md-tabs id="tab-picture_during_toolbox">
+            <md-tabs id="tab-picture_during_toolbox" class="disabled-tabs">
                 <!-- Yes Radio Button -->
                 <md-secondary-tab value="yes" id="val-tab-picture_during_toolbox" onclick="toggleToolboxImageUpload('picture_during_toolbox', true, 'yes')" {{ isset($toolboxTalk) && $toolboxTalk->picture_during_toolbox == 'yes' ? 'active' : '' }}>
                     Yes

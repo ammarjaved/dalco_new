@@ -154,7 +154,7 @@ anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
   </div>
       <md-menu positioning="document" id="usage-document4" anchor="usage-document-anchor4">
          
-         <md-menu-item href="{{ route('LKS.create', ['id' => $id]) }}">
+         <md-menu-item href="{{ route('LKS.create', ['id' => $id]) }}" target="_blank">
               Show LKS
           </md-menu-item>
          

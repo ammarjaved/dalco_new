@@ -59,7 +59,7 @@
     <div class="container-  ">
         <div class="row mb-2" style="flex-wrap:nowrap">
             <div class="col-sm-6">
-                <h3>Pre Cabling</h3>
+                <h3 style="color: #8e44ad;">Pre Cabling</h3>
             </div>
             <div class="col-sm-6 text-right">
                 <ol class="breadcrumb float-right">
@@ -406,7 +406,7 @@
 <form action="{{ route('PreCabling.toolboxtalk.destroy', $toolboxtalk->id) }}" method="POST" style="display: inline;">
     @csrf
     @method('DELETE')
-    <md-filled-tonal-button  type="submit" >Delete Toolbox</md-filled-tonal-button >
+    <md-filled-tonal-button style="margin-left:260px; margin-top:-122px" type="submit" >Delete Toolbox</md-filled-tonal-button >
 </form>
 
  @endsection 

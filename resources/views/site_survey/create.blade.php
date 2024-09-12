@@ -299,7 +299,7 @@
                 
     <div class="input-container" style="margin-top:5px">
                     {{-- <label for="tahun_pembinaan">Tahun Pembinaan</label> --}}
-                    <input   type="date"  id="tahun_pembinaan" style=" height:50px !important;border-radius: 5px !important;width:90% !important;" name="tahun_pembinaan" value="{{ $siteSurvey->tahun_pembinaan ?? old('tahun_pembinaan') }}">
+                    <input  type="date"  id="tahun_pembinaan" style=" height:50px !important;border-radius: 5px !important;width:90% !important;" name="tahun_pembinaan" value="{{ $siteSurvey->tahun_pembinaan ?? old('tahun_pembinaan') }}">
                     <label>Tahun Pembinaan</label>
                 </div>
         </div>
