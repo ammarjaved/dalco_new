@@ -19,13 +19,16 @@
     .input-container {
             position: relative;
             margin-bottom: 10px;
+           
         }
         
         label {
             position: absolute;
             top: -10px;
             left: 10px;
-            background-color: white;
+            color:black;
+            font-family: 'Roboto';
+            background-color: #F4F6F9;
             padding: 0 5px;
             font-size: 12px;
             color: #666;
@@ -90,8 +93,8 @@
 </div> -->
 <div class="col-md-6">
 <div class="input-container" style="margin-top:5px">
-    <input type="date" id="tarikh"  style="border-radius: 5px !important;width:40% !important;" name="tarikh" value="{{ $toolboxtalk->tarikh }}" required>
-    <label for="tarikh">Tarikh*</label>
+    <input type="date" id="tarikh"  style=" height:50px !important;border-radius: 5px !important;width:60% !important;" name="tarikh" value="{{ $toolboxtalk->tarikh }}" required>
+    <label for="tarikh">Tarikh</label>
 </div>
 </div>    
     
