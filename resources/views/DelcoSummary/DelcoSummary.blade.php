@@ -217,28 +217,24 @@ style="background-color: #8e44ad;margin-left:20px; color:white">Add Site Survey<
                         <div class="dropdown-menu dropdown-menu-right p-2 shadow" style="border-radius: 8px; background-color: #f8f9fa; min-width: 150px; right: -20px;">
                             <!-- Edit Site Survey -->
                             <div class="mb-2">
-                                @if ($data->nama_pe)
+                                
                                     <a href="{{ route('site_survey.edit', $data->id) }}" class="dropdown-item text-dark d-flex align-items-center">
                                         <i class="fa fa-edit mr-2"></i> Edit Site Survey
                                     </a>
-                                @else
-                                    <a href="{{ route('site_survey.create') }}" class="dropdown-item text-dark d-flex align-items-center">
-                                        <i class="fa fa-plus-circle mr-2"></i> Create Site Survey
-                                    </a>
-                                @endif
+                               
+                                   
+                              
                             </div>
                 
                             <!-- Show Site Survey -->
                             <div class="mb-2">
-                                @if ($data->nama_pe)
+                                
                                     <a href="{{ route('site_survey.show', $data->id) }}" class="dropdown-item text-dark d-flex align-items-center">
                                         <i class="fa fa-eye mr-2"></i> Show Site Survey
                                     </a>
-                                @else
-                                    <a href="{{ route('site_survey.create') }}" class="dropdown-item text-dark d-flex align-items-center">
-                                        <i class="fa fa-plus-circle mr-2"></i> Create Site Survey
-                                    </a>
-                                @endif
+                               
+                                  
+                                
                             </div>
                 
                             <!-- Delete Site Survey -->
@@ -415,6 +411,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 function toggleDropdown(icon) {
     const dropdownMenu = icon.nextElementSibling;
     dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+
+    var pe = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tbl_site_survey',
+                format: 'image/png',
+                // cql_filter: q_cql,
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+
+            map.addLayer(pe)
+            pe.bringToFront();
 }
 
 document.addEventListener('click', function(event) {

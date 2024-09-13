@@ -37,6 +37,7 @@ class LKSController extends Controller{
 
 
         $files = FileUpload::where('site_survey_id', $survey->id)->get();
+        
 
         $projectMaterials = ProjectMaterial::where('site_survey_id', $survey->id)->get();
 
