@@ -523,10 +523,10 @@
                 <input type="text" hidden  class="form-control" placeholder="lng" value="{{ $location->x ?? old('') }}" name="lng" id="lng" readonly>
             </div>
         </div>
-        <div id="map" style="z-index:1;height: 400px; width: 100%;" ></div>
+        <div id="map" style="z-index:1;height: 400px; width: 100%;" ></div><br>
 
 
-
+<md-filled-tonal-button onclick="handleNavigation('next')">Next </md-filled-tonal-button>
        
         
     </div>
@@ -582,6 +582,10 @@
                 </div>
             </div>
         @endforeach
+    </div>
+    <div>
+        <md-filled-tonal-button onclick="handleNavigation('previous')">Previous</md-filled-tonal-button>
+        <md-filled-tonal-button onclick="handleNavigation('next')">Next</md-filled-tonal-button>
     </div>
 </div>
         
@@ -884,9 +888,14 @@
             </div>
         </div>
     </div>
+    
 </div>
 
+<md-filled-tonal-button onclick="handleNavigation('previous')">Previous</md-filled-tonal-button>
+
 <md-filled-tonal-button type="submit"  id="submitBtn">{{ isset($siteSurvey) ? 'Update' : 'Create' }}</md-filled-tonal-button>
+
+
 
         </div>
     </div>
@@ -913,6 +922,41 @@
 @endsection
 
 <script>
+
+const tabOrder = ['tab1-tab', 'tab2-tab', 'tab3-tab']; // Update this array with your actual tab IDs in order
+
+function handleNavigation(direction) {
+    const currentTabId = getCurrentTabId();
+    const currentIndex = tabOrder.indexOf(currentTabId);
+    
+    let targetIndex;
+    if (direction === 'next') {
+        targetIndex = (currentIndex + 1) % tabOrder.length;
+    } else { // previous
+        targetIndex = (currentIndex - 1 + tabOrder.length) % tabOrder.length;
+    }
+    
+    const targetTabId = tabOrder[targetIndex];
+    const targetTab = document.getElementById(targetTabId);
+    
+    if (targetTab) {
+        targetTab.click();
+        window.scrollTo(0, 0);
+        console.log(`Navigated to ${direction} tab: ${targetTabId}`);
+    } else {
+        console.error(`Target tab not found: ${targetTabId}`);
+    }
+}
+
+function getCurrentTabId() {
+    for (let tabId of tabOrder) {
+        const tab = document.getElementById(tabId);
+        if (tab && tab.getAttribute('active') !== null) {
+            return tabId;
+        }
+    }
+    return tabOrder[0]; // Default to first tab if no active tab found
+}
 
 function toggleToolboxImageUpload(fieldName, show, value) {
     var imagesDiv = document.getElementById(fieldName + '_images');

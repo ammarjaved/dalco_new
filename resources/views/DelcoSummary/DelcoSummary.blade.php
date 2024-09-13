@@ -174,6 +174,7 @@ style="background-color: #8e44ad;margin-left:20px; color:white">Add Site Survey<
                     @if ($data->nama_pe)
                         <span class="check "
                             style="font-weight: 600; color: green;">&#x2713;</span>
+                    
                     @else
                         <span class="check"
                             style="font-weight: 600; color: red;">&#x2715;</span>
@@ -200,8 +201,8 @@ style="background-color: #8e44ad;margin-left:20px; color:white">Add Site Survey<
 
 
                 <td class="align-middle text-center">
-                    @if ($data->SAT)
-                        <span class="check "
+                    @if ($data->SATStatus)
+                        <span class="check"
                             style="font-weight: 600; color: green;">&#x2713;</span>
                     @else
                         <span class="check"

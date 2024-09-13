@@ -519,6 +519,8 @@
             </div>
         </div>
         <div id="map" style="height: 400px; width: 100%;" class="my-3"></div>
+
+        <md-filled-tonal-button onclick="handleNavigation('next')">Next </md-filled-tonal-button>
         
     </div>
     @php

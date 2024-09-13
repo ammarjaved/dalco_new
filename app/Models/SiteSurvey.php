@@ -60,12 +60,12 @@ class SiteSurvey extends Model
 
     public function imageShutdown()
     {
-        return $this->hasMany(ImageShutdown::class, 'site_survey_id');
+        return $this->hasOne(ImageShutdown::class, 'site_survey_id');
     }
 
     public function SATs()
 {
-    return $this->hasMany(SAT::class, 'site_survey_id');
+    return $this->hasOne(SAT::class, 'site_survey_id');
 }
 
 
@@ -83,13 +83,13 @@ public function PreCablingStatus()
 
 public function ShutDownStatus()
 {
-    return $this->hasMany(ImageShutdown::class, 'site_survey_id');
+    return $this->hasOne(ImageShutdown::class, 'site_survey_id');
 }
 
 
 public function SATStatus()
 {
-    return $this->hasMany(SAT::class, 'site_survey_id');
+    return $this->hasOne(SAT::class, 'site_survey_id');
 
 }
 
