@@ -394,10 +394,10 @@ table = $('.data-table').DataTable({
                
 })
 })
-
+var map="";
 
 document.addEventListener('DOMContentLoaded', function () {
-                    let map = L.map('map').setView([3.2888784335929744,102.06586684019376], 8);
+                     map = L.map('map').setView([3.2888784335929744,102.06586684019376], 8);
 
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         maxZoom: 19,
@@ -405,14 +405,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     }).addTo(map);
 
                 });     
-                
-                
-                // Toggle the display of the context menu
-                function toggleDropdown(icon) {
-    const dropdownMenu = icon.nextElementSibling;
-    dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
 
-    var pe = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+
+                var pe = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:tbl_site_survey',
                 format: 'image/png',
                 // cql_filter: q_cql,
@@ -424,7 +419,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
             map.addLayer(pe)
             pe.bringToFront();
+                
+                
+                // Toggle the display of the context menu
+                function toggleDropdown(icon) {
+    const dropdownMenu = icon.nextElementSibling;
+    dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+
+   
 }
+
+
 
 document.addEventListener('click', function(event) {
     const isClickInsideDropdown = event.target.closest('.dropdown');
