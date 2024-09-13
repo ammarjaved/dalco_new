@@ -32,7 +32,10 @@ class SiteSurveyController extends Controller
      public function delcoSummary()
      {
          $usr_info = \Auth::user();
-         $delcoSummary = SiteSurvey::with(['PreCablingStatus', 'ShutDownStatus','SATStatus'])->get();
+         $delcoSummary = SiteSurvey::with(['PreCablingStatus', 'ShutDownStatus','SATStatus'])->select('*', 
+         DB::raw('ST_X(geom) as x'),
+         DB::raw('ST_Y(geom) as y')
+     )->get();
 
         //  return  $data;
         
@@ -125,7 +128,7 @@ class SiteSurveyController extends Controller
 
             
 
-            DB::statement("UPDATE tbl_site_survey set geom = ST_GeomFromText('POINT($request->lat $request->lng)',4326) where id = $siteSurvey->id");
+            DB::statement("UPDATE tbl_site_survey set geom = ST_GeomFromText('POINT($request->lng $request->lat)',4326) where id = $siteSurvey->id");
            
 
             // DB::statement("update tbl_site_survey set area='$area' ,project='$company' where id = $siteSurvey->id"); 
@@ -278,7 +281,7 @@ class SiteSurveyController extends Controller
             $tbk=ToolBoxTalk::where('site_survey_id',$id)->where('skop_kerja','=','SITE-SURVEY')->get();
             
 
-            DB::statement("UPDATE tbl_site_survey set geom = ST_GeomFromText('POINT($request->lat $request->lng)',4326) where id =  $id");
+            DB::statement("UPDATE tbl_site_survey set geom = ST_GeomFromText('POINT($request->lng $request->lat)',4326) where id =  $id");
 
     
             $pictureData['site_survey_id'] = $id;

@@ -236,6 +236,13 @@ style="background-color: #8e44ad;margin-left:20px; color:white">Add Site Survey<
                                   
                                 
                             </div>
+
+                            <div class="mb-2">
+                                
+                                    <a href="javascript:zoomToMap({{$data->x}},{{$data->y}});" class="dropdown-item text-dark d-flex align-items-center">
+                                        <i class="fa fa-eye mr-2"></i> ZoomToMap
+                                    </a>
+                            </div>
                 
                             <!-- Delete Site Survey -->
                             <form action="{{ route('delco-summary.delete', $data->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
@@ -256,12 +263,12 @@ style="background-color: #8e44ad;margin-left:20px; color:white">Add Site Survey<
 </table>
 
     </div>
-
-    <div  id="map" style="width: 90%; height:620px" class="col-md-6">
+    <div class="col-md-6">
+    <div  id="map" style="width: 100%; height:620px">
         
 
     </div>
-
+</div>
 
 </div>
 
@@ -396,17 +403,29 @@ table = $('.data-table').DataTable({
 })
 var map="";
 
+
+function zoomToMap(x,y){
+    var y=parseFloat(y);
+    var x=parseFloat(x);
+    map.setView([y,x], 12);
+}
+
 document.addEventListener('DOMContentLoaded', function () {
                      map = L.map('map').setView([3.2888784335929744,102.06586684019376], 8);
 
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    var osm=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         maxZoom: 19,
                         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     }).addTo(map);
 
-                });     
+                   var  googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+                        maxZoom: 20,
+                        subdomains:['mt0','mt1','mt2','mt3']
+                    });
 
+          // setTimeout(function(){
 
+           
                 var pe = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:tbl_site_survey',
                 format: 'image/png',
@@ -419,8 +438,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
             map.addLayer(pe)
             pe.bringToFront();
+
+
+
+            var baseLayers = {
+            "Street": osm,
+              "Satellite":googleSat
+            };
+
+                var overlays = {
                 
-                
+                    "FP Layer":pe
+                };
+
+                L.control.layers(baseLayers, overlays).addTo(map);
+
+       // },3000)     
+    });            
                 // Toggle the display of the context menu
                 function toggleDropdown(icon) {
     const dropdownMenu = icon.nextElementSibling;

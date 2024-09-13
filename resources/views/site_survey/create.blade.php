@@ -523,7 +523,7 @@
                 <input type="text" hidden  class="form-control" placeholder="lng" value="{{ $location->x ?? old('') }}" name="lng" id="lng" readonly>
             </div>
         </div>
-        <div id="map" style="height: 400px; width: 100%;" ></div>
+        <div id="map" style="z-index:1;height: 400px; width: 100%;" ></div>
 
 
 
@@ -1244,6 +1244,11 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('lat').value = e.latlng.lat;
             document.getElementById('lng').value = e.latlng.lng;
         });
+
+
+        setTimeout(() => {
+            map.invalidateSize();
+        }, 500);
 
     } catch (error) {
         console.error("Error initializing map:", error);

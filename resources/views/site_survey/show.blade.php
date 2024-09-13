@@ -1214,22 +1214,28 @@ document.addEventListener('DOMContentLoaded', function () {
                     var mark1='';
 
                     if($("#lat").val()!='' && $("#lng").val()!=''){
-                        mark1= L.marker([$("#lng").val(),$("#lat").val()]).addTo(map)
+                        mark1= L.marker([$("#lat").val(),$("#lng").val()]).addTo(map)
+
+                        map.setView([$("#lat").val(),$("#lng").val()]);
                     }
                     
                     
                    
 
-                    map.on('click', function (e) {
-                        if(mark1!=''){
-                            map.removeLayer(mark1);
-                        }
+                    // map.on('click', function (e) {
+                    //     if(mark1!=''){
+                    //         map.removeLayer(mark1);
+                    //     }
                       
-                    mark1= L.marker([e.latlng.lat,e.latlng.lng]).addTo(map)
+                    // mark1= L.marker([e.latlng.lat,e.latlng.lng]).addTo(map)
 
-                        document.getElementById('lat').value = e.latlng.lat;
-                        document.getElementById('lng').value = e.latlng.lng;
-                    });
+                    //     document.getElementById('lat').value = e.latlng.lat;
+                    //     document.getElementById('lng').value = e.latlng.lng;
+                    // });
+
+                    setTimeout(() => {
+            map.invalidateSize();
+        }, 500);
                 });
 
 
