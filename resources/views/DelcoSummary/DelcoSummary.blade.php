@@ -362,45 +362,24 @@ table.dataTable thead .sorting_desc:after {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-table = $('.data-table').DataTable({
-
-    dom: '<"row"<"col-sm-6"l><"col-sm-6 text-right"f>>' +
-         '<"row"<"col-sm-12"tr>>' +
-         '<"row"<"col-sm-5"i><"col-sm-7 text-right"p>>',
-    language: {
-        search: "",
-        searchPlaceholder: "Search..."
-
-    },
-
-    ordering: true,
-    order: [[0, 'asc']], // Sort by the first column (index 0) in ascending order by default
-    // columnDefs: [
-    //     { orderable: false, targets: [4] } // Disable sorting on the SAT column (index 4)
-    // ]
-
-    lengthChange: true,
-    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-    initComplete: function(settings, json) {
-      // Replace the default select with a Material select
-      $('.dataTables_length select').each(function() {
-        const select = $(this);
-        const mdSelect = document.createElement('md-select');
-        mdSelect.setAttribute('label', 'Show entries');
-        select.find('option').each(function() {
-          const mdOption = document.createElement('md-option');
-          mdOption.value = $(this).val();
-          mdOption.textContent = $(this).text();
-          mdSelect.appendChild(mdOption);
-        });
-        select.replaceWith(mdSelect);
-      });
-    }
-
-               
-               
-})
-})
+    table = $('.data-table').DataTable({
+        dom: "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+             "<'row'<'col-sm-12'tr>>" +
+             "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+        language: {
+            search: "",
+            searchPlaceholder: "Search...",
+            lengthMenu: "Show _MENU_ entries"
+        },
+        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        pageLength: 10,
+        ordering: true,
+        order: [[0, 'asc']],
+        columnDefs: [
+            { orderable: false, targets: [4] }
+        ]
+    });
+});
 var map="";
 
 
