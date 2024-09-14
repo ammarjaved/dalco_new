@@ -520,7 +520,7 @@
         </div>
         <div id="map" style="height: 400px; width: 100%;" class="my-3"></div>
 
-        <md-filled-tonal-button onclick="handleNavigation('next')">Next </md-filled-tonal-button>
+        
         
     </div>
     @php
@@ -882,19 +882,15 @@
     </div>
 
 
-  
- 
-
-
-    <div class="mt-3">
-      <!-- <button type="button" class="btn btn-secondary" id="prevBtn" onclick="navigate(-1)">Previous</button> -->
-      <!-- <button type="button" class="btn btn-primary" id="nextBtn" onclick="navigate(1)">Next</button> -->
-
-    </div>
-
-
         
     </form>
+
+    <div class="mt-3">
+        <md-filled-tonal-button type="button" style='visibility:hidden;'  id="prevBtn" onclick="handleNavigation('previous')">Previous</md-filled-tonal-button>
+         <md-filled-tonal-button type="button"  style='visibility:visible;' id="nextBtn" onclick="handleNavigation('next')">Next</md-filled-tonal-button>
+      
+    
+      </div>
 
    
     </div>
@@ -903,6 +899,68 @@
 @endsection
 
 <script>
+
+const tabOrder = ['tab1-tab', 'tab2-tab', 'tab3-tab']; // Update this array with your actual tab IDs in order
+
+
+function handleNavigation1(targetTabId) {
+
+    if(targetTabId=='tab1-tab'){
+        document.getElementById('prevBtn').style.visibility = 'hidden'
+         document.getElementById('nextBtn').style.visibility = 'visible'
+    }else if(targetTabId=='tab3-tab'){
+         document.getElementById('nextBtn').style.visibility = 'hidden'
+    }else{
+        document.getElementById('prevBtn').style.visibility = 'visible'
+         document.getElementById('nextBtn').style.visibility = 'visible'
+    }
+    window.scrollTo(0, 0);
+}
+
+function handleNavigation(direction) {
+    const currentTabId = getCurrentTabId();
+    const currentIndex = tabOrder.indexOf(currentTabId);
+
+   
+    let targetIndex;
+    if (direction === 'next') {
+        targetIndex = (currentIndex + 1) % tabOrder.length;
+    } else { // previous
+        targetIndex = (currentIndex - 1 + tabOrder.length) % tabOrder.length;
+    }
+    
+    const targetTabId = tabOrder[targetIndex];
+    const targetTab = document.getElementById(targetTabId);
+
+    if(targetTabId=='tab1-tab'){
+        document.getElementById('prevBtn').style.visibility = 'hidden'
+         document.getElementById('nextBtn').style.visibility = 'visible'
+    }else if(targetTabId=='tab3-tab'){
+         document.getElementById('nextBtn').style.visibility = 'hidden'
+    }else{
+        document.getElementById('prevBtn').style.visibility = 'visible'
+         document.getElementById('nextBtn').style.visibility = 'visible'
+    }
+    
+    
+    if (targetTab) {
+        targetTab.click();
+        window.scrollTo(0, 0);
+        console.log(`Navigated to ${direction} tab: ${targetTabId}`);
+    } else {
+        console.error(`Target tab not found: ${targetTabId}`);
+    }
+}
+
+function getCurrentTabId() {
+    for (let tabId of tabOrder) {
+        const tab = document.getElementById(tabId);
+        if (tab && tab.getAttribute('active') !== null) {
+            return tabId;
+        }
+    }
+    return tabOrder[0]; // Default to first tab if no active tab found
+}
 
 function toggleToolboxImageUpload(fieldName, show, value) {
     var imagesDiv = document.getElementById(fieldName + '_images');

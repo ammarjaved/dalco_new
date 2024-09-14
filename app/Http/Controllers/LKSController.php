@@ -10,8 +10,14 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\ToolBoxTalk;
 use App\Models\ProjectMaterial;
 use App\Models\material;
-
-
+use App\Models\PreCabling;
+use App\Models\PreCablingShutDown;
+use App\Models\PreCablingAttachments;
+use App\Models\PreCablingImages;
+use App\Models\ImageShutdown; 
+use App\Models\ImageShutdownAttachments;   
+use App\Models\SAT;
+use App\Models\SATAttachments; 
 use Exception;
 
 class LKSController extends Controller{
@@ -37,20 +43,46 @@ class LKSController extends Controller{
 
 
         $files = FileUpload::where('site_survey_id', $survey->id)->get();
-        
+
 
         $projectMaterials = ProjectMaterial::where('site_survey_id', $survey->id)->get();
 
         $projectName = $survey->project;
-       
 
-       
+        $Piw = PreCabling::where('site_survey_id', $survey->id)->first();
 
-       
-      
+        $PreShutdown= PreCablingShutDown::where('site_survey_id', $survey->id)->first();
 
-    
-        return view('LKS.show', compact('survey','toolboxtalk','files','pictureData','projectMaterials','projectName'));
+        $PreCableFiles=PreCablingAttachments::where('site_survey_id', $survey->id)->get();
+
+        $PreCablmages=PreCablingImages::where('site_survey_id', $survey->id)->get();
+
+        $PreCablks = ToolBoxTalk::where('site_survey_id', $survey->id)
+        ->where('skop_kerja', 'CABLING')
+        ->get();
+
+        $ImageShutImages=ImageShutdown::where('site_survey_id', $survey->id)->get();
+
+        $ImageShutFiles=ImageShutdownAttachments::where('site_survey_id', $survey->id)->get();
+
+        
+        $ImageShutdownlks = ToolBoxTalk::where('site_survey_id', $survey->id)
+        ->where('skop_kerja', 'OUTAGE')
+        ->get();
+
+
+        $SATImages=SAT::where('site_survey_id', $survey->id)->get();
+
+        $SATFiles=SATAttachments::where('site_survey_id', $survey->id)->get();
+
+        $SATlks = ToolBoxTalk::where('site_survey_id', $survey->id)
+        ->where('skop_kerja', 'SAT')
+        ->get();
+
+
+        return view('LKS.show', compact('survey','toolboxtalk','files','pictureData','projectMaterials','projectName',
+        'Piw','PreShutdown','PreCableFiles','PreCablmages','PreCablks','ImageShutImages','ImageShutFiles','ImageShutdownlks',
+         'SATImages','SATFiles','SATlks'));
     }
 
 

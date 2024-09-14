@@ -54,7 +54,7 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
 
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 400px;
             margin: 0 auto;
         }
 
@@ -63,10 +63,7 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
             margin-bottom: 20px;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+       
 
         th, td {
             padding: 8px 12px;
@@ -94,8 +91,7 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
 
         .checklist-container {
             display: flex;
-            justify-content: space-between;
-            padding: 20px; 
+            
         }
 
         .checklist-left, .checklist-right {
@@ -348,29 +344,20 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
 
        
 
-        @media print {
-            .print-button {
-                display: none;
-            }
-            body {
-                padding: 0;
-            }
-            /* Ensure each major section starts on a new page */
-            .page-break {
-                page-break-before: always;
-            }
-            /* Prevent awkward breaks within sections */
-            table, tr, td, th, .no-break {
-                page-break-inside: avoid;
-            }
-        }
-        
+      
 
     </style>
 </head>
 <body>
     <div class="container">
     <div class="header">
+        <div class="logo">
+            <img src="{{ URL::asset('assets/web-images/tnblogo.png') }}" alt="TNB Logo">
+
+            <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
+            Level 2, Jalan Air Hitam, Kawasan 16,<br>
+            40000 Shah Alam, Selangor</p>
+        </div>
         <div class="logo">
             @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
                 <img src="{{ URL::asset('assets/web-images/main-logo.png') }}" alt="Aerosynergy Solutions Logo">
@@ -388,6 +375,7 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
                 Default Address</p>
             @endif
         </div>
+       
         
     </div>
     <div class="content">
@@ -400,8 +388,17 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
     </div>
 
 
-    <div class="header" style="padding-top: 300px">
+    <div class="header" style="padding-top:750px">
         <div class="logo">
+            <img src="{{ URL::asset('assets/web-images/tnblogo.png') }}" alt="TNB Logo">
+
+            <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
+            Level 2, Jalan Air Hitam, Kawasan 16,<br>
+            40000 Shah Alam, Selangor</p>
+        </div>
+        <div class="logo">
+
+
             @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
                 <img src="{{ URL::asset('assets/web-images/main-logo.png') }}" alt="Aerosynergy Solutions Logo">
                 <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
@@ -418,6 +415,7 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
                 Default Address</p>
             @endif
         </div>
+        
     </div>
 
     <h2 style="text-align: center;">TOOLBOX TALK FORM</h2>
@@ -441,7 +439,7 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
         </tr>
     </table>
 
-    <div class="container">
+    <div>
         <h2>Checklist</h2>
         <table>
             <tr>
@@ -621,7 +619,7 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
     </div>
 
 
-    <div class="header" style="padding-top: 300px">
+    <div class="header" style="padding-top: 100px">
         <div class="logo">
             <img src="{{ URL::asset('assets/web-images/tnblogo.png') }}" alt="TNB Logo">
 
@@ -629,6 +627,7 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
             Level 2, Jalan Air Hitam, Kawasan 16,<br>
             40000 Shah Alam, Selangor</p>
         </div>
+       
         <div class="logo">
             @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
                 <img src="{{ URL::asset('assets/web-images/main-logo.png') }}" alt="Aerosynergy Solutions Logo">
@@ -646,6 +645,7 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
                 Default Address</p>
             @endif
         </div>
+       
     </div>
 
     <h1 class="title">PICTURE LIST FORM<br>(SITE VISIT)</h1>
@@ -761,7 +761,7 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
 
     <div>
        
-    <div class="header" style="padding-top: 300px">
+    <div class="header" style="padding-top: 200px">
         <div class="logo">
             <img src="{{ URL::asset('assets/web-images/tnblogo.png') }}" alt="TNB Logo">
 
@@ -823,8 +823,34 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
     </div>
 
 
+    <div class="header" style="padding-top: 200px">
+        <div class="logo">
+            <img src="{{ URL::asset('assets/web-images/tnblogo.png') }}" alt="TNB Logo">
 
-    <div style="padding-top: 300px">
+            <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
+            Level 2, Jalan Air Hitam, Kawasan 16,<br>
+            40000 Shah Alam, Selangor</p>
+        </div>
+          <div class="logo">
+            @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
+                <img src="{{ URL::asset('assets/web-images/main-logo.png') }}" alt="Aerosynergy Solutions Logo">
+                <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
+               NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
+            @elseif($projectName === 'ARAS-JOHOR')
+                <img src="{{ URL::asset('assets/web-images/araslogo.png') }}" alt="ARAS Kejuruteraan Logo">
+                <p>ARAS KEJURUTERAAN SDN BHD<br>
+                1st Floor No 72, Jalan SS 21/1, Damansara<br>
+                Utama, 47400 Petaling Jaya, Selangor</p>
+            @else
+                <!-- Default logo or empty state -->
+                <img src="{{ URL::asset('assets/web-images/defaultlogo.png') }}" alt="Default Logo">
+                <p>Default Company Name<br>
+                Default Address</p>
+            @endif
+        </div>
+    </div>
+
+    <div style="padding-top: 100px">
         <h1>JADUAL ANGGARAN DAN PENGGUNAAN BAHAN</h1>
         <table>
             <tr>
@@ -879,7 +905,7 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
     </div>
 
 
-    <div class="pictures-grids">
+    {{-- <div class="pictures-grids">
         <p class="survey-titles">{{$survey->nama_pe}}</p>
         @foreach($files as $file)
             <div class="image-containers">
@@ -888,14 +914,38 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
             </div>
             <div class="page-break"></div>
         @endforeach
-    </div>
+    </div> --}}
 
 
     <div class="form-container">
-        <div class="header">
-            <img src="{{ URL::asset('assets/web-images/tenegalogofull.jfif') }}" alt="TNB Logo">
-            
+        <div class="header" style="padding-top: 150px">
+            <div class="logo">
+                <img src="{{ URL::asset('assets/web-images/tnblogo.png') }}" alt="TNB Logo">
+    
+                <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
+                Level 2, Jalan Air Hitam, Kawasan 16,<br>
+                40000 Shah Alam, Selangor</p>
+            </div>
+              <div class="logo">
+                @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
+                    <img src="{{ URL::asset('assets/web-images/main-logo.png') }}" alt="Aerosynergy Solutions Logo">
+                    <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
+                   NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
+                @elseif($projectName === 'ARAS-JOHOR')
+                    <img src="{{ URL::asset('assets/web-images/araslogo.png') }}" alt="ARAS Kejuruteraan Logo">
+                    <p>ARAS KEJURUTERAAN SDN BHD<br>
+                    1st Floor No 72, Jalan SS 21/1, Damansara<br>
+                    Utama, 47400 Petaling Jaya, Selangor</p>
+                @else
+                    <!-- Default logo or empty state -->
+                    <img src="{{ URL::asset('assets/web-images/defaultlogo.png') }}" alt="Default Logo">
+                    <p>Default Company Name<br>
+                    Default Address</p>
+                @endif
+            </div>
         </div>
+    
+        
         <h1 style="margin-left: -150px">SENARAI SEMAK LAWATAN TAPAK PROJEK SCADA DA</h1>
 
         <table class="form-table">
@@ -924,13 +974,14 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
             </tr>
             <tr>
                 <td class="label">Jenis Kompaun</td>
-                <td class="input">
-                    <span class="checkboxs {{ $survey->jenis_kompaun == 'Simen' ? 'checkeds' : '' }}"></span> Simen
-                    <span class="checkboxs {{ $survey->jenis_kompaun == 'Rumput' ? 'checkeds' : '' }}"></span> Rumput
-                    <span class="checkboxs {{ $survey->jenis_kompaun == 'Inter-locking' ? 'checkeds' : '' }}"></span> Inter-locking
-                    <span class="checkboxs {{ $survey->jenis_kompaun == 'Crusher Run' ? 'checkeds' : '' }}"></span> Crusher Run
-                    <span class="checkboxs {{ $survey->jenis_kompaun == 'Tidak' ? 'checkeds' : '' }}"></span> Tidak
-                </td>
+<td class="input">
+    <span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'simen' ? 'checkeds' : '' }}"></span> Simen
+    <span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'rumput' ? 'checkeds' : '' }}"></span> Rumput
+    <span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'inter-locking' ? 'checkeds' : '' }}"></span> Inter-locking
+    <span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'crusher run' ? 'checkeds' : '' }}"></span> Crusher Run
+    <span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'tidak' ? 'checkeds' : '' }}"></span> Tidak
+</td>
+
             </tr>
             <tr>
                 <td class="label">Jenis Perkakasuis</td>
@@ -1019,10 +1070,7 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
                 <td class="label">Keperluan Khas Kerja</td>
                 <td class="input">{{ $survey->keperluan_khas_kerja }}</td>
             </tr>
-            <tr>
-                <td class="label">Susun</td>
-                <td class="input">{{ $survey->susun }}</td>
-            </tr>
+           
             
             
         </table>
@@ -1031,12 +1079,1124 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
         </div>
     </div>
 
+    
+
 
     
     
-    <button onclick="window.print()">Print</button>
+    
+
 
     </div>
+<!-- Include Bootstrap CSS -->
+
+
+<!-- Custom Styles -->
+<style>
+    .form-container {
+        background-color: #f9f9f9;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+    
+    .form-group label {
+        font-weight: bold;
+        color: #333;
+    }
+    
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        padding: 10px;
+    }
+    
+    .form-check-input {
+        margin-left: 0;
+    }
+
+    .form-check-label {
+        margin-left: 25px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #555;
+    }
+    
+    .radio-container {
+        display: flex;
+        justify-content: space-around;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .radio-label {
+        font-size: 16px;
+        color: #444;
+    }
+
+    /* Styling for rows and spacing */
+    .row {
+        margin-bottom: 20px;
+    }
+
+   
+
+    
+</style>
+
+
+
+
+<!-- Form Container -->
+<div class="container form-container">
+    <h4 class="text-center mb-4">Pre-Cabling PIW</h4>
+    <form class="form-horizontal">
+        <div class="row">
+            <!-- Kontraktor PIW -->
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="kontraktor_piw">Kontraktor PIW</label>
+                    <input type="text" class="form-control" id="kontraktor_piw" value="{{ $Piw->kontraktor_piw }}" readonly>
+                </div>
+            </div>
+
+            <!-- Kontraktor RTU -->
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="kontraktor_rtu">Kontraktor RTU</label>
+                    <input type="text" class="form-control" id="kontraktor_rtu" value="{{ $Piw->kontraktor_rtu }}" readonly>
+                </div>
+            </div>
+
+            <!-- Nama PE -->
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="pe_name">Nama PE</label>
+                    <input type="text" class="form-control" id="pe_name" value="{{ $Piw->pe_name }}" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Tarikh -->
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="tarikh">Tarikh</label>
+                    <input type="date" class="form-control" id="tarikh" value="{{ date('Y-m-d', strtotime($Piw->tarikh)) }}" readonly>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loop through fields with Yes/No options -->
+        <div class="row">
+            @foreach([
+                'lokasi_efi' => 'Lokasi EFI Seteah Dipasang',
+                'lokasi_rcb' => 'Lokasi RCB Seteah Dipasang',
+                'connection_rcb' => 'Connection RCB',
+                'lokasi_battary' => 'Lokasi Battery Charger Setelah Dipasang',
+                'plate_battary' => 'Plate Battery Charger / Serial No',
+                'lokasi_rtu' => 'Lokasi RTU Setelah Dipasang',
+                'connection_rtu' => 'Connection RTU',
+                'plate_rtu' => 'Plate RTU / Serial No',
+                'laluan_cable_piw' => 'Laluan Cable (PIW)',
+                'laluan_cable' => 'Laulan Cable'
+            ] as $key => $label)
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="radio-label">{{ $label }}</label>
+                    <div class="radio-container">
+                        <!-- Yes option -->
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="{{ $key }}" id="{{ $key }}_yes" value="yes"
+                            {{ ($Piw->$key ?? '') == 'yes' ? 'checked' : '' }} disabled>
+                            <label class="form-check-label" for="{{ $key }}_yes">Yes</label>
+                        </div>
+                        <!-- No option -->
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="{{ $key }}" id="{{ $key }}_no" value="no"
+                            {{ ($Piw->$key ?? '') == 'no' ? 'checked' : '' }} disabled>
+                            <label class="form-check-label" for="{{ $key }}_no">No</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+        <!-- Hidden input to store site survey ID -->
+        <input type="hidden" name="site_survey_id" value="{{ $Piw->site_survey_id }}">
+    </form>
+
+
+    <div class="container my-5" style="margin-left: -27px">
+        <h2>Pre-Shutdown</h2>
+        <table class="table table-bordered" style="margin-left:-15px">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Yes</th>
+                    <th>No</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Remote Control Box</strong></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>RCB Telah Dipasang & Semua Kabel Telah Dibuat Tamatann</td>
+                    <td><input type="checkbox" {{ $PreShutdown->rcb_telah == 'yes' ? 'checked' : '' }} disabled></td>
+                    <td><input type="checkbox" {{ $PreShutdown->rcb_telah == 'no' ? 'checked' : '' }} disabled></td>
+                </tr>
+                <tr>
+                    <td>Setiap Set Kabel Telah Dilabelkan Degan Betul</td>
+                    <td><input type="checkbox" {{ $PreShutdown->rcb_setiap == 'yes' ? 'checked' : '' }} disabled></td>
+                    <td><input type="checkbox" {{ $PreShutdown->rcb_setiap == 'no' ? 'checked' : '' }} disabled></td>
+                </tr>
+                <tr>
+                    <td>Modifikasi dalam RCB Telah Dibuat</td>
+                    <td><input type="checkbox" {{ $PreShutdown->rcb_modifikasi == 'yes' ? 'checked' : '' }} disabled></td>
+                    <td><input type="checkbox" {{ $PreShutdown->rcb_modifikasi == 'no' ? 'checked' : '' }} disabled></td>
+                </tr>
+                <tr>
+                    <td>Ujian Keterusan Litar Untuk Setiap Kabel Telah Dibuat</td>
+                    <td><input type="checkbox" {{ $PreShutdown->rcb_ujian == 'yes' ? 'checked' : '' }} disabled></td>
+                    <td><input type="checkbox" {{ $PreShutdown->rcb_ujian == 'no' ? 'checked' : '' }} disabled></td>
+                </tr>
+                <tr>
+                    <td>Pemasangan Kemas dan Teratur</td>
+                    <td><input type="checkbox" {{ $PreShutdown->rcb_pemasangan == 'yes' ? 'checked' : '' }} disabled></td>
+                    <td><input type="checkbox" {{ $PreShutdown->rcb_pemasangan == 'no' ? 'checked' : '' }} disabled></td>
+                </tr>
+                
+                <tr>
+                    <td><strong>Remote Terminal Unit</strong></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>RCB Telah Dipasang & Semua Kabel Telah Dibuat Tamatann</td>
+                    <td><input type="checkbox" {{ $PreShutdown->rtu_rcb == 'yes' ? 'checked' : '' }} disabled></td>
+                    <td><input type="checkbox" {{ $PreShutdown->rtu_rcb == 'no' ? 'checked' : '' }} disabled></td>
+                </tr>
+                <tr>
+                    <td>Setiap Set Kabel Telah Dilabelkan Degan Betul</td>
+                    <td><input type="checkbox" {{ $PreShutdown->rtu_setiap == 'yes' ? 'checked' : '' }} disabled></td>
+                    <td><input type="checkbox" {{ $PreShutdown->rtu_setiap == 'no' ? 'checked' : '' }} disabled></td>
+                </tr>
+                <tr>
+                    <td>Ujian Keterusan Litar Untuk Setiap Kabel Telah Dibuat</td>
+                    <td><input type="checkbox" {{ $PreShutdown->rtu_ujian == 'yes' ? 'checked' : '' }} disabled></td>
+                    <td><input type="checkbox" {{ $PreShutdown->rtu_ujian == 'no' ? 'checked' : '' }} disabled></td>
+                </tr>
+                <tr>
+                    <td>Pemasangan Kemas dan Teratur</td>
+                    <td><input type="checkbox" {{ $PreShutdown->rtu_pemasangan == 'yes' ? 'checked' : '' }} disabled></td>
+                    <td><input type="checkbox" {{ $PreShutdown->rtu_pemasangan == 'no' ? 'checked' : '' }} disabled></td>
+                </tr>
+                
+                <tr>
+                    <td><strong>Cable Section</strong></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Laluan Kabel Dan Tray Yang Tersusun</td>
+                    <td><input type="checkbox" {{ $PreShutdown->cable_laluan == 'yes' ? 'checked' : '' }} disabled></td>
+                    <td><input type="checkbox" {{ $PreShutdown->cable_laluan == 'no' ? 'checked' : '' }} disabled></td>
+                </tr>
+                <tr>
+                    <td>Kabel Yang Dipasang Mengikut Spesifikasi TNB</td>
+                    <td><input type="checkbox" {{ $PreShutdown->cable_kabel == 'yes' ? 'checked' : '' }} disabled></td>
+                    <td><input type="checkbox" {{ $PreShutdown->cable_kabel == 'no' ? 'checked' : '' }} disabled></td>
+                </tr>
+                <tr>
+                    <td>Pemasangan Kemas Dan Teratur</td>
+                    <td><input type="checkbox" {{ $PreShutdown->cable_pemasangan == 'yes' ? 'checked' : '' }} disabled></td>
+                    <td><input type="checkbox" {{ $PreShutdown->cable_pemasangan == 'no' ? 'checked' : '' }} disabled></td>
+                </tr>
+                <tr>
+                    <td>Kawasan Kerja Telah Dibersihkan</td>
+                    <td><input type="checkbox" {{ $PreShutdown->cable_kawasan == 'yes' ? 'checked' : '' }} disabled></td>
+                    <td><input type="checkbox" {{ $PreShutdown->cable_kawasan == 'no' ? 'checked' : '' }} disabled></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    
+    <div class="pictures-grids" style="margin-top:-200px ">
+        <h2>Pre-Cabling Attachments</h2>
+        <p class="survey-titles">Nama Pe: {{ $survey->nama_pe }}</p>
+        @foreach($PreCableFiles as $file)
+            <div class="image-containers">
+                <img class="gallery-images" src="{{ asset($file->file_path) }}" alt="{{ $file->description }}">
+                <p class="image-descriptions">File Description: {{ $file->description }}</p>
+            </div>
+        @endforeach
+    </div>
+
+    <div class="pictures-grids"  style="margin-top:120px ">
+        <h2>Pre-Cabling Images</h2>
+        <p class="survey-titles">Nama Pe:{{ $survey->nama_pe }}</p>
+        <div class="gallery-container">
+            @foreach($PreCablmages as $image)
+            <div class="image-containers">
+                    <!-- Construct the full path to the image -->
+                    <img class="gallery-images" src="{{ asset($image->image_url) }}" alt="{{ $image->image_name }}">
+                    <div class="image-info">
+                        <h6 class="">Images Name: {{ $image->image_name }}</h6>
+                        <p class="image-descriptions">Image Description: {{ $image->image_desc }}</p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+    
+    
+   
+    <div class="header" style="padding-top: 300px">
+        <div class="logo">
+            <img src="{{ URL::asset('assets/web-images/tnblogo.png') }}" alt="TNB Logo">
+
+            <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
+            Level 2, Jalan Air Hitam, Kawasan 16,<br>
+            40000 Shah Alam, Selangor</p>
+        </div>
+        <div class="logo">
+            @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
+                <img src="{{ URL::asset('assets/web-images/main-logo.png') }}" alt="Aerosynergy Solutions Logo">
+                <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
+                Address details for Aerosynergy Solutions</p>
+            @elseif($projectName === 'ARAS-JOHOR')
+                <img src="{{ URL::asset('assets/web-images/araslogo.png') }}" alt="ARAS Kejuruteraan Logo">
+                <p>ARAS KEJURUTERAAN SDN BHD<br>
+                1st Floor No 72, Jalan SS 21/1, Damansara<br>
+                Utama, 47400 Petaling Jaya, Selangor</p>
+            @else
+                <!-- Default logo or empty state -->
+                <img src="{{ URL::asset('assets/web-images/defaultlogo.png') }}" alt="Default Logo">
+                <p>Default Company Name<br>
+                Default Address</p>
+            @endif
+        </div>
+       
+    </div>
+    
+    <h2 style="text-align: center;">PreCabling TOOLBOXTALK </h2>
+    
+    <table>
+        <tr>
+            <th>Lokasi</th>
+            <td>{{$toolboxtalk->lokasi}}</td>
+            <th>Tarikh</th>
+            <td>{{$PreCablks->first()->tarikh}}</td>
+        </tr>
+        <tr>
+            <th>Nama Pencawang</th>
+            <td>{{$survey->nama_pe}}</td>
+            <th>CFS</th>
+            <td>{{$toolboxtalk->cfs}}</td>
+        </tr>
+        <tr>
+            <th>Skop Kerja</th>
+            <td colspan="3">CABLING</td>
+        </tr>
+    </table>
+    
+    <div class="container">
+        <h2>Checklist</h2>
+        <table style="margin-left:-23px">
+            <tr>
+                <th></th>
+                <th>Site Survey</th>
+                <th>Cabling</th>
+                <th>Outage</th>
+                <th>SAT</th>
+            </tr>
+            <tr>
+                <td colspan="5"><strong>PPD</strong></td>
+            </tr>
+            @foreach($PreCablks as $item)
+                <tr>
+                    <td>Safety Helmet</td>
+                    <td></td>
+                    <td>{{$item->ppd_safety_helment}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Safety Vest</td>
+                    <td></td>
+                    <td>{{$item->ppd_safety_vest}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Safety Shoes</td>
+                    <td></td>
+                    <td>{{$item->ppd_safety_shoes}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Safety</td>
+                    <td></td>
+                    <td>{{$item->ppd_safety}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            @endforeach
+    
+            <tr>
+                <td colspan="5"><strong>TOOL & EQUIPMENT INSTRUMENT</strong></td>
+            </tr>
+            @foreach($PreCablks as $item)
+                <tr>
+                    <td>All In Good Condition</td>
+                    <td></td>
+                    <td>{{$item->equipment_condition}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            @endforeach
+    
+            <tr>
+                <td colspan="5"><strong>INSTRUMENT</strong></td>
+            </tr>
+            @foreach($PreCablks as $item)
+                <tr>
+                    <td>All In Good Condition</td>
+                    <td></td>
+                    <td>{{$item->instrument_condition}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>First Aid Kit</td>
+                    <td></td>
+                    <td>{{$item->instrument_kit_condition}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            @endforeach
+    
+            <tr>
+                <td colspan="5"><strong>VEHICLE</strong></td>
+            </tr>
+            @foreach($PreCablks as $item)
+                <tr>
+                    <td>Fire Extinguisher</td>
+                    <td></td>
+                    <td>{{$item->vehicle_fire_extinguisher}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Vehicle In Good Condition</td>
+                    <td></td>
+                    <td>{{$item->vehicle_condition}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            @endforeach
+    
+            <tr>
+                <td colspan="5"><strong>TRAFFIC</strong></td>
+            </tr>
+            @foreach($PreCablks as $item)
+                <tr>
+                    <td>Safety Kon</td>
+                    <td></td>
+                    <td>{{$item->traffic_safety_kon}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Sign Board</td>
+                    <td></td>
+                    <td>{{$item->traffic_sign_board}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Chargeman Bo</td>
+                    <td></td>
+                    <td>{{$item->traffic_chargeman}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            @endforeach
+    
+            <tr>
+                <td colspan="5"><strong>TEAM</strong></td>
+            </tr>
+            @foreach($PreCablks as $item)
+                <tr>
+                    <td>AP TNP</td>
+                    <td></td>
+                    <td>{{$item->team_ap_tnp}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>CP TNB</td>
+                    <td></td>
+                    <td>{{$item->team_cp_tnb}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            @endforeach
+    
+            <tr>
+                <td colspan="5"><strong>NIOSH</strong></td>
+            </tr>
+            @foreach($PreCablks as $item)
+                <tr>
+                    <td>All Staff Have NTSP</td>
+                    <td></td>
+                    <td>{{$item->niosh_staff_ntsp}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            @endforeach
+    
+            <tr>
+                <td colspan="5"><strong>PERMIT</strong></td>
+            </tr>
+            @foreach($PreCablks as $item)
+                <tr>
+                    <td>Special Permit</td>
+                    <td></td>
+                    <td>{{$item->permit_special}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Permit To Work (PTW)</td>
+                    <td></td>
+                    <td>{{$item->permit_work}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            @endforeach
+    
+            <tr>
+                <td colspan="5"><strong>PICTURE</strong></td>
+            </tr>
+            @foreach($PreCablks as $item)
+                <tr>
+                    <td>Picture During Tool Box Talk</td>
+                    <td></td>
+                    <td>{{$item->picture_during_toolbox}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src='/{{$item->toolbox_image1}}' width="200px" height="200px" /></td>
+                    <td><img src='/{{$item->toolbox_image2}}' width="200px" height="200px" /></td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
+    
+    <div class="signature">
+        <p>Supervisor:</p>
+        <p>Nama : </p>
+    </div>
+
+    
+      
+    <div class="pictures-grids" style="margin-top: -200px;">
+        <h2>Shutdown Images</h2>
+        <p class="survey-titles">Nama Pe: {{ $survey->nama_pe }}</p> <!-- You can replace this variable accordingly -->
+        
+        <div class="gallery-container">
+            @foreach($ImageShutImages as $imageShutdown)
+                <div class="image-containers">
+                    <!-- Image Thumbnail -->
+                    <img class="gallery-images" src="{{ asset($imageShutdown->image_url) }}" alt="{{ $imageShutdown->image_name }}">
+    
+                    <!-- Image Information -->
+                    <div class="image-info">
+                        <h6>Image Name: {{ $imageShutdown->image_name }}</h6>
+                        <p class="image-descriptions">Image Type: {{ $imageShutdown->image_type }}</p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+
+    <div class="pictures-grids" style="margin-top:-200px ">
+        <h2>Pre-Cabling Attachments</h2>
+        <p class="survey-titles">Nama Pe: {{ $survey->nama_pe }}</p>
+        @foreach($ImageShutFiles as $file)
+            <div class="image-containers">
+                <img class="gallery-images" src="{{ asset($file->file_path) }}" alt="{{ $file->description }}">
+                <p class="image-descriptions">File Description: {{ $file->description }}</p>
+            </div>
+        @endforeach
+    </div>
+
+    <div class="header" style="padding-top: 300px">
+        <div class="logo">
+            <img src="{{ URL::asset('assets/web-images/tnblogo.png') }}" alt="TNB Logo">
+
+            <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
+            Level 2, Jalan Air Hitam, Kawasan 16,<br>
+            40000 Shah Alam, Selangor</p>
+        </div>
+        <div class="logo">
+            @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
+                <img src="{{ URL::asset('assets/web-images/main-logo.png') }}" alt="Aerosynergy Solutions Logo">
+                <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
+                Address details for Aerosynergy Solutions</p>
+            @elseif($projectName === 'ARAS-JOHOR')
+                <img src="{{ URL::asset('assets/web-images/araslogo.png') }}" alt="ARAS Kejuruteraan Logo">
+                <p>ARAS KEJURUTERAAN SDN BHD<br>
+                1st Floor No 72, Jalan SS 21/1, Damansara<br>
+                Utama, 47400 Petaling Jaya, Selangor</p>
+            @else
+                <!-- Default logo or empty state -->
+                <img src="{{ URL::asset('assets/web-images/defaultlogo.png') }}" alt="Default Logo">
+                <p>Default Company Name<br>
+                Default Address</p>
+            @endif
+        </div>
+       
+    </div>
+    <h2 style="text-align: center;">Shutdown TOOLBOXTALK</h2>
+
+<table >
+    <tr>
+        <th>Lokasi</th>
+        <td>{{$toolboxtalk->lokasi}}</td>
+        <th>Tarikh</th>
+        <td>{{$ImageShutdownlks->first()->tarikh}}</td>
+    </tr>
+    <tr>
+        <th>Nama Pencawang</th>
+        <td>{{$survey->nama_pe}}</td>
+        <th>CFS</th>
+        <td>{{$toolboxtalk->cfs}}</td>
+    </tr>
+    <tr>
+        <th>Skop Kerja</th>
+        <td colspan="3">OUTAGE</td> <!-- Changed the scope to OUTAGE -->
+    </tr>
+</table>
+
+<div class="container">
+    <h2>Checklist</h2>
+    <table style="margin-left:-23px">
+        <tr>
+            <th></th>
+            <th>Site Survey</th>
+            <th>Cabling</th>
+            <th>Outage</th>
+            <th>SAT</th>
+        </tr>
+        <tr>
+            <td colspan="5"><strong>PPD</strong></td>
+        </tr>
+        @foreach($ImageShutdownlks as $item)
+            <tr>
+                <td>Safety Helmet</td>
+                <td></td>
+                <td></td>
+                <td>{{$item->ppd_safety_helment}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Safety Vest</td>
+                <td></td>
+                <td></td>
+                <td>{{$item->ppd_safety_vest}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Safety Shoes</td>
+                <td></td>
+                <td></td>
+                <td>{{$item->ppd_safety_shoes}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Safety</td>
+                <td></td>
+                <td></td>
+                <td>{{$item->ppd_safety}}</td>
+                <td></td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td colspan="5"><strong>TOOL & EQUIPMENT INSTRUMENT</strong></td>
+        </tr>
+        @foreach($ImageShutdownlks as $item)
+            <tr>
+                <td>All In Good Condition</td>
+                <td></td>
+                <td></td>
+                <td>{{$item->equipment_condition}}</td>
+                <td></td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td colspan="5"><strong>INSTRUMENT</strong></td>
+        </tr>
+        @foreach($ImageShutdownlks as $item)
+            <tr>
+                <td>All In Good Condition</td>
+                <td></td>
+                <td></td>
+                <td>{{$item->instrument_condition}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>First Aid Kit</td>
+                <td></td>
+                <td></td>
+                <td>{{$item->instrument_kit_condition}}</td>
+                <td></td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td colspan="5"><strong>VEHICLE</strong></td>
+        </tr>
+        @foreach($ImageShutdownlks as $item)
+            <tr>
+                <td>Fire Extinguisher</td>
+                <td></td>
+                <td></td>
+                <td>{{$item->vehicle_fire_extinguisher}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Vehicle In Good Condition</td>
+                <td></td>
+                <td></td>
+                <td>{{$item->vehicle_condition}}</td>
+                <td></td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td colspan="5"><strong>TRAFFIC</strong></td>
+        </tr>
+        @foreach($ImageShutdownlks as $item)
+            <tr>
+                <td>Safety Kon</td>
+                <td></td>
+                <td></td>
+                <td>{{$item->traffic_safety_kon}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Sign Board</td>
+                <td></td>
+                <td></td>
+                <td>{{$item->traffic_sign_board}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Chargeman Bo</td>
+                <td></td>
+                <td></td>
+                <td>{{$item->traffic_chargeman}}</td>
+                <td></td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td colspan="5"><strong>TEAM</strong></td>
+        </tr>
+        @foreach($ImageShutdownlks as $item)
+            <tr>
+                <td>AP TNP</td>
+                <td></td>
+                <td></td>
+                <td>{{$item->team_ap_tnp}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>CP TNB</td>
+                <td></td>
+                <td></td>
+                <td>{{$item->team_cp_tnb}}</td>
+                <td></td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td colspan="5"><strong>NIOSH</strong></td>
+        </tr>
+        @foreach($ImageShutdownlks as $item)
+            <tr>
+                <td>All Staff Have NTSP</td>
+                <td></td>
+                <td></td>
+                <td>{{$item->niosh_staff_ntsp}}</td>
+                <td></td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td colspan="5"><strong>PERMIT</strong></td>
+        </tr>
+        @foreach($ImageShutdownlks as $item)
+            <tr>
+                <td>Special Permit</td>
+                <td></td>
+                <td></td>
+                <td>{{$item->permit_special}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Permit To Work (PTW)</td>
+                <td></td>
+                <td></td>
+                <td>{{$item->permit_work}}</td>
+                <td></td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td colspan="5"><strong>PICTURE</strong></td>
+        </tr>
+        @foreach($ImageShutdownlks as $item)
+            <tr>
+                <td>Picture During Tool Box Talk</td>
+                <td></td>
+                <td></td>
+                <td>{{$item->picture_during_toolbox}}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><img src='/{{$item->toolbox_image1}}' width="200px" height="200px" /></td>
+                <td><img src='/{{$item->toolbox_image2}}' width="200px" height="200px" /></td>
+            </tr>
+        @endforeach
+    </table>
+</div>
+
+<div class="signature">
+    <p>Supervisor:</p>
+    <p>Nama : </p>
+</div>
+
+
+
+<div class="pictures-grids" style="margin-top: -200px;">
+    <h2>SAT Images</h2>
+    <p class="survey-titles">Nama Pe: {{ $survey->nama_pe }}</p> <!-- You can replace this variable accordingly -->
+    
+    <div class="gallery-container">
+        @foreach($SATImages as $SATData)
+            <div class="image-containers">
+                <!-- Image Thumbnail -->
+                <img class="gallery-images" src="{{ asset($SATData->image_url) }}" alt="{{ $imageShutdown->image_name }}">
+
+                <!-- Image Information -->
+                <div class="image-info">
+                    <h6>Image Name: {{ $SATData->image_name }}</h6>
+                    <p class="image-descriptions">Image Type: {{ $SATData->image_type }}</p>
+                </div>
+            </div>
+        @endforeach
+        
+    </div>
+</div>
+
+
+$SATFiles
+
+<div class="pictures-grids" style="margin-top:-200px ">
+    <h2>SAT Attachments</h2>
+    <p class="survey-titles">Nama Pe: {{ $survey->nama_pe }}</p>
+    @foreach($SATFiles as $SATfile)
+        <div class="image-containers">
+            <img class="gallery-images" src="{{ asset( $SATfile->file_path) }}" alt="{{  $SATfile->description }}">
+            <p class="image-descriptions">File Description: {{  $SATfile->description }}</p>
+        </div>
+    @endforeach
+</div>
+
+
+<div class="header" style="padding-top: 100px">
+    <div class="logo">
+        <img src="{{ URL::asset('assets/web-images/tnblogo.png') }}" alt="TNB Logo">
+
+        <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
+        Level 2, Jalan Air Hitam, Kawasan 16,<br>
+        40000 Shah Alam, Selangor</p>
+    </div>
+    <div class="logo">
+        @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
+            <img src="{{ URL::asset('assets/web-images/main-logo.png') }}" alt="Aerosynergy Solutions Logo">
+            <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
+            Address details for Aerosynergy Solutions</p>
+        @elseif($projectName === 'ARAS-JOHOR')
+            <img src="{{ URL::asset('assets/web-images/araslogo.png') }}" alt="ARAS Kejuruteraan Logo">
+            <p>ARAS KEJURUTERAAN SDN BHD<br>
+            1st Floor No 72, Jalan SS 21/1, Damansara<br>
+            Utama, 47400 Petaling Jaya, Selangor</p>
+        @else
+            <!-- Default logo or empty state -->
+            <img src="{{ URL::asset('assets/web-images/defaultlogo.png') }}" alt="Default Logo">
+            <p>Default Company Name<br>
+            Default Address</p>
+        @endif
+    </div>
+    
+</div>
+<h2 style="text-align: center;">SAT TOOLBOXTALK</h2>
+
+<table>
+    <tr>
+        <th>Lokasi</th>
+        <td>{{$toolboxtalk->lokasi}}</td>
+        <th>Tarikh</th>
+        <td>{{$SATlks->first()->tarikh}}</td>
+    </tr>
+    <tr>
+        <th>Nama Pencawang</th>
+        <td>{{$survey->nama_pe}}</td>
+        <th>CFS</th>
+        <td>{{$toolboxtalk->cfs}}</td>
+    </tr>
+    <tr>
+        <th>Skop Kerja</th>
+        <td colspan="3">SAT</td>
+    </tr>
+</table>
+
+<div class="container">
+    <h2>Checklist</h2>
+    <table style="margin-left:-23px"> 
+        <tr>
+            <th></th>
+            <th>Site Survey</th>
+            <th>Cabling</th>
+            <th>Outage</th>
+            <th>SAT</th>
+        </tr>
+        <tr>
+            <td colspan="5"><strong>PPD</strong></td>
+        </tr>
+        @foreach($SATlks as $item)
+            <tr>
+                <td>Safety Helmet</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$item->ppd_safety_helment}}</td>
+            </tr>
+            <tr>
+                <td>Safety Vest</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$item->ppd_safety_vest}}</td>
+            </tr>
+            <tr>
+                <td>Safety Shoes</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$item->ppd_safety_shoes}}</td>
+            </tr>
+            <tr>
+                <td>Safety</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$item->ppd_safety}}</td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td colspan="5"><strong>TOOL & EQUIPMENT INSTRUMENT</strong></td>
+        </tr>
+        @foreach($SATlks as $item)
+            <tr>
+                <td>All In Good Condition</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$item->equipment_condition}}</td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td colspan="5"><strong>INSTRUMENT</strong></td>
+        </tr>
+        @foreach($SATlks as $item)
+            <tr>
+                <td>All In Good Condition</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$item->instrument_condition}}</td>
+            </tr>
+            <tr>
+                <td>First Aid Kit</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$item->instrument_kit_condition}}</td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td colspan="5"><strong>VEHICLE</strong></td>
+        </tr>
+        @foreach($SATlks as $item)
+            <tr>
+                <td>Fire Extinguisher</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$item->vehicle_fire_extinguisher}}</td>
+            </tr>
+            <tr>
+                <td>Vehicle In Good Condition</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$item->vehicle_condition}}</td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td colspan="5"><strong>TRAFFIC</strong></td>
+        </tr>
+        @foreach($SATlks as $item)
+            <tr>
+                <td>Safety Kon</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$item->traffic_safety_kon}}</td>
+            </tr>
+            <tr>
+                <td>Sign Board</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$item->traffic_sign_board}}</td>
+            </tr>
+            <tr>
+                <td>Chargeman Bo</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$item->traffic_chargeman}}</td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td colspan="5"><strong>TEAM</strong></td>
+        </tr>
+        @foreach($SATlks as $item)
+            <tr>
+                <td>AP TNP</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$item->team_ap_tnp}}</td>
+            </tr>
+            <tr>
+                <td>CP TNB</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$item->team_cp_tnb}}</td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td colspan="5"><strong>NIOSH</strong></td>
+        </tr>
+        @foreach($SATlks as $item)
+            <tr>
+                <td>All Staff Have NTSP</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$item->niosh_staff_ntsp}}</td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td colspan="5"><strong>PERMIT</strong></td>
+        </tr>
+        @foreach($SATlks as $item)
+            <tr>
+                <td>Special Permit</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$item->permit_special}}</td>
+            </tr>
+            <tr>
+                <td>Permit To Work (PTW)</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$item->permit_work}}</td>
+            </tr>
+        @endforeach
+
+        <tr>
+            <td colspan="5"><strong>PICTURE</strong></td>
+        </tr>
+        @foreach($SATlks as $item)
+            <tr>
+                <td>Picture During Tool Box Talk</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{$item->picture_during_toolbox}}</td>
+            </tr>
+            <tr>
+                <td><img src='/{{$item->toolbox_image1}}' width="200px" height="200px" /></td>
+                <td><img src='/{{$item->toolbox_image2}}' width="200px" height="200px" /></td>
+            </tr>
+        @endforeach
+    </table>
+</div>
+
+
+
+<div class="signature">
+    <p>Supervisor:</p>
+    <p>Nama : </p>
+</div>
+
+<button onclick="printPage()">Print </button>
+
+</div>
+
+<script>
+    // JavaScript function to trigger the print dialog
+    function printPage() {
+      window.print();
+    }
+  </script>
+    
+    
+   
+
+    
+    
 </body>
 </html>
 
