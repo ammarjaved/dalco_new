@@ -150,9 +150,9 @@
 
 
         <md-tabs id="myTab">
-            <md-primary-tab id="tab1-tab" active>Site Survey Info</md-primary-tab>
-            <md-primary-tab id="tab2-tab">Site Survey Pic</md-primary-tab>
-            <md-primary-tab id="tab3-tab">Tool Box Talk</md-primary-tab>
+            <md-primary-tab onclick="handleNavigation1('tab1-tab')" id="tab1-tab" active>Site Survey Info</md-primary-tab>
+            <md-primary-tab onclick="handleNavigation1('tab2-tab')" id="tab2-tab">Site Survey Pic</md-primary-tab>
+            <md-primary-tab onclick="handleNavigation1('tab3-tab')" id="tab3-tab">Tool Box Talk</md-primary-tab>
         </md-tabs>
 
 
@@ -523,11 +523,7 @@
                 <input type="text" hidden  class="form-control" placeholder="lng" value="{{ $location->x ?? old('') }}" name="lng" id="lng" readonly>
             </div>
         </div>
-        <div id="map" style="z-index:1;height: 400px; width: 100%;" ></div><br>
-
-
-<md-filled-tonal-button onclick="handleNavigation('next')">Next </md-filled-tonal-button>
-       
+        <div id="map" style="z-index:1;height: 400px; width: 100%;" ></div><br>       
         
     </div>
 
@@ -583,10 +579,7 @@
             </div>
         @endforeach
     </div>
-    <div>
-        <md-filled-tonal-button onclick="handleNavigation('previous')">Previous</md-filled-tonal-button>
-        <md-filled-tonal-button onclick="handleNavigation('next')">Next</md-filled-tonal-button>
-    </div>
+   
 </div>
         
         <div id="tab3-content">
@@ -890,9 +883,6 @@
     </div>
     
 </div>
-
-<md-filled-tonal-button onclick="handleNavigation('previous')">Previous</md-filled-tonal-button>
-
 <md-filled-tonal-button type="submit"  id="submitBtn">{{ isset($siteSurvey) ? 'Update' : 'Create' }}</md-filled-tonal-button>
 
 
@@ -905,15 +895,16 @@
  
 
 
-    <div class="mt-3">
-      <!-- <button type="button" class="btn btn-secondary" id="prevBtn" onclick="navigate(-1)">Previous</button> -->
-      <!-- <button type="button" class="btn btn-primary" id="nextBtn" onclick="navigate(1)">Next</button> -->
-
-    </div>
-
+    
 
         
     </form>
+    <div class="mt-3">
+      <md-filled-tonal-button type="button" style='visibility:hidden;'  id="prevBtn" onclick="handleNavigation('previous')">Previous</md-filled-tonal-button>
+       <md-filled-tonal-button type="button"  style='visibility:visible;' id="nextBtn" onclick="handleNavigation('next')">Next</md-filled-tonal-button>
+    
+  
+    </div>
 
    
     </div>
@@ -925,10 +916,26 @@
 
 const tabOrder = ['tab1-tab', 'tab2-tab', 'tab3-tab']; // Update this array with your actual tab IDs in order
 
+
+function handleNavigation1(targetTabId) {
+
+    if(targetTabId=='tab1-tab'){
+        document.getElementById('prevBtn').style.visibility = 'hidden'
+         document.getElementById('nextBtn').style.visibility = 'visible'
+    }else if(targetTabId=='tab3-tab'){
+         document.getElementById('nextBtn').style.visibility = 'hidden'
+    }else{
+        document.getElementById('prevBtn').style.visibility = 'visible'
+         document.getElementById('nextBtn').style.visibility = 'visible'
+    }
+    window.scrollTo(0, 0);
+}
+
 function handleNavigation(direction) {
     const currentTabId = getCurrentTabId();
     const currentIndex = tabOrder.indexOf(currentTabId);
-    
+
+   
     let targetIndex;
     if (direction === 'next') {
         targetIndex = (currentIndex + 1) % tabOrder.length;
@@ -938,6 +945,17 @@ function handleNavigation(direction) {
     
     const targetTabId = tabOrder[targetIndex];
     const targetTab = document.getElementById(targetTabId);
+
+    if(targetTabId=='tab1-tab'){
+        document.getElementById('prevBtn').style.visibility = 'hidden'
+         document.getElementById('nextBtn').style.visibility = 'visible'
+    }else if(targetTabId=='tab3-tab'){
+         document.getElementById('nextBtn').style.visibility = 'hidden'
+    }else{
+        document.getElementById('prevBtn').style.visibility = 'visible'
+         document.getElementById('nextBtn').style.visibility = 'visible'
+    }
+    
     
     if (targetTab) {
         targetTab.click();
@@ -1241,19 +1259,19 @@ document.addEventListener('DOMContentLoaded', function() {
    // updateButtons();
 
     // Add event listener for tab changes
-    document.querySelectorAll('a[data-toggle="tab"]').forEach(function(tabElement) {
-        tabElement.addEventListener('shown.bs.tab', function (e) {
-            currentTabIndex = tabs.indexOf(e.target.getAttribute('href'));
-            updateButtons();
-        });
-    });
+    // document.querySelectorAll('a[data-toggle="tab"]').forEach(function(tabElement) {
+    //     tabElement.addEventListener('shown.bs.tab', function (e) {
+    //         currentTabIndex = tabs.indexOf(e.target.getAttribute('href'));
+    //         updateButtons();
+    //     });
+    // });
 
     // Navigation button click handlers
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
+    // const prevBtn = document.getElementById('prevBtn');
+    // const nextBtn = document.getElementById('nextBtn');
 
-    if (prevBtn) prevBtn.addEventListener('click', function() { navigate(-1); });
-    if (nextBtn) nextBtn.addEventListener('click', function() { navigate(1); });
+    // if (prevBtn) prevBtn.addEventListener('click', function() { navigate(-1); });
+    // if (nextBtn) nextBtn.addEventListener('click', function() { navigate(1); });
 });
 
 
