@@ -91,7 +91,7 @@
                 <div class="w-full max-w-md p-8">
                     <md-label for="site_file" class="block text-sm font-medium text-gray-700 mb-2">Upload Your File</md-label>
                     <div class="file-upload-wrapper">
-                        <input type="file" id="site_file" name="site_file" class="file-upload-input" required>
+                        <input type="file" id="site_file" name="site_file" class="file-upload-input"  accept="image/*,.pdf" required>
                         <span class="file-upload-text">Choose a file or drag it here</span>
                     </div>
                 </div>

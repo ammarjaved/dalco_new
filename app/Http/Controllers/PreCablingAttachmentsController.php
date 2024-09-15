@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\PreCablingAttachments;
 use App\Models\SiteSurvey;
 use Illuminate\Http\Request;
+use Smalot\PdfParser\Parser;
+
 
 class PreCablingAttachmentsController extends Controller
 {
@@ -50,19 +52,56 @@ class PreCablingAttachmentsController extends Controller
         try {
             $destinationPath = 'assets/images/';
             if ($request->hasFile('site_file')) {
+               
                 $file = $request->file('site_file');
-                $filename = time() . '-' . $file->getClientOriginalName();
+               // return $file->getMimeType();
+                if ($file->getMimeType()== 'application/pdf') {
 
+                $filename = time() . '-' . $file->getClientOriginalName();
                 $request->file('site_file')->move($destinationPath, $filename);
                 $file_path = $destinationPath . $filename;
+               
+                $parser = new Parser();
+                   $pdf = $parser->parseFile( $file_path);
+                 //  $imagePaths = [];
+                   $imageIndex = 0;
+                $objects = $pdf->getObjects();
+                   foreach ($objects as $object) {
+                       if ($object instanceof \Smalot\PdfParser\XObject\Image) {
+                           $imageFilename = 'image_' . (++$imageIndex) . '_' . time() . '.png';
+                           $fullImagePath = $destinationPath . $imageFilename;
+           
+                           file_put_contents($fullImagePath, $object->getContent());
+           
+                           // Save image info to database
+                           PreCablingAttachments::create([
+                            'file_name' => $imageFilename,
+                            'file_path' => $fullImagePath,
+                            'description' => $request->description,
+                            'site_survey_id' => $request->id
+                             
+                           ]);
+           
+                          // $imagePaths[] = $imagePath;
+                       }
+                   }   
+            
 
+                   
+
+                }else{
                 // Save file details to the database
+                $filename = time() . '-' . $file->getClientOriginalName();
+                $request->file('site_file')->move($destinationPath, $filename);
+                $file_path = $destinationPath . $filename;
                 $uploadedFile = PreCablingAttachments::create([
                     'file_name' => $filename,
                     'file_path' => $file_path,
                     'description' => $request->description,
                     'site_survey_id' => $request->id
                 ]);
+               
+                 }
 
                 return redirect()->route('pre-cabling-attachment.index', ['id' => $request->id])->with('success', 'File uploaded successfully.');
             } else {
@@ -70,6 +109,7 @@ class PreCablingAttachmentsController extends Controller
             }
       
         } catch (\Throwable $th) {
+            return $th->getMessage();
             return redirect()->route('pre-cabling-attachment.index', ['id' => $request->id])->with('failed', 'Request Failed: ' . $th->getMessage());
         }
     }
