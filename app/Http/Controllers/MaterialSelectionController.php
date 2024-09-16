@@ -45,43 +45,40 @@ class MaterialSelectionController extends Controller
 
 
     public function searchMaterial(Request $request)
-{
-    $query = Material::query();
+    {
+        $query = Material::query();
     
-    if ($request->has('query')) {
-        $search = $request->input('query');
-        //$query->where('mat_code', 'LIKE', "{$search}%");
-        $query->where(function($q) use ($search) {
-            $q->where('mat_code', 'LIKE', "{$search}%")
-              ->orWhere('mat_code', 'LIKE', "%{$search}%");
-        })
-        ->orderByRaw("CASE 
-            WHEN mat_code LIKE ? THEN 1 
-            WHEN mat_code LIKE ? THEN 2 
-            ELSE 3 END", 
-            ["{$search}%", "%{$search}%"]
-        );
+        if ($request->has('query')) {
+            $search = $request->input('query');
+            $query->where(function($q) use ($search) {
+                $q->where('mat_code', 'LIKE', "%{$search}%")
+                  ->orWhere('mat_desc', 'LIKE', "%{$search}%");
+            });
+        }
+    
+        // Fetch materials
+        $results = $query->orderBy('mat_code')
+                         ->inRandomOrder()
+                         ->limit(5)
+                         ->get(['mat_code', 'mat_desc']); // Get both fields
+    
+        // Log and return for debugging purposes
+        // Log to the Laravel log for checking
+        return response()->json($results);
     }
     
-    $results = $query->orderBy('mat_code')
-                    ->inRandomOrder()
-                     ->limit(5)
-                     ->pluck('mat_code');
-    
-    return response()->json($results);
-}
-
-
 
 
     public function materialData(Request $request){
-        $query = material::query();
+        $query = Material::query();
         if ($request->has('desc')) {
             $search = $request->input('desc');
-            $query->where('mat_code', 'LIKE', "%{$search}%");
-                 // ->orWhere('mat_desc', 'LIKE', "%{$search}%");
+            $query->where(function($q) use ($search) {
+                $q->where('mat_code', 'LIKE', "%{$search}%")
+                  ->orWhere('mat_desc', 'LIKE', "%{$search}%");
+            });
         }
-    
+        
         return $materials = $query->get();
     }
 

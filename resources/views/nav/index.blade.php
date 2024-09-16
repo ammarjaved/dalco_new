@@ -12,6 +12,42 @@
                 ◄ Delco Summary
             </md-filled-button>
         </a>
+
+        {{-- <div class="d-flex">
+            <!-- Display nama_pe -->
+            <div style="margin: 16px; color: white; font-weight: bold;">
+                {{ $nama_pe }}
+            </div> --}}
+
+       
+
+
+        <div style="margin: 16px;">
+            <md-filled-button id="usage-document-anchor6">Site Survey Actions</md-filled-button>
+          </div>
+              <md-menu positioning="document" id="usage-document6" anchor="usage-document-anchor6">
+                 
+                 <md-menu-item href="{{ route('site_survey.edit', $survey->id) }}">
+                      Edit Site Survey
+                  </md-menu-item>
+        
+                  <md-menu-item href="{{ route('site_survey.show', $survey->id) }}">
+                     Show Site Survey
+                  </md-menu-item>
+
+
+                  <md-menu-item href="{{ route('siteFileUploadView.index', ['id' => $survey->id]) }}">
+                    Attach Site Suvey Files 
+                 </md-menu-item>
+                 
+              </md-menu>
+          <!-- </md-menu-button> -->
+        
+          <script type="module">
+        const anchorEl = document.body.querySelector('#usage-document-anchor6');
+        const menuEl = document.body.querySelector('#usage-document6');
+        anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
+        </script>
         
         
 
@@ -35,6 +71,17 @@
           <md-filled-button id="usage-document-anchor1">PreCabling </md-filled-button>
         </div>
             <md-menu positioning="document" id="usage-document1" anchor="usage-document-anchor1">
+
+                @if ($survey->ToolBoxTalk)
+                <md-menu-item href="{{ route('PreCabling.toolboxtalkedit', $survey->ToolBoxTalk->id) }}">
+                    Edit Toolbox Talk
+                </md-menu-item>
+            @else
+                <md-menu-item href="{{ route('PreCabling.toolboxtalk', ['id' => $id]) }}">
+                    Toolbox Talk
+                </md-menu-item>
+            @endif
+
                 @if ($survey->PreCabling)
                     <md-menu-item href="{{ route('pre-cabling.edit', $survey->PreCabling->id) }}">
                         Edit PIW
@@ -62,15 +109,7 @@
                     PreCabling Images
                 </md-menu-item>
 
-                @if ($survey->ToolBoxTalk)
-                    <md-menu-item href="{{ route('PreCabling.toolboxtalkedit', $survey->ToolBoxTalk->id) }}">
-                        Edit Toolbox Talk
-                    </md-menu-item>
-                @else
-                    <md-menu-item href="{{ route('PreCabling.toolboxtalk', ['id' => $id]) }}">
-                        Toolbox Talk
-                    </md-menu-item>
-                @endif
+               
             </md-menu>
         <!-- </md-menu-button> -->
 
@@ -85,7 +124,15 @@
   </div>
       <md-menu positioning="document" id="usage-document2" anchor="usage-document-anchor2">
          
-
+        @if ($survey->toolBoxTalkOutage)
+        <md-menu-item href="{{ route('image_shutdown.toolboxtalkedit', $survey->toolBoxTalkOutage->id) }}">
+            Edit Toolbox Talk
+        </md-menu-item>
+    @else
+        <md-menu-item href="{{ route('image_shutdown.toolboxtalk', ['id' => $id]) }}">
+            Toolbox Talk
+        </md-menu-item>
+    @endif
          
 
           <md-menu-item href="{{ route('image-shutdown.create', ['id' => $id]) }}">
@@ -95,15 +142,7 @@
               Add Image Shutdown Attachments
           </md-menu-item>
 
-          @if ($survey->toolBoxTalkOutage)
-              <md-menu-item href="{{ route('image_shutdown.toolboxtalkedit', $survey->toolBoxTalkOutage->id) }}">
-                  Edit Toolbox Talk
-              </md-menu-item>
-          @else
-              <md-menu-item href="{{ route('image_shutdown.toolboxtalk', ['id' => $id]) }}">
-                  Toolbox Talk
-              </md-menu-item>
-          @endif
+        
       </md-menu>
   <!-- </md-menu-button> -->
 
@@ -119,6 +158,16 @@ anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
     <md-filled-button id="usage-document-anchor3">SAT</md-filled-button>
   </div>
       <md-menu positioning="document" id="usage-document3" anchor="usage-document-anchor3">
+
+        @if ($survey->ToolBoxTalkSAT)
+        <md-menu-item href="{{ route('SAT.toolboxtalkedit', $survey->ToolBoxTalkSAT->id) }}">
+            Edit Toolbox Talk
+        </md-menu-item>
+    @else
+        <md-menu-item href="{{ route('SAT.toolboxtalk', ['id' => $id]) }}">
+            Toolbox Talk
+        </md-menu-item>
+    @endif
          
          <md-menu-item href="{{ route('sat.create', ['id' => $id]) }}">
               Add SAT
@@ -128,15 +177,7 @@ anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
               Add SAT Attachments
           </md-menu-item>
 
-          @if ($survey->ToolBoxTalkSAT)
-              <md-menu-item href="{{ route('SAT.toolboxtalkedit', $survey->ToolBoxTalkSAT->id) }}">
-                  Edit Toolbox Talk
-              </md-menu-item>
-          @else
-              <md-menu-item href="{{ route('SAT.toolboxtalk', ['id' => $id]) }}">
-                  Toolbox Talk
-              </md-menu-item>
-          @endif
+        
          
 
          

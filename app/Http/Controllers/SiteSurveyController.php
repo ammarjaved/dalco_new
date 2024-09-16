@@ -67,13 +67,16 @@ class SiteSurveyController extends Controller
 
 
 
-    public function index()
+    public function index($id)
     {
          $myuser=\Auth::user();
         // return $myuser->area.'-'.$myuser->project.'-'.$myuser->vendo;
 
         $surveys = SiteSurvey::where('area',$myuser->area)
                             ->where('project','=',$myuser->project)->get();
+
+
+         
 
         //  return  $surveys;                  
         return view('site_survey.index',compact('surveys')); //compact('surveys') is equivalent to ['surveys' => $surveys].
@@ -237,12 +240,13 @@ class SiteSurveyController extends Controller
         $toolboxTalk = toolboxTalk::where('site_survey_id', $id)->first();
         $sql='select st_x(geom) as x,st_y(geom) as y from tbl_site_survey where id='.$id;
         $location=DB::select($sql)[0];
+        $site_survey=$id;
         
 
        
     //  $combinedArray =  (object) array_merge($data->toArray(), $data1->toArray());
     // return $siteSurvey1;
-    return view('site_survey.show', compact('siteSurvey','siteSurvey1','toolboxTalk','location'));
+    return view('site_survey.show', compact('siteSurvey','siteSurvey1','toolboxTalk','location','site_survey'));
     }
 
     /**
@@ -259,12 +263,13 @@ class SiteSurveyController extends Controller
         $sql='select st_x(geom) as x,st_y(geom) as y from tbl_site_survey where id='.$id;
         $location=DB::select($sql)[0];
 
-    
+        $site_survey=$id;
+
 
        
     //  $combinedArray =  (object) array_merge($data->toArray(), $data1->toArray());
     // return $siteSurvey1;
-    return view('site_survey.create', compact('siteSurvey','siteSurvey1','toolboxTalk','location'));
+    return view('site_survey.create', compact('siteSurvey','siteSurvey1','toolboxTalk','location','site_survey'));
 
     }
 

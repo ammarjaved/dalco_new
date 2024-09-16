@@ -108,9 +108,9 @@ table.dataTable thead .sorting_desc:after {
         <div style="background-color: white">
             <md-outlined-text-field type="text" label="Search" style="min-width: 500px;margin:2px" name="search" id="search_input1" placeholder="Search by material"></md-outlined-text-field>
         </div>
-        <div class="col-sm-1">
+        {{-- <div class="col-sm-1">
             <md-filled-tonal-button style="horizontal-align: center; margin:5px" type="button" onclick="addData()">Add</md-filled-tonal-button>
-        </div>
+        </div> --}}
     </div>
    
     <div class="row">
@@ -191,16 +191,30 @@ function addData() {
             url: searchMaterialUrl + '?desc=' + myval,
             dataType: 'JSON',
             method: 'GET',
-            success: function callback(data) {
-                
-                var str = '<tr><td><input type="text" name="data[' + i + '][id]" value="' + data[0].id + '"' +
-                    '/></td><td><input type="text" name="data[' + i + '][mat_code]" value="' + data[0].mat_code + '"' +
-                    '/></td><td><input type="text" name="data[' + i + '][mat_desc]" value="' + data[0].mat_desc + '" />' +
-                    '</td><td><input type="text" name="data[' + i + '][bun]" value="' + data[0].bun + '" /></td>' +
-                    '<td><input type="text" name="data[' + i + '][quantity]" value="0"/></td></tr>';
-                $("#mat_sel").append(str);
-                $('#search_input1').val('');
-                i++;
+            success: function(data) {
+                if (data.length > 0) {
+                    // Check if material is already added to the table
+                    var existingMaterial = $('#myTable').find('td:contains(' + data[0].mat_code + ')');
+                    if (existingMaterial.length > 0) {
+                        if (confirm('This material is already added. Do you want to delete it?')) {
+                            // Delete the existing material
+                            var row = existingMaterial.closest('tr');
+                            row.remove();
+                        }
+                    } else {
+                        // Add the new material to the table
+                        var i = $('#myTable tr').length; // Define i as the number of table rows
+                        var str = '<tr><td><input type="text" name="data[' + i + '][id]" value="' + data[0].id + '" /></td>' +
+                                  '<td><input type="text" name="data[' + i + '][mat_code]" value="' + data[0].mat_code + '" /></td>' +
+                                  '<td><input type="text" name="data[' + i + '][mat_desc]" value="' + data[0].mat_desc + '" /></td>' +
+                                  '<td><input type="text" name="data[' + i + '][bun]" value="' + data[0].bun + '" /></td>' +
+                                  '<td><input type="text" name="data[' + i + '][quantity]" value="0" /></td></tr>';
+                        $("#mat_sel").append(str);
+                        $('#search_input1').val(''); // Clear the search input
+                    }
+                } else {
+                    alert('No material found');
+                }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error("AJAX error:", textStatus, errorThrown);
@@ -208,7 +222,7 @@ function addData() {
             }
         });
     } else {
-        alert("please select material first");
+        alert("Please select a material first.");
     }
 }
 
@@ -216,18 +230,20 @@ $(document).ready(function() {
     const $search = $('#search_input1');
     const $searchResults = $('#search-results');
 
+    // Autocomplete based on mat_desc and mat_code
     $('#search_input1').on('keyup', function() {
         var query = $(this).val();
-        
+
         if (query.length >= 2) {
             $.ajax({
                 url: "{{ route('search.material') }}",
                 method: 'GET',
-                data: {query:query},
+                data: { query: query },
                 success: function(data) {
                     $('#search-results').empty();
                     $.each(data, function(index, item) {
-                        $searchResults.append('<div class="search-item" data-name="' + item + '">' + item + '</div>');
+                        // Display both mat_code and mat_desc in the search results
+                        $searchResults.append('<div class="search-item" data-code="' + item.mat_code + '" data-desc="' + item.mat_desc + '">' + item.mat_desc + ' (' + item.mat_code + ')</div>');
                     });
                 }
             });
@@ -236,15 +252,24 @@ $(document).ready(function() {
         }
     });
 
+    // Handle the selection of material from the autocomplete results
     $searchResults.on('click', '.search-item', function() {
-        const selectedName = $(this).data('name');
-        $search.val(selectedName);
+        const selectedCode = $(this).data('code');
+        const selectedDesc = $(this).data('desc');
+
+        // Set the selected description in the input field
+        $search.val(selectedDesc);
+
+        // Add the selected material to the table (you can call addData here or integrate this logic)
+        addData();
+
+        // Clear the autocomplete results
         $searchResults.empty();
     });
 
     // Close search results when clicking outside
     $(document).on('click', function(event) {
-        if (!$(event.target).closest('#search, #search-results').length) {
+        if (!$(event.target).closest('#search_input1, #search-results').length) {
             $searchResults.empty();
         }
     });

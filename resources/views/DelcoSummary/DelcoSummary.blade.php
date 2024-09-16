@@ -217,7 +217,7 @@ style="background-color: #8e44ad;margin-left:20px; color:white">Add Site Survey<
                 
                         <div class="dropdown-menu dropdown-menu-right p-2 shadow" style="border-radius: 8px; background-color: #f8f9fa; min-width: 150px; right: -20px;">
                             <!-- Edit Site Survey -->
-                            <div class="mb-2">
+                            {{-- <div class="mb-2">
                                 
                                     <a href="{{ route('site_survey.edit', $data->id) }}" class="dropdown-item text-dark d-flex align-items-center">
                                         <i class="fa fa-edit mr-2"></i> Edit Site Survey
@@ -236,7 +236,7 @@ style="background-color: #8e44ad;margin-left:20px; color:white">Add Site Survey<
                                
                                   
                                 
-                            </div>
+                            </div> --}}
 
                             <div class="mb-2">
                                 

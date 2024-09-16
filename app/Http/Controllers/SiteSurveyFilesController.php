@@ -19,8 +19,9 @@ class SiteSurveyFilesController extends Controller
     }
 
     $files = FileUpload::where('site_survey_id', $id)->get();
+    $site_survey=$id;
 
-    return view('site_survey.upload_files', compact('siteSurvey', 'files'));
+    return view('site_survey.upload_files', compact('siteSurvey', 'files','site_survey'));
 }
     // Store uploaded file and its details
     public function storeViewFiles(Request $request, $id)
