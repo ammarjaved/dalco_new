@@ -5,7 +5,6 @@
 
 
 @php
-
     $navContent = Blade::render(
         '@include("nav.index", ["survey" => $survey, "id" => $id])', 
         [
@@ -14,6 +13,7 @@
         ]
     );
 @endphp
+
 {!! $navContent !!}
 
 

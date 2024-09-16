@@ -194,24 +194,24 @@ function addData() {
             success: function(data) {
                 if (data.length > 0) {
                     // Check if material is already added to the table
-                    var existingMaterial = $('#myTable').find('td:contains(' + data[0].mat_code + ')');
-                    if (existingMaterial.length > 0) {
-                        if (confirm('This material is already added. Do you want to delete it?')) {
-                            // Delete the existing material
-                            var row = existingMaterial.closest('tr');
-                            row.remove();
-                        }
-                    } else {
+                    // var existingMaterial = $('#myTable').find('td:contains(' + data[0].mat_code + ')');
+                    // if (existingMaterial.length > 0) {
+                    //     if (confirm('This material is already added. Do you want to delete it?')) {
+                    //         // Delete the existing material
+                    //         var row = existingMaterial.closest('tr');
+                    //         row.remove();
+                    //     }
+                    // } else {
                         // Add the new material to the table
                         var i = $('#myTable tr').length; // Define i as the number of table rows
                         var str = '<tr><td><input type="text" name="data[' + i + '][id]" value="' + data[0].id + '" /></td>' +
                                   '<td><input type="text" name="data[' + i + '][mat_code]" value="' + data[0].mat_code + '" /></td>' +
                                   '<td><input type="text" name="data[' + i + '][mat_desc]" value="' + data[0].mat_desc + '" /></td>' +
                                   '<td><input type="text" name="data[' + i + '][bun]" value="' + data[0].bun + '" /></td>' +
-                                  '<td><input type="text" name="data[' + i + '][quantity]" value="0" /></td></tr>';
+                                  '<td><input type="number" name="data[' + i + '][quantity]" value="0" /></td></tr>';
                         $("#mat_sel").append(str);
                         $('#search_input1').val(''); // Clear the search input
-                    }
+                   // }
                 } else {
                     alert('No material found');
                 }

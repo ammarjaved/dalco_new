@@ -147,7 +147,12 @@ public function showData($id)
         foreach ($selections as $row) {
            // if ($quantity > 0) {
                 $username = Auth::user()->name;
-    
+
+                $exist = ProjectMaterial::where('material_id',$row['id'])->exists();
+                if($exist){
+                $record = ProjectMaterial::where('material_id',$row['id']);    
+                $record->delete();
+                }
                 ProjectMaterial::create(
                     [
                         'material_id' =>$row['id'],

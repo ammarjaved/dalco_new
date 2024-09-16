@@ -1,23 +1,22 @@
 <nav class="main-header navbar navbar-expand navbar-light d-flex justify-content-between" style="background-color: #8e44ad;margin-left:1px;">
     <ul class="navbar-nav">
         <li class="nav-item d-sm-inline-block">
-            <img src="{{ asset('assets/web-images/main-logo.png') }}" height="35" alt="">
+            <img src="{{ asset('assets/web-images/main-logo.png') }}" height="35" alt=""><span>PE: {{ $survey->nama_pe }}</span>
         </li>
     </ul>
 
     <div class="d-flex">
         
+        
+
+
         <a href="{{ route('delco-summary') }}" style="text-decoration: none;">
             <md-filled-button style="margin-top:17px;margin: 16px;">
                 ◄ Delco Summary
             </md-filled-button>
         </a>
 
-        {{-- <div class="d-flex">
-            <!-- Display nama_pe -->
-            <div style="margin: 16px; color: white; font-weight: bold;">
-                {{ $nama_pe }}
-            </div> --}}
+           
 
        
 

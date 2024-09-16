@@ -65,10 +65,10 @@ Route::middleware('auth')->group(function () {
 
   
 
-     Route::resource('site_survey', SiteSurveyController::class,['except' => ['create','edit']]);
-    //  Route::resource('site_survey', SiteSurveyController::class);
-     Route::post('site_survey/create', SiteSurveyController::class)->name('site_survey.create');
-    Route::post('site_survey/edit/id', SiteSurveyController::class)->name('site_survey.edit');
+   Route::get('site_survey/create', [SiteSurveyController::class,'create'])->name('site_survey.create');
+   Route::get('site_survey/{id}/edit', [SiteSurveyController::class, 'edit'])->name('site_survey.edit');
+   Route::resource('site_survey', SiteSurveyController::class,['except' => ['create','edit']]);
+
     Route::resource('toolbox_talks', ToolboxTalkController::class);
 
 

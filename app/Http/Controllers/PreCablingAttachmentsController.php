@@ -55,41 +55,41 @@ class PreCablingAttachmentsController extends Controller
                
                 $file = $request->file('site_file');
                // return $file->getMimeType();
-                if ($file->getMimeType()== 'application/pdf') {
+                // if ($file->getMimeType()== 'application/pdf') {
 
-                $filename = time() . '-' . $file->getClientOriginalName();
-                $request->file('site_file')->move($destinationPath, $filename);
-                $file_path = $destinationPath . $filename;
+                // $filename = time() . '-' . $file->getClientOriginalName();
+                // $request->file('site_file')->move($destinationPath, $filename);
+                // $file_path = $destinationPath . $filename;
                
-                $parser = new Parser();
-                   $pdf = $parser->parseFile( $file_path);
-                 //  $imagePaths = [];
-                   $imageIndex = 0;
-                $objects = $pdf->getObjects();
-                   foreach ($objects as $object) {
-                       if ($object instanceof \Smalot\PdfParser\XObject\Image) {
-                           $imageFilename = 'image_' . (++$imageIndex) . '_' . time() . '.png';
-                           $fullImagePath = $destinationPath . $imageFilename;
+                // $parser = new Parser();
+                //    $pdf = $parser->parseFile( $file_path);
+                //  //  $imagePaths = [];
+                //    $imageIndex = 0;
+                // $objects = $pdf->getObjects();
+                //    foreach ($objects as $object) {
+                //        if ($object instanceof \Smalot\PdfParser\XObject\Image) {
+                //            $imageFilename = 'image_' . (++$imageIndex) . '_' . time() . '.png';
+                //            $fullImagePath = $destinationPath . $imageFilename;
            
-                           file_put_contents($fullImagePath, $object->getContent());
+                //            file_put_contents($fullImagePath, $object->getContent());
            
-                           // Save image info to database
-                           PreCablingAttachments::create([
-                            'file_name' => $imageFilename,
-                            'file_path' => $fullImagePath,
-                            'description' => $request->description,
-                            'site_survey_id' => $request->id
+                //            // Save image info to database
+                //            PreCablingAttachments::create([
+                //             'file_name' => $imageFilename,
+                //             'file_path' => $fullImagePath,
+                //             'description' => $request->description,
+                //             'site_survey_id' => $request->id
                              
-                           ]);
+                //            ]);
            
-                          // $imagePaths[] = $imagePath;
-                       }
-                   }   
+                //           // $imagePaths[] = $imagePath;
+                //        }
+                //    }   
             
 
                    
 
-                }else{
+                // }else{
                 // Save file details to the database
                 $filename = time() . '-' . $file->getClientOriginalName();
                 $request->file('site_file')->move($destinationPath, $filename);
@@ -101,7 +101,7 @@ class PreCablingAttachmentsController extends Controller
                     'site_survey_id' => $request->id
                 ]);
                
-                 }
+                // }
 
                 return redirect()->route('pre-cabling-attachment.index', ['id' => $request->id])->with('success', 'File uploaded successfully.');
             } else {

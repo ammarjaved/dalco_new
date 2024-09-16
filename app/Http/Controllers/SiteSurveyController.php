@@ -269,7 +269,7 @@ class SiteSurveyController extends Controller
        
     //  $combinedArray =  (object) array_merge($data->toArray(), $data1->toArray());
     // return $siteSurvey1;
-    return view('site_survey.create', compact('siteSurvey','siteSurvey1','toolboxTalk','location','site_survey'));
+    return view('site_survey.edit', compact('siteSurvey','siteSurvey1','toolboxTalk','location','site_survey'));
 
     }
 

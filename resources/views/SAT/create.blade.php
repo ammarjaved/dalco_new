@@ -111,7 +111,7 @@
                                 <!-- Image Type -->
                                 <div class="col-md-4">
                                     {{-- <label for="image_type">Image Type</label> --}}
-                                    <md-outlined-select label="Image Type"  class="label" id="image_type" name="image_type" required>
+                                    <md-outlined-select label="Image Type"  class="label" onchange="setType(this.value)" id="image_type" name="image_type" required>
                                        
                                         <md-select-option value="BEFORE">BEFORE</md-select-option>
                                         <md-select-option value="DURING">DURING</md-select-option>
@@ -240,9 +240,25 @@
 
 <script>
 
+function setType(val){
+    localStorage.setItem("img_sat_type",val);
+}
+
+function getType(){
+    var img_type=localStorage.getItem("img_sat_type")
+    if(img_type){
+        var dropdown = document.getElementById('image_type');
+        dropdown.value=img_type;
+
+    }
+
+}
 
 
 document.addEventListener('DOMContentLoaded', function() {
+
+    getType();
+
 table = $('.data-table').DataTable({
 
     dom: '<"row"<"col-sm-6"l><"col-sm-6 text-right"f>>' +

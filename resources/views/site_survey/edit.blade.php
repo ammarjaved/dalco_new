@@ -13,7 +13,9 @@
         ]
     );
 @endphp
+
 {!! $navContent !!}
+
 <style>
     md-menu-button {
         margin-left: 20px;
