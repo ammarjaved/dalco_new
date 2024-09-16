@@ -22,15 +22,22 @@ use Exception;
 
 class LKSController extends Controller{
 
-    public function index()
+    public function index($id)
     {
-        $usr_info = Auth::user();
-        $surveys = SiteSurvey::where('created_by', $usr_info->name)->get();
+        // $usr_info = Auth::user();
+        // $surveys = SiteSurvey::where('created_by', $usr_info->name)->get();
 
         // Pass the surveys to the 'SAT.index' view
-        return view('LKS.index', compact('surveys'));
+        return view('LKS.index', compact('id'));
     }
 
+
+    public function siteSurveyToolboxTalk($id){
+        $survey = SiteSurvey::findOrFail($id);
+      $toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->get()[0];
+    //  return $toolboxtalk;
+    return view('LKS.site_survey_tbk', compact('toolboxtalk','survey'));
+    }
 
     public function create($id)
     {

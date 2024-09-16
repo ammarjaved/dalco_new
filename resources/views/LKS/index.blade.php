@@ -1,88 +1,15 @@
 @extends('layouts.app')
 
-@section('css')
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-
-    
-    
-
-<style>
-.dropdown {
-    position: relative; /* Ensure this is correct for your layout */
-}
-
-.dropdown-menu {
-    min-width: 200px;
-    position: absolute;
-    top: 100%; /* Position dropdown just below the button */
-    left: 0; /* Aligns dropdown menu with the left edge of the button */
-    z-index: 1050; /* Ensure it appears above other content */
-    background: #fff; /* Ensure the dropdown background is solid */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add a shadow for better visibility */
-    border-radius: 4px; /* Optional: Add rounded corners for a better look */
-}
-
-.dropdown-item {
-    padding: 0.5rem 1rem;
-    display: flex;
-    align-items: center;
-}
-
-.dropdown-item i {
-    margin-right: 10px;
-    width: 16px;
-    text-align: center;
-}
-
-.dataTables_filter {
-    float: right !important;
-}
-.dataTables_paginate {
-    float: right !important;
-}
-.dataTables_length {
-    float: left !important;
-}
-.dataTables_info {
-    float: left !important;
-}
-
-table.dataTable thead .sorting,
-table.dataTable thead .sorting_asc,
-table.dataTable thead .sorting_desc {
-    cursor: pointer;
-    position: relative;
-}
-
-table.dataTable thead .sorting:after,
-table.dataTable thead .sorting_asc:after,
-table.dataTable thead .sorting_desc:after {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-    display: block;
-    font-family: 'Font Awesome 5 Free';
-    opacity: 0.5;
-}
-
-table.dataTable thead .sorting:after {
-    content: "\f0dc";
-    opacity: 0.2;
-}
-
-table.dataTable thead .sorting_asc:after {
-    content: "\f0de";
-}
-
-table.dataTable thead .sorting_desc:after {
-    content: "\f0dd";
-}
-
-</style>
-
-@endsection
+@php
+    $navContent = Blade::render(
+        '@include("nav.index", ["survey" => $survey, "id" => $id])', 
+        [
+            'survey' => app(\App\Http\Controllers\TopnavbarController::class)->index($id)->getData()['survey'],
+            'id' => $id
+        ]
+    );
+@endphp
+{!! $navContent !!}
 
 @section('content')
     <div class="container">
@@ -94,34 +21,11 @@ table.dataTable thead .sorting_desc:after {
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="myTable" class="table table-bordered table-hover data-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nama PE</th>
-                                <th>Kawasan</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($surveys as $survey)
-                            <tr>
-                                <td>{{ $survey->id }}</td>
-                                <td>{{ $survey->nama_pe }}</td>
-                                <td>{{ $survey->kawasan }}</td>
-                                <td>
-                                    <div class="dropdown" style="position: relative;">
-                                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#E0B0FF'" onmouseout="this.style.backgroundColor='#fef7ff'">
-                                            <img src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}" alt="Menu" style="width: 16px; height: 16px;">
-                                        </button>
-                                    
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="{{ route('LKS.create', $survey->id) }}" target="_blank"> <i class="fas fa-eye"></i>Show LKS</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
                         
+                        <tbody>
+                            <tr>
+                              <th>Site Survey ToolboxTalk</th><td><a href="/ss_tbk/{{$id}}" target="_blank">download Site survey Toolbox Talk</a></td>  
+                            </tr>    
                         </tbody>
                     </table>
                 </div>

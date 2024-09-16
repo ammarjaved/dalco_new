@@ -206,7 +206,9 @@ Route::put('/sat/{id}', [SATController::class, 'update'])->name('sat.update');
 Route::post('sat-store', [SATController::class, 'store'])->name('sat.store');
 
 
-Route::get('/LKS', [LKSController::class, 'index'])->name('LKS.index');
+Route::get('/LKS/{id}', [LKSController::class, 'index'])->name('LKS.index');
+Route::get('/ss_tbk/{id}', [LKSController::class, 'siteSurveyToolboxTalk'])->name('ss_tbk');
+
 
 Route::get('/LKS/create/{id}', [LKSController::class, 'create'])->name('LKS.create');
 
