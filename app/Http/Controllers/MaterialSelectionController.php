@@ -59,7 +59,7 @@ class MaterialSelectionController extends Controller
         // Fetch materials
         $results = $query->orderBy('mat_code')
                          ->inRandomOrder()
-                         ->limit(5)
+                         ->limit(100)
                          ->get(['mat_code', 'mat_desc']); // Get both fields
     
         // Log and return for debugging purposes

@@ -48,7 +48,7 @@
         <div class="container-fluid">
             <div class="container bg-white  shadow my-4 " style="border-radius: 10px">
 
-                <h3 class="text-center mb-4"> ShutDown Form</h3>
+                <h3 class="text-center mb-4"> Pre-ShutDown Form</h3>
 
                 <form
                     action="{{ isset($piw['id']) ? route('pre-cabling-shut-down.update', $piw['id']) : route('pre-cabling-shut-down.store') }}"

@@ -4,7 +4,6 @@
 @section('content')
 
 
-
 @php
 
     $navContent = Blade::render(
@@ -16,7 +15,11 @@
     );
 @endphp
 {!! $navContent !!}
-
+<style>
+  .d-flex{
+    padding-top: 20px;
+  }
+</style>    
     <div class="container">
         <h2>LKS</h2>
 

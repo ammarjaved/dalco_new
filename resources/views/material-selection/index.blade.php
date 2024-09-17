@@ -182,27 +182,36 @@ table.dataTable thead .sorting_desc:after {
 <script>
 var i = 0;
 
+
+function capitalizeStringIgnoreNo(inputString) {
+    // Split the string into words
+    const words = inputString.split(/\s+/);
+    
+    // Capitalize each word, ignoring 'no'
+    const capitalizedWords = words.map(word => {
+        if (word.toLowerCase() === 'no') {
+            return word; // Keep 'no' as is
+        }
+        // Capitalize the entire word
+        return word.toUpperCase();
+    });
+    
+    // Join the words back into a string
+    return capitalizedWords.join(' ');
+}
+
 function addData() {
     var myval = $('#search_input1').val();
     if (myval != '') {
         var searchMaterialUrl = '/data_material';
 
         $.ajax({
-            url: searchMaterialUrl + '?desc=' + myval,
+            url: searchMaterialUrl + '?desc=' + encodeURIComponent(myval),
             dataType: 'JSON',
             method: 'GET',
             success: function(data) {
                 if (data.length > 0) {
-                    // Check if material is already added to the table
-                    // var existingMaterial = $('#myTable').find('td:contains(' + data[0].mat_code + ')');
-                    // if (existingMaterial.length > 0) {
-                    //     if (confirm('This material is already added. Do you want to delete it?')) {
-                    //         // Delete the existing material
-                    //         var row = existingMaterial.closest('tr');
-                    //         row.remove();
-                    //     }
-                    // } else {
-                        // Add the new material to the table
+                    
                         var i = $('#myTable tr').length; // Define i as the number of table rows
                         var str = '<tr><td><input type="text" name="data[' + i + '][id]" value="' + data[0].id + '" /></td>' +
                                   '<td><input type="text" name="data[' + i + '][mat_code]" value="' + data[0].mat_code + '" /></td>' +
@@ -232,7 +241,7 @@ $(document).ready(function() {
 
     // Autocomplete based on mat_desc and mat_code
     $('#search_input1').on('keyup', function() {
-        var query = $(this).val();
+        var query = capitalizeStringIgnoreNo($(this).val());
 
         if (query.length >= 2) {
             $.ajax({
