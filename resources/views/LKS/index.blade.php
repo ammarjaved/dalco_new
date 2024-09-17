@@ -17,6 +17,7 @@
 @endphp
 {!! $navContent !!}
 
+
     <div class="container">
         <h2>LKS</h2>
 

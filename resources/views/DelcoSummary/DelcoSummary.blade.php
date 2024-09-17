@@ -164,6 +164,7 @@ style="background-color: #8e44ad;margin-left:20px; color:white">Add Site Survey<
     <tbody>
 
         @foreach ($delcoSummary as $data)
+        
             <tr>
                 <td class="align-middle"><a href="{{ route('material-selection.index',$data->id) }}">{{$data->nama_pe ? $data->nama_pe : '-' }}</a></td>
 
@@ -181,7 +182,7 @@ style="background-color: #8e44ad;margin-left:20px; color:white">Add Site Survey<
                     @endif
                 </td>
                 <td class="align-middle text-center">
-                    @if ($data->PreCabling)
+                    @if ($data->PreCablingImagesStatus)
                         <span class="check "
                             style="font-weight: 600; color: green;">&#x2713;</span>
                     @else
@@ -190,27 +191,43 @@ style="background-color: #8e44ad;margin-left:20px; color:white">Add Site Survey<
                     @endif
                 </td>
                 <td class="align-middle text-center">
-                    @if ($data->ImageShutdown)
-                        <span class="check "
-                            style="font-weight: 600; color: green;">&#x2713;</span>
+                    @php
+                        $hasAfterImage = false;
+                        foreach ($data->ShutDownStatus as $image) {
+                            if ($image->image_type === 'AFTER') {
+                                $hasAfterImage = true;
+                                break;
+                            }
+                        }
+                    @endphp
+                
+                    @if ($hasAfterImage)
+                        <span class="check" style="font-weight: 600; color: green;">&#x2713;</span>
                     @else
-                        <span class="check"
-                            style="font-weight: 600; color: red;">&#x2715;</span>
+                        <span class="check" style="font-weight: 600; color: red;">&#x2715;</span>
                     @endif
                 </td>
+                
 
 
                 <td class="align-middle text-center">
-                    @if ($data->SATStatus)
-                        <span class="check"
-                            style="font-weight: 600; color: green;">&#x2713;</span>
+                    @php
+                        $hasAfterImageSAT = false;
+                        foreach ($data->SATStatus as $image) {
+                            if ($image->image_type === 'AFTER') {
+                                $hasAfterImageSAT = true;
+                                break;
+                            }
+                        }
+                    @endphp
+                
+                    @if ($hasAfterImageSAT)
+                        <span class="check" style="font-weight: 600; color: green;">&#x2713;</span>
                     @else
-                        <span class="check"
-                            style="font-weight: 600; color: red;">&#x2715;</span>
+                        <span class="check" style="font-weight: 600; color: red;">&#x2715;</span>
                     @endif
                 </td>
-
-
+                
                 <td class="align-middle text-center">
                     <div class="dropdown">
                         <img src="{{ URL::asset('assets/web-images/three-dots-vertical.svg') }}" class="three-dots-icon" alt="Options" onclick="toggleDropdown(this)" style="cursor: pointer;">

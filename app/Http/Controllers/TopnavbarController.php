@@ -15,5 +15,7 @@ class TopnavbarController extends Controller
       // return ['surveys' =>  $data[0],'id' => $id];
         return view('nav.index', ['survey' =>  $data[0],'id' => $id]);
 
+        
+
     }
 }

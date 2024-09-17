@@ -79,17 +79,20 @@ public function PreCablingStatus()
 
 
 }
-
+public function PreCablingImagesStatus()
+{
+    return $this->hasOne(PreCblImage::class, 'site_survey_id');
+}
 
 public function ShutDownStatus()
 {
-    return $this->hasOne(ImageShutdown::class, 'site_survey_id');
+    return $this->hasMany(ImageShutdown::class, 'site_survey_id');
 }
 
 
 public function SATStatus()
 {
-    return $this->hasOne(SAT::class, 'site_survey_id');
+    return $this->hasMany(SAT::class, 'site_survey_id');
 
 }
 
