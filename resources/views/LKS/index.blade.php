@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
+
+@section('content')
+
+
+
 @php
+
     $navContent = Blade::render(
         '@include("nav.index", ["survey" => $survey, "id" => $id])', 
         [
@@ -11,9 +17,8 @@
 @endphp
 {!! $navContent !!}
 
-@section('content')
     <div class="container">
-        <h3>LKS</h3>
+        <h2>LKS</h2>
 
         <div class="card" style="background-color:#fef7ff;">
           
@@ -23,11 +28,114 @@
                     <table id="myTable" class="table table-bordered table-hover data-table">
                         
                         <tbody>
+                            <h3>Site Survey Collection</h3>
                             <tr>
-                              <th>Site Survey ToolboxTalk</th><td><a href="/ss_tbk/{{$id}}" target="_blank">download Site survey Toolbox Talk</a></td>  
+                              <th>Site Survey ToolboxTalk</th><td><a href="/ss_tbk/{{$id}}" target="_blank">Download Site survey Toolbox Talk</a></td> 
                             </tr>    
+                            <tr>
+                                <th>Site Survey Pictures</th><td><a href="" target="_blank">Download Site survey Pictures</a></td> 
+                            </tr>
+
+                            <tr>
+                                <th>Site Survey Information</th><td><a href="" target="_blank">Download Site Survey Info</a></td> 
+                            </tr>
+
+                            <tr>
+                                <th>Site Survey Files</th><td><a href="" target="_blank">Download Site Survey Files</a></td> 
+                            </tr>
                         </tbody>
                     </table>
+
+
+
+                    
+                    <table id="myTable" class="table table-bordered table-hover data-table">
+                        
+                        <tbody>
+                            <h3>Material Selection</h3>
+                            <tr>
+                              <th>Material Selection </th><td><a href="" target="_blank"> Download Material Selection</a></td> 
+                            </tr>  
+                              
+                          
+
+                           
+                        </tbody>
+                    </table>
+
+
+                    <table id="myTable" class="table table-bordered table-hover data-table">
+                        
+                        <tbody>
+                            <h3>PreCabling</h3>
+                            <tr>
+                              <th>PreCabling ToolboxTalk</th><td><a href="" target="_blank"> Download PreCabling ToolboxTalk</a></td> 
+                            </tr>  
+
+                            <tr>
+                                <th>PreCabling PIW</th><td><a href="" target="_blank"> Download PreCabling PIW</a></td> 
+                              </tr>  
+
+                              <tr>
+                                <th>PreCabling PreShutdown</th><td><a href="" target="_blank"> Download PreCabling PreShutdown</a></td> 
+                              </tr>  
+
+                              <tr>
+                                <th>PreCabling Attachments</th><td><a href="" target="_blank"> Download PreCabling Attachments</a></td> 
+                              </tr>  
+
+                              <tr>
+                                <th>PreCabling Images</th><td><a href="" target="_blank"> Download PreCabling Images</a></td> 
+                              </tr>  
+                              
+                          
+
+                           
+                        </tbody>
+                    </table>
+
+
+
+                    <table id="myTable" class="table table-bordered table-hover data-table">
+                        
+                        <tbody>
+                            <h3>Shutdown</h3>
+                            <tr>
+                              <th>Shutdown ToolboxTalk</th><td><a href="" target="_blank"> Download Shutdown ToolboxTalk</a></td> 
+                            </tr>  
+
+                            <tr>
+                                <th>Shutdown Images</th><td><a href="" target="_blank"> Download Shutdown Images</a></td> 
+                              </tr>  
+
+                              <tr>
+                                <th>Shutdown Attachments</th><td><a href="" target="_blank"> Download Shutdown Attachments</a></td> 
+                              </tr>  
+                           
+                        </tbody>
+                    </table>
+
+
+                    
+                    <table id="myTable" class="table table-bordered table-hover data-table">
+                        
+                        <tbody>
+                            <h3>SAT</h3>
+                            <tr>
+                              <th>SAT ToolboxTalk</th><td><a href="" target="_blank"> Download SAT ToolboxTalk</a></td> 
+                            </tr>  
+
+                            <tr>
+                                <th>SAT Images</th><td><a href="" target="_blank"> Download SAT Images</a></td> 
+                              </tr>  
+
+                              <tr>
+                                <th>SAT Attachments</th><td><a href="" target="_blank"> Download SAT Attachments</a></td> 
+                              </tr>  
+                           
+                        </tbody>
+                    </table>
+                   
                 </div>
             </div>
         </div>
@@ -36,44 +144,6 @@
 
 
 
-@section('script')
 
-<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('assets/js/generate-qr.js') }}"></script>
-
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
-
-<script>
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-table = $('.data-table').DataTable({
-
-    dom: '<"row"<"col-sm-6"l><"col-sm-6 text-right"f>>' +
-         '<"row"<"col-sm-12"tr>>' +
-         '<"row"<"col-sm-5"i><"col-sm-7 text-right"p>>',
-    language: {
-        search: "",
-        searchPlaceholder: "Search..."
-
-    },
-
-    // ordering: true,
-    // order: [[0, 'asc']], // Sort by the first column (index 0) in ascending order by default
-    // columnDefs: [
-    //     { orderable: false, targets: [4] } // Disable sorting on the SAT column (index 4)
-    // ]
-
-               
-               
-})
-})
-
-</script>
-
-
-@endsection
 
 

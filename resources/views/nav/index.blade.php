@@ -119,7 +119,7 @@
 </script>
 
 <div style="margin: 16px;">
-    <md-filled-button id="usage-document-anchor2">Image Shutdown</md-filled-button>
+    <md-filled-button id="usage-document-anchor2">Shutdown</md-filled-button>
   </div>
       <md-menu positioning="document" id="usage-document2" anchor="usage-document-anchor2">
          
@@ -135,10 +135,10 @@
          
 
           <md-menu-item href="{{ route('image-shutdown.create', ['id' => $id]) }}">
-              Add Image Shutdown
+              Add Shutdown Images
           </md-menu-item>
            <md-menu-item href="{{ route('image-shutdown-attachment.index', ['id' => $id]) }}">
-              Add Image Shutdown Attachments
+              Add Shutdown Attachments
           </md-menu-item>
 
         
@@ -169,7 +169,7 @@ anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
     @endif
          
          <md-menu-item href="{{ route('sat.create', ['id' => $id]) }}">
-              Add SAT
+              Add SAT Images
           </md-menu-item>
 
           <md-menu-item href="{{ route('sat-attachment.index', ['id' => $id]) }}">
