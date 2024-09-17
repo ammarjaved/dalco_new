@@ -39,6 +39,14 @@ class LKSController extends Controller{
     return view('LKS.site_survey_tbk', compact('toolboxtalk','survey'));
     }
 
+
+    public function siteSurvey($id){
+        $survey = SiteSurvey::findOrFail($id);
+      //$toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->get()[0];
+    //  return $toolboxtalk;
+    return view('LKS.site_survey', compact('survey'));
+    }
+
     public function create($id)
     {
         // Find the specific site survey by ID

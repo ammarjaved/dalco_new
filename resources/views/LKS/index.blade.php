@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('content')
+
 @php
     $navContent = Blade::render(
         '@include("nav.index", ["survey" => $survey, "id" => $id])', 
@@ -11,7 +13,6 @@
 @endphp
 {!! $navContent !!}
 
-@section('content')
     <div class="container">
         <h3>LKS</h3>
 
