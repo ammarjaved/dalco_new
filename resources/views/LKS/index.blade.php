@@ -44,7 +44,7 @@
                             </tr>
 
                             <tr>
-                                <th>Site Survey Files</th><td><a href="" target="_blank">Download Site Survey Files</a></td> 
+                                <th>Site Survey Files</th><td><a href="/ss_attachments/{{$id}}" target="_blank">Download Site Survey Files</a></td> 
                             </tr>
                         </tbody>
                     </table>

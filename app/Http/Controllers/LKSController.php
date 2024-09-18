@@ -145,9 +145,6 @@ class LKSController extends Controller{
 
     }
 
-
-    
-
     public function siteSurveyPics($id){
       $usr_info = \Auth::user();
       $projectName = $usr_info->project;
@@ -202,9 +199,29 @@ if (file_exists($pdfFilePath)) {
 
     public function siteSurveyAttachments($id){
         $survey = SiteSurvey::findOrFail($id);
-      //$toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->get()[0];
-    //  return $toolboxtalk;
-    return view('LKS.site_survey', compact('survey'));
+        $files = FileUpload::where('site_survey_id', $survey->id)->get();
+   
+
+    // return view('LKS.Site_Survey_Files', compact('survey','files'));
+    return $files;
+    // }
+    }
+
+     function Site_surveyAjax ()
+    {
+      $.ajax({
+        url:  '/ss_attachments'+ ,
+        dataType: 'JSON',
+        method: 'GET',
+        success: function(data) {
+            
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("AJAX error:", textStatus, errorThrown);
+            alert("Error fetching material data. Please try again.");
+        }
+    });
+
     }
 
     public function create($id)
