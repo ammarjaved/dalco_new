@@ -406,7 +406,7 @@
 <form action="{{ route('PreCabling.toolboxtalk.destroy', $toolboxtalk->id) }}" method="POST" style="display: inline;">
     @csrf
     @method('DELETE')
-    <md-filled-tonal-button style="margin-left:260px; margin-top:-122px" type="submit" >Delete Toolbox</md-filled-tonal-button >
+    <md-filled-tonal-button style="margin-left:190px; margin-top:-70px" type="submit" >Delete Toolbox</md-filled-tonal-button >
 </form>
 
  @endsection 

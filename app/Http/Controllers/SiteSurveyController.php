@@ -33,7 +33,8 @@ class SiteSurveyController extends Controller
      public function delcoSummary()
      {
          $usr_info = \Auth::user();
-         $delcoSummary = SiteSurvey::with(['PreCablingStatus', 'ShutDownStatus','SATStatus'])->select('*', 
+         $delcoSummary = SiteSurvey::with(['PreCablingImagesStatus', 'ShutDownStatus','SATStatus'])->select('*', 
+         
         
          DB::raw('ST_X(geom) as x'),
          DB::raw('ST_Y(geom) as y')
