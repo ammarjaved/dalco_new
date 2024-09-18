@@ -36,7 +36,7 @@
                               <th>Site Survey ToolboxTalk</th><td><a href="/ss_tbk/{{$id}}" target="_blank">Download Site survey Toolbox Talk</a></td> 
                             </tr>    
                             <tr>
-                                <th>Site Survey Pictures</th><td><a href="" target="_blank">Download Site survey Pictures</a></td> 
+                                <th>Site Survey Pictures</th><td><a href="/ss_pics/{{$id}}" target="_blank">Download Site survey Pictures</a></td> 
                             </tr>
 
                             <tr>

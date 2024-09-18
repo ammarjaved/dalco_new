@@ -210,6 +210,7 @@ Route::get('/LKS/{id}', [LKSController::class, 'index'])->name('LKS.index');
 Route::get('/ss_tbk/{id}', [LKSController::class, 'siteSurveyToolboxTalk'])->name('ss_tbk');
 
 Route::get('/ss_info/{id}', [LKSController::class, 'siteSurvey'])->name('ss_info');
+Route::get('/ss_pics/{id}', [LKSController::class, 'siteSurveyPics'])->name('ss_pics');
 
 
 Route::get('/LKS/create/{id}', [LKSController::class, 'create'])->name('LKS.create');

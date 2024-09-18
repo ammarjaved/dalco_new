@@ -1,102 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<script type="importmap">
-    {
-      "imports": {
-        "@material/web/": "https://esm.run/@material/web/"
-      }
-    }
-  </script>
-    <meta charset="utf-8">
-    <meta name="csrf-token" content="0bQGBmn1ftAwdGBcS5bbS9FD4G8IbeP1gSx50R6K">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-    <!-- Scripts -->
-    <link rel="preload" as="style" href="http://127.0.0.1:8000/build/assets/app-87d794a9.css" /><link rel="modulepreload" href="http://127.0.0.1:8000/build/assets/app-eada0a17.js" /><link rel="stylesheet" href="http://127.0.0.1:8000/build/assets/app-87d794a9.css" /><script type="module" src="http://127.0.0.1:8000/build/assets/app-eada0a17.js"></script>
-    <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DALCO</title>
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Scada Johor</title>
-
-
-
-<!-- Google Font: Source Sans Pro -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-<!-- Font Awesome -->
-<link rel="stylesheet" href="http://127.0.0.1:8000/plugins/fontawesome-free/css/all.min.css">
-<!-- Ionicons -->
-<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-<!-- Tempusdominus Bootstrap 4 -->
-<link rel="stylesheet" href="http://127.0.0.1:8000/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-
-
-<!-- iCheck -->
-<link rel="stylesheet" href="http://127.0.0.1:8000/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-<!-- JQVMap -->
-
-<!-- Theme style -->
-<link rel="stylesheet" href="http://127.0.0.1:8000/dist/css/adminlte.min.css">
-<!-- overlayScrollbars -->
-<link rel="stylesheet" href="http://127.0.0.1:8000/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-<!-- Daterange picker -->
-
-<!-- summernote -->
-
-<link rel="stylesheet" href="http://127.0.0.1:8000/assets/css/app.css">
-
-
-<script src="http://127.0.0.1:8000/assets/dist/js/lightbox-plus-jquery.min.js"></script>
-<link rel="shortcut icon" href="http://127.0.0.1:8000/assets/web-images/main-logo.ico">
-
-
-
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
- 
-  <script type="module">
-    import '@material/web/all.js';
-    import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
-
-    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
-  </script>
-
-
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-
-</head>
-
-<body class="hold-transition sidebar-mini layout-fixed" >
-    <div class="wrapper">
-      
-        <div class="content-wrapper" style="margin-left:5px;!important">
-
-            <div id="overlay">
-                <div class="loading-spinner"></div>
-            </div>
-
-            
-
 <style>
-
-.form-container {
-        background-color: #f9f9f9;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        margin-top: 20px;
-    }
-    .header {
+ .header {
             display: flex;
             justify-content: space-between;
             margin-bottom: 50px;
@@ -125,6 +28,164 @@
         .logo img {
             width: 100px;
         }
+        .title {
+            font-size: 24px;
+            text-align: center;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        .checklist-container {
+            display: flex;
+            
+        }
+
+        .checklist-left, .checklist-right {
+            flex: 1;
+            margin: 0 30px; 
+        }
+
+        .checklist-left {
+            margin-right: 40px; 
+        }
+
+        .checklist-right {
+            margin-left: 40px; 
+        }
+
+        .checklist {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap; 
+        }
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        .prepared, .reviewed {
+            width: 45%;
+            text-align: left;
+        }
+        .signature-box {
+            border: 1px solid #000;
+            width: 150px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .substation-info {
+            margin-bottom: 20px;
+        }
+
+        .pictures-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 items per row */
+            gap: 20px; /* Space between items */
+        }
+
+        .picture-item {
+            padding: 10px;
+            border: 1px solid black; /* Simple black border */
+            text-align: center; /* Center align text */
+        }
+
+        .picture-item img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px; /* Space between image and description */
+            border: 1px solid black; /* Black border around image */
+        }
+
+        .picture-item p {
+            font-size: 14px;
+            color: #000; /* Black text color */
+            font-weight: normal; /* Normal weight for description text */
+            border-top: 1px solid black; /* Black line above description */
+            padding-top: 10px; /* Space between line and description */
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+        .logo {
+            border: 1px solid black;
+            padding: 10px;
+            font-size: 12px;
+            width: 45%;
+        }
+        .content {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 200px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+       
+
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td[colspan="5"] {
+            font-weight: bold;
+            background-color: #f9f9f9;
+        }
+
+        .logo img {
+            width: 100px;
+        }
+
+        .title {
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .checklist-container {
+            display: flex;
+            
+        }
+
+        .checklist-left, .checklist-right {
+            flex: 1;
+            margin: 0 30px; 
+        }
+
+        .checklist-left {
+            margin-right: 40px; 
+        }
+
+        .checklist-right {
+            margin-left: 40px; 
+        }
+
+        .checklist {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap; 
+        }
+
         ol {
             list-style: none;
             padding: 0;
@@ -142,6 +203,199 @@
             margin-right: 20px; 
             margin-left: 10px; 
         }
+
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .prepared, .reviewed {
+            width: 45%;
+            text-align: left;
+        }
+
+        .signature-box {
+            border: 1px solid #000;
+            width: 150px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px; 
+            accent-color: black;
+            cursor: not-allowed;
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #000;
+            background-color: #fff;
+            position: relative;
+            vertical-align: middle; 
+        }
+
+        input[type="checkbox"]:checked::before {
+            content: "✓";
+            color: #000;
+            font-weight: bold;
+            font-size: 14px; 
+            position: absolute;
+            left: 2px;
+            top: -2px;
+        }
+
+        input[type="checkbox"].yes {
+            margin-right: 20px; 
+        }
+
+        input[type="checkbox"].no {
+            margin-right: 0; 
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            
+        }
+
+       
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        header img {
+            max-height: 100px;
+        }
+
+        .substation-info {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .pictures-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 items per row */
+            gap: 20px; /* Space between items */
+        }
+
+        .picture-item {
+            padding: 10px;
+            border: 1px solid black; /* Simple black border */
+            text-align: center; /* Center align text */
+        }
+
+        .picture-item img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px; /* Space between image and description */
+            border: 1px solid black; /* Black border around image */
+        }
+
+        .picture-item p {
+            font-size: 14px;
+            color: #000; /* Black text color */
+            font-weight: normal; /* Normal weight for description text */
+            border-top: 1px solid black; /* Black line above description */
+            padding-top: 10px; /* Space between line and description */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #000;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .signature {
+            text-align: center;
+        }
+        .stamp {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .image-container {
+            max-width: 100%;
+            max-height: 100vh;
+        }
+        img {
+            max-width: 100%;
+            max-height: 100vh;
+            object-fit: contain;
+            
+        }
+
+        .pictures-grids {
+            padding-top: 300px;
+            margin: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-containers {
+            text-align: center;
+            margin-bottom: 50px; /* Adjust spacing between images */
+        }
+
+        .gallery-images {
+            max-width: 90%;
+            max-height: 80vh;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .image-descriptions {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
         .checkboxs {
     display: inline-block;
     width: 12px;
@@ -154,267 +408,243 @@
     background-color: #000;
 }
 
-.footer {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
+.headers img {
+    max-width: 50%; /* Scale down the image to 80% of its container's width */
+    /* Maintain aspect ratio */
+    margin-bottom: 20px; /* Space between image and heading */
+}
 
-    
+
 
 </style>
 
 
 
 
+<div class="header" style="">
+    <div class="logo">
+        <img src="http://127.0.0.1:8000/assets/web-images/tnblogo.png" alt="TNB Logo">
 
+        <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
+        Level 2, Jalan Air Hitam, Kawasan 16,<br>
+        40000 Shah Alam, Selangor</p>
+    </div>
+   
+    <div class="logo">
+                    <img src="http://127.0.0.1:8000/assets/web-images/main-logo.png" alt="Aerosynergy Solutions Logo">
+            <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
+           NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
+            </div>
+   
+</div>
+<h1 class="title">PICTURE LIST FORM<br>(SITE VISIT)</h1>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    <h1 style="margin-left: -150px">SENARAI SEMAK LAWATAN TAPAK PROJEK SCADA DA</h1>
-
-    <table class="form-table">
-        <tr>
-            <td class="label">Nama Pencawang</td>
-            <td class="input">hellolks</td>
-        </tr>
-        <tr>
-            <td class="label">Kawasan / Negeri</td>
-            <td class="input">KL</td>
-        </tr>
-        <tr>
-            <td class="label">No. Functional Location (FL)</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">PE Jenis</td>
-            
-                <td class="input">STAND-ALONE</td>
-            </td>
-        </tr>
-        <tr>
-            <td class="label">Pepatit (Trench) Berpagar?</td>
-            <td class="input">yes</td>
-            </td>
-        </tr>
-        <tr>
-            <td class="label">Jenis Kompaun</td>
-<td class="input">
-<span class="checkboxs "></span> Simen
-<span class="checkboxs checkeds"></span> Rumput
-<span class="checkboxs "></span> Inter-locking
-<span class="checkboxs "></span> Crusher Run
-<span class="checkboxs "></span> Tidak
-</td>
-
-        </tr>
-        <tr>
-            <td class="label">Jenis Perkakasuis</td>
-            <td class="input">
-                <span class="checkboxs "></span> VCB
-                <span class="checkboxs checkeds"></span> RMU
-            </td>
-        </tr>
-        <tr>
-            <td class="label">Konfigurasi</td>
-            <td class="input">3S+2F</td>
-        </tr>
-        
-        <tr>
-            <td class="label">Jenama Alatsuis</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Jenis Model</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Tahun Pembinaan</td>
-            <td class="input">2024-09-03 00:00:00</td>
-        </tr>
-        <tr>
-            <td class="label">Siri Alatsuis</td>
+<div class="checklist-container">
+    <div class="checklist">
+        <div class="checklist-left">
+            <ol>
+                <li>1. Substation (FL)
+                    <input type="checkbox" name="substation_fl" value="yes" checked disabled> Yes
+                    <input type="checkbox" name="substation_fl" value="no"  disabled> No
+                </li>
                 
-            <td class="input">test</td>
-              
-            </td>
-        </tr>
-                <tr>
-            <td class="label">Suis No 1</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Suis Label 1</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Kabel Jenis 1</td>
-            <td class="input">XLPE</td>
-            
-        </tr>
-        <tr>
-            <td class="label">Kabel Saiz 1</td>
-            <td class="input">185MM</td>
-        </tr>
-            <tr>
-            <td class="label">Suis No 2</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Suis Label 2</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Kabel Jenis 2</td>
-            <td class="input">XLPE</td>
-            
-        </tr>
-        <tr>
-            <td class="label">Kabel Saiz 2</td>
-            <td class="input">185MM</td>
-        </tr>
-            <tr>
-            <td class="label">Suis No 3</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Suis Label 3</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Kabel Jenis 3</td>
-            <td class="input">XLPE</td>
-            
-        </tr>
-        <tr>
-            <td class="label">Kabel Saiz 3</td>
-            <td class="input">185MM</td>
-        </tr>
-            <tr>
-            <td class="label">Suis No 4</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Suis Label 4</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Kabel Jenis 4</td>
-            <td class="input">XLPE</td>
-            
-        </tr>
-        <tr>
-            <td class="label">Kabel Saiz 4</td>
-            <td class="input">185MM</td>
-        </tr>
-            <tr>
-            <td class="label">Suis No 5</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Suis Label 5</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Kabel Jenis 5</td>
-            <td class="input">XLPE</td>
-            
-        </tr>
-        <tr>
-            <td class="label">Kabel Saiz 5</td>
-            <td class="input">185MM</td>
-        </tr>
-            <!-- Repeat similar structure for Suis No 2 to 5 -->
-        <tr>
-            <td class="label">Fius Saiz</td>
-            <td class="input">testtest</td>
-        </tr>
-        <tr>
-            <td class="label">CT Saiz Protection</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">CT Saiz Metering</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">SCADA Status</td>
-            <td class="input">yes</td>
-        </tr>
-        <tr>
-            <td class="label">Bekalan LV</td>
-            <td class="input">yes</td>
-        </tr>
-        <tr>
-            <td class="label">Bacaan Beban</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Genset</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Jenis LVDB</td>
-            <td class="input">DIN</td>
-        </tr>
-        <tr>
-            <td class="label">Keperluan Khas Kerja</td>
-            <td class="input">test</td>
-        </tr>
-       
-        
-        
-    </table>
-    <div class="footer">
-        <p>Susun atur Didalam Pencawang. Sila tandakan kedudukan Alatuis / Battery Charger / TX / RCB / RTU / EFI</p>
+                <li>2. Existing Switchgear
+                    <input type="checkbox" name="existing_switchgear" value="yes" checked disabled> Yes
+                    <input type="checkbox" name="existing_switchgear" value="no"  disabled> No
+                </li>
+                
+                
+                <li>3. Switchgear Nameplate
+                    <input type="checkbox" name="switchgear_nameplate" value="yes" checked disabled> Yes
+                    <input type="checkbox" name="switchgear_nameplate" value="no"  disabled> No
+                </li>
+                
+                <li>4. Distribution Board
+                    <input type="checkbox" name="distribution_board" value="yes"  disabled> Yes
+                    <input type="checkbox" name="distribution_board" value="no" checked disabled> No
+                </li>
+                
+                <li>5. Battery Charger
+                    <input type="checkbox" name="battery_charger" value="yes"  disabled> Yes
+                    <input type="checkbox" name="battery_charger" value="no" checked disabled> No
+                </li>
+                
+                <li>6. Battery Charger Nameplate
+                    <input type="checkbox" name="battery_charger_nameplate" value="yes"  disabled> Yes
+                    <input type="checkbox" name="battery_charger_nameplate" value="no" checked disabled> No
+                </li>
+                
+                <li>7. Wall / Ceiling Cable Tray Route (P/W)
+                    <input type="checkbox" name="ceiling_tray" value="yes"  disabled> Yes
+                    <input type="checkbox" name="ceiling_tray" value="no" checked disabled> No
+                </li>
+                
+                <li>8. Civil Work Location
+                    <input type="checkbox" name="civil_location" value="yes"  disabled> Yes
+                    <input type="checkbox" name="civil_location" value="no" checked disabled> No
+                </li>
+                
+            </ol>
+        </div>
+        <div class="checklist-right">
+            <ol start="9">
+                <li>9. Substation Entrance
+                    <input type="checkbox" name="substation_entrance"  disabled> Yes
+                    <input type="checkbox" name="substation_entrance" checked disabled> No
+                </li>
+                
+                <li>10. Cable Route
+                    <input type="checkbox" name="cable_route"  disabled> Yes
+                    <input type="checkbox" name="cable_route" checked disabled> No
+                </li>
+                
+                <li>11. Portable Genset Location
+                    <input type="checkbox" name="genset_location"  disabled> Yes
+                    <input type="checkbox" name="genset_location" checked disabled> No
+                </li>
+                
+                <li>12. Feeder and TX Cable
+                    <input type="checkbox" name="feeder_tx"  disabled> Yes
+                    <input type="checkbox" name="feeder_tx" checked disabled> No
+                </li>
+                
+                <li>13. Trench Inside View
+                    <input type="checkbox" name="trench_view"  disabled> Yes
+                    <input type="checkbox" name="trench_view" checked disabled> No
+                </li>
+                
+                <li>14. RTU Remote Terminal Unit
+                    <input type="checkbox" name="rtu"  disabled> Yes
+                    <input type="checkbox" name="rtu" checked disabled> No
+                </li>
+                
+                <li>15. RCB Remote Control Box
+                    <input type="checkbox" name="rcb" checked disabled> Yes
+                    <input type="checkbox" name="rcb"  disabled> No
+                </li>
+                
+                <li>16. EFI Earth Fault Indicator
+                    <input type="checkbox" name="efi" checked disabled> Yes
+                    <input type="checkbox" name="efi"  disabled> No
+                </li>
+            </ol>
+        </div>
     </div>
 </div>
 
+
+<div class="signature-section">
+    <div class="prepared">
+        <p>Disediakan Oleh:</p>
+        
+        <p>Nama: <br>Jawatan: </p>
+    </div>
+    <div class="reviewed">
+        <p>Disemak Oleh:</p>
+        <div class="signature-box">Signature 2</div>
+        <p>Nama:<br>Jawatan:</p>
+    </div>
+</div>
+
+
+<div>
+       
+    <div class="header" style="padding-top: 150px">
+        <div class="logo">
+            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/web-images/tnblogo.png' alt="TNB Logo">
+
+            <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
+            Level 2, Jalan Air Hitam, Kawasan 16,<br>
+            40000 Shah Alam, Selangor</p>
         </div>
-
-        <!-- jQuery -->
-<script src="http://127.0.0.1:8000/plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="http://127.0.0.1:8000/plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-
-<!-- Bootstrap 4 -->
-<script src="http://127.0.0.1:8000/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-
-<!-- daterangepicker -->
-<script src="http://127.0.0.1:8000/plugins/moment/moment.min.js"></script>
-<script src="http://127.0.0.1:8000/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="http://127.0.0.1:8000/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-
-<!-- Summernote -->
-
-<!-- overlayScrollbars -->
-
-<!-- AdminLTE App -->
-<script src="http://127.0.0.1:8000/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-
- <script src="http://127.0.0.1:8000/dist/js/libs/typeahead.min.js"></script>
-
+          <div class="logo">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
+                <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
+               NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
+                    </div>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-</body>
+        <div class="substation-info">           
+            <p><strong>SUBSTATION NAME:</strong> hellolks</p>
+            <p><strong>NO FUNCTIONAL LOCATION:</strong> JJBUPJCOEH00621</p>
+        </div>
 
-</html>
+        <h2 class="section-title"><u>PICTURE OF SITE SURVEY</u></h2>
+
+        <div class="pictures-grid">
+                                                                        <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/substation_fl_image1-1726256566.PNG' alt="Substation fl image1">
+                            <p>Substation fl image1</p>
+                        </div>
+                        
+                                                                                <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/substation_fl_image2-1726256566.PNG' alt="Substation fl image2">
+                            <p>Substation fl image2</p>
+                        </div>
+                        
+                                                                                <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/existing_switchgear_image1-1726256566.PNG' alt="Existing switchgear image1">
+                            <p>Existing switchgear image1</p>
+                        </div>
+                        
+                                                                                <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/existing_switchgear_image2-1726256566.PNG' alt="Existing switchgear image2">
+                            <p>Existing switchgear image2</p>
+                        </div>
+                        
+                                                                                <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/switchgear_nameplate_image1-1726256566.PNG' alt="Switchgear nameplate image1">
+                            <p>Switchgear nameplate image1</p>
+                        </div>
+                        
+                                                                                <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/switchgear_nameplate_image2-1726256566.PNG' alt="Switchgear nameplate image2">
+                            <p>Switchgear nameplate image2</p>
+                        </div>
+                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/rcb_image1-1726256566.PNG' alt="Rcb image1">
+                            <p>Rcb image1</p>
+                        </div>
+                        
+                                                                                <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/rcb_image2-1726256566.PNG' alt="Rcb image2">
+                            <p>Rcb image2</p>
+                        </div>
+                        
+                                                                                <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/efi_image1-1726256566.PNG' alt="Efi image1">
+                            <p>Efi image1</p>
+                        </div>
+                        
+                                                                                <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/efi_image2-1726256566.PNG' alt="Efi image2">
+                            <p>Efi image2</p>
+                        </div>
+                        
+                                                                                <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/other_image1-1726256566.PNG' alt="Other image1">
+                            <p>Other image1</p>
+                        </div>
+                        
+                                                                                <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/other_image2-1726256566.PNG' alt="Other image2">
+                            <p>Other image2</p>
+                        </div>
+                        
+                                                                                <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/other_image3-1726256566.PNG' alt="Other image3">
+                            <p>Other image3</p>
+                        </div>
+                        
+                                                                                <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/other_image4-1726256566.PNG' alt="Other image4">
+                            <p>Other image4</p>
+                        </div>
+                        
+                                                        
+                    </div>
+        
+        
+    </div>
+

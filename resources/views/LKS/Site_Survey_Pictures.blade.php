@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('content')
+
 
 <style>
  .header {
@@ -110,6 +109,313 @@
             padding-top: 10px; /* Space between line and description */
         }
 
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+        .logo {
+            border: 1px solid black;
+            padding: 10px;
+            font-size: 12px;
+            width: 45%;
+        }
+        .content {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 200px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+       
+
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td[colspan="5"] {
+            font-weight: bold;
+            background-color: #f9f9f9;
+        }
+
+        .logo img {
+            width: 100px;
+        }
+
+        .title {
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .checklist-container {
+            display: flex;
+            
+        }
+
+        .checklist-left, .checklist-right {
+            flex: 1;
+            margin: 0 30px; 
+        }
+
+        .checklist-left {
+            margin-right: 40px; 
+        }
+
+        .checklist-right {
+            margin-left: 40px; 
+        }
+
+        .checklist {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap; 
+        }
+
+        ol {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px; 
+            font-size: 14px; 
+        }
+
+        li label {
+            margin-right: 20px; 
+            margin-left: 10px; 
+        }
+
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .prepared, .reviewed {
+            width: 45%;
+            text-align: left;
+        }
+
+        .signature-box {
+            border: 1px solid #000;
+            width: 150px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px; 
+            accent-color: black;
+            cursor: not-allowed;
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #000;
+            background-color: #fff;
+            position: relative;
+            vertical-align: middle; 
+        }
+
+        input[type="checkbox"]:checked::before {
+            content: "✓";
+            color: #000;
+            font-weight: bold;
+            font-size: 14px; 
+            position: absolute;
+            left: 2px;
+            top: -2px;
+        }
+
+        input[type="checkbox"].yes {
+            margin-right: 20px; 
+        }
+
+        input[type="checkbox"].no {
+            margin-right: 0; 
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            
+        }
+
+       
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        header img {
+            max-height: 100px;
+        }
+
+        .substation-info {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .pictures-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 items per row */
+            gap: 20px; /* Space between items */
+        }
+
+        .picture-item {
+            padding: 10px;
+            border: 1px solid black; /* Simple black border */
+            text-align: center; /* Center align text */
+        }
+
+        .picture-item img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px; /* Space between image and description */
+            border: 1px solid black; /* Black border around image */
+        }
+
+        .picture-item p {
+            font-size: 14px;
+            color: #000; /* Black text color */
+            font-weight: normal; /* Normal weight for description text */
+            border-top: 1px solid black; /* Black line above description */
+            padding-top: 10px; /* Space between line and description */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #000;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .signature {
+            text-align: center;
+        }
+        .stamp {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .image-container {
+            max-width: 100%;
+            max-height: 100vh;
+        }
+        img {
+            max-width: 100%;
+            max-height: 100vh;
+            object-fit: contain;
+            
+        }
+
+        .pictures-grids {
+            padding-top: 300px;
+            margin: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-containers {
+            text-align: center;
+            margin-bottom: 50px; /* Adjust spacing between images */
+        }
+
+        .gallery-images {
+            max-width: 90%;
+            max-height: 80vh;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .image-descriptions {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .checkboxs {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+    border: 1px solid #000;
+}
+
+.checkeds {
+    background-color: #000;
+}
+
+.headers img {
+    max-width: 50%; /* Scale down the image to 80% of its container's width */
+    /* Maintain aspect ratio */
+    margin-bottom: 20px; /* Space between image and heading */
+}
+
 
 
 </style>
@@ -139,7 +445,7 @@
 $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
 @endphp
 
-<div class="header" style="padding-top: 100px">
+<div class="header" style="">
     <div class="logo">
         <img src="{{ URL::asset('assets/web-images/tnblogo.png') }}" alt="TNB Logo">
 
@@ -279,9 +585,9 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
 
 <div>
        
-    <div class="header" style="padding-top: 200px">
+    <div class="header" style="padding-top: 150px">
         <div class="logo">
-            <img src="{{ URL::asset('assets/web-images/tnblogo.png') }}" alt="TNB Logo">
+            <img src='/assets/web-images/tnblogo.png' alt="TNB Logo">
 
             <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
             Level 2, Jalan Air Hitam, Kawasan 16,<br>
@@ -289,17 +595,17 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
         </div>
           <div class="logo">
             @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
-                <img src="{{ URL::asset('assets/web-images/main-logo.png') }}" alt="Aerosynergy Solutions Logo">
+                <img src='/assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
                 <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
                NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
             @elseif($projectName === 'ARAS-JOHOR')
-                <img src="{{ URL::asset('assets/web-images/araslogo.png') }}" alt="ARAS Kejuruteraan Logo">
+                <img src='/assets/web-images/araslogo.png' alt="ARAS Kejuruteraan Logo">
                 <p>ARAS KEJURUTERAAN SDN BHD<br>
                 1st Floor No 72, Jalan SS 21/1, Damansara<br>
                 Utama, 47400 Petaling Jaya, Selangor</p>
             @else
                 <!-- Default logo or empty state -->
-                <img src="{{ URL::asset('assets/web-images/defaultlogo.png') }}" alt="Default Logo">
+                <img src='/assets/web-images/defaultlogo.png' alt="Default Logo">
                 <p>Default Company Name<br>
                 Default Address</p>
             @endif
@@ -318,9 +624,10 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
                 @foreach($imageFields as $field)
                     @if(!empty($pictureData->$field))
                         <div class="picture-item">
-                            <img src="{{ asset($pictureData->$field) }}" alt="{{ ucfirst(str_replace('_', ' ', $field)) }}">
+                            <img src='/{{ $pictureData->$field }}' alt="{{ ucfirst(str_replace('_', ' ', $field)) }}">
                             <p>{{ ucfirst(str_replace('_', ' ', $field)) }}</p>
                         </div>
+                        
                     @endif
                 @endforeach
             @endif
@@ -329,7 +636,7 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
                 @foreach($toolboxImageFields as $field)
                     @if(!empty($toolbox->$field))
                         <div class="picture-item">
-                            <img src="{{ asset($toolbox->$field) }}" alt="{{ ucfirst(str_replace('_', ' ', $field)) }}">
+                            <img src='/{{$toolbox->$field }}' alt="{{ ucfirst(str_replace('_', ' ', $field)) }}">
                             <p>{{ ucfirst(str_replace('_', ' ', $field)) }}</p>
                         </div>
                     @endif
@@ -340,4 +647,3 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
         
     </div>
 
-    @endsection

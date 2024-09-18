@@ -149,10 +149,55 @@ class LKSController extends Controller{
     
 
     public function siteSurveyPics($id){
+      $usr_info = \Auth::user();
+      $projectName = $usr_info->project;
         $survey = SiteSurvey::findOrFail($id);
+        $pictureData = SitePicture::where('site_survey_id', $survey->id)->first();
+
       //$toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->get()[0];
     //  return $toolboxtalk;
-    return view('LKS.site_survey', compact('survey'));
+    $html=  view('LKS.Site_Survey_Pictures', compact('survey','pictureData','projectName'))->render();
+    $html = preg_replace_callback(
+      '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
+      function ($matches) {
+          $path = public_path(ltrim($matches[2], '/'));
+          return str_replace($matches[2], $path, $matches[0]);
+      },
+      $html
+  );
+
+  $directory = 'assets/debug_html';
+
+  $filename = 'Site_survey_info' . $id . '.html';
+
+  $htmlFilePath=$directory . '/' . $filename;
+
+  if (!file_exists($directory)) {
+    mkdir($directory, 0755, true);
+}
+file_put_contents($htmlFilePath, $html);
+
+$pdfFilePath='assets/debug_html'.'/'.'Site_Survey_Pictures_' . $id . '.pdf';
+
+$wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
+// $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+$command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+
+// Execute the command
+$output = shell_exec($command);
+
+// Check if the PDF was generated
+if (file_exists($pdfFilePath)) {
+    // Return the PDF file for download
+    return response()->download($pdfFilePath, 'Site_Survey_Pictures.pdf')->deleteFileAfterSend(true);
+    } else {
+        // If PDF generation failed, return the error output
+        return response()->json([
+            'error' => 'PDF generation failed',
+            'output' => $output
+        ], 500);
+    }
+
     }
 
     public function siteSurveyAttachments($id){
