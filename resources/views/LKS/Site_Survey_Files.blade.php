@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('content')
 
 
 <style>
@@ -42,6 +43,8 @@
     @endforeach
 </div>
 
+
+@endsection
 
 
 
