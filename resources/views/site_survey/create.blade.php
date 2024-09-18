@@ -5,6 +5,9 @@
 .dropdown {
     position: relative;
 }
+.labels{
+    max-width: 200px;
+}
 
 .dropdown-menu {
     position: absolute;
@@ -362,25 +365,25 @@
 
         <!-- Repeat for suis_no1, suis_label1, kabel_jenis1, kabel_saiz1 -->
         @for ($i = 1; $i <= 5; $i++)
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
                 {{-- <label for="suis_no{{ $i }}">Suis No {{ $i }}</label> --}}
-                <md-outlined-text-field type="text" class="label" label="Suis No {{ $i }}"  id="suis_no{{ $i }}" name="suis_no{{ $i }}" value="{{ $siteSurvey->{"suis_no{$i}"} ?? old("suis_no{$i}") }}">
+                <md-outlined-text-field type="text" class="labels" label="Suis No {{ $i }}"  id="suis_no{{ $i }}" name="suis_no{{ $i }}" value="{{ $siteSurvey->{"suis_no{$i}"} ?? old("suis_no{$i}") }}">
             </div>
         </div>
 
-        <div class="col-md-4"> 
+        <div class="col-md-3"> 
                     <div class="form-group">
                         {{-- <label for="suis_label{{ $i }}">Suis Label {{ $i }}</label> --}}
-                        <md-outlined-text-field type="text" label="Suis Label {{ $i }}" class="label"  id="suis_label{{ $i }}" name="suis_label{{ $i }}" value="{{ $siteSurvey->{"suis_label{$i}"} ?? old("suis_label{$i}") }}">
+                        <md-outlined-text-field type="text" label="Suis Label {{ $i }}" class="labels"  id="suis_label{{ $i }}" name="suis_label{{ $i }}" value="{{ $siteSurvey->{"suis_label{$i}"} ?? old("suis_label{$i}") }}">
                     </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
                 {{-- <label for="kabel_jenis{{ $i }}">Kabel Jenis {{ $i }}</label> --}}
                 <!-- <input type="text" class="form-control" id="kabel_jenis{{ $i }}" name="kabel_jenis{{ $i }}" value="{{ $siteSurvey->{"kabel_jenis{$i}"} ?? old("kabel_jenis{$i}") }}"> -->
-            <md-outlined-select class="label" label="Kabel Jenis {{ $i }}" id="kabel_jenis{{ $i }}" name="kabel_jenis{{ $i }}"  value="{{ $siteSurvey->{"kabel_jenis{$i}"} ?? old("kabel_jenis{$i}") }}">
+            <md-outlined-select class="labels" label="Kabel Jenis {{ $i }}" id="kabel_jenis{{ $i }}" name="kabel_jenis{{ $i }}"  value="{{ $siteSurvey->{"kabel_jenis{$i}"} ?? old("kabel_jenis{$i}") }}">
                 {{-- <option value="">Jenis Perkakasuis</option> --}}
                 <md-select-option value="PILC" {{ (old('kabel_jenis'.$i, $siteSurvey->{"kabel_jenis{$i}"} ?? '') == 'PILC') ? 'selected' : '' }}>PILC</md-select-option>
                 <md-select-option value="XLPE" {{ (old('kabel_jenis'.$i, $siteSurvey->{"kabel_jenis{$i}"} ?? '') == 'XLPE') ? 'selected' : '' }}>XLPE</md-select-option>
@@ -388,11 +391,11 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
                         {{-- <label for="kabel_saiz{{ $i }}">Kabel Saiz {{ $i }}</label> --}}
                         <!-- <input type="text" class="form-control" id="kabel_saiz{{ $i }}" name="kabel_saiz{{ $i }}" value="{{ $siteSurvey->{"kabel_saiz{$i}"} ?? old("kabel_saiz{$i}") }}"> -->
-            <md-outlined-select class="label" label="Kabel Saiz {{ $i }}" id="kabel_saiz{{ $i }}" name="kabel_saiz{{ $i }}" value="{{ $siteSurvey->{"kabel_saiz{$i}"} ?? old("kabel_saiz{$i}") }}">
+            <md-outlined-select class="labels" label="Kabel Saiz {{ $i }}" id="kabel_saiz{{ $i }}" name="kabel_saiz{{ $i }}" value="{{ $siteSurvey->{"kabel_saiz{$i}"} ?? old("kabel_saiz{$i}") }}">
                 {{-- <md-select-option value="">Jenis Perkakasuis</md-select-option> --}}
                 <md-select-option value="70MM" {{ (old('kabel_saiz'.$i, $siteSurvey->{"kabel_saiz{$i}"} ?? '') == '70MM') ? 'selected' : '' }}>70MM</md-select-option>
                 <md-select-option value="185MM" {{ (old('kabel_saiz'.$i, $siteSurvey->{"kabel_saiz{$i}"} ?? '') == '185MM') ? 'selected' : '' }}>185MM</md-select-option>
@@ -511,7 +514,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <!-- Jenis LVDB Label -->
-                <md-label style="display: block; margin-bottom: 5px;">Jenis LVDB:</md-label>
+                <md-label style="display: block; margin-top:-20px">Jenis LVDB:</md-label>
         
                 <!-- Tabs for Jenis LVDB -->
                 <md-tabs id="tab-jenis-lvdb" class="toggle-btn">
@@ -1120,7 +1123,7 @@ function updateButtons() {
 
     function konfiDisable(props){
         //  alert(prop)
-        if(props=='RMU'){
+        if(props=='RMU' || props=="CSU"){
             $("#konfigurasi").prop('disabled',false)
         }else{
             $("#konfigurasi").prop('disabled',true)
