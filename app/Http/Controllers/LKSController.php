@@ -156,6 +156,7 @@ class LKSController extends Controller{
 
       //$toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->get()[0];
     //  return $toolboxtalk;
+  //  return view('LKS.Site_Survey_Pictures', compact('survey','pictureData','projectName'));
     $html=  view('LKS.Site_Survey_Pictures', compact('survey','pictureData','projectName'))->render();
     $html = preg_replace_callback(
       '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',

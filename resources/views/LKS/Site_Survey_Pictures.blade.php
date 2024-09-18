@@ -445,34 +445,34 @@
 $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
 @endphp
 
-<div class="header" style="">
-    <div class="logo">
-        <img src="{{ URL::asset('assets/web-images/tnblogo.png') }}" alt="TNB Logo">
+<div class="header" style="padding-top: 150px">
+        <div class="logo">
+            <img src='/assets/web-images/tnblogo.png' alt="TNB Logo">
 
-        <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
-        Level 2, Jalan Air Hitam, Kawasan 16,<br>
-        40000 Shah Alam, Selangor</p>
+            <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
+            Level 2, Jalan Air Hitam, Kawasan 16,<br>
+            40000 Shah Alam, Selangor</p>
+        </div>
+          <div class="logo">
+            @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
+                <img src='/assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
+                <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
+               NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
+            @elseif($projectName === 'ARAS-JOHOR')
+                <img src='/assets/web-images/araslogo.png' alt="ARAS Kejuruteraan Logo">
+                <p>ARAS KEJURUTERAAN SDN BHD<br>
+                1st Floor No 72, Jalan SS 21/1, Damansara<br>
+                Utama, 47400 Petaling Jaya, Selangor</p>
+            @else
+                <!-- Default logo or empty state -->
+                <img src='/assets/web-images/defaultlogo.png' alt="Default Logo">
+                <p>Default Company Name<br>
+                Default Address</p>
+            @endif
+        </div>
     </div>
-   
-    <div class="logo">
-        @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
-            <img src="{{ URL::asset('assets/web-images/main-logo.png') }}" alt="Aerosynergy Solutions Logo">
-            <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
-           NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
-        @elseif($projectName === 'ARAS-JOHOR')
-            <img src="{{ URL::asset('assets/web-images/araslogo.png') }}" alt="ARAS Kejuruteraan Logo">
-            <p>ARAS KEJURUTERAAN SDN BHD<br>
-            1st Floor No 72, Jalan SS 21/1, Damansara<br>
-            Utama, 47400 Petaling Jaya, Selangor</p>
-        @else
-            <!-- Default logo or empty state -->
-            <img src="{{ URL::asset('assets/web-images/defaultlogo.png') }}" alt="Default Logo">
-            <p>Default Company Name<br>
-            Default Address</p>
-        @endif
-    </div>
-   
-</div>
+
+
 <h1 class="title">PICTURE LIST FORM<br>(SITE VISIT)</h1>
 
 <div class="checklist-container">
