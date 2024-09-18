@@ -115,7 +115,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <md-label style="display: block; margin-bottom: 5px;">
-                    {{ ucwords(str_replace('_', ' ', $field)) }}:
+                    {{ ucwords(str_replace(['ppd_', '_'], ['PPD ', ' '], $field)) }}::
                 </md-label>
                 <md-tabs id="tab-{{ $field }}" class="toggle-btn">
                     <!-- Yes Radio Button -->

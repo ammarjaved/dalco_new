@@ -110,12 +110,13 @@
 
    
     <!-- PPD Safety fields -->
+    <h4><span style="background-color: #fef7ff; color: #8e44ad; padding: 0 5px;">PPD</span></h4>
     <div class="row">
         @foreach(['ppd_safety_helment', 'ppd_safety_vest', 'ppd_safety_shoes', 'ppd_safety'] as $field)
         <div class="col-md-6">
             <div class="form-group">
                 <md-label style="display: block; margin-bottom: 5px;">
-                    {{ ucwords(str_replace('_', ' ', $field)) }}:
+                    {{ ucwords(str_replace(['ppd_', '_'], ['PPD ', ' '], $field)) }}:
                 </md-label>
                 <md-tabs id="tab-{{ $field }}" class="toggle-btn">
                     <!-- Yes Tab -->
