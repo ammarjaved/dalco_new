@@ -208,6 +208,7 @@ if (file_exists($pdfFilePath)) {
     }
 
      function Site_surveyAjax ()
+     
     {
       $.ajax({
         url:  '/ss_attachments'+ ,
