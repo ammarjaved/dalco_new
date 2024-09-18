@@ -96,7 +96,7 @@
 
 
 
-<div class="form-container">
+{{-- <div class="form-container">
     <div class="header" style="padding-top: 150px">
         <div class="logo">
             <img src="{{ URL::asset('assets/web-images/tnblogo.png') }}" alt="TNB Logo">
@@ -122,7 +122,7 @@
                 Default Address</p>
             @endif
         </div>
-    </div>
+    </div> --}}
 
     
     <h1 style="margin-left: -150px">SENARAI SEMAK LAWATAN TAPAK PROJEK SCADA DA</h1>

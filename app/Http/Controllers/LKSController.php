@@ -19,6 +19,7 @@ use App\Models\ImageShutdownAttachments;
 use App\Models\SAT;
 use App\Models\SATAttachments; 
 use Exception;
+use PDF;
 
 class LKSController extends Controller{
 
@@ -33,19 +34,118 @@ class LKSController extends Controller{
 
 
     public function siteSurveyToolboxTalk($id){
-        $survey = SiteSurvey::findOrFail($id);
-      $toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->get()[0];
+    $survey = SiteSurvey::findOrFail($id);
+    $toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->get()[0];
     //  return $toolboxtalk;
-    return view('LKS.site_survey_tbk', compact('toolboxtalk','survey'));
-    }
+   // $appUrl = config('app.url');
+
+
+
+    $html = view('LKS.site_survey_tbk', compact('toolboxtalk','survey'))->render();
+    $html = preg_replace_callback(
+      '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
+      function ($matches) {
+          $path = public_path(ltrim($matches[2], '/'));
+          return str_replace($matches[2], $path, $matches[0]);
+      },
+      $html
+  );
+
+    $directory = 'assets/debug_html';
+
+    $filename = 'site_survey_tbk_' . $id . '.html';
+
+    $htmlFilePath=$directory . '/' . $filename;
+
+    if (!file_exists($directory)) {
+      mkdir($directory, 0755, true);
+  }
+  file_put_contents($htmlFilePath, $html);
+
+
+
+
+  $pdfFilePath='assets/debug_html'.'/'.'site_survey_tbk_' . $id . '.pdf';
+
+  $wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
+ // $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+ $command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+
+  // Execute the command
+  $output = shell_exec($command);
+
+  // Check if the PDF was generated
+  if (file_exists($pdfFilePath)) {
+      // Return the PDF file for download
+      return response()->download($pdfFilePath, 'site_survey_tbk.pdf')->deleteFileAfterSend(true);
+      } else {
+          // If PDF generation failed, return the error output
+          return response()->json([
+              'error' => 'PDF generation failed',
+              'output' => $output
+          ], 500);
+      }
+
+
+  }
 
 
     public function siteSurvey($id){
+      $usr_info = \Auth::user();
+      $projectName = $usr_info->project;
+     
         $survey = SiteSurvey::findOrFail($id);
+
       //$toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->get()[0];
     //  return $toolboxtalk;
-    return view('LKS.site_survey', compact('survey'));
+    $html=  view('LKS.Site_Survey_Info', compact('survey','projectName'))->render();
+  
+    $html = preg_replace_callback(
+      '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
+      function ($matches) {
+          $path = public_path(ltrim($matches[2], '/'));
+          return str_replace($matches[2], $path, $matches[0]);
+      },
+      $html
+  );
+    $directory = 'assets/debug_html';
+
+    $filename = 'Site_survey_info' . $id . '.html';
+
+    $htmlFilePath=$directory . '/' . $filename;
+
+    if (!file_exists($directory)) {
+      mkdir($directory, 0755, true);
+  }
+  file_put_contents($htmlFilePath, $html);
+
+  $pdfFilePath='assets/debug_html'.'/'.'Site_survey_info_' . $id . '.pdf';
+
+  $wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
+ // $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+ $command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+
+  // Execute the command
+  $output = shell_exec($command);
+
+  // Check if the PDF was generated
+  if (file_exists($pdfFilePath)) {
+      // Return the PDF file for download
+      return response()->download($pdfFilePath, 'Site_survey_info.pdf')->deleteFileAfterSend(true);
+      } else {
+          // If PDF generation failed, return the error output
+          return response()->json([
+              'error' => 'PDF generation failed',
+              'output' => $output
+          ], 500);
+      }
+
+
+
     }
+
+
+    
 
     public function siteSurveyPics($id){
         $survey = SiteSurvey::findOrFail($id);

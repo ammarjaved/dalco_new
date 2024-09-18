@@ -40,7 +40,7 @@
                             </tr>
 
                             <tr>
-                                <th>Site Survey Information</th><td><a href="" target="_blank">Download Site Survey Info</a></td> 
+                                <th>Site Survey Information</th><td><a href="/ss_info/{{$id}}" target="_blank">Download Site Survey Info</a></td> 
                             </tr>
 
                             <tr>
