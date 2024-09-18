@@ -153,6 +153,7 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
+    'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
 
     'providers' => [
 
@@ -213,5 +214,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Image' => Intervention\Image\Facades\Image::class,
     ])->toArray(),
+
+    Barryvdh\Snappy\ServiceProvider::class,
 
 ];
