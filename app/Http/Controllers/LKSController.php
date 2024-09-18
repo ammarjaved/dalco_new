@@ -169,7 +169,7 @@ class LKSController extends Controller{
 
   $directory = 'assets/debug_html';
 
-  $filename = 'Site_survey_info' . $id . '.html';
+  $filename = 'Site_survey_pics' . $id . '.html';
 
   $htmlFilePath=$directory . '/' . $filename;
 
