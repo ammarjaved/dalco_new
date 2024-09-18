@@ -93,13 +93,13 @@ class LKSController extends Controller{
     public function siteSurvey($id){
       $usr_info = \Auth::user();
       $projectName = $usr_info->project;
-     
+     //return $projectName;
         $survey = SiteSurvey::findOrFail($id);
 
       //$toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->get()[0];
     //  return $toolboxtalk;
+   // return view('LKS.Site_Survey_Info', compact('survey','projectName'));
     $html=  view('LKS.Site_Survey_Info', compact('survey','projectName'))->render();
-  
     $html = preg_replace_callback(
       '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
       function ($matches) {
@@ -108,6 +108,7 @@ class LKSController extends Controller{
       },
       $html
   );
+    
     $directory = 'assets/debug_html';
 
     $filename = 'Site_survey_info' . $id . '.html';
