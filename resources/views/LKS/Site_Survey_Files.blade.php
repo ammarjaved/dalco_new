@@ -1,10 +1,9 @@
-@extends('layouts.app')
-@section('content')
+
 
 
 <style>
    .pictures-grids {
-            padding-top: 300px;
+           
             margin: 0;
             width: 100%;
             display: flex;
@@ -44,7 +43,15 @@
 </div>
 
 
-@endsection
+<script>
+
+    
+
+
+</script>
+
+
+
 
 
 

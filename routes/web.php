@@ -212,6 +212,7 @@ Route::get('/ss_tbk/{id}', [LKSController::class, 'siteSurveyToolboxTalk'])->nam
 Route::get('/ss_info/{id}', [LKSController::class, 'siteSurvey'])->name('ss_info');
 Route::get('/ss_pics/{id}', [LKSController::class, 'siteSurveyPics'])->name('ss_pics');
 
+Route::get('/ss_attachments/{id}', [LKSController::class, 'siteSurveyAttachments'])->name('ss_attachments');
 
 Route::get('/LKS/create/{id}', [LKSController::class, 'create'])->name('LKS.create');
 
