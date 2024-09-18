@@ -208,23 +208,7 @@ if (file_exists($pdfFilePath)) {
     // }
     }
 
-     function Site_surveyAjax ()
      
-    {
-      $.ajax({
-        url:  '/ss_attachments'+ ,
-        dataType: 'JSON',
-        method: 'GET',
-        success: function(data) {
-            
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error("AJAX error:", textStatus, errorThrown);
-            alert("Error fetching material data. Please try again.");
-        }
-    });
-
-    }
 
     public function create($id)
     {

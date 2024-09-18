@@ -15,11 +15,7 @@
     );
 @endphp
 {!! $navContent !!}
-<style>
-  .d-flex{
-    padding-top: 20px;
-  }
-</style>    
+
     <div class="container">
         <h2>LKS</h2>
 
@@ -28,9 +24,9 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="myTable" class="table table-bordered table-hover data-table">
+                    <table  class="table table-bordered table-hover data-table">
                         
-                        <tbody>
+                        <tbody id="myTable1">
                             <h3>Site Survey Collection</h3>
                             <tr>
                               <th>Site Survey ToolboxTalk</th><td><a href="/ss_tbk/{{$id}}" target="_blank">Download Site survey Toolbox Talk</a></td> 
@@ -44,7 +40,7 @@
                             </tr>
 
                             <tr>
-                                <th>Site Survey Files</th><td><a href="/ss_attachments/{{$id}}" target="_blank">Download Site Survey Files</a></td> 
+                                <th colspan="2" style="text-align: center;">Site Survey Files</th>
                             </tr>
                         </tbody>
                     </table>
@@ -145,8 +141,41 @@
     </div>
 @endsection
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
+<script>
+function Site_surveyAjax ()  
+     {
+       $.ajax({
+         url:  '/ss_attachments/{{$id}}' ,
+         dataType: 'JSON',
+         method: 'GET',
+         success: function(data) {
+          var str='';
+         for(var i=0;i<data.length;i++){
+        
+          str=str+'<tr><th>'+data[i].file_name+'</th><td><a href="/'+data[i].file_path+'" download>download</a></td><tr>'
+          
+         }
 
+         $("#myTable1").append(str);
+
+         },
+         error: function(jqXHR, textStatus, errorThrown) {
+             console.error("AJAX error:", textStatus, errorThrown);
+             alert("Error fetching material data. Please try again.");
+         }
+     });
+ 
+     }
+$(document).ready(function(){
+
+  Site_surveyAjax ()
+
+});
+
+
+ </script> 
 
 
