@@ -60,7 +60,7 @@
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
-                        <li class="breadcrumb-item"><a href="{{ route('pre-cabling.index') }}">index</a></li>
+                        <li class="breadcrumb-item"><a href="">index</a></li>
                         <li class="breadcrumb-item active">create</li>
                     </ol>
                 </div>

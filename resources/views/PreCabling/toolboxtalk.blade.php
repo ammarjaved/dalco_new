@@ -60,7 +60,7 @@
             </div>
             <div class="col-sm-6 text-right">
                 <ol class="breadcrumb float-right">
-                    <li class="breadcrumb-item"><a href="{{ route('pre-cabling.index') }}">index</a></li>
+                    <li class="breadcrumb-item"><a href="">index</a></li>
                     <li class="breadcrumb-item active">create</li>
                 </ol>
             </div>
@@ -108,8 +108,8 @@
             <div class="form-group">
                 <md-label for="{{ $field }}">{{ ucwords(str_replace('_', ' ', $field)) }}</md-label><br>
     
-                <!-- Hidden input to ensure 'no' is submitted by default if nothing is selected -->
-                <input type="hidden" name="{{ $field }}" value="no">
+                <!-- Hidden input to ensure 'yes' is submitted by default if nothing is selected -->
+                <input type="hidden" name="{{ $field }}" value="yes">
     
                 <!-- Tabs for Yes/No -->
                 <md-tabs id="tab-{{ $field }}" class="toggle-btn">
@@ -118,7 +118,7 @@
                         value="yes" 
                         id="tab-{{ $field }}-yes"
                         onclick="document.getElementById('{{ $field }}_yes').checked = true"
-                        {{ ($toolboxTalk->$field ?? old($field, 'no')) === 'yes' ? 'active' : '' }}
+                        {{ ($toolboxTalk->$field ?? old($field, 'yes')) !== 'no' ? 'active' : '' }}
                     >
                         Yes
                     </md-secondary-tab>
@@ -128,7 +128,7 @@
                         value="no" 
                         id="tab-{{ $field }}-no"
                         onclick="document.getElementById('{{ $field }}_no').checked = true"
-                        {{ ($toolboxTalk->$field ?? old($field, 'no')) === 'no' ? 'active' : '' }}
+                        {{ ($toolboxTalk->$field ?? old($field, 'yes')) === 'no' ? 'active' : '' }}
                     >
                         No
                     </md-secondary-tab>
@@ -136,10 +136,10 @@
     
                 <!-- Hidden radio buttons to maintain functionality -->
                 <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="display:none;" 
-                    {{ ($toolboxTalk->$field ?? old($field)) === 'yes' ? 'checked' : '' }}>
-
+                    {{ ($toolboxTalk->$field ?? old($field, 'yes')) !== 'no' ? 'checked' : '' }}>
+    
                 <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="display:none;" 
-                    {{ ($toolboxTalk->$field ?? old($field)) === 'no' ? 'checked' : '' }}>
+                    {{ ($toolboxTalk->$field ?? old($field, 'yes')) === 'no' ? 'checked' : '' }}>
             </div>
         </div>
         @endforeach
@@ -149,47 +149,47 @@
 
     <!-- Equipment fields -->
     <h4><span style="background-color: #fef7ff; color: #8e44ad; padding: 0 5px;">EQUIPMENT & INSTRUMENT</span></h4>
-<div class="row">
-    @foreach(['equipment_condition', 'instrument_condition', 'instrument_kit_condition'] as $field)
-    <div class="col-md-6">
-        <div class="form-group">
-            <md-label for="{{ $field }}">{{ ucwords(str_replace('_', ' ', $field)) }}</md-label><br>
-
-            <!-- Hidden input to ensure 'no' is submitted by default if nothing is selected -->
-            <input type="hidden" name="{{ $field }}" value="no">
-
-            <!-- Tabs for Yes/No -->
-            <md-tabs id="tab-{{ $field }}" class="toggle-btn">
-                <!-- Yes Tab -->
-                <md-secondary-tab 
-                    value="yes" 
-                    id="tab-{{ $field }}-yes"
-                    onclick="document.getElementById('{{ $field }}_yes').checked = true"
-                    {{ ($toolboxTalk->$field ?? old($field, 'no')) === 'yes' ? 'active' : '' }}
-                >
-                    Yes
-                </md-secondary-tab>
-
-                <!-- No Tab -->
-                <md-secondary-tab 
-                    value="no" 
-                    id="tab-{{ $field }}-no"
-                    onclick="document.getElementById('{{ $field }}_no').checked = true"
-                    {{ ($toolboxTalk->$field ?? old($field, 'no')) === 'no' ? 'active' : '' }}
-                >
-                    No
-                </md-secondary-tab>
-            </md-tabs>
-
-            <!-- Hidden radio buttons to maintain functionality -->
-            <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="display:none;" 
-                {{ ($toolboxTalk->$field ?? old($field)) === 'yes' ? 'checked' : '' }}>
-            <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="display:none;" 
-                {{ ($toolboxTalk->$field ?? old($field)) === 'no' ? 'checked' : '' }}>
+    <div class="row">
+        @foreach(['equipment_condition', 'instrument_condition', 'instrument_kit_condition'] as $field)
+        <div class="col-md-6">
+            <div class="form-group">
+                <md-label for="{{ $field }}">{{ ucwords(str_replace('_', ' ', $field)) }}</md-label><br>
+    
+                <!-- Hidden input to ensure 'yes' is submitted by default if nothing is selected -->
+                <input type="hidden" name="{{ $field }}" value="yes">
+    
+                <!-- Tabs for Yes/No -->
+                <md-tabs id="tab-{{ $field }}" class="toggle-btn">
+                    <!-- Yes Tab -->
+                    <md-secondary-tab 
+                        value="yes" 
+                        id="tab-{{ $field }}-yes"
+                        onclick="document.getElementById('{{ $field }}_yes').checked = true"
+                        {{ ($toolboxTalk->$field ?? old($field, 'yes')) !== 'no' ? 'active' : '' }}
+                    >
+                        Yes
+                    </md-secondary-tab>
+    
+                    <!-- No Tab -->
+                    <md-secondary-tab 
+                        value="no" 
+                        id="tab-{{ $field }}-no"
+                        onclick="document.getElementById('{{ $field }}_no').checked = true"
+                        {{ ($toolboxTalk->$field ?? old($field, 'yes')) === 'no' ? 'active' : '' }}
+                    >
+                        No
+                    </md-secondary-tab>
+                </md-tabs>
+    
+                <!-- Hidden radio buttons to maintain functionality -->
+                <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="display:none;" 
+                    {{ ($toolboxTalk->$field ?? old($field, 'yes')) !== 'no' ? 'checked' : '' }}>
+                <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="display:none;" 
+                    {{ ($toolboxTalk->$field ?? old($field, 'yes')) === 'no' ? 'checked' : '' }}>
+            </div>
         </div>
+        @endforeach
     </div>
-    @endforeach
-</div>
 <br>
 
 
@@ -201,8 +201,8 @@
             <div class="form-group">
                 <md-label for="{{ $field }}">{{ ucwords(str_replace('_', ' ', $field)) }}</md-label><br>
     
-                <!-- Hidden input to ensure 'no' is submitted by default if nothing is selected -->
-                <input type="hidden" name="{{ $field }}" value="no">
+                <!-- Hidden input to ensure 'yes' is submitted by default if nothing is selected -->
+                <input type="hidden" name="{{ $field }}" value="yes">
     
                 <!-- Tabs for Yes/No -->
                 <md-tabs id="tab-{{ $field }}" class="toggle-btn">
@@ -211,7 +211,7 @@
                         value="yes" 
                         id="tab-{{ $field }}-yes"
                         onclick="document.getElementById('{{ $field }}_yes').checked = true; document.getElementById('{{ $field }}_no').checked = false;"
-                        {{ ($toolboxTalk->$field ?? old($field, 'no')) === 'yes' ? 'active' : '' }}
+                        {{ ($toolboxTalk->$field ?? old($field, 'yes')) !== 'no' ? 'active' : '' }}
                     >
                         Yes
                     </md-secondary-tab>
@@ -221,7 +221,7 @@
                         value="no" 
                         id="tab-{{ $field }}-no"
                         onclick="document.getElementById('{{ $field }}_no').checked = true; document.getElementById('{{ $field }}_yes').checked = false;"
-                        {{ ($toolboxTalk->$field ?? old($field, 'no')) === 'no' ? 'active' : '' }}
+                        {{ ($toolboxTalk->$field ?? old($field, 'yes')) === 'no' ? 'active' : '' }}
                     >
                         No
                     </md-secondary-tab>
@@ -229,9 +229,9 @@
     
                 <!-- Hidden radio buttons to maintain functionality -->
                 <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="display:none;" 
-                    {{ ($toolboxTalk->$field ?? old($field)) === 'yes' ? 'checked' : '' }}>
+                    {{ ($toolboxTalk->$field ?? old($field, 'yes')) !== 'no' ? 'checked' : '' }}>
                 <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="display:none;" 
-                    {{ ($toolboxTalk->$field ?? old($field)) === 'no' ? 'checked' : '' }}>
+                    {{ ($toolboxTalk->$field ?? old($field, 'yes')) === 'no' ? 'checked' : '' }}>
             </div>
         </div>
         @endforeach
@@ -242,139 +242,139 @@
     <!-- Traffic fields -->
     <h4><span style="background-color: #fef7ff; color: #8e44ad; padding: 0 5px;">TRAFFIC</span></h4>
 
-<div class="row">
-    @foreach(['traffic_safety_kon', 'traffic_sign_board', 'traffic_chargeman'] as $field)
-    <div class="col-md-6">
-        <div class="form-group">
-            <md-label for="{{ $field }}">{{ ucwords(str_replace('_', ' ', $field)) }}</md-label><br>
-
-            <!-- Hidden input to ensure 'no' is submitted by default if nothing is selected -->
-            <input type="hidden" name="{{ $field }}" value="no">
-
-            <!-- Tabs for Yes/No -->
-            <md-tabs id="tab-{{ $field }}" class="toggle-btn">
-                <!-- Yes Tab -->
-                <md-secondary-tab 
-                    value="yes" 
-                    id="tab-{{ $field }}-yes"
-                    onclick="document.getElementById('{{ $field }}_yes').checked = true; document.getElementById('{{ $field }}_no').checked = false;"
-                    {{ ($toolboxTalk->$field ?? old($field, 'no')) === 'yes' ? 'active' : '' }}
-                >
-                    Yes
-                </md-secondary-tab>
-
-                <!-- No Tab -->
-                <md-secondary-tab 
-                    value="no" 
-                    id="tab-{{ $field }}-no"
-                    onclick="document.getElementById('{{ $field }}_no').checked = true; document.getElementById('{{ $field }}_yes').checked = false;"
-                    {{ ($toolboxTalk->$field ?? old($field, 'no')) === 'no' ? 'active' : '' }}
-                >
-                    No
-                </md-secondary-tab>
-            </md-tabs>
-
-            <!-- Hidden radio buttons to maintain functionality -->
-            <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="display:none;" 
-                {{ ($toolboxTalk->$field ?? old($field)) === 'yes' ? 'checked' : '' }}>
-            <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="display:none;" 
-                {{ ($toolboxTalk->$field ?? old($field)) === 'no' ? 'checked' : '' }}>
+    <div class="row">
+        @foreach(['traffic_safety_kon', 'traffic_sign_board', 'traffic_chargeman'] as $field)
+        <div class="col-md-6">
+            <div class="form-group">
+                <md-label for="{{ $field }}">{{ ucwords(str_replace('_', ' ', $field)) }}</md-label><br>
+    
+                <!-- Hidden input to ensure 'yes' is submitted by default if nothing is selected -->
+                <input type="hidden" name="{{ $field }}" value="yes">
+    
+                <!-- Tabs for Yes/No -->
+                <md-tabs id="tab-{{ $field }}" class="toggle-btn">
+                    <!-- Yes Tab -->
+                    <md-secondary-tab 
+                        value="yes" 
+                        id="tab-{{ $field }}-yes"
+                        onclick="document.getElementById('{{ $field }}_yes').checked = true; document.getElementById('{{ $field }}_no').checked = false;"
+                        {{ ($toolboxTalk->$field ?? old($field, 'yes')) !== 'no' ? 'active' : '' }}
+                    >
+                        Yes
+                    </md-secondary-tab>
+    
+                    <!-- No Tab -->
+                    <md-secondary-tab 
+                        value="no" 
+                        id="tab-{{ $field }}-no"
+                        onclick="document.getElementById('{{ $field }}_no').checked = true; document.getElementById('{{ $field }}_yes').checked = false;"
+                        {{ ($toolboxTalk->$field ?? old($field, 'yes')) === 'no' ? 'active' : '' }}
+                    >
+                        No
+                    </md-secondary-tab>
+                </md-tabs>
+    
+                <!-- Hidden radio buttons to maintain functionality -->
+                <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="display:none;" 
+                    {{ ($toolboxTalk->$field ?? old($field, 'yes')) !== 'no' ? 'checked' : '' }}>
+                <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="display:none;" 
+                    {{ ($toolboxTalk->$field ?? old($field, 'yes')) === 'no' ? 'checked' : '' }}>
+            </div>
         </div>
+        @endforeach
     </div>
-    @endforeach
-</div>
 <br>
 
 
 
     <!-- Team fields -->
     <h4><span style="background-color: #fef7ff; color: #8e44ad; padding: 0 5px;">TEAM</span></h4>
-<div class="row">
-    @foreach(['team_ap_tnp', 'team_cp_tnb'] as $field)
-    <div class="col-md-6">
-        <div class="form-group">
-            <md-label for="{{ $field }}">{{ ucwords(str_replace('_', ' ', $field)) }}</md-label><br>
-
-            <!-- Hidden input to ensure 'no' is submitted by default if nothing is selected -->
-            <input type="hidden" name="{{ $field }}" value="no">
-
-            <!-- Tabs for Yes/No -->
-            <md-tabs id="tab-{{ $field }}" class="toggle-btn">
-                <!-- Yes Tab -->
-                <md-secondary-tab 
-                    value="yes" 
-                    id="tab-{{ $field }}-yes"
-                    onclick="document.getElementById('{{ $field }}_yes').checked = true; document.getElementById('{{ $field }}_no').checked = false;"
-                    {{ ($toolboxTalk->$field ?? old($field, 'no')) === 'yes' ? 'active' : '' }}
-                >
-                    Yes
-                </md-secondary-tab>
-
-                <!-- No Tab -->
-                <md-secondary-tab 
-                    value="no" 
-                    id="tab-{{ $field }}-no"
-                    onclick="document.getElementById('{{ $field }}_no').checked = true; document.getElementById('{{ $field }}_yes').checked = false;"
-                    {{ ($toolboxTalk->$field ?? old($field, 'no')) === 'no' ? 'active' : '' }}
-                >
-                    No
-                </md-secondary-tab>
-            </md-tabs>
-
-            <!-- Hidden radio buttons to maintain functionality -->
-            <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="display:none;" 
-                {{ ($toolboxTalk->$field ?? old($field)) === 'yes' ? 'checked' : '' }}>
-            <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="display:none;" 
-                {{ ($toolboxTalk->$field ?? old($field)) === 'no' ? 'checked' : '' }}>
+    <div class="row">
+        @foreach(['team_ap_tnp', 'team_cp_tnb'] as $field)
+        <div class="col-md-6">
+            <div class="form-group">
+                <md-label for="{{ $field }}">{{ ucwords(str_replace('_', ' ', $field)) }}</md-label><br>
+    
+                <!-- Hidden input to ensure 'yes' is submitted by default if nothing is selected -->
+                <input type="hidden" name="{{ $field }}" value="yes">
+    
+                <!-- Tabs for Yes/No -->
+                <md-tabs id="tab-{{ $field }}" class="toggle-btn">
+                    <!-- Yes Tab -->
+                    <md-secondary-tab 
+                        value="yes" 
+                        id="tab-{{ $field }}-yes"
+                        onclick="document.getElementById('{{ $field }}_yes').checked = true; document.getElementById('{{ $field }}_no').checked = false;"
+                        {{ ($toolboxTalk->$field ?? old($field, 'yes')) !== 'no' ? 'active' : '' }}
+                    >
+                        Yes
+                    </md-secondary-tab>
+    
+                    <!-- No Tab -->
+                    <md-secondary-tab 
+                        value="no" 
+                        id="tab-{{ $field }}-no"
+                        onclick="document.getElementById('{{ $field }}_no').checked = true; document.getElementById('{{ $field }}_yes').checked = false;"
+                        {{ ($toolboxTalk->$field ?? old($field, 'yes')) === 'no' ? 'active' : '' }}
+                    >
+                        No
+                    </md-secondary-tab>
+                </md-tabs>
+    
+                <!-- Hidden radio buttons to maintain functionality -->
+                <input type="radio" id="{{ $field }}_yes" name="{{ $field }}" value="yes" style="display:none;" 
+                    {{ ($toolboxTalk->$field ?? old($field, 'yes')) !== 'no' ? 'checked' : '' }}>
+                <input type="radio" id="{{ $field }}_no" name="{{ $field }}" value="no" style="display:none;" 
+                    {{ ($toolboxTalk->$field ?? old($field, 'yes')) === 'no' ? 'checked' : '' }}>
+            </div>
         </div>
+        @endforeach
     </div>
-    @endforeach
-</div>
 <br>
 
     <!-- NIOSH fields -->
     <h4><span style="background-color: #fef7ff; color: #8e44ad; padding: 0 5px;">NIOS & PERMIT</span></h4>
-<div class="row">
-    @foreach(['niosh_staff_ntsp', 'permit_special', 'permit_work'] as $field)
-    <div class="col-md-6">
-        <div class="form-group">
-            <md-label for="{{ $field }}">{{ ucwords(str_replace('_', ' ', $field)) }}</md-label><br>
-
-            <!-- Hidden input to ensure 'no' is submitted by default if nothing is selected -->
-            <input type="hidden" name="{{ $field }}" value="no">
-
-            <!-- Tabs for Yes/No -->
-            <md-tabs id="tab-{{ $field }}" class="toggle-btn">
-                <!-- Yes Tab -->
-                <md-secondary-tab 
-                    value="yes" 
-                    id="tab-{{ $field }}-yes"
-                    onclick="handleTabClick('{{ $field }}', 'yes')"
-                    {{ ($toolboxTalk->$field ?? old($field, 'no')) === 'yes' ? 'active' : '' }}
-                >
-                    Yes
-                </md-secondary-tab>
-
-                <!-- No Tab -->
-                <md-secondary-tab 
-                    value="no" 
-                    id="tab-{{ $field }}-no"
-                    onclick="handleTabClick('{{ $field }}', 'no')"
-                    {{ ($toolboxTalk->$field ?? old($field, 'no')) === 'no' ? 'active' : '' }}
-                >
-                    No
-                </md-secondary-tab>
-            </md-tabs>
-
-            <!-- Hidden radio buttons to maintain functionality -->
-            <input type="radio" id="{{ $field }}_yes_hidden" name="{{ $field }}" value="yes" style="display:none;" 
-                {{ ($toolboxTalk->$field ?? old($field)) === 'yes' ? 'checked' : '' }}>
-            <input type="radio" id="{{ $field }}_no_hidden" name="{{ $field }}" value="no" style="display:none;" 
-                {{ ($toolboxTalk->$field ?? old($field)) === 'no' ? 'checked' : '' }}>
+    <div class="row">
+        @foreach(['niosh_staff_ntsp', 'permit_special', 'permit_work'] as $field)
+        <div class="col-md-6">
+            <div class="form-group">
+                <md-label for="{{ $field }}">{{ ucwords(str_replace('_', ' ', $field)) }}</md-label><br>
+    
+                <!-- Hidden input to ensure 'yes' is submitted by default if nothing is selected -->
+                <input type="hidden" name="{{ $field }}" value="yes">
+    
+                <!-- Tabs for Yes/No -->
+                <md-tabs id="tab-{{ $field }}" class="toggle-btn">
+                    <!-- Yes Tab -->
+                    <md-secondary-tab 
+                        value="yes" 
+                        id="tab-{{ $field }}-yes"
+                        onclick="handleTabClick('{{ $field }}', 'yes')"
+                        {{ ($toolboxTalk->$field ?? old($field, 'yes')) !== 'no' ? 'active' : '' }}
+                    >
+                        Yes
+                    </md-secondary-tab>
+    
+                    <!-- No Tab -->
+                    <md-secondary-tab 
+                        value="no" 
+                        id="tab-{{ $field }}-no"
+                        onclick="handleTabClick('{{ $field }}', 'no')"
+                        {{ ($toolboxTalk->$field ?? old($field, 'yes')) === 'no' ? 'active' : '' }}
+                    >
+                        No
+                    </md-secondary-tab>
+                </md-tabs>
+    
+                <!-- Hidden radio buttons to maintain functionality -->
+                <input type="radio" id="{{ $field }}_yes_hidden" name="{{ $field }}" value="yes" style="display:none;" 
+                    {{ ($toolboxTalk->$field ?? old($field, 'yes')) !== 'no' ? 'checked' : '' }}>
+                <input type="radio" id="{{ $field }}_no_hidden" name="{{ $field }}" value="no" style="display:none;" 
+                    {{ ($toolboxTalk->$field ?? old($field, 'yes')) === 'no' ? 'checked' : '' }}>
+            </div>
         </div>
+        @endforeach
     </div>
-    @endforeach
-</div>
 <br>
 
 
@@ -391,9 +391,9 @@
                     value="yes" 
                     id="tab-yes-picture_during_toolbox" 
                     onclick="toggleToolboxImageUpload('picture_during_toolbox', true, 'yes')"
-                    {{ ($toolboxTalk->picture_during_toolbox ?? old('picture_during_toolbox', 'no')) === 'yes' ? 'active' : '' }}>
+                    {{ ($toolboxTalk->picture_during_toolbox ?? old('picture_during_toolbox', 'yes')) === 'yes' ? 'active' : '' }}>
                     Yes
-                    <input type="radio" id="picture_during_toolbox_yes" name="picture_during_toolbox" value="yes" style="display:none;" {{ ($toolboxTalk->picture_during_toolbox ?? old('picture_during_toolbox', 'no')) === 'yes' ? 'checked' : '' }}>
+                    <input type="radio" id="picture_during_toolbox_yes" name="picture_during_toolbox" value="yes" style="display:none;" {{ ($toolboxTalk->picture_during_toolbox ?? old('picture_during_toolbox', 'yes')) === 'yes' ? 'checked' : '' }}>
                 </md-secondary-tab>
     
                 <!-- No Radio Button -->
@@ -401,12 +401,11 @@
                     value="no" 
                     id="tab-no-picture_during_toolbox" 
                     onclick="toggleToolboxImageUpload('picture_during_toolbox', false, 'no')"
-                    {{ ($toolboxTalk->picture_during_toolbox ?? old('picture_during_toolbox', 'no')) === 'no' ? 'active' : '' }}>
+                    {{ ($toolboxTalk->picture_during_toolbox ?? old('picture_during_toolbox', 'yes')) === 'no' ? 'active' : '' }}>
                     No
-                    <input type="radio" id="picture_during_toolbox_no" name="picture_during_toolbox" value="no" style="display:none;" {{ ($toolboxTalk->picture_during_toolbox ?? old('picture_during_toolbox', 'no')) === 'no' ? 'checked' : '' }}>
+                    <input type="radio" id="picture_during_toolbox_no" name="picture_during_toolbox" value="no" style="display:none;" {{ ($toolboxTalk->picture_during_toolbox ?? old('picture_during_toolbox', 'yes')) === 'no' ? 'checked' : '' }}>
                 </md-secondary-tab>
             </md-tabs>
-            
         </div>
     </div>
 </div>
@@ -417,8 +416,7 @@
     <div class="col-md-6">
         <div id="picture_during_toolbox_images" style="{{ ($toolboxTalk->picture_during_toolbox ?? old('picture_during_toolbox', 'no')) === 'yes' ? '' : 'display: none;' }}">
             <div class="form-group">
-                <md-label for="toolbox_image1">Toolbox Image 1</md-label>
-                <input type="file" class="form-control-file" id="toolbox_image1" name="toolbox_image1" onchange="previewImage(this, 'img_toolbox1')">
+                <input type="file" class="form-control-file" id="toolbox_image1" name="toolbox_image1" onchange="previewImage(this, 'img_toolbox1')" style="display:none;">
                 @if(isset($toolboxTalk->toolbox_image1) && $toolboxTalk->toolbox_image1)
                     <img src="{{ asset($toolboxTalk->toolbox_image1) }}" alt="Toolbox Image 1" class="img-thumbnail mt-2" id="img_toolbox1" style="max-width: 200px;" onclick="document.getElementById('toolbox_image1').click();">
                 @else
@@ -427,8 +425,7 @@
             </div>
             
             <div class="form-group">
-                <md-label for="toolbox_image2">Toolbox Image 2</md-label>
-                <input type="file" class="form-control-file" id="toolbox_image2" name="toolbox_image2" onchange="previewImage(this, 'img_toolbox2')">
+                <input type="file" class="form-control-file" id="toolbox_image2" name="toolbox_image2" onchange="previewImage(this, 'img_toolbox2')" style="display:none;">
                 @if(isset($toolboxTalk->toolbox_image2) && $toolboxTalk->toolbox_image2)
                     <img src="{{ asset($toolboxTalk->toolbox_image2) }}" alt="Toolbox Image 2" class="img-thumbnail mt-2" id="img_toolbox2" style="max-width: 200px;" onclick="document.getElementById('toolbox_image2').click();">
                 @else

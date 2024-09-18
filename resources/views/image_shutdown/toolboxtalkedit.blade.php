@@ -61,7 +61,7 @@
             </div>
             <div class="col-sm-6 text-right">
                 <ol class="breadcrumb float-right" >
-                    <li class="breadcrumb-item"><a href="{{ route('image-shutdown.index') }}" style="color: #8e44ad;">index</a></li>
+                    <li class="breadcrumb-item"><a href="" style="color: #8e44ad;">index</a></li>
                     <li class="breadcrumb-item active" style="color: #8e44ad;">edit</li>
                 </ol>
             </div>
