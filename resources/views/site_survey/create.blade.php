@@ -1123,7 +1123,7 @@ function updateButtons() {
 
     function konfiDisable(props){
         //  alert(prop)
-        if(props=='RMU'){
+        if(props=='RMU' || props=="CSU"){
             $("#konfigurasi").prop('disabled',false)
         }else{
             $("#konfigurasi").prop('disabled',true)
