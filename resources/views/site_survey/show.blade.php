@@ -212,35 +212,30 @@
 
         <div class="col-md-4">       
             <div class="form-group">
-            {{-- <label for="jenis_perkakasuis">Jenis Perkakasuis</label> --}}
-            <!-- <input type="text" class="form-control" id="jenis_perkakasuis" name="jenis_perkakasuis" value="{{ $siteSurvey->jenis_perkakasuis ?? old('jenis_perkakasuis') }}"> -->
-            <md-outlined-select  label="Jenis Perkakasuis" id="jenis_perkakasuis" class="label" name="jenis_perkakasuis" onchange="konfiDisable(this.value)">
-                {{-- <md-select-option value="">Jenis Perkakasuis</md-select-option> --}}
-                <md-select-option disabled value="VCB" {{ (old('jenis_perkakasuis', $siteSurvey->jenis_perkakasuis ?? '') == 'VCB') ? 'selected' : '' }}>VCB</md-select-option>
-                <md-select-option disabled value="RMU" {{ (old('jenis_perkakasuis', $siteSurvey->jenis_perkakasuis ?? '') == 'RMU') ? 'selected' : '' }}>RMU</md-select-option>
-                <md-select-option disabled value="CSU" {{ (old('jenis_perkakasuis', $siteSurvey->jenis_perkakasuis ?? '') == 'CSU') ? 'selected' : '' }}>CSU</md-select-option>
-
-            </md-outlined-select >
+                <md-outlined-select label="Jenis Perkakasuis" id="jenis_perkakasuis" class="label" name="jenis_perkakasuis" value="{{ $siteSurvey->jenis_perkakasuis ?? old('jenis_perkakasuis') }}" onchange="konfiDisable(this.value)">
+                    <md-select-option disabled value="VCB" {{ (old('jenis_perkakasuis', $siteSurvey->jenis_perkakasuis ?? '') == 'VCB') ? 'selected' : '' }}>VCB</md-select-option>
+                    <md-select-option disabled value="RMU" {{ (old('jenis_perkakasuis', $siteSurvey->jenis_perkakasuis ?? '') == 'RMU') ? 'selected' : '' }}>RMU</md-select-option>
+                    <md-select-option disabled value="CSU" {{ (old('jenis_perkakasuis', $siteSurvey->jenis_perkakasuis ?? '') == 'CSU') ? 'selected' : '' }}>CSU</md-select-option>
+                </md-outlined-select>
             </div>
         </div>
-
-
+        
         <div class="col-md-4">    
             <div class="form-group">
-            {{-- <label for="konfigurasi">Konfigurasi</label> --}}
-            <!-- <input type="text" class="form-control" id="konfigurasi" name="konfigurasi" value="{{ $siteSurvey->konfigurasi ?? old('konfigurasi') }}"> -->
-            <md-outlined-select label="Konfigurasi" class="label"  id="konfigurasi" name="konfigurasi" disabled>
-                {{-- <option value="">Jenis Perkakasuis</option> --}}
-                <md-select-option disabled value="2S+1F" {{ (old('konfigurasi', $siteSurvey->jenis_perkakasuis ?? '') == '2S+1F') ? 'selected' : '' }}>2S+1F</md-select-option>
-                <md-select-option disabled value="2S+2F" {{ (old('konfigurasi', $siteSurvey->jenis_perkakasuis ?? '') == '2S+2F') ? 'selected' : '' }}>2S+2F</md-select-option>
-                <md-select-option disabled value="3S" {{ (old('konfigurasi', $siteSurvey->jenis_perkakasuis ?? '') == '3S') ? 'selected' : '' }}>3S</md-select-option>
-                <md-select-option disabled value="3S+1F" {{ (old('konfigurasi', $siteSurvey->jenis_perkakasuis ?? '') == '3S+1F') ? 'selected' : '' }}>3S+1F</md-select-option>
-                <md-select-option disabled value="3S+2F" {{ (old('konfigurasi', $siteSurvey->jenis_perkakasuis ?? '') == '3S+2F') ? 'selected' : '' }}>3S+2F</md-select-option>
-
-            </md-outlined-select >
+                <md-outlined-select disabled label="Konfigurasi" class="label" id="konfigurasi" name="konfigurasi" value="{{ $siteSurvey->konfigurasi ?? old('konfigurasi') }}" onchange="showOtherField(this.value)"> 
+                    <!-- Options will be dynamically added here -->
+                </md-outlined-select>
             </div>
         </div>
-
+        
+        <!-- Field to show when 'Other' is selected -->
+        <div class="col-md-4" id="konfigurasi_other_field" style="display:none;">
+            <div class="form-group">
+                {{-- <label for="konfigurasi_other">Other Konfigurasi</label> --}}
+                <md-outlined-text-field disabled type="text" label="Other Konfigurasi" class="label"  id="konfigurasi_other" name="konfigurasi_other" value="{{ $siteSurvey->konfigurasi_other ?? old('konfigurasi_other') }}">
+                
+            </div>
+        </div>
 
         <div class="col-md-4">
                 <div class="form-group">
@@ -1063,15 +1058,69 @@ function updateButtons() {
     }
 
 
-    function konfiDisable(props){
-        //  alert(prop)
-        if(props=='RMU'){
-            $("#konfigurasi").prop('disabled',false)
-        }else{
-            $("#konfigurasi").prop('disabled',true)
-
-        }
+    function konfiDisable(selectedValue) {
+    let konfigurasiDropdown = document.getElementById('konfigurasi');
+    konfigurasiDropdown.innerHTML = ''; // Clear existing options
+    
+    if (selectedValue === 'VCB') {
+        // Add specific options for VCB
+        konfigurasiDropdown.innerHTML += `
+            <md-select-option disabled value="SSU">SSU</md-select-option>
+            <md-select-option disabled value="SS">SS</md-select-option>
+            <md-select-option disabled value="PE">PE</md-select-option>
+            <md-select-option disabled value="Other">Other</md-select-option>
+        `;
+        $("#konfigurasi").prop('disabled', false);
+    } else if (selectedValue === 'CSU') {
+        // Only show 2+1 for CSU
+        konfigurasiDropdown.innerHTML += `<md-select-option value="2+1">2+1</md-select-option>`;
+        $("#konfigurasi").prop('disabled', false);
+    } else if (selectedValue === 'RMU') {
+        // Add options for RMU
+        konfigurasiDropdown.innerHTML += `
+            <md-select-option disabled  value="2S+1F">2S+1F</md-select-option>
+            <md-select-option disabled value="2S+2F">2S+2F</md-select-option>
+            <md-select-option disabled value="3S">3S</md-select-option>
+            <md-select-option disabled value="3S+1F">3S+1F</md-select-option>
+            <md-select-option disabled value="3S+2F">3S+2F</md-select-option>
+        `;
+        $("#konfigurasi").prop('disabled', false);
+    } else {
+        $("#konfigurasi").prop('disabled', true);
     }
+
+    // Hide the 'Other' field by default when changing 'jenis_perkakasuis'
+    document.getElementById('konfigurasi_other_field').style.display = 'none';
+}
+
+function showOtherField(selectedKonfigurasi) {
+    if (selectedKonfigurasi === 'Other') {
+        document.getElementById('konfigurasi_other_field').style.display = 'block';
+    } else {
+        document.getElementById('konfigurasi_other_field').style.display = 'none';
+    }
+}
+
+// On page load, handle the case where the user might have previously selected 'VCB' and 'Other'
+document.addEventListener('DOMContentLoaded', function () {
+    const currentJenisPerkakasuis = "{{ $siteSurvey->jenis_perkakasuis ?? old('jenis_perkakasuis') }}";
+    const currentKonfigurasi = "{{ $siteSurvey->konfigurasi ?? old('konfigurasi') }}";
+    const otherKonfigurasiValue = "{{ $siteSurvey->konfigurasi_other ?? old('konfigurasi_other') }}";
+
+    // Trigger the initial population of konfigurasi options
+    konfiDisable(currentJenisPerkakasuis);
+
+    // Set the konfigurasi dropdown to its previous value
+    if (currentKonfigurasi) {
+        document.getElementById('konfigurasi').value = currentKonfigurasi;
+    }
+
+    // If 'Other' was previously selected and has a value, show the 'Other' input box with pre-filled value
+    if (currentJenisPerkakasuis === 'VCB' && currentKonfigurasi === 'Other' && otherKonfigurasiValue !== '') {
+        document.getElementById('konfigurasi_other_field').style.display = 'block';
+        document.getElementById('konfigurasi_other').value = otherKonfigurasiValue;
+    }
+});
 
 // Function to check if all required images are uploaded
 document.addEventListener('DOMContentLoaded', function() {
