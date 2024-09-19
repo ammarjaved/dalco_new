@@ -40,7 +40,7 @@
                             </tr>
 
                             <tr>
-                                <th colspan="2" style="text-align: center;">Site Survey Files</th>
+                                <th colspan="2" style="text-align: center;">Site Survey Attachments</th>
                             </tr>
                         </tbody>
                     </table>
@@ -63,12 +63,12 @@
                     </table>
 
 
-                    <table id="myTable" class="table table-bordered table-hover data-table">
+                    <table  class="table table-bordered table-hover data-table">
                         
-                        <tbody>
+                        <tbody id="myTable2">
                             <h3>PreCabling</h3>
                             <tr>
-                              <th>PreCabling ToolboxTalk</th><td><a href="" target="_blank"> Download PreCabling ToolboxTalk</a></td> 
+                              <th>PreCabling ToolboxTalk</th><td><a href="/pc_tbk/{{$id}}" target="_blank"> Download PreCabling ToolboxTalk</a></td> 
                             </tr>  
 
                             <tr>
@@ -79,15 +79,17 @@
                                 <th>PreCabling PreShutdown</th><td><a href="" target="_blank"> Download PreCabling PreShutdown</a></td> 
                               </tr>  
 
-                              <tr>
-                                <th>PreCabling Attachments</th><td><a href="" target="_blank"> Download PreCabling Attachments</a></td> 
-                              </tr>  
+                               
 
                               <tr>
                                 <th>PreCabling Images</th><td><a href="" target="_blank"> Download PreCabling Images</a></td> 
                               </tr>  
                               
-                          
+
+                            
+                              <tr>
+                                <th colspan="2" style="text-align: center;">PreCabling Attachments</th>
+                            </tr>
 
                            
                         </tbody>
@@ -100,7 +102,7 @@
                         <tbody>
                             <h3>Shutdown</h3>
                             <tr>
-                              <th>Shutdown ToolboxTalk</th><td><a href="" target="_blank"> Download Shutdown ToolboxTalk</a></td> 
+                              <th>Shutdown ToolboxTalk</th><td><a href="/sd_tbk/{{$id}}" target="_blank"> Download Shutdown ToolboxTalk</a></td> 
                             </tr>  
 
                             <tr>
@@ -121,7 +123,7 @@
                         <tbody>
                             <h3>SAT</h3>
                             <tr>
-                              <th>SAT ToolboxTalk</th><td><a href="" target="_blank"> Download SAT ToolboxTalk</a></td> 
+                              <th>SAT ToolboxTalk</th><td><a href="/sat_tbk/{{$id}}" target="_blank"> Download SAT ToolboxTalk</a></td> 
                             </tr>  
 
                             <tr>
@@ -169,9 +171,37 @@ function Site_surveyAjax ()
      });
  
      }
+
+
+
+     function precable_Ajax ()  
+     {
+       $.ajax({
+         url:  '/precable_attactments/{{$id}}' ,
+         dataType: 'JSON',
+         method: 'GET',
+         success: function(data) {
+          var str='';
+         for(var i=0;i<data.length;i++){
+        
+          str=str+'<tr><th>'+data[i].file_name+'</th><td><a href="/'+data[i].file_path+'" download>download</a></td><tr>'
+          
+         }
+
+         $("#myTable2").append(str);
+
+         },
+         error: function(jqXHR, textStatus, errorThrown) {
+             console.error("AJAX error:", textStatus, errorThrown);
+             alert("Error fetching material data. Please try again.");
+         }
+     });
+ 
+     }
 $(document).ready(function(){
 
   Site_surveyAjax ()
+  precable_Ajax ()  
 
 });
 

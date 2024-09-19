@@ -216,6 +216,11 @@ Route::get('/ss_attachments/{id}', [LKSController::class, 'siteSurveyAttachments
 
 Route::get('/LKS/create/{id}', [LKSController::class, 'create'])->name('LKS.create');
 
+Route::get('/pc_tbk/{id}', [LKSController::class, 'PrecableToolboxTalk'])->name('pc_tbk');
+Route::get('/sd_tbk/{id}', [LKSController::class, 'ShutdownToolboxTalk'])->name('sd_tbk');
+Route::get('/sat_tbk/{id}', [LKSController::class, 'SATToolboxTalk'])->name('sat_tbk');
+
+Route::get('/precable_attactments/{id}', [LKSController::class, ' PreCablingAttachments'])->name('precable_attactments');
 
 
 

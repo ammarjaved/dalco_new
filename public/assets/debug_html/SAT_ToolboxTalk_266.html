@@ -1,6 +1,3 @@
-
-
-
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -115,45 +112,35 @@
 <div class="container">
     <div class="header">
         <div class="logo">
-            <img src='/assets/web-images/tnblogo.png' alt="TNB Logo">
+            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/web-images/tnblogo.png' alt="TNB Logo">
             <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
                 Level 2, Jalan Air Hitam, Kawasan 16,<br>
                 40000 Shah Alam, Selangor</p>
         </div>
         <div class="logo">
-            @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
-                <img src='/assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
                 <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
                 NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
-            @elseif($projectName === 'ARAS-JOHOR')
-                <img src='/assets/web-images/araslogo.png' alt="ARAS Kejuruteraan Logo">
-                <p>ARAS KEJURUTERAAN SDN BHD<br>
-                1st Floor No 72, Jalan SS 21/1, Damansara Utama, 47400 Petaling Jaya, Selangor</p>
-            @else
-                <img src='/assets/web-images/defaultlogo.png' alt="Default Logo">
-                <p>Default Company Name<br>
-                Default Address</p>
-            @endif
-        </div>
+                    </div>
     </div>
     <h2>TOOLBOX TALK FORM</h2>
 
     <table>
         <tr>
             <th>Lokasi</th>
-            <td>{{$ImageShutdownlks->lokasi}}</td>
+            <td>KL</td>
             <th>Tarikh</th>
-            <td>{{$ImageShutdownlks->first()->tarikh}}</td>
+            <td>2024-08-29</td>
         </tr>
         <tr>
             <th>Nama Pencawang</th>
-            <td>{{$survey->nama_pe}}</td>
+            <td>hellolks</td>
             <th>CFS</th>
-            <td>{{$ImageShutdownlks->cfs}}</td>
+            <td>KL</td>
         </tr>
         <tr>
             <th>Skop Kerja</th>
-            <td colspan="3">OUTAGE</td>
+            <td colspan="3">SAT</td>
         </tr>
     </table>
 
@@ -169,22 +156,22 @@
         </tr>
         <tr>
             <td>Safety Helmet</td>
-            <td>{{$ImageShutdownlks->ppd_safety_helment}}</td>
+            <td>yes</td>
           
         </tr>
         <tr>
             <td>Safety Vest</td>
-            <td>{{$ImageShutdownlks->ppd_safety_vest}}</td>
+            <td>yes</td>
           
         </tr>
         <tr>
             <td>Safety Shoes</td>
-            <td>{{$ImageShutdownlks->ppd_safety_shoes}}</td>
+            <td>yes</td>
           
         </tr>
         <tr>
             <td>Safety</td>
-            <td>{{$ImageShutdownlks->ppd_safety}}</td>
+            <td>yes</td>
         
         </tr>
         <tr>
@@ -192,7 +179,7 @@
         </tr>
         <tr>
             <td>All In Good Condition</td>
-            <td>{{$ImageShutdownlks->equipment_condition}}</td>
+            <td>yes</td>
            
         </tr>
 
@@ -202,12 +189,12 @@
         </tr>
         <tr>
             <td>All In Good Condition</td>
-            <td>{{$ImageShutdownlks->instrument_condition}}</td>
+            <td>yes</td>
           
         </tr>
         <tr>
             <td>First Aid Kit</td>
-            <td>{{$ImageShutdownlks->instrument_kit_condition}}</td>
+            <td>yes</td>
            
         </tr>
 
@@ -217,12 +204,12 @@
         </tr>
         <tr>
             <td>Fire Extinguisher</td>
-            <td>{{$ImageShutdownlks->vehicle_fire_extinguisher}}</td>
+            <td>no</td>
           
         </tr>
         <tr>
             <td>Vehicle In Good Condition</td>
-            <td>{{$ImageShutdownlks->vehicle_condition}}</td>
+            <td>no</td>
            
         </tr>
         <tr>
@@ -230,17 +217,17 @@
         </tr>
         <tr>
             <td>Safety Kon</td>
-            <td>{{$ImageShutdownlks->traffic_safety_kon}}</td>
+            <td>no</td>
            
         </tr>
         <tr>
             <td>Sign Board</td>
-            <td>{{$ImageShutdownlks->traffic_sign_board}}</td>
+            <td>no</td>
            
         </tr>
         <tr>
             <td>Chargeman Bo</td>
-            <td>{{$ImageShutdownlks->traffic_chargeman}}</td>
+            <td>no</td>
         
         </tr>
         <tr>
@@ -248,12 +235,12 @@
         </tr>
         <tr>
             <td>AP TNP</td>
-            <td>{{$ImageShutdownlks->team_ap_tnp}}</td>
+            <td>yes</td>
           
         </tr>
         <tr>
             <td>CP TNB</td>
-            <td>{{$ImageShutdownlks->team_cp_tnb}}</td>
+            <td>yes</td>
            
         </tr>
         <tr>
@@ -261,7 +248,7 @@
         </tr>
         <tr>
             <td>All Staff Have NTSP</td>
-            <td>{{$ImageShutdownlks->niosh_staff_ntsp}}</td>
+            <td>yes</td>
           
         </tr>
         <tr>
@@ -269,12 +256,12 @@
         </tr>
         <tr>
             <td>Special Permit</td>
-            <td>{{$ImageShutdownlks->permit_special}}</td>
+            <td>no</td>
           
         </tr>
         <tr>
             <td>Permit To Work (PTW)</td>
-            <td>{{$ImageShutdownlks->permit_work}}</td>
+            <td>yes</td>
            
         </tr>
         <tr>
@@ -282,7 +269,7 @@
         </tr>
         <tr>
             <td>Picture During ToolBox Talk</td>
-            <td>{{$ImageShutdownlks->picture_during_toolbox}}</td>
+            <td>yes</td>
            
         </tr>
 
@@ -291,22 +278,14 @@
 
     <h2>ToolBox Talk Images</h2>
     <div class="img-container">
-        <img src='/{{$ImageShutdownlks->toolbox_image1}}' alt="Toolbox Talk Image 1">
-        <img src='/{{$ImageShutdownlks->toolbox_image2}}' alt="Toolbox Talk Image 2">
+        <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/toolbox_image1-1726302186.png' alt="Toolbox Talk Image 1">
+        <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/toolbox_image2-1726302186.jfif' alt="Toolbox Talk Image 2">
     </div>
 
-    {{-- <div class="signature">
-        <p><strong>Supervisor:</strong></p>
-        <p>Nama:</p>
-    </div>
-
-    <div class="footer">
-        <div>
-            <p><strong>Approved By:</strong></p>
-            <p>Name</p>
-        </div>
-        <div class="stamp">
-            <p>STAMP</p>
-        </div>
-    </div> --}}
+    
 </div>
+
+
+
+
+
