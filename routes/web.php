@@ -220,7 +220,7 @@ Route::get('/pc_tbk/{id}', [LKSController::class, 'PrecableToolboxTalk'])->name(
 Route::get('/sd_tbk/{id}', [LKSController::class, 'ShutdownToolboxTalk'])->name('sd_tbk');
 Route::get('/sat_tbk/{id}', [LKSController::class, 'SATToolboxTalk'])->name('sat_tbk');
 
-Route::get('/precable_attactments/{id}', [LKSController::class, ' PreCablingAttachments'])->name('precable_attactments');
+Route::get('/precable_attachments/{id}', [LKSController::class, 'PreCabling_Attachments'])->name('precable_attachments');
 
 
 

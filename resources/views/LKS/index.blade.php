@@ -174,30 +174,24 @@ function Site_surveyAjax ()
 
 
 
-     function precable_Ajax ()  
-     {
-       $.ajax({
-         url:  '/precable_attactments/{{$id}}' ,
-         dataType: 'JSON',
-         method: 'GET',
-         success: function(data) {
-          var str='';
-         for(var i=0;i<data.length;i++){
-        
-          str=str+'<tr><th>'+data[i].file_name+'</th><td><a href="/'+data[i].file_path+'" download>download</a></td><tr>'
-          
-         }
-
-         $("#myTable2").append(str);
-
-         },
-         error: function(jqXHR, textStatus, errorThrown) {
-             console.error("AJAX error:", textStatus, errorThrown);
-             alert("Error fetching material data. Please try again.");
-         }
-     });
- 
-     }
+     function precable_Ajax() {
+    $.ajax({
+        url: '/precable_attachments/{{$id}}',
+        dataType: 'JSON',
+        method: 'GET',
+        success: function(data) {
+            var str = '';
+            for (var i = 0; i < data.length; i++) {
+                str += '<tr><th>' + data[i].file_name + '</th><td><a href="/' + data[i].file_path + '" download>download</a></td></tr>';
+            }
+            $("#myTable2").append(str);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("AJAX error:", textStatus, errorThrown);
+            alert("Error fetching PreCabling attachments. Please try again.");
+        }
+    });
+}
 $(document).ready(function(){
 
   Site_surveyAjax ()

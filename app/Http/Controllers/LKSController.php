@@ -396,7 +396,7 @@ if (file_exists($pdfFilePath)) {
     }
 
 
-    public function PreCablingAttachments($id){
+    public function PreCabling_Attachments($id){
       $survey = SiteSurvey::findOrFail($id);
       $PreCableFiles=PreCablingAttachments::where('site_survey_id', $survey->id)->get();
  
@@ -405,6 +405,8 @@ if (file_exists($pdfFilePath)) {
   return $PreCableFiles;
   // }
   }
+
+
 
 
      
