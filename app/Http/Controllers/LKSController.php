@@ -407,6 +407,30 @@ if (file_exists($pdfFilePath)) {
   }
 
 
+  
+  public function Shutdown_Attachments($id){
+    $survey = SiteSurvey::findOrFail($id);
+    $ImageShutFiles=ImageShutdownAttachments::where('site_survey_id', $survey->id)->get();
+
+
+// return view('LKS.Site_Survey_Files', compact('survey','files'));
+return $ImageShutFiles;
+// }
+}
+
+
+
+public function SAT_Attachments($id){
+  $survey = SiteSurvey::findOrFail($id);
+  $SATFiles=SATAttachments::where('site_survey_id', $survey->id)->get();
+
+
+// return view('LKS.Site_Survey_Files', compact('survey','files'));
+return $SATFiles;
+// }
+}
+
+
 
 
      

@@ -97,9 +97,9 @@
 
 
 
-                    <table id="myTable" class="table table-bordered table-hover data-table">
+                    <table  class="table table-bordered table-hover data-table">
                         
-                        <tbody>
+                        <tbody id="myTable3">
                             <h3>Shutdown</h3>
                             <tr>
                               <th>Shutdown ToolboxTalk</th><td><a href="/sd_tbk/{{$id}}" target="_blank"> Download Shutdown ToolboxTalk</a></td> 
@@ -110,17 +110,16 @@
                               </tr>  
 
                               <tr>
-                                <th>Shutdown Attachments</th><td><a href="" target="_blank"> Download Shutdown Attachments</a></td> 
-                              </tr>  
-                           
+                                <th colspan="2" style="text-align: center;">ShutDown Attachments</th>
+                            </tr>
                         </tbody>
                     </table>
 
 
                     
-                    <table id="myTable" class="table table-bordered table-hover data-table">
+                    <table  class="table table-bordered table-hover data-table">
                         
-                        <tbody>
+                        <tbody id="myTable4">
                             <h3>SAT</h3>
                             <tr>
                               <th>SAT ToolboxTalk</th><td><a href="/sat_tbk/{{$id}}" target="_blank"> Download SAT ToolboxTalk</a></td> 
@@ -131,8 +130,8 @@
                               </tr>  
 
                               <tr>
-                                <th>SAT Attachments</th><td><a href="" target="_blank"> Download SAT Attachments</a></td> 
-                              </tr>  
+                                <th colspan="2" style="text-align: center;">SAT Attachments</th>
+                            </tr>
                            
                         </tbody>
                     </table>
@@ -192,10 +191,65 @@ function Site_surveyAjax ()
         }
     });
 }
+
+
+
+function shutdown_Ajax() {
+    $.ajax({
+        url: '/shutdown_attachments/{{$id}}',
+        dataType: 'JSON',
+        method: 'GET',
+        success: function(data) {
+            if (data && data.length > 0) {
+                var str = '';
+                for (var i = 0; i < data.length; i++) {
+                    str += '<tr><th>' + data[i].file_name + '</th><td><a href="/' + data[i].file_path + '" download>download</a></td></tr>';
+                }
+                $("#myTable3").append(str);
+            } else {
+                console.log("No shutdown attachments found");
+                $("#myTable3").append('<tr><td colspan="2">No attachments available</td></tr>');
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("AJAX error:", textStatus, errorThrown);
+            alert("Error fetching Shutdown attachments. Please try again.");
+        }
+    });
+}
+
+
+
+function SAT_Ajax() {
+    $.ajax({
+        url: '/SAT_attachments/{{$id}}',
+        dataType: 'JSON',
+        method: 'GET',
+        success: function(data) {
+            if (data && data.length > 0) {
+                var str = '';
+                for (var i = 0; i < data.length; i++) {
+                    str += '<tr><th>' + data[i].file_name + '</th><td><a href="/' + data[i].file_path + '" download>download</a></td></tr>';
+                }
+                $("#myTable4").append(str);
+            } else {
+                console.log("No shutdown attachments found");
+                $("#myTable4").append('<tr><td colspan="2">No attachments available</td></tr>');
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("AJAX error:", textStatus, errorThrown);
+            alert("Error fetching Shutdown attachments. Please try again.");
+        }
+    });
+}
 $(document).ready(function(){
 
   Site_surveyAjax ()
   precable_Ajax ()  
+  shutdown_Ajax()
+  SAT_Ajax()
+
 
 });
 

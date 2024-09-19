@@ -309,6 +309,9 @@
                 {{-- <md-select-option value="">Jenis Perkakasuis</md-select-option> --}}
                 <md-select-option disabled value="70MM" {{ (old('kabel_saiz'.$i, $siteSurvey->{"kabel_saiz{$i}"} ?? '') == '70MM') ? 'selected' : '' }}>70MM</md-select-option>
                 <md-select-option disabled value="185MM" {{ (old('kabel_saiz'.$i, $siteSurvey->{"kabel_saiz{$i}"} ?? '') == '185MM') ? 'selected' : '' }}>185MM</md-select-option>
+                <md-select-option disabled value="150MM" {{ (old('kabel_saiz'.$i, $siteSurvey->{"kabel_saiz{$i}"} ?? '') == '150MM') ? 'selected' : '' }}>150MM</md-select-option>
+                <md-select-option disabled value="240MM" {{ (old('kabel_saiz'.$i, $siteSurvey->{"kabel_saiz{$i}"} ?? '') == '240MM') ? 'selected' : '' }}>240MM</md-select-option>
+                <md-select-option disabled value="500MM" {{ (old('kabel_saiz'.$i, $siteSurvey->{"kabel_saiz{$i}"} ?? '') == '500MM') ? 'selected' : '' }}>500MM</md-select-option>
             </md-outlined-select>
             </div>
         </div>    
@@ -463,6 +466,42 @@
                 <md-outlined-text-field disabled class="label" type="text" label="Genset"  id="genset" name="genset" value="{{ $siteSurvey->genset ?? old('genset') }}">
             </div>
             </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <!-- Jenis LVDB Label -->
+                    <md-label style="display: block; margin-top:-20px">Jenis Fius</md-label>
+            
+                    <!-- Tabs for Jenis LVDB -->
+                    <md-tabs id="tab-jenis-fius" class="disabled-tabs">
+                        <!-- DIN Tab -->
+                        <md-secondary-tab 
+                            value="DIN" 
+                            id="val-tab-jenis-fius-din" 
+                            onclick="updateFieldValue('jenis_fius', 'DIN')"
+                            {{ ($siteSurvey->jenis_fius ?? old('jenis_fius', 'Time Laps')) === 'DIN' ? 'active' : '' }}
+                        >
+                            DIN
+                            <input type="radio" id="din-jenis-fius" name="jenis_fius" value="DIN" style="display:none;" 
+                            {{ ($siteSurvey->jenis_fius ?? old('jenis_fius', 'Time Laps')) === 'DIN' ? 'checked' : '' }}>
+                        </md-secondary-tab>
+            
+                        <!-- BS Tab -->
+                        <md-secondary-tab 
+                            value="Time Laps" 
+                            id="val-tab-jenis-fius-timelaps" 
+                            onclick="updateFieldValue('jenis_fius', 'Time Laps')"
+                            {{ ($siteSurvey->jenis_fius ?? old('jenis_fius', 'Time Laps')) === 'Time Laps' ? 'active' : '' }}
+                        >
+                        Time Laps
+                            <input type="radio" id="timelaps-jenis-fius" name="jenis_fius" value="Time Laps" style="display:none;" 
+                            {{ ($siteSurvey->jenis_lvdb ?? old('jenis_fius', 'Time Laps')) === 'Time Laps' ? 'checked' : '' }}>
+                        </md-secondary-tab>
+                    </md-tabs>
+                </div>
+            </div>
+    
+
     
 
 

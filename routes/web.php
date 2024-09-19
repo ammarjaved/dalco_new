@@ -221,6 +221,8 @@ Route::get('/sd_tbk/{id}', [LKSController::class, 'ShutdownToolboxTalk'])->name(
 Route::get('/sat_tbk/{id}', [LKSController::class, 'SATToolboxTalk'])->name('sat_tbk');
 
 Route::get('/precable_attachments/{id}', [LKSController::class, 'PreCabling_Attachments'])->name('precable_attachments');
+Route::get('/shutdown_attachments/{id}', [LKSController::class, 'Shutdown_Attachments'])->name('shutdown_attachments');
+Route::get('/SAT_attachments/{id}', [LKSController::class, 'SAT_Attachments'])->name('SAT_attachments');
 
 
 
