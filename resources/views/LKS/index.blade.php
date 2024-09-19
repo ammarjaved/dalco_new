@@ -53,7 +53,7 @@
                         <tbody>
                             <h3>Material Selection</h3>
                             <tr>
-                              <th>Material Selection </th><td><a href="" target="_blank"> Download Material Selection</a></td> 
+                              <th>Material Selection </th><td><a href="/material_selec/{{$id}}" target="_blank"> Download Material Selection</a></td> 
                             </tr>  
                               
                           
@@ -72,17 +72,17 @@
                             </tr>  
 
                             <tr>
-                                <th>PreCabling PIW</th><td><a href="" target="_blank"> Download PreCabling PIW</a></td> 
+                                <th>PreCabling PIW</th><td><a href="/precbale_piw/{{$id}}" target="_blank"> Download PreCabling PIW</a></td> 
                               </tr>  
 
                               <tr>
-                                <th>PreCabling PreShutdown</th><td><a href="" target="_blank"> Download PreCabling PreShutdown</a></td> 
+                                <th>PreCabling PreShutdown</th><td><a href="/precbale_shutdown/{{$id}}" target="_blank"> Download PreCabling PreShutdown</a></td> 
                               </tr>  
 
                                
 
                               <tr>
-                                <th>PreCabling Images</th><td><a href="" target="_blank"> Download PreCabling Images</a></td> 
+                                <th>PreCabling Images</th><td><a href="/precbale_images/{{$id}}" target="_blank"> Download PreCabling Images</a></td> 
                               </tr>  
                               
 
@@ -106,7 +106,7 @@
                             </tr>  
 
                             <tr>
-                                <th>Shutdown Images</th><td><a href="" target="_blank"> Download Shutdown Images</a></td> 
+                                <th>Shutdown Images</th><td><a href="/shutdown_images/{{$id}}" target="_blank"> Download Shutdown Images</a></td> 
                               </tr>  
 
                               <tr>
@@ -126,7 +126,7 @@
                             </tr>  
 
                             <tr>
-                                <th>SAT Images</th><td><a href="" target="_blank"> Download SAT Images</a></td> 
+                                <th>SAT Images</th><td><a href="/sat_images/{{$id}}" target="_blank"> Download SAT Images</a></td> 
                               </tr>  
 
                               <tr>
@@ -146,30 +146,29 @@
 
 
 <script>
-function Site_surveyAjax ()  
-     {
-       $.ajax({
-         url:  '/ss_attachments/{{$id}}' ,
-         dataType: 'JSON',
-         method: 'GET',
-         success: function(data) {
-          var str='';
-         for(var i=0;i<data.length;i++){
-        
-          str=str+'<tr><th>'+data[i].file_name+'</th><td><a href="/'+data[i].file_path+'" download>download</a></td><tr>'
-          
-         }
-
-         $("#myTable1").append(str);
-
-         },
-         error: function(jqXHR, textStatus, errorThrown) {
-             console.error("AJAX error:", textStatus, errorThrown);
-             alert("Error fetching material data. Please try again.");
-         }
-     });
- 
-     }
+function Site_surveyAjax() {
+    $.ajax({
+        url: '/ss_attachments/{{$id}}',
+        dataType: 'JSON',
+        method: 'GET',
+        success: function(data) {
+            if (data && data.length > 0) {
+                var str = '';
+                for (var i = 0; i < data.length; i++) {
+                    str += '<tr><th>' + data[i].file_name + '</th><td><a href="/' + data[i].file_path + '" download>download</a></td></tr>';
+                }
+                $("#myTable1").append(str);
+            } else {
+                console.log("No site survey attachments found");
+                $("#myTable1").append('<tr><td colspan="2">No attachments available</td></tr>');
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("AJAX error:", textStatus, errorThrown);
+            alert("Error fetching site survey attachments. Please try again.");
+        }
+    });
+}
 
 
 
@@ -179,11 +178,16 @@ function Site_surveyAjax ()
         dataType: 'JSON',
         method: 'GET',
         success: function(data) {
-            var str = '';
-            for (var i = 0; i < data.length; i++) {
-                str += '<tr><th>' + data[i].file_name + '</th><td><a href="/' + data[i].file_path + '" download>download</a></td></tr>';
+            if (data && data.length > 0) {
+                var str = '';
+                for (var i = 0; i < data.length; i++) {
+                    str += '<tr><th>' + data[i].file_name + '</th><td><a href="/' + data[i].file_path + '" download>download</a></td></tr>';
+                }
+                $("#myTable2").append(str);
+            } else {
+                console.log("No precable attachments found");
+                $("#myTable2").append('<tr><td colspan="2">No attachments available</td></tr>');
             }
-            $("#myTable2").append(str);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.error("AJAX error:", textStatus, errorThrown);

@@ -1,11 +1,7 @@
 <style>
 
-body {
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        background-color: #f8f9fa;
-        padding: 20px;
-    }
+
+
 
  .container {
         max-width: 1000px;
@@ -38,6 +34,130 @@ body {
         font-size: 14px;
         line-height: 1.4;
     }
+/* General Styling */
+
+/* General Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #fff; /* No background color */
+}
+
+h1.title {
+    font-size: 4em; /* Larger font size */
+    color: #1a1a1a;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); /* Text shadow for emphasis */
+}
+
+.checklist-container {
+    width: 90%;
+    max-width: 1400px; /* Larger max width */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 80px; /* Increased gap */
+    margin: 0 auto;
+}
+
+.checklist {
+    width: 100%;
+    padding: 30px;
+}
+
+.checklist-left, .checklist-right {
+    flex: 1;
+}
+
+
+li {
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    font-size: 6em; /* Larger font size for the list items */
+    color: #2c3e50;
+    font-weight: bold;
+    position: relative;
+    padding-left: 60px; /* Increase padding for better spacing */
+}
+
+li:before {
+   
+    position: absolute;
+    left: 0;
+    font-size: 1.8em;
+    color: #3498db; /* Blue color for the numbering */
+    top: 0;
+}
+
+input[type="checkbox"] {
+    margin-left: 20px;
+    transform: scale(1.5); /* Enlarge checkbox for better visibility */
+    accent-color: #3498db; /* Matching color */
+}
+
+input[type="checkbox"]:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+/* Mobile-friendly */
+@media (max-width: 768px) {
+    .checklist-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    h1.title {
+        font-size: 3em; /* Slightly smaller on mobile */
+    }
+
+    li {
+        font-size: 1.4em;
+    }
+}
+/* Base styles for the pictures grid */
+.pictures-grid {
+    display: flex;                      /* Enable Flexbox layout */
+    flex-wrap: wrap;                    /* Allow items to wrap onto the next line */
+    justify-content: space-between;     /* Space out items evenly */
+    margin: 20px;                       /* Margin around the grid */
+}
+
+.pictures-grid .picture-item {
+    flex: 0 0 48%;                      /* Each item takes up 48% of the row width */
+    margin-bottom: 20px;                /* Space below each item */
+    position: relative;                 /* Position for the overlay effect */
+    transition: transform 0.3s ease;    /* Smooth scaling effect on hover */
+}
+
+.pictures-grid .picture-item img {
+    width: 100%;                        /* Make images responsive */
+    height: auto;                       /* Maintain aspect ratio */
+    border-radius: 8px;                 /* Rounded corners for images */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+}
+
+.pictures-grid .picture-item p {
+    text-align: center;                 /* Center the text */
+    font-weight: bold;                  /* Make the text bold */
+    margin-top: 8px;                    /* Margin above the text */
+    color: #333;                        /* Dark gray text color */
+    font-size: 16px;                    /* Font size for text */
+}
+
+.pictures-grid .picture-item:hover {
+    transform: scale(1.05);             /* Slightly increase the size on hover */
+}
 
 
 
@@ -189,7 +309,7 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
     </div>
 </div>
 
-
+{{-- 
 <div class="signature-section">
     <div class="prepared">
         <p>Disediakan Oleh:</p>
@@ -201,12 +321,12 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
         <div class="signature-box">Signature 2</div>
         <p>Nama:<br>Jawatan:</p>
     </div>
-</div>
+</div> --}}
 
 
 <div>
        
-    <div class="header" style="padding-top: 150px">
+    {{-- <div class="header" style="padding-top: 260px">
         <div class="logo">
             <img src='/assets/web-images/tnblogo.png' alt="TNB Logo">
 
@@ -231,12 +351,12 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
                 Default Address</p>
             @endif
         </div>
-    </div>
+    </div> --}}
 
-        <div class="substation-info">           
+        {{-- <div class="substation-info">           
             <p><strong>SUBSTATION NAME:</strong> {{$survey->nama_pe}}</p>
             <p><strong>NO FUNCTIONAL LOCATION:</strong> JJBUPJCOEH00621</p>
-        </div>
+        </div> --}}
 
         <h2 class="section-title"><u>PICTURE OF SITE SURVEY</u></h2>
 
@@ -248,7 +368,6 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
                             <img src='/{{ $pictureData->$field }}' alt="{{ ucfirst(str_replace('_', ' ', $field)) }}">
                             <p>{{ ucfirst(str_replace('_', ' ', $field)) }}</p>
                         </div>
-                        
                     @endif
                 @endforeach
             @endif

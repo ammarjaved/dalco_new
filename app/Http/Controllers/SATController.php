@@ -208,7 +208,10 @@ public function destroy($id)
      
              // Add the toolbox talk using the repository
              $toolbox = $this->siteRepository->addToolBoxTalk($request, $request->site_survey_id, $request->nama_pe, $usr_info);
-             
+             $site_survey = SiteSurvey::find( $request->site_survey_id);
+             $site_survey->overall_status='sat';
+             $site_survey->save();
+
              // Create the toolbox talk record
              $newToolboxTalk = ToolBoxTalk::create($toolbox);
      

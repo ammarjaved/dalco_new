@@ -168,7 +168,9 @@ class ImageShutdownController extends Controller
              
              // Add the toolbox talk using the repository method
              $toolbox = $this->siteRepository->addToolBoxTalk($request, $request->site_survey_id, $request->nama_pe, $usr_info);
-     
+             $site_survey = SiteSurvey::find( $request->site_survey_id);
+             $site_survey->overall_status='outage';
+             $site_survey->save();
              // Create a new ToolBoxTalk record and capture the instance
              $toolboxTalk = ToolBoxTalk::create($toolbox);
      

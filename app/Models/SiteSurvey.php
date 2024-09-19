@@ -22,7 +22,7 @@ class SiteSurvey extends Model
         'ct_saiz_protection', 'ct_saiz_metering', 'scada_status', 'bekalan_lv',
         'bacaan_beban', 'genset', 'jenis_lvdb', 'keperluan_khas_kerja', 'susun',
         'geom', 'created_by', 'updated_by','project','area',
-        'jenis_fius','konfigurasi_other'
+        'jenis_fius','konfigurasi_other','overall_status'
     ];
 
     protected $casts = [

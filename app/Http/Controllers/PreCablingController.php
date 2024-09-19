@@ -109,7 +109,9 @@ class PreCablingController extends Controller
             $usr_info = Auth::user();
             // Add the toolboxtalk using the repository method
             $toolbox = $this->siteRepository->addToolBoxTalk($request, $request->site_survey_id, $request->nama_pe, $usr_info);
-    
+            $site_survey = SiteSurvey::find( $request->site_survey_id);
+            $site_survey->overall_status='cabling';
+            $site_survey->save();
             // Create the toolboxtalk record
             $toolboxTalk = ToolBoxTalk::create($toolbox);
 

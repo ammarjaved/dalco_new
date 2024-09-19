@@ -1,0 +1,311 @@
+<style>
+
+body {
+    font-family: 'Roboto', sans-serif;
+   
+    margin: 0;
+    padding: 20px;
+}
+
+ .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    align-items: center; /* Add this line to vertically center the logos */
+}
+
+.logo {
+    width: 45%;
+    display: inline-block; /* Add this line to make the logos display inline */
+    vertical-align: middle; /* Add this line to vertically center the logos */
+}
+
+.logo img {
+    max-width: 80%; /* Reduce the image size to 80% of the parent container */
+    height: auto;
+    margin-bottom: 10px;
+}
+    .header .logo p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    h1.title {
+    font-size: 2.5em;
+    color: #2c3e50;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    line-height: 1.4;
+}
+
+.checklist-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 20px;
+}
+
+.checklist {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.checklist-left, .checklist-right {
+    flex: 1;
+}
+
+ol {
+    counter-reset: list-counter;
+}
+
+li {
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    font-size: 1.1em;
+    color: #34495e;
+    position: relative;
+    padding-left: 35px;
+}
+
+li:before {
+   
+    position: absolute;
+    left: 0;
+    font-size: 1.5em;
+    color: #3498db;
+    top: 0;
+}
+
+input[type="checkbox"] {
+    margin-left: 15px;
+    accent-color: #3498db; /* Modern look for checkboxes */
+}
+
+input[type="checkbox"]:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Mobile-friendly */
+@media (max-width: 768px) {
+    .checklist-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    h1.title {
+        font-size: 2em;
+    }
+}
+
+
+
+
+</style>
+
+
+
+
+<div class="header">
+    <div class="logo">
+        <img src='C:\Users\Hp\Documents\dalco_new\public\assets/web-images/tnblogo.png' alt="TNB Logo">
+        <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
+            Level 2, Jalan Air Hitam, Kawasan 16,<br>
+            40000 Shah Alam, Selangor</p>
+    </div>
+    <div class="logo">
+                    <img src='C:\Users\Hp\Documents\dalco_new\public\assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
+            <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
+            NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
+            </div>
+</div>
+
+
+<h1 class="title">PICTURE LIST FORM<br>(SITE VISIT)</h1>
+
+<div class="checklist-container">
+    <div class="checklist">
+        <div class="checklist-left">
+            <ol>
+                <li> Substation (FL)
+                    <input type="checkbox" name="substation_fl" value="yes" checked disabled> Yes
+                    <input type="checkbox" name="substation_fl" value="no"  disabled> No
+                </li>
+                
+                <li> Existing Switchgear
+                    <input type="checkbox" name="existing_switchgear" value="yes" checked disabled> Yes
+                    <input type="checkbox" name="existing_switchgear" value="no"  disabled> No
+                </li>
+                
+                
+                <li> Switchgear Nameplate
+                    <input type="checkbox" name="switchgear_nameplate" value="yes" checked disabled> Yes
+                    <input type="checkbox" name="switchgear_nameplate" value="no"  disabled> No
+                </li>
+                
+                <li> Distribution Board
+                    <input type="checkbox" name="distribution_board" value="yes"  disabled> Yes
+                    <input type="checkbox" name="distribution_board" value="no" checked disabled> No
+                </li>
+                
+                <li> Battery Charger
+                    <input type="checkbox" name="battery_charger" value="yes"  disabled> Yes
+                    <input type="checkbox" name="battery_charger" value="no" checked disabled> No
+                </li>
+                
+                <li> Battery Charger Nameplate
+                    <input type="checkbox" name="battery_charger_nameplate" value="yes"  disabled> Yes
+                    <input type="checkbox" name="battery_charger_nameplate" value="no" checked disabled> No
+                </li>
+                
+                <li> Wall / Ceiling Cable Tray Route (P/W)
+                    <input type="checkbox" name="ceiling_tray" value="yes"  disabled> Yes
+                    <input type="checkbox" name="ceiling_tray" value="no" checked disabled> No
+                </li>
+                
+                <li> Civil Work Location
+                    <input type="checkbox" name="civil_location" value="yes"  disabled> Yes
+                    <input type="checkbox" name="civil_location" value="no" checked disabled> No
+                </li>
+                
+            </ol>
+        </div>
+        <div class="checklist-right">
+            <ol start="9">
+                <li> Substation Entrance
+                    <input type="checkbox" name="substation_entrance"  disabled> Yes
+                    <input type="checkbox" name="substation_entrance" checked disabled> No
+                </li>
+                
+                <li> Cable Route
+                    <input type="checkbox" name="cable_route"  disabled> Yes
+                    <input type="checkbox" name="cable_route" checked disabled> No
+                </li>
+                
+                <li> Portable Genset Location
+                    <input type="checkbox" name="genset_location"  disabled> Yes
+                    <input type="checkbox" name="genset_location" checked disabled> No
+                </li>
+                
+                <li> Feeder and TX Cable
+                    <input type="checkbox" name="feeder_tx"  disabled> Yes
+                    <input type="checkbox" name="feeder_tx" checked disabled> No
+                </li>
+                
+                <li> Trench Inside View
+                    <input type="checkbox" name="trench_view"  disabled> Yes
+                    <input type="checkbox" name="trench_view" checked disabled> No
+                </li>
+                
+                <li> RTU Remote Terminal Unit
+                    <input type="checkbox" name="rtu"  disabled> Yes
+                    <input type="checkbox" name="rtu" checked disabled> No
+                </li>
+                
+                <li> RCB Remote Control Box
+                    <input type="checkbox" name="rcb"  disabled> Yes
+                    <input type="checkbox" name="rcb" checked disabled> No
+                </li>
+                
+                <li> EFI Earth Fault Indicator
+                    <input type="checkbox" name="efi"  disabled> Yes
+                    <input type="checkbox" name="efi" checked disabled> No
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+
+<div class="signature-section">
+    <div class="prepared">
+        <p>Disediakan Oleh:</p>
+        
+        <p>Nama: <br>Jawatan: </p>
+    </div>
+    <div class="reviewed">
+        <p>Disemak Oleh:</p>
+        <div class="signature-box">Signature 2</div>
+        <p>Nama:<br>Jawatan:</p>
+    </div>
+</div>
+
+
+<div>
+       
+    <div class="header" style="padding-top: 150px">
+        <div class="logo">
+            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/web-images/tnblogo.png' alt="TNB Logo">
+
+            <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
+            Level 2, Jalan Air Hitam, Kawasan 16,<br>
+            40000 Shah Alam, Selangor</p>
+        </div>
+          <div class="logo">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
+                <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
+               NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
+                    </div>
+    </div>
+
+        <div class="substation-info">           
+            <p><strong>SUBSTATION NAME:</strong> Bandar Sunway</p>
+            <p><strong>NO FUNCTIONAL LOCATION:</strong> JJBUPJCOEH00621</p>
+        </div>
+
+        <h2 class="section-title"><u>PICTURE OF SITE SURVEY</u></h2>
+
+        <div class="pictures-grid">
+                                                                        <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/substation_fl_image1-1726644489.jpg' alt="Substation fl image1">
+                            <p>Substation fl image1</p>
+                        </div>
+                        
+                                                                                <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/substation_fl_image2-1726644489.jpg' alt="Substation fl image2">
+                            <p>Substation fl image2</p>
+                        </div>
+                        
+                                                                                <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/existing_switchgear_image1-1726644489.jpg' alt="Existing switchgear image1">
+                            <p>Existing switchgear image1</p>
+                        </div>
+                        
+                                                                                <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/existing_switchgear_image2-1726644489.jpg' alt="Existing switchgear image2">
+                            <p>Existing switchgear image2</p>
+                        </div>
+                        
+                                                                                <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/switchgear_nameplate_image1-1726644489.jpg' alt="Switchgear nameplate image1">
+                            <p>Switchgear nameplate image1</p>
+                        </div>
+                        
+                                                                                <div class="picture-item">
+                            <img src='C:\Users\Hp\Documents\dalco_new\public\assets/images/switchgear_nameplate_image2-1726644489.jpg' alt="Switchgear nameplate image2">
+                            <p>Switchgear nameplate image2</p>
+                        </div>
+                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                    </div>
+        
+        
+    </div>
+

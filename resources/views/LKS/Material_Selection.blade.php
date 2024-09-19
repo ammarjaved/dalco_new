@@ -1,26 +1,30 @@
 
 <style>
 
+
 .header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 50px;
-        }
-        .logo {
-            border: 1px solid black;
-            padding: 10px;
-            font-size: 12px;
-            width: 45%;
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .logo img {
-            width: 100px;
-        }
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    align-items: center; /* Add this line to vertically center the logos */
+}
+
+.logo {
+    width: 45%;
+    display: inline-block; /* Add this line to make the logos display inline */
+    vertical-align: middle; /* Add this line to vertically center the logos */
+}
+
+.logo img {
+    max-width: 80%; /* Reduce the image size to 80% of the parent container */
+    height: auto;
+    margin-bottom: 10px;
+}
+    .header .logo p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.4;
+    }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -48,27 +52,24 @@
 
 
 
-<div class="header" style="padding-top: 200px">
+<div class="header">
     <div class="logo">
-        <img src="{{ URL::asset('assets/web-images/tnblogo.png') }}" alt="TNB Logo">
-
+        <img src='/assets/web-images/tnblogo.png' alt="TNB Logo">
         <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
-        Level 2, Jalan Air Hitam, Kawasan 16,<br>
-        40000 Shah Alam, Selangor</p>
+            Level 2, Jalan Air Hitam, Kawasan 16,<br>
+            40000 Shah Alam, Selangor</p>
     </div>
-      <div class="logo">
+    <div class="logo">
         @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
-            <img src="{{ URL::asset('assets/web-images/main-logo.png') }}" alt="Aerosynergy Solutions Logo">
+            <img src='/assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
             <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
-           NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
+            NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
         @elseif($projectName === 'ARAS-JOHOR')
-            <img src="{{ URL::asset('assets/web-images/araslogo.png') }}" alt="ARAS Kejuruteraan Logo">
+            <img src='/assets/web-images/araslogo.png' alt="ARAS Kejuruteraan Logo">
             <p>ARAS KEJURUTERAAN SDN BHD<br>
-            1st Floor No 72, Jalan SS 21/1, Damansara<br>
-            Utama, 47400 Petaling Jaya, Selangor</p>
+            1st Floor No 72, Jalan SS 21/1, Damansara Utama, 47400 Petaling Jaya, Selangor</p>
         @else
-            <!-- Default logo or empty state -->
-            <img src="{{ URL::asset('assets/web-images/defaultlogo.png') }}" alt="Default Logo">
+            <img src='/assets/web-images/defaultlogo.png' alt="Default Logo">
             <p>Default Company Name<br>
             Default Address</p>
         @endif
@@ -77,7 +78,7 @@
 
 <div style="padding-top: 100px">
     <h1>JADUAL ANGGARAN DAN PENGGUNAAN BAHAN</h1>
-    <table>
+    {{-- <table>
         <tr>
             <th>PROJEK PEMBINAAN:</th>
             <td colspan="3">PROJEK TAMAN DESA COPIAWALA - PKT MUTIARA IMAN NO.5</td>
@@ -94,7 +95,7 @@
             <th>KONTRAKTOR:</th>
             <td colspan="3">JAYA KEJURUTERAAN SDN BHD</td>
         </tr>
-    </table>
+    </table> --}}
     <table>
         <tr>
             <th>Bil.</th>
@@ -102,6 +103,7 @@
             <th>Keterangan Barang</th>
             <th>Kuantiti</th>
             <th>Unit</th>
+            <th>Remarks</th>
         </tr>
     
         @foreach ($projectMaterials as $item)
@@ -111,12 +113,14 @@
                 <td>{{ $item->material->mat_desc }}</td>
                 <td>{{ $item->quantity }}</td>
                 <td>{{ $item->material->bun }}</td>
+                <td>{{ $item->remarks }}</td>
+                
             </tr>
         @endforeach
     </table>
     
     
-    <div class="footer">
+    {{-- <div class="footer">
         <div class="signature">
            
     <p>Nama : </p>
@@ -126,14 +130,8 @@
             <p>Jurutera</p>
             <p>NAMA:</p>
         </div>
-    </div>
+    </div> --}}
 </div>
 
-<button onclick="printPage()">Print </button>
 
-<script>
-    // JavaScript function to trigger the print dialog
-    function printPage() {
-      window.print();
-    }
-  </script>
+

@@ -12,7 +12,7 @@ class ProjectMaterial extends Model
     use HasFactory;
     protected $table = 'project_material';
 
-    protected $fillable = ['quantity','material_id','site_survey_id'];
+    protected $fillable = ['quantity','material_id','site_survey_id','remarks'];
 
     protected static function boot()
     {

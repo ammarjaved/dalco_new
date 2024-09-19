@@ -48,26 +48,16 @@
 
 <div class="header">
     <div class="logo">
-        <img src='/assets/web-images/tnblogo.png' alt="TNB Logo">
+        <img src='C:\Users\Hp\Documents\dalco_new\public\assets/web-images/tnblogo.png' alt="TNB Logo">
         <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
             Level 2, Jalan Air Hitam, Kawasan 16,<br>
             40000 Shah Alam, Selangor</p>
     </div>
     <div class="logo">
-        @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
-            <img src='/assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
+                    <img src='C:\Users\Hp\Documents\dalco_new\public\assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
             <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
             NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
-        @elseif($projectName === 'ARAS-JOHOR')
-            <img src='/assets/web-images/araslogo.png' alt="ARAS Kejuruteraan Logo">
-            <p>ARAS KEJURUTERAAN SDN BHD<br>
-            1st Floor No 72, Jalan SS 21/1, Damansara Utama, 47400 Petaling Jaya, Selangor</p>
-        @else
-            <img src='/assets/web-images/defaultlogo.png' alt="Default Logo">
-            <p>Default Company Name<br>
-            Default Address</p>
-        @endif
-    </div>
+            </div>
 </div>
 
 
@@ -75,22 +65,30 @@
 
 <div class="pictures-grids">
     <h2>SAT Images</h2>
-    <h3 class="survey-titles">Nama Pe: {{ $survey->nama_pe }}</h3> <!-- You can replace this variable accordingly -->
+    <h3 class="survey-titles">Nama Pe: testinglks</h3> <!-- You can replace this variable accordingly -->
     
     <div class="gallery-container">
-        @foreach($SATImages as $SATData)
-            <div class="image-containers">
+                    <div class="image-containers">
                 <!-- Image Thumbnail -->
-                <img class="gallery-images" src='/{{ $SATData->image_url }}' alt="{{ $SATData->image_name }}">
+                <img class="gallery-images" src='C:\Users\Hp\Documents\dalco_new\public\assets/images/image_url-1726774139.png' alt="hello">
 
                 <!-- Image Information -->
                 <div class="image-info">
-                    <h3>Image Name: {{ $SATData->image_name }}</h3>
-                    <h4 class="image-descriptions">Image Type: {{ $SATData->image_type }}</h4>
+                    <h3>Image Name: hello</h3>
+                    <h4 class="image-descriptions">Image Type: BEFORE</h4>
                 </div>
             </div>
-        @endforeach
-        
+                    <div class="image-containers">
+                <!-- Image Thumbnail -->
+                <img class="gallery-images" src='C:\Users\Hp\Documents\dalco_new\public\assets/images/image_url-1726774152.PNG' alt="this is good">
+
+                <!-- Image Information -->
+                <div class="image-info">
+                    <h3>Image Name: this is good</h3>
+                    <h4 class="image-descriptions">Image Type: DURING</h4>
+                </div>
+            </div>
+                
     </div>
 </div>
 

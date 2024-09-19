@@ -1,9 +1,5 @@
 
 
-
-
-
-
 <style>
 .image-containers {
             text-align: center;
