@@ -255,6 +255,9 @@ Route::get('/sat_images/{id}', [LKSController::class, 'SAT_Images'])->name('sat_
     
 
     
+    Route::get('/sat/{id}/gallery', [SatController::class, 'gallery'])->name('sat.gallery');
+    Route::get('/sat/{id}/download', [SatController::class, 'download'])->name('sat.download');
+    
 
 
 

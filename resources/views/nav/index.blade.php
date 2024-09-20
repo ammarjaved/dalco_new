@@ -1,7 +1,7 @@
 <nav class="main-header navbar navbar-expand navbar-light d-flex justify-content-between" style="background-color: #8e44ad;margin-left:1px;">
     <ul class="navbar-nav">
         <li class="nav-item d-sm-inline-block">
-            <img src="{{ asset('assets/web-images/main-logo.png') }}" height="35" alt=""><span>PE: {{ $survey->nama_pe }}</span>
+            <img src="{{ asset('assets/web-images/main-logo.png') }}" style="margin-top: 55px" height="35" alt="">          <span style="color: black">PE: {{ $survey->nama_pe }}</span>
         </li>
     </ul>
 
@@ -16,10 +16,8 @@
             </md-filled-button>
         </a>
 
-           
 
-       
-
+     
 
         <div style="margin: 16px;">
             <md-filled-button id="usage-document-anchor6">Site Survey Actions</md-filled-button>
@@ -208,6 +206,22 @@ anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
 </script>
 
 
+<div style="margin: 16px;">
+    <md-filled-button id="usage-document-anchor9">Gallery</md-filled-button>
+</div>
+<md-menu positioning="document" id="usage-document9" anchor="usage-document-anchor9">
+    <md-menu-item href="{{ route('sat.gallery', ['id' => $id]) }}">
+        Gallery
+    </md-menu-item>
+</md-menu>
+
+<script type="module">
+    const anchorEl = document.body.querySelector('#usage-document-anchor9');
+    const menuEl = document.body.querySelector('#usage-document9');
+    anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
+</script>
+
+
 
 <div style="margin: 16px;">
     <md-filled-button id="usage-document-anchor5">
@@ -243,12 +257,39 @@ anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
 </nav>
 
 <style>
-    md-menu-button {
-        margin-left: 20px;
-    }
+  
     md-filled-tonal-button, md-filled-button {
         --md-sys-color-primary: #D7b4f3;
         --md-sys-color-on-primary: white;
     }
+
+    .main-header {
+    padding: 10px 15px; /* Adjust padding for spacing */
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space out logo and buttons */
+    align-items: center; /* Center items vertically */
+    background-color: #8e44ad; /* Background color */
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center; /* Center logo and text */
+}
+
+
+.navbar .nav-item {
+    margin-right: 40px; /* Reduced space between buttons */
+}
+
+.md-filled-button {
+    padding: 6px 10px; /* Adjust button padding */
+    font-size: 14px; /* Font size */
+}
+
+.d-flex {
+    display: flex; /* Ensure flex display */
+    align-items: center; /* Center items vertically */
+}
+
 </style>
 

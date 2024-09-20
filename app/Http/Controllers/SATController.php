@@ -277,4 +277,28 @@ public function destroy($id)
 
     
 
+   // Method to show the form for creating a new SAT
+   public function gallery($id)
+   {
+       $survey = SiteSurvey::findOrFail($id);
+       $satRecords = SAT::where('site_survey_id', $id)->where('image_type', 'GALLERY')->get();
+       $site_survey = $id;
+   
+       return view('SAT.Gallery', compact('survey', 'satRecords', 'site_survey'));
+   }
+   
+
+   public function download($id)
+{
+    $satRecord = SAT::findOrFail($id);
+    $filePath = public_path($satRecord->image_url);
+
+    if (file_exists($filePath)) {
+        return response()->download($filePath);
+    } else {
+        return redirect()->back()->with('error', 'File not found.');
+    }
+}
+
+
 }
