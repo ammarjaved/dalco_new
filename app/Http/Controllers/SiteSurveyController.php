@@ -34,11 +34,12 @@ class SiteSurveyController extends Controller
      {
          $usr_info = \Auth::user();
          $delcoSummary = SiteSurvey::with(['PreCablingImagesStatus', 'ShutDownStatus','SATStatus'])->select('*', 
+
          
         
          DB::raw('ST_X(geom) as x'),
          DB::raw('ST_Y(geom) as y')
-     )->get();
+     )->where('project',$usr_info->project)->get();
 
         //    return var_dump($delcoSummary);
         
