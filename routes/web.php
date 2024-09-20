@@ -216,6 +216,23 @@ Route::get('/ss_attachments/{id}', [LKSController::class, 'siteSurveyAttachments
 
 Route::get('/LKS/create/{id}', [LKSController::class, 'create'])->name('LKS.create');
 
+Route::get('/pc_tbk/{id}', [LKSController::class, 'PrecableToolboxTalk'])->name('pc_tbk');
+Route::get('/sd_tbk/{id}', [LKSController::class, 'ShutdownToolboxTalk'])->name('sd_tbk');
+Route::get('/sat_tbk/{id}', [LKSController::class, 'SATToolboxTalk'])->name('sat_tbk');
+
+Route::get('/precable_attachments/{id}', [LKSController::class, 'PreCabling_Attachments'])->name('precable_attachments');
+Route::get('/shutdown_attachments/{id}', [LKSController::class, 'Shutdown_Attachments'])->name('shutdown_attachments');
+Route::get('/SAT_attachments/{id}', [LKSController::class, 'SAT_Attachments'])->name('SAT_attachments');
+Route::get('/material_selec/{id}', [LKSController::class, 'Material_Selection'])->name('material_selec');
+Route::get('/precbale_piw/{id}', [LKSController::class, 'Precable_Piw'])->name('precbale_piw');
+
+Route::get('/precbale_shutdown/{id}', [LKSController::class, 'Precable_Shutdown'])->name('precbale_shutdown');
+
+Route::get('/precbale_images/{id}', [LKSController::class, 'Precable_Images'])->name('precbale_images');
+Route::get('/shutdown_images/{id}', [LKSController::class, 'Shutdown_Images'])->name('shutdown_images');
+Route::get('/sat_images/{id}', [LKSController::class, 'SAT_Images'])->name('sat_images');
+
+
 
 
 

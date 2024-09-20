@@ -128,6 +128,7 @@ table.dataTable thead .sorting_desc:after {
                     <th>Description</th>
                     <th>Bun</th>
                     <th>Quantity</th>
+                    <th>Remarks</th>
                 </tr>
             </thead>
             <tbody id='mat_sel'>
@@ -151,6 +152,7 @@ table.dataTable thead .sorting_desc:after {
                 <th>Description</th>
                 <th>Bun</th>
                 <th>Quantity</th>
+                <th>Remarks</th>
                 <th>Action</th> <!-- New column for delete button -->
             </tr>
         </thead>
@@ -162,6 +164,7 @@ table.dataTable thead .sorting_desc:after {
                     <td>{{ $item->mat_desc }}</td>
                     <td>{{ $item->bun }}</td>
                     <td>{{ $item->quantity }}</td>
+                    <td>{{ $item->remarks }}</td>
                     <td>
                         <form action="{{ route('material-selection.delete', $item->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
                             @csrf
@@ -213,11 +216,14 @@ function addData() {
                 if (data.length > 0) {
                     
                         var i = $('#myTable tr').length; // Define i as the number of table rows
-                        var str = '<tr><td><input type="text" name="data[' + i + '][id]" value="' + data[0].id + '" /></td>' +
-                                  '<td><input type="text" name="data[' + i + '][mat_code]" value="' + data[0].mat_code + '" /></td>' +
-                                  '<td><input type="text" name="data[' + i + '][mat_desc]" value="' + data[0].mat_desc + '" /></td>' +
-                                  '<td><input type="text" name="data[' + i + '][bun]" value="' + data[0].bun + '" /></td>' +
-                                  '<td><input type="number" name="data[' + i + '][quantity]" value="0" /></td></tr>';
+                        var str = '<tr>' +
+                              '<td><input type="text" name="data[' + i + '][id]" value="' + data[0].id + '" /></td>' +
+                              '<td><input type="text" name="data[' + i + '][mat_code]" value="' + data[0].mat_code + '" /></td>' +
+                              '<td><input type="text" name="data[' + i + '][mat_desc]" value="' + data[0].mat_desc + '" /></td>' +
+                              '<td><input type="text" name="data[' + i + '][bun]" value="' + data[0].bun + '" /></td>' +
+                              '<td><input type="number" name="data[' + i + '][quantity]" value="0" /></td>' +
+                              '<td><input type="text" name="data[' + i + '][remarks]" value="" /></td>' + <!-- New input for remarks -->
+                              '</tr>';
                         $("#mat_sel").append(str);
                         $('#search_input1').val(''); // Clear the search input
                    // }

@@ -109,7 +109,9 @@ class PreCablingController extends Controller
             $usr_info = Auth::user();
             // Add the toolboxtalk using the repository method
             $toolbox = $this->siteRepository->addToolBoxTalk($request, $request->site_survey_id, $request->nama_pe, $usr_info);
-    
+            $site_survey = SiteSurvey::find( $request->site_survey_id);
+            $site_survey->overall_status='cabling';
+            $site_survey->save();
             // Create the toolboxtalk record
             $toolboxTalk = ToolBoxTalk::create($toolbox);
 
@@ -225,14 +227,15 @@ class PreCablingController extends Controller
     try {
         // Find and delete the ToolBoxTalk by ID
         $toolBoxTalk = ToolBoxTalk::findOrFail($id);
+       $siteSurveyId = $toolBoxTalk->site_survey_id;
         $toolBoxTalk->delete();
 
         // Redirect to the PreCabling.toolboxtalk route with the same ID after deletion
-        return redirect()->route('PreCabling.toolboxtalk', ['id' => $id])
+        return redirect()->route('PreCabling.toolboxtalk', ['id' =>  $siteSurveyId])
                          ->with('success', 'ToolBoxTalk deleted successfully');
     } catch (\Throwable $th) {
         // Handle any failure in deletion
-        return redirect()->route('pre-cabling.index')->with('failed', 'Failed to delete ToolBoxTalk');
+        return redirect()->route('PreCabling.toolboxtalk')->with('failed', 'Failed to delete ToolBoxTalk');
     }
 }
 

@@ -4,78 +4,93 @@
 
 <style>
 
-.form-container {
-        background-color: #f9f9f9;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        margin-top: 20px;
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    align-items: center; /* Add this line to vertically center the logos */
+}
+
+.logo {
+    width: 45%;
+    display: inline-block; /* Add this line to make the logos display inline */
+    vertical-align: middle; /* Add this line to vertically center the logos */
+}
+
+.logo img {
+    max-width: 80%; /* Reduce the image size to 80% of the parent container */
+    height: auto;
+    margin-bottom: 10px;
+}
+    .header .logo p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.4;
     }
-    .header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 50px;
-        }
-        .logo {
-            border: 1px solid black;
-            padding: 10px;
-            font-size: 12px;
-            width: 45%;
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        header img {
-            max-height: 100px;
-        }
-        .logo {
-            border: 1px solid black;
-            padding: 10px;
-            font-size: 12px;
-            width: 45%;
-        }
-        .logo img {
-            width: 100px;
-        }
-        ol {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        li {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px; 
-            font-size: 14px; 
-        }
-
-        li label {
-            margin-right: 20px; 
-            margin-left: 10px; 
-        }
-        .checkboxs {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin-right: 5px;
-    border: 1px solid #000;
+    .form-table {
+  border-collapse: collapse;
+  width: 100%;
 }
 
-.checkeds {
-    background-color: #000;
+.form-table tr {
+  border-bottom: 1px solid #ddd;
 }
 
-.footer {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
+.form-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
 
-    
+.form-table td {
+  padding: 10px;
+  text-align: left;
+}
+
+.form-table td.label {
+  font-weight: bold;
+  width: 30%;
+}
+
+.form-table td.input {
+  width: 70%;
+}
+
+
+
+.checkboxs {
+  display: inline-block;
+  width: 30px; /* Increase width to fit the larger tick mark */
+  height: 30px; /* Increase height to fit the larger tick mark */
+  margin-right: 5px;
+  border: 2px solid #dcdcdc;
+  border-radius: 4px;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 30px; /* Center the tick mark vertically */
+}
+
+.checkboxs::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 29px; /* Increase font size of the tick mark */
+  color: transparent; /* Hide the tick mark initially */
+}
+
+.checkeds::after {
+  content: '\2713'; /* Unicode for checkmark */
+  color: green;
+}
+
+.input {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+
 
 </style>
 
@@ -83,7 +98,7 @@
 
  <div class="form-container">
     
- <div class="header" style="padding-top: 150px">
+ <div class="header" >
         <div class="logo">
             <img src='/assets/web-images/tnblogo.png' alt="TNB Logo">
 
@@ -138,25 +153,33 @@
         </tr>
         <tr>
             <td class="label">Jenis Kompaun</td>
-<td class="input">
-<span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'simen' ? 'checkeds' : '' }}"></span> Simen
-<span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'rumput' ? 'checkeds' : '' }}"></span> Rumput
-<span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'inter-locking' ? 'checkeds' : '' }}"></span> Inter-locking
-<span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'crusher run' ? 'checkeds' : '' }}"></span> Crusher Run
-<span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'tidak' ? 'checkeds' : '' }}"></span> Tidak
-</td>
-
+            <td class="input">
+                <span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'simen' ? 'checkeds' : '' }}"></span> Simen
+                <span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'rumput' ? 'checkeds' : '' }}"></span> Rumput
+                <span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'inter-locking' ? 'checkeds' : '' }}"></span> Inter-locking
+                <span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'crusher run' ? 'checkeds' : '' }}"></span> Crusher Run
+                <span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'tidak' ? 'checkeds' : '' }}"></span> Tidak
+            </td>
         </tr>
         <tr>
             <td class="label">Jenis Perkakasuis</td>
             <td class="input">
                 <span class="checkboxs {{ $survey->jenis_perkakasuis == 'VCB' ? 'checkeds' : '' }}"></span> VCB
                 <span class="checkboxs {{ $survey->jenis_perkakasuis == 'RMU' ? 'checkeds' : '' }}"></span> RMU
+                <span class="checkboxs {{ $survey->jenis_perkakasuis == 'CSU' ? 'checkeds' : '' }}"></span> CSU
             </td>
         </tr>
+        
+        
+        
         <tr>
             <td class="label">Konfigurasi</td>
             <td class="input">{{ $survey->konfigurasi}}</td>
+        </tr>
+
+        <tr>
+            <td class="label">Konfigurasi Other</td>
+            <td class="input">{{ $survey->konfigurasi_other}}</td>
         </tr>
         
         <tr>
@@ -229,6 +252,11 @@
         <tr>
             <td class="label">Jenis LVDB</td>
             <td class="input">{{ $survey->jenis_lvdb }}</td>
+        </tr>
+
+        <tr>
+            <td class="label">Jenis fius</td>
+            <td class="input">{{ $survey->jenis_fius }}</td>
         </tr>
         <tr>
             <td class="label">Keperluan Khas Kerja</td>

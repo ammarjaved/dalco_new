@@ -22,15 +22,17 @@ class MaterialSelectionController extends Controller
         // Fetch the Site Survey
         $siteSurvey = SiteSurvey::find($request->id);
     
-        // Fetch the materials data (this can be from the `showData` method or similar)
+        // Fetch the materials data
         $data = DB::select(DB::raw("
             WITH foo AS (SELECT * FROM project_material)
-            SELECT a.id, c.nama_pe, mat_desc, mat_code, bun, a.quantity
+            SELECT a.id, c.nama_pe, mat_desc, mat_code, bun, a.quantity, a.remarks
             FROM material b
             JOIN foo a ON a.material_id = b.id
             JOIN tbl_site_survey c ON a.site_survey_id = c.id
             WHERE c.id = ?
         "), [$request->id]);
+    
+        
     
         // Pass both siteSurvey and data to the view
         return view('material-selection.index', compact('siteSurvey', 'data'));
@@ -158,6 +160,7 @@ public function showData($id)
                         'material_id' =>$row['id'],
                         'site_survey_id' => $id,
                         'quantity' => $row['quantity'],
+                        'remarks' => $row['remarks'] ?? '', // Save remarks
                         'created_by' => $username
                     ]
                 );

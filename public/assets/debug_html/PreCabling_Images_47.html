@@ -1,4 +1,3 @@
-
 <style>
 
 .pictures-grids {
@@ -58,43 +57,39 @@
 
 <div class="header">
     <div class="logo">
-        <img src='/assets/web-images/tnblogo.png' alt="TNB Logo">
+        <img src='C:\Users\Hp\Documents\dalco_new\public\assets/web-images/tnblogo.png' alt="TNB Logo">
         <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
             Level 2, Jalan Air Hitam, Kawasan 16,<br>
             40000 Shah Alam, Selangor</p>
     </div>
     <div class="logo">
-        @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
-            <img src='/assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
+                    <img src='C:\Users\Hp\Documents\dalco_new\public\assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
             <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
             NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
-        @elseif($projectName === 'ARAS-JOHOR')
-            <img src='/assets/web-images/araslogo.png' alt="ARAS Kejuruteraan Logo">
-            <p>ARAS KEJURUTERAAN SDN BHD<br>
-            1st Floor No 72, Jalan SS 21/1, Damansara Utama, 47400 Petaling Jaya, Selangor</p>
-        @else
-            <img src='/assets/web-images/defaultlogo.png' alt="Default Logo">
-            <p>Default Company Name<br>
-            Default Address</p>
-        @endif
-    </div>
+            </div>
 </div>
 
 
 <div class="pictures-grids" >
    <h2>Pre-Cabling Images</h2>
-    <h3 class="survey-titles">Nama Pe:{{ $survey->nama_pe }}</h3>
+    <h3 class="survey-titles">Nama Pe:testinglks</h3>
     <div class="gallery-container">
-        @foreach($PreCablmages as $image)
-        <div class="image-containers">
+                <div class="image-containers">
                 <!-- Construct the full path to the image -->   
-                <img class="gallery-images" src='/{{$image->image_url }}' alt="{{ $image->image_name }}">
+                <img class="gallery-images" src='C:\Users\Hp\Documents\dalco_new\public\assets/images/1726772249-1726300453-kjkkjk.png' alt="RCB-2">
                 <div class="image-info">
-                    <h3 class="">Images Name: {{ $image->image_name }}</h3>
-                    <p class="image-descriptions">Image Description: {{ $image->image_desc }}</p>
+                    <h3 class="">Images Name: RCB-2</h3>
+                    <p class="image-descriptions">Image Description: hello</p>
                 </div>
             </div>
-        @endforeach
-    </div>
+                <div class="image-containers">
+                <!-- Construct the full path to the image -->   
+                <img class="gallery-images" src='C:\Users\Hp\Documents\dalco_new\public\assets/images/1726772260-amdkadaksld.PNG' alt="RCB-SERIAL-NUMBER-2">
+                <div class="image-info">
+                    <h3 class="">Images Name: RCB-SERIAL-NUMBER-2</h3>
+                    <p class="image-descriptions">Image Description: aasaa</p>
+                </div>
+            </div>
+            </div>
 </div>
 

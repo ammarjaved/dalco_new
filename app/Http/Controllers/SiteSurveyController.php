@@ -127,15 +127,15 @@ class SiteSurveyController extends Controller
            $var['updated_by']= $usr_info->name;
            $var['area']=$area;
            $var['project']=$project;
-             
+           $var['overall_status']='site-survey';
            
 
             $siteSurvey = SiteSurvey::create($var); 
-
+   
             
 
             DB::statement("UPDATE tbl_site_survey set geom = ST_GeomFromText('POINT($request->lng $request->lat)',4326) where id = $siteSurvey->id");
-           
+            
 
             // DB::statement("update tbl_site_survey set area='$area' ,project='$company' where id = $siteSurvey->id"); 
 

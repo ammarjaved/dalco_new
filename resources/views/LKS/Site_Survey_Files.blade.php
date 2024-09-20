@@ -43,12 +43,7 @@
 </div>
 
 
-<script>
 
-    
-
-
-</script>
 
 
 

@@ -168,7 +168,9 @@ class ImageShutdownController extends Controller
              
              // Add the toolbox talk using the repository method
              $toolbox = $this->siteRepository->addToolBoxTalk($request, $request->site_survey_id, $request->nama_pe, $usr_info);
-     
+             $site_survey = SiteSurvey::find( $request->site_survey_id);
+             $site_survey->overall_status='outage';
+             $site_survey->save();
              // Create a new ToolBoxTalk record and capture the instance
              $toolboxTalk = ToolBoxTalk::create($toolbox);
      
@@ -218,10 +220,11 @@ class ImageShutdownController extends Controller
          try {
              // Find and delete the ToolBoxTalk by ID
              $toolboxtalk = ToolBoxTalk::findOrFail($id);
+             $siteSurveyId = $toolboxtalk->site_survey_id;
              $toolboxtalk->delete();
      
              // Redirect to the image_shutdown.toolboxtalk route with the ID of the deleted toolbox talk
-             return redirect()->route('image_shutdown.toolboxtalk', ['id' => $id])
+             return redirect()->route('image_shutdown.toolboxtalk', ['id' => $siteSurveyId])
                               ->with('success', 'Toolbox Talk deleted successfully.');
          } catch (\Throwable $th) {
              // If there's an error, redirect to the image-shutdown.index with a failure message
