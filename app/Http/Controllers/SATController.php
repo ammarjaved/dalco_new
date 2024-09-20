@@ -44,7 +44,7 @@ class SATController extends Controller
         $survey = SiteSurvey::findOrFail($id);
     
         // Retrieve all SAT records related to this site survey
-        $satRecords = SAT::where('site_survey_id', $id)->get();
+        $satRecords = SAT::where('site_survey_id', $id)->where('image_type','!=','GALLERY')->get();
 
         $site_survey=$id;
     
