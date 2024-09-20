@@ -29,23 +29,28 @@ class SiteSurveyController extends Controller
      * @return \Illuminate\Http\Response
      */
     // 'PreCablingStatus', 'ShutDownStatus',
-
-     public function delcoSummary()
-     {
-         $usr_info = \Auth::user();
-         $delcoSummary = SiteSurvey::with(['PreCablingImagesStatus', 'ShutDownStatus','SATStatus'])->select('*', 
-
-         
-        
-         DB::raw('ST_X(geom) as x'),
-         DB::raw('ST_Y(geom) as y')
-     )->where('project',$usr_info->project)->get();
-
-        //    return var_dump($delcoSummary);
-        
-         // Pass the surveys to the 'DelcoSummary.DelcoSummary' view
-         return view('DelcoSummary.DelcoSummary', compact('delcoSummary'));
-     }
+    public function delcoSummary()
+    {
+        try {
+            $usr_info = \Auth::user();
+            $delcoSummary = SiteSurvey::with(['PreCablingImagesStatus', 'ShutDownStatus', 'SATStatus'])
+                ->select('*', 
+                    DB::raw('ST_X(geom) as x'),
+                    DB::raw('ST_Y(geom) as y')
+                )
+                ->where('project', $usr_info->project)
+                ->get();
+    
+            return view('DelcoSummary.DelcoSummary', compact('delcoSummary'));
+        } catch (\Exception $e) {
+            // Log the error
+            return $e->getMessage();
+           
+            
+            // Return an error view or redirect with an error message
+            return redirect()->back()->with('error', 'An error occurred while retrieving the Delco summary.');
+        }
+    }
 
      public function deleteDelcoSummary($id)
      {
