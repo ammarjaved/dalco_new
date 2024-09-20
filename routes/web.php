@@ -267,7 +267,7 @@ require __DIR__ . '/auth.php';
 
 Route::get('/dashboard', function () {
 
-    return Auth::user()->type  ? Redirect::route('site_survey.index'):Redirect::route('admin-order.index') ;
+    return Auth::user()->type  ? Redirect::route('delco-summary'):Redirect::route('delco-summary') ;
 
 })
     ->middleware(['auth', 'verified'])
