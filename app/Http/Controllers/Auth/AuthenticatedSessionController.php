@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
         // if(Auth::user()->type==false){
         //  return redirect('/site-data/create-mobile');
         // }else{
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->intended('/delco-summary');
       //  return redirect('/site_survey/index');
 
       //  }
