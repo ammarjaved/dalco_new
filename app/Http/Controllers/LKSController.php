@@ -40,7 +40,7 @@ class LKSController extends Controller{
    // $appUrl = config('app.url');
 
 
-
+    // return view('LKS.site_survey_tbk', compact('toolboxtalk','survey'))
     $html = view('LKS.site_survey_tbk', compact('toolboxtalk','survey'))->render();
     $html = preg_replace_callback(
       '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
