@@ -220,10 +220,11 @@ class ImageShutdownController extends Controller
          try {
              // Find and delete the ToolBoxTalk by ID
              $toolboxtalk = ToolBoxTalk::findOrFail($id);
+             $siteSurveyId = $toolboxtalk->site_survey_id;
              $toolboxtalk->delete();
      
              // Redirect to the image_shutdown.toolboxtalk route with the ID of the deleted toolbox talk
-             return redirect()->route('image_shutdown.toolboxtalk', ['id' => $id])
+             return redirect()->route('image_shutdown.toolboxtalk', ['id' => $siteSurveyId])
                               ->with('success', 'Toolbox Talk deleted successfully.');
          } catch (\Throwable $th) {
              // If there's an error, redirect to the image-shutdown.index with a failure message
