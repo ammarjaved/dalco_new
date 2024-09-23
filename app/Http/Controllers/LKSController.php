@@ -51,10 +51,13 @@ class LKSController extends Controller{
     $filename = 'site_survey_tbk_' . $id . '.pdf';
 
   try {
+    $html = $this->addOptimizationCSS($html);
     $pdf = Pdf::loadHTML($html);
     
     // Optional: Set paper size and orientation
     $pdf->setPaper('A4', 'portrait');
+    $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+
     return $pdf->download($filename);
 
 } catch (\Exception $e) {
@@ -66,6 +69,37 @@ class LKSController extends Controller{
 
   }
 
+
+
+  private function addOptimizationCSS($html)
+{
+    $css = '
+        <style>
+            body {
+                font-size: 10pt; /* Reduce font size */
+                line-height: 1.3; /* Reduce line height */
+                margin: 10mm 10mm 10mm 10mm; /* Reduce margins */
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            td, th {
+                padding: 2px 4px; /* Reduce cell padding */
+            }
+            img {
+                max-width: 100%; /* Ensure images dont overflow */
+                height: auto;
+            }
+            .page-break {
+                page-break-after: always;
+            }
+        </style>
+    ';
+
+    // Insert the CSS at the beginning of the <head> tag
+    return preg_replace('/<head>/', '<head>' . $css, $html);
+}
 
     public function siteSurvey($id){
       $usr_info = \Auth::user();
