@@ -15,9 +15,9 @@
     }
 
     .gallery-item img {
-        max-width: 100%;
+        max-width: 70%;
         height: auto;
-        border-radius: 8px;
+        border-radius: 3px;
     }
 
     .button-group {

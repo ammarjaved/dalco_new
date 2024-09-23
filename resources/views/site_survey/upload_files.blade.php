@@ -108,9 +108,11 @@
 
     <h4 class="mt-4">Uploaded Files</h4> <!-- Adjusted top margin -->
     @if ($files->isEmpty())
-        <div class="alert alert-warning" role="alert">
+    <div>
+        <span style="background-color: #d7b4f3;">
             No files uploaded yet.
-        </div>
+        </span>
+    </div>
     @else
         
             <table id="myTable" class="table table-bordered  data-table">
