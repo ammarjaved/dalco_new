@@ -176,6 +176,12 @@
 
         .center {
             text-align: center;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            align-self: center;
+            padding-top: auto;
+            padding-top: auto;
         }
     </style>
 </head>
@@ -221,137 +227,213 @@
                     </tr>
                 </table>
             </div>
-        </div>
-
-        <div style="break-after:page">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col border overall-margin" style="margin-left: 10px;">
-                        <img class="logo" src='/assets/web-images/tnblogo.png' alt="TNB Logo">
-                        <p class="center-text">TNB ENERGY SERVICES SDN BHD (234667-M)<br>
-                            Level 2, Jalan Air Hitam, Kawasan 16,<br>
-                            40000 Shah Alam, Selangor</p>
-                    </div>
-                    <div class="col border overall-margin" style="margin-right: 10px;">
-                        <img class="logo" src='/assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
-                        <p class="center-text">AEROSYNERGY SOLUTIONS SDN BHD<br>
-                            NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
-                    </div>
-                </div>
-            </div>
 
             <h4 class="title center-text">CHECKLIST</h4>
 
+            <h4 class="title center-text">Site Survey</h4>
+
             <div class="container-fluid">
-                <table>
-                    <tr>
-                        <th></th>
-                        <th>Site Survey</th>
-                    </tr>
-                    <tr>
-                        <td colspan="5"><strong>PPD</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Safety Helmet</td>
-                        <td>{{$toolboxtalk->ppd_safety_helment}}</td>
-                    </tr>
-                    <tr>
-                        <td>Safety Vest</td>
-                        <td>{{$toolboxtalk->ppd_safety_vest}}</td>
-                    </tr>
-                    <tr>
-                        <td>Safety Shoes</td>
-                        <td>{{$toolboxtalk->ppd_safety_shoes}}</td>
-                    </tr>
-                    <tr>
-                        <td>Safety</td>
-                        <td>{{$toolboxtalk->ppd_safety}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="5"><strong>TOOL & EQUIPMENT INSTRUMENT</strong></td>
-                    </tr>
-                    <tr>
-                        <td>All In Good Condition</td>
-                        <td>{{$toolboxtalk->equipment_condition}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="5"><strong>INSTRUMENT</strong></td>
-                    </tr>
-                    <tr>
-                        <td>All In Good Condition</td>
-                        <td>{{$toolboxtalk->instrument_condition}}</td>
-                    </tr>
-                    <tr>
-                        <td>First Aid Kit</td>
-                        <td>{{$toolboxtalk->instrument_kit_condition}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="5"><strong>VEHICLE</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Fire Extinguisher</td>
-                        <td>{{$toolboxtalk->vehicle_fire_extinguisher}}</td>
-                    </tr>
-                    <tr>
-                        <td>Vehicle In Good Condition</td>
-                        <td>{{$toolboxtalk->vehicle_condition}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="5"><strong>TRAFFIC</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Safety Kon</td>
-                        <td>{{$toolboxtalk->traffic_safety_kon}}</td>
-                    </tr>
-                    <tr>
-                        <td>Sign Board</td>
-                        <td>{{$toolboxtalk->traffic_sign_board}}</td>
-                    </tr>
-                    <tr>
-                        <td>Chargeman Bo</td>
-                        <td>{{$toolboxtalk->traffic_chargeman}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="5"><strong>TEAM</strong></td>
-                    </tr>
-                    <tr>
-                        <td>AP TNP</td>
-                        <td>{{$toolboxtalk->team_ap_tnp}}</td>
-                    </tr>
-                    <tr>
-                        <td>CP TNB</td>
-                        <td>{{$toolboxtalk->team_cp_tnb}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="5"><strong>NIOSH</strong></td>
-                    </tr>
-                    <tr>
-                        <td>All Staff Have NTSP</td>
-                        <td>{{$toolboxtalk->niosh_staff_ntsp}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="5"><strong>PERMIT</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Special Permit</td>
-                        <td>{{$toolboxtalk->permit_special}}</td>
-                    </tr>
-                    <tr>
-                        <td>Permit To Work (PTW)</td>
-                        <td>{{$toolboxtalk->permit_work}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="5"><strong>PICTURE</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Picture During ToolBox Talk</td>
-                        <td>{{$toolboxtalk->picture_during_toolbox}}</td>
-                    </tr>
-                </table>
+                <div class="row">
+                    <div class="col">
+                        <strong class="center">PPD</strong>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            Safety Helmet
+                        </div>
+                        <div class="row">
+                            Safety Vest
+                        </div>
+                        <div class="row">
+                            Safety Shoes
+                        </div>
+                        <div class="row">
+                            Safety
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row border">
+                            {{strtoupper($toolboxtalk->ppd_safety_helment)}}
+                        </div>
+                        <div class="row border">
+                            {{strtoupper($toolboxtalk->ppd_safety_vest)}}
+                        </div>
+                        <div class="row border">
+                            {{strtoupper($toolboxtalk->ppd_safety_shoes)}}
+                        </div>
+                        <div class="row border">
+                            {{strtoupper($toolboxtalk->ppd_safety)}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <strong class="center">TOOL & EQUIPMENT</strong>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            All In Good Condition
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row border">
+                            {{strtoupper($toolboxtalk->equipment_condition)}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <strong class="center">INSTRUMENT</strong>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            All In Good Condition
+                        </div>
+                        <div class="row">
+                            First Aid Kit
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row border">
+                            {{strtoupper($toolboxtalk->instrument_condition)}}
+                        </div>
+                        <div class="row border">
+                            {{strtoupper($toolboxtalk->instrument_kit_condition)}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <strong class="center">VEHICLE</strong>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            Fire Extinguisher
+                        </div>
+                        <div class="row">
+                            Vehicle In Good Condition
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row border">
+                            {{strtoupper($toolboxtalk->vehicle_fire_extinguisher)}}
+                        </div>
+                        <div class="row border">
+                            {{strtoupper($toolboxtalk->vehicle_condition)}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <strong class="center">TRAFFIC</strong>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            Safety Kon
+                        </div>
+                        <div class="row">
+                            Sign Board
+                        </div>
+                        <div class="row">
+                            Chargeman Bo
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row border">
+                            {{strtoupper($toolboxtalk->traffic_safety_kon)}}
+                        </div>
+                        <div class="row border">
+                            {{strtoupper($toolboxtalk->traffic_sign_board)}}
+                        </div>
+                        <div class="row border">
+                            {{strtoupper($toolboxtalk->traffic_chargeman)}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <strong class="center">TEAM</strong>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            AP TNP
+                        </div>
+                        <div class="row">
+                            CP TNB
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row border">
+                            {{strtoupper($toolboxtalk->team_ap_tnp)}}
+                        </div>
+                        <div class="row border">
+                            {{strtoupper($toolboxtalk->team_cp_tnb)}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <strong class="center">NIOSH</strong>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            All Staff Have NTSP
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row border">
+                            {{strtoupper($toolboxtalk->niosh_staff_ntsp)}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <strong class="center">PERMIT</strong>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            Special Permit
+                        </div>
+                        <div class="row">
+                            Permit To Work (PTW)
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row border">
+                            {{strtoupper($toolboxtalk->permit_special)}}
+                        </div>
+                        <div class="row border">
+                            {{strtoupper($toolboxtalk->permit_work)}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <strong class="center">PICTURE</strong>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            Picture During ToolBox Talk
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row border">
+                            {{strtoupper($toolboxtalk->picture_during_toolbox)}}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="container-fluid" style="break-after:page">
+        <div style="break-after:page">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col border overall-margin" style="margin-left: 10px;">
@@ -389,12 +471,12 @@
                     <p>STAMP</p>
                 </div>
             </div>
-        </div>  
+        </div>
     </div>
 
     <script>
         window.onload = function () {
-        window.print();
+            //window.print();
             // const element = document.getElementById('content');
             // const opt = {
             //     margin: 1,
