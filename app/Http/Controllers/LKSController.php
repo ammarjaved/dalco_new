@@ -104,7 +104,7 @@ exec($command, 'site_survey_tbk.pdf', $return_var);
 
       //$toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->get()[0];
     //  return $toolboxtalk;
-   // return view('LKS.Site_Survey_Info', compact('survey','projectName'));
+    return view('LKS.Site_Survey_Info', compact('survey','projectName'));
     $html=  view('LKS.Site_Survey_Info', compact('survey','projectName'))->render();
     $html = preg_replace_callback(
       '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
@@ -159,7 +159,7 @@ exec($command, 'site_survey_tbk.pdf', $return_var);
 
       //$toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->get()[0];
     //  return $toolboxtalk;
-  //  return view('LKS.Site_Survey_Pictures', compact('survey','pictureData','projectName'));
+    return view('LKS.Site_Survey_Pictures', compact('survey','pictureData','projectName'));
     $html=  view('LKS.Site_Survey_Pictures', compact('survey','pictureData','projectName'))->render();
     $html = preg_replace_callback(
       '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
@@ -443,6 +443,9 @@ public function Material_Selection($id){
  
   $projectMaterials = ProjectMaterial::where('site_survey_id', $survey->id)->get();
 
+  return view('LKS.Material_Selection', compact('survey','projectMaterials','projectName'));
+
+
   $html =  view('LKS.Material_Selection', compact('survey','projectMaterials','projectName'))->render();
   $html = preg_replace_callback(
     '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
@@ -498,7 +501,9 @@ public function Precable_Piw($id)
   $usr_info = \Auth::user();
   $projectName = $usr_info->project;
   $survey = SiteSurvey::findOrFail($id);
-  $Piw = PreCabling::where('site_survey_id', $survey->id)->first();
+  $Piw = PreCabling::where('site_survey_id', $survey->id)->get();
+
+  return  view('LKS.PreCabling_PIW', compact('survey','Piw','projectName'));
 
   $html =  view('LKS.PreCabling_PIW', compact('survey','Piw','projectName'))->render();
 
