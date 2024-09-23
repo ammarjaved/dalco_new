@@ -84,8 +84,8 @@
                                         <div class="form-group">
                                             <md-label for="{{ $key }}">{{ $field }}</md-label><br>
                         
-                                            <!-- Hidden input to ensure 'no' is submitted by default if nothing is selected -->
-                                            <input type="hidden" name="{{ $key }}" value="no">
+                                            <!-- Hidden input to ensure 'yes' is submitted by default if nothing is selected -->
+                                            <input type="hidden" name="{{ $key }}" value="yes">
                         
                                             <!-- Tabs for Yes/No -->
                                             <md-tabs id="tab-{{ $key }}" class="toggle-btn">
@@ -94,7 +94,7 @@
                                                     value="yes" 
                                                     id="tab-{{ $key }}-yes"
                                                     onclick="document.getElementById('{{ $key }}_yes').checked = true"
-                                                    {{ ($piw->$key ?? old($key, 'no')) === 'yes' ? 'active' : '' }}
+                                                    {{ ($piw->$key ?? old($key, 'yes')) === 'yes' ? 'active' : '' }}
                                                 >
                                                     Yes
                                                 </md-secondary-tab>
@@ -104,7 +104,7 @@
                                                     value="no" 
                                                     id="tab-{{ $key }}-no"
                                                     onclick="document.getElementById('{{ $key }}_no').checked = true"
-                                                    {{ ($piw->$key ?? old($key, 'no')) === 'no' ? 'active' : '' }}
+                                                    {{ ($piw->$key ?? old($key, 'yes')) === 'no' ? 'active' : '' }}
                                                 >
                                                     No
                                                 </md-secondary-tab>
@@ -112,9 +112,9 @@
                         
                                             <!-- Hidden radio buttons to maintain functionality -->
                                             <input type="radio" id="{{ $key }}_yes" name="{{ $key }}" value="yes" style="display:none;" 
-                                                {{ ($piw->$key ?? old($key)) === 'yes' ? 'checked' : '' }}>
+                                                {{ ($piw->$key ?? old($key, 'yes')) === 'yes' ? 'checked' : '' }}>
                                             <input type="radio" id="{{ $key }}_no" name="{{ $key }}" value="no" style="display:none;" 
-                                                {{ ($piw->$key ?? old($key)) === 'no' ? 'checked' : '' }}>
+                                                {{ ($piw->$key ?? old($key, 'yes')) === 'no' ? 'checked' : '' }}>
                                         </div>
                                     </div>
                                 </div>
@@ -134,8 +134,8 @@
                                         <div class="form-group">
                                             <md-label for="{{ $key }}">{{ $field }}</md-label><br>
                         
-                                            <!-- Hidden input to ensure 'no' is submitted by default if nothing is selected -->
-                                            <input type="hidden" name="{{ $key }}" value="no">
+                                            <!-- Hidden input to ensure 'yes' is submitted by default if nothing is selected -->
+                                            <input type="hidden" name="{{ $key }}" value="yes">
                         
                                             <!-- Tabs for Yes/No -->
                                             <md-tabs id="tab-{{ $key }}" class="toggle-btn">
@@ -144,7 +144,7 @@
                                                     value="yes" 
                                                     id="tab-{{ $key }}-yes"
                                                     onclick="document.getElementById('{{ $key }}_yes').checked = true"
-                                                    {{ ($piw->$key ?? old($key, 'no')) === 'yes' ? 'active' : '' }}
+                                                    {{ ($piw->$key ?? old($key, 'yes')) === 'yes' ? 'active' : '' }}
                                                 >
                                                     Yes
                                                 </md-secondary-tab>
@@ -154,7 +154,7 @@
                                                     value="no" 
                                                     id="tab-{{ $key }}-no"
                                                     onclick="document.getElementById('{{ $key }}_no').checked = true"
-                                                    {{ ($piw->$key ?? old($key, 'no')) === 'no' ? 'active' : '' }}
+                                                    {{ ($piw->$key ?? old($key, 'yes')) === 'no' ? 'active' : '' }}
                                                 >
                                                     No
                                                 </md-secondary-tab>
@@ -162,88 +162,80 @@
                         
                                             <!-- Hidden radio buttons to maintain functionality -->
                                             <input type="radio" id="{{ $key }}_yes" name="{{ $key }}" value="yes" style="display:none;" 
-                                                {{ ($piw->$key ?? old($key)) === 'yes' ? 'checked' : '' }}>
+                                                {{ ($piw->$key ?? old($key, 'yes')) === 'yes' ? 'checked' : '' }}>
                                             <input type="radio" id="{{ $key }}_no" name="{{ $key }}" value="no" style="display:none;" 
-                                                {{ ($piw->$key ?? old($key)) === 'no' ? 'checked' : '' }}>
+                                                {{ ($piw->$key ?? old($key, 'yes')) === 'no' ? 'checked' : '' }}>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
-                        
-            </div>
-
-            <h2 class="my-4" style="font-weight: 600">Cable</h2>
-            @foreach ([
-                'cable_laluan' => 'Laluan Kabel Dan Tray Yang Tersusun', 
-                'cable_kabel' => 'Kabel Yang Dipasang Mengikut Spesifikasi TNB', 
-                'cable_pemasangan' => 'Pemasangan Kemas Dan Teratur', 
-                'cable_kawasan' => 'Kawasan Kerja Telah Dibersihkan'
-            ] as $key => $field)
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <md-label for="{{ $key }}">{{ $field }}</md-label><br>
-            
-                            <!-- Hidden input to ensure 'no' is submitted by default if nothing is selected -->
-                            <input type="hidden" name="{{ $key }}" value="no">
-            
-                            <!-- Tabs for Yes/No -->
-                            <md-tabs id="tab-{{ $key }}" class="toggle-btn">
-                                <!-- Yes Tab -->
-                                <md-secondary-tab 
-                                    value="yes" 
-                                    id="tab-{{ $key }}-yes"
-                                    onclick="document.getElementById('{{ $key }}_yes').checked = true"
-                                    {{ ($piw->$key ?? old($key, 'no')) === 'yes' ? 'active' : '' }}
-                                >
-                                    Yes
-                                </md-secondary-tab>
-            
-                                <!-- No Tab -->
-                                <md-secondary-tab 
-                                    value="no" 
-                                    id="tab-{{ $key }}-no"
-                                    onclick="document.getElementById('{{ $key }}_no').checked = true"
-                                    {{ ($piw->$key ?? old($key, 'no')) === 'no' ? 'active' : '' }}
-                                >
-                                    No
-                                </md-secondary-tab>
-                            </md-tabs>
-            
-                            <!-- Hidden radio buttons to maintain functionality -->
-                            <input type="radio" id="{{ $key }}_yes" name="{{ $key }}" value="yes" style="display:none;" 
-                                {{ ($piw->$key ?? old($key)) === 'yes' ? 'checked' : '' }}>
-                            <input type="radio" id="{{ $key }}_no" name="{{ $key }}" value="no" style="display:none;" 
-                                {{ ($piw->$key ?? old($key)) === 'no' ? 'checked' : '' }}>
-                        </div>
                     </div>
-                </div>
-            @endforeach
-            
-
-
-
-
-
-
+    
+                    <h2 class="my-4" style="font-weight: 600">Cable</h2>
+                    @foreach ([
+                        'cable_laluan' => 'Laluan Kabel Dan Tray Yang Tersusun', 
+                        'cable_kabel' => 'Kabel Yang Dipasang Mengikut Spesifikasi TNB', 
+                        'cable_pemasangan' => 'Pemasangan Kemas Dan Teratur', 
+                        'cable_kawasan' => 'Kawasan Kerja Telah Dibersihkan'
+                    ] as $key => $field)
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <md-label for="{{ $key }}">{{ $field }}</md-label><br>
+                    
+                                    <!-- Hidden input to ensure 'yes' is submitted by default if nothing is selected -->
+                                    <input type="hidden" name="{{ $key }}" value="yes">
+                    
+                                    <!-- Tabs for Yes/No -->
+                                    <md-tabs id="tab-{{ $key }}" class="toggle-btn">
+                                        <!-- Yes Tab -->
+                                        <md-secondary-tab 
+                                            value="yes" 
+                                            id="tab-{{ $key }}-yes"
+                                            onclick="document.getElementById('{{ $key }}_yes').checked = true"
+                                            {{ ($piw->$key ?? old($key, 'yes')) === 'yes' ? 'active' : '' }}
+                                        >
+                                            Yes
+                                        </md-secondary-tab>
+                    
+                                        <!-- No Tab -->
+                                        <md-secondary-tab 
+                                            value="no" 
+                                            id="tab-{{ $key }}-no"
+                                            onclick="document.getElementById('{{ $key }}_no').checked = true"
+                                            {{ ($piw->$key ?? old($key, 'yes')) === 'no' ? 'active' : '' }}
+                                        >
+                                            No
+                                        </md-secondary-tab>
+                                    </md-tabs>
+                    
+                                    <!-- Hidden radio buttons to maintain functionality -->
+                                    <input type="radio" id="{{ $key }}_yes" name="{{ $key }}" value="yes" style="display:none;" 
+                                        {{ ($piw->$key ?? old($key, 'yes')) === 'yes' ? 'checked' : '' }}>
+                                    <input type="radio" id="{{ $key }}_no" name="{{ $key }}" value="no" style="display:none;" 
+                                        {{ ($piw->$key ?? old($key, 'yes')) === 'no' ? 'checked' : '' }}>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+    
                     <div class="text-center">
                         @if (isset($piw))
                         <a href="{{route('pre-cabling-shut-down.delete', $piw->id)}}">
-                            <md-filled-tonal-button  type="button" 
-                                type="submit">Remove</md-filled-tonal-button >
+                            <md-filled-tonal-button type="button" 
+                                type="submit">Remove</md-filled-tonal-button>
                             </a>
                         @endif
                         <md-filled-tonal-button 
-                            type="submit">{{ isset($piw) ? 'Update' : 'Create' }}</md-filled-tonal-button >
+                            type="submit">{{ isset($piw) ? 'Update' : 'Create' }}</md-filled-tonal-button>
                     </div>
-
+    
                 </form>
             </div>
-
         </div>
     </section>
-@endsection
+    @endsection
 
 @section('script')
     <script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
