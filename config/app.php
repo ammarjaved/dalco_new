@@ -153,9 +153,10 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
+   'aliases' => [
+    // ...
     'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
-
-    'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+],
 
     'providers' => [
 
