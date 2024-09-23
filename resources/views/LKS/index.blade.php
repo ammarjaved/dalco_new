@@ -153,14 +153,14 @@ function Site_surveyAjax() {
         method: 'GET',
         success: function(data) {
             if (data && data.length > 0) {
-                var str = '';
+                var str = '<tr><th>File Name</th><th>Description</th><th>Download</th></tr>';
                 for (var i = 0; i < data.length; i++) {
-                    str += '<tr><th>' + data[i].file_name + '</th><td><a href="/' + data[i].file_path + '" download>download</a></td></tr>';
+                    str += '<tr><th>' + data[i].file_name + '</th><td>' + (data[i].description || 'No description available') + '</td><td><a href="/' + data[i].file_path + '" download>download</a></td></tr>';
                 }
                 $("#myTable1").append(str);
             } else {
                 console.log("No site survey attachments found");
-                $("#myTable1").append('<tr><td colspan="2">No attachments available</td></tr>');
+                $("#myTable1").append('<tr><td colspan="3">No attachments available</td></tr>');
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -172,21 +172,21 @@ function Site_surveyAjax() {
 
 
 
-     function precable_Ajax() {
+function precable_Ajax() {
     $.ajax({
         url: '/precable_attachments/{{$id}}',
         dataType: 'JSON',
         method: 'GET',
         success: function(data) {
             if (data && data.length > 0) {
-                var str = '';
+                var str = '<tr><th>File Name</th><th>Description</th><th>Download</th></tr>';
                 for (var i = 0; i < data.length; i++) {
-                    str += '<tr><th>' + data[i].file_name + '</th><td><a href="/' + data[i].file_path + '" download>download</a></td></tr>';
+                    str += '<tr><th>' + data[i].file_name + '</th><td>' + (data[i].description || 'No description available') + '</td><td><a href="/' + data[i].file_path + '" download>download</a></td></tr>';
                 }
                 $("#myTable2").append(str);
             } else {
                 console.log("No precable attachments found");
-                $("#myTable2").append('<tr><td colspan="2">No attachments available</td></tr>');
+                $("#myTable2").append('<tr><td colspan="3">No attachments available</td></tr>');
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -197,7 +197,6 @@ function Site_surveyAjax() {
 }
 
 
-
 function shutdown_Ajax() {
     $.ajax({
         url: '/shutdown_attachments/{{$id}}',
@@ -205,14 +204,14 @@ function shutdown_Ajax() {
         method: 'GET',
         success: function(data) {
             if (data && data.length > 0) {
-                var str = '';
+                var str = '<tr><th>File Name</th><th>Description</th><th>Download</th></tr>';
                 for (var i = 0; i < data.length; i++) {
-                    str += '<tr><th>' + data[i].file_name + '</th><td><a href="/' + data[i].file_path + '" download>download</a></td></tr>';
+                    str += '<tr><th>' + data[i].file_name + '</th><td>' + (data[i].description || 'No description available') + '</td><td><a href="/' + data[i].file_path + '" download>download</a></td></tr>';
                 }
                 $("#myTable3").append(str);
             } else {
                 console.log("No shutdown attachments found");
-                $("#myTable3").append('<tr><td colspan="2">No attachments available</td></tr>');
+                $("#myTable3").append('<tr><td colspan="3">No attachments available</td></tr>');
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -231,19 +230,19 @@ function SAT_Ajax() {
         method: 'GET',
         success: function(data) {
             if (data && data.length > 0) {
-                var str = '';
+                var str = '<tr><th>File Name</th><th>Description</th><th>Download</th></tr>';
                 for (var i = 0; i < data.length; i++) {
-                    str += '<tr><th>' + data[i].file_name + '</th><td><a href="/' + data[i].file_path + '" download>download</a></td></tr>';
+                    str += '<tr><th>' + data[i].file_name + '</th><td>' + (data[i].description || 'No description available') + '</td><td><a href="/' + data[i].file_path + '" download>download</a></td></tr>';
                 }
                 $("#myTable4").append(str);
             } else {
                 console.log("No shutdown attachments found");
-                $("#myTable4").append('<tr><td colspan="2">No attachments available</td></tr>');
+                $("#myTable4").append('<tr><td colspan="3">No attachments available</td></tr>');
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.error("AJAX error:", textStatus, errorThrown);
-            alert("Error fetching Shutdown attachments. Please try again.");
+            alert("Error fetching SAT attachments. Please try again.");
         }
     });
 }
