@@ -1,185 +1,218 @@
-<style>
-  .form-container {
-        background-color: #f9f9f9;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        margin-top: 20px;
-    }
-    
-    .form-group label {
-        font-weight: bold;
-        color: #333;
-    }
-    
-    .form-control {
-        border-radius: 5px;
-        border: 1px solid #ced4da;
-        padding: 10px;
-    }
-    
-    .form-check-input {
-        margin-left: 0;
-    }
-
-    .form-check-label {
-        margin-left: 25px;
-        font-size: 14px;
-        font-weight: 500;
-        color: #555;
-    }
-    
-    .radio-container {
-        display: flex;
-        justify-content: space-around;
-        padding: 10px;
-        background-color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-    }
-
-    .radio-label {
-        font-size: 16px;
-        color: #444;
-    }
-
-    /* Styling for rows and spacing */
-    .row {
-        margin-bottom: 20px;
-    }
-    .header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 50px;
-    align-items: center; /* Add this line to vertically center the logos */
-}
-
-.logo {
-    width: 45%;
-    display: inline-block; /* Add this line to make the logos display inline */
-    vertical-align: middle; /* Add this line to vertically center the logos */
-}
-
-.logo img {
-    max-width: 80%; /* Reduce the image size to 80% of the parent container */
-    height: auto;
-    margin-bottom: 10px;
-}
-    .header .logo p {
-        margin: 0;
-        font-size: 14px;
-        line-height: 1.4;
-    }
-
-
-
-
-</style>
-
-
-<div class="header">
-    <div class="logo">
-        <img src='/assets/web-images/tnblogo.png' alt="TNB Logo">
-        <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
-            Level 2, Jalan Air Hitam, Kawasan 16,<br>
-            40000 Shah Alam, Selangor</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <title>PIW CHECKLIST</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .checkbox {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .signature {
+            text-align: center;
+        }
+        .logo {
+            height: 100px;
+            width: 200px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            object-fit: contain;
+        }
+        .center-text {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col border" style="margin-left: 10px;">
+                <img class="logo" src='/assets/web-images/tnblogo.png' alt="TNB Logo">
+                <p class="center-text">TNB ENERGY SERVICES SDN BHD (234667-M)<br>
+                    Level 2, Jalan Air Hitam, Kawasan 16,<br>
+                    40000 Shah Alam, Selangor</p>
+            </div>
+            <div class="col border" style="margin-right: 10px;">
+                <img class="logo" src='/assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
+                <p class="center-text">AEROSYNERGY SOLUTIONS SDN BHD<br>
+                    NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
+            </div>
+        </div>
     </div>
-    <div class="logo">
-        @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
-            <img src='/assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
-            <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
-            NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
-        @elseif($projectName === 'ARAS-JOHOR')
-            <img src='/assets/web-images/araslogo.png' alt="ARAS Kejuruteraan Logo">
-            <p>ARAS KEJURUTERAAN SDN BHD<br>
-            1st Floor No 72, Jalan SS 21/1, Damansara Utama, 47400 Petaling Jaya, Selangor</p>
-        @else
-            <img src='/assets/web-images/defaultlogo.png' alt="Default Logo">
-            <p>Default Company Name<br>
-            Default Address</p>
-        @endif
-    </div>
-</div>
 
-
-<div class="container form-container">
-    <h4 class="text-center mb-4">Pre-Cabling PIW</h4>
-    <form class="form-horizontal">
-        <div class="row">
-            <!-- Kontraktor PIW -->
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="kontraktor_piw">Kontraktor PIW</label>
-                    <input type="text" class="form-control" id="kontraktor_piw" value="{{ $Piw->kontraktor_piw }}" readonly>
-                </div>
-            </div>
-
-            <!-- Kontraktor RTU -->
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="kontraktor_rtu">Kontraktor RTU</label>
-                    <input type="text" class="form-control" id="kontraktor_rtu" value="{{ $Piw->kontraktor_rtu }}" readonly>
-                </div>
-            </div>
-
-            <!-- Nama PE -->
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="pe_name">Nama PE</label>
-                    <input type="text" class="form-control" id="pe_name" value="{{ $Piw->pe_name }}" readonly>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- Tarikh -->
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="tarikh">Tarikh</label>
-                    <input type="date" class="form-control" id="tarikh" value="{{ date('Y-m-d', strtotime($Piw->tarikh)) }}" readonly>
-                </div>
-            </div>
-        </div>
-
-        <!-- Loop through fields with Yes/No options -->
-        <div class="row">
-            @foreach([
-                'lokasi_efi' => 'Lokasi EFI Seteah Dipasang',
-                'lokasi_rcb' => 'Lokasi RCB Seteah Dipasang',
-                'connection_rcb' => 'Connection RCB',
-                'lokasi_battary' => 'Lokasi Battery Charger Setelah Dipasang',
-                'plate_battary' => 'Plate Battery Charger / Serial No',
-                'lokasi_rtu' => 'Lokasi RTU Setelah Dipasang',
-                'connection_rtu' => 'Connection RTU',
-                'plate_rtu' => 'Plate RTU / Serial No',
-                'laluan_cable_piw' => 'Laluan Cable (PIW)',
-                'laluan_cable' => 'Laulan Cable'
-            ] as $key => $label)
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label class="radio-label">{{ $label }}</label>
-                    <div class="radio-container">
-                        <!-- Yes option -->
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="{{ $key }}" id="{{ $key }}_yes" value="yes"
-                            {{ ($Piw->$key ?? '') == 'yes' ? 'checked' : '' }} disabled>
-                            <label class="form-check-label" for="{{ $key }}_yes">Yes</label>
-                        </div>
-                        <!-- No option -->
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="{{ $key }}" id="{{ $key }}_no" value="no"
-                            {{ ($Piw->$key ?? '') == 'no' ? 'checked' : '' }} disabled>
-                            <label class="form-check-label" for="{{ $key }}_no">No</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-      
-
-        <!-- Hidden input to store site survey ID -->
-        <input type="hidden" name="site_survey_id" value="{{ $Piw->site_survey_id }}">
-    </form>
-
+    <h1>PIW CHECKLIST</h1>
     
+    <table>
+        <tr>
+            <th>Kontraktor PIW</th>
+            <td>{{ strtoupper($Piw->kontraktor_piw) }}</td>
+            <th>Lokasi</th>
+            <td>{{ $Piw->lokasi_efi }}</td>
+        </tr>
+        <tr>
+            <th>Kontraktor RTU</th>
+            <td>{{ $Piw->kontraktor_rtu }}</td>
+            <th>Tarikh</th>
+            <td>{{ $Piw->tarikh }}</td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <th>No.</th>
+            <th>Item</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Lokasi EFI Setelah Dipasang</td>
+            <td>
+                <div class="checklist-item">
+                    <span class="checkbox">{{ $Piw->lokasi_efi == 'yes' ? '☑' : '☐' }}</span> Yes
+                    <span class="checkbox">{{ $Piw->lokasi_efi == 'no' ? '☑' : '☐' }}</span> No
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Lokasi RCB Setelah Dipasang</td>
+            <td>
+                <div class="checklist-item">
+                    <span class="checkbox">{{ $Piw->lokasi_rcb == 'yes' ? '☑' : '☐' }}</span> Yes
+                    <span class="checkbox">{{ $Piw->lokasi_rcb == 'no' ? '☑' : '☐' }}</span> No
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Connection RCB</td>
+            <td>
+                <div class="checklist-item">
+                    <span class="checkbox">{{ $Piw->connection_rcb == 'yes' ? '☑' : '☐' }}</span> Yes
+                    <span class="checkbox">{{ $Piw->connection_rcb == 'no' ? '☑' : '☐' }}</span> No
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Lokasi Battery Charger Setelah Dipasang</td>
+            <td>
+                <div class="checklist-item">
+                    <span class="checkbox">{{ $Piw->lokasi_battary == 'yes' ? '☑' : '☐' }}</span> Yes
+                    <span class="checkbox">{{ $Piw->lokasi_battary == 'no' ? '☑' : '☐' }}</span> No
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Plate Battery Charger / Serial No</td>
+            <td>
+                <div class="checklist-item">
+                    <span class="checkbox">{{ $Piw->plate_battary == 'yes' ? '☑' : '☐' }}</span> Yes
+                    <span class="checkbox">{{ $Piw->plate_battary == 'no' ? '☑' : '☐' }}</span> No
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Lokasi RTU Setelah Dipasang</td>
+            <td>
+                <div class="checklist-item">
+                    <span class="checkbox">{{ $Piw->lokasi_rtu == 'yes' ? '☑' : '☐' }}</span> Yes
+                    <span class="checkbox">{{ $Piw->lokasi_rtu == 'no' ? '☑' : '☐' }}</span> No
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Connection RTU</td>
+            <td>
+                <div class="checklist-item">
+                    <span class="checkbox">{{ $Piw->connection_rtu == 'yes' ? '☑' : '☐' }}</span> Yes
+                    <span class="checkbox">{{ $Piw->connection_rtu == 'no' ? '☑' : '☐' }}</span> No
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Plate RTU / Serial No</td>
+            <td>
+                <div class="checklist-item">
+                    <span class="checkbox">{{ $Piw->plate_rtu == 'yes' ? '☑' : '☐' }}</span> Yes
+                    <span class="checkbox">{{ $Piw->plate_rtu == 'no' ? '☑' : '☐' }}</span> No
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Laluan Cable (PIW)</td>
+            <td>
+                <div class="checklist-item">
+                    <span class="checkbox">{{ $Piw->laluan_cable_piw == 'yes' ? '☑' : '☐' }}</span> Yes
+                    <span class="checkbox">{{ $Piw->laluan_cable_piw == 'no' ? '☑' : '☐' }}</span> No
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Laluan Cable</td>
+            <td>
+                <div class="checklist-item">
+                    <span class="checkbox">{{ $Piw->laluan_cable == 'yes' ? '☑' : '☐' }}</span> Yes
+                    <span class="checkbox">{{ $Piw->laluan_cable == 'no' ? '☑' : '☐' }}</span> No
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+    <div class="signature-section">
+        <div class="signature">
+            <p>PEGAWAI DI TEMPAT</p>
+           
+            <p>Tandatangan</p>
+        </div>
+        <div class="signature">
+            <p>PEGAWAI TNB</p>
+            
+            <p>Tandatangan</p>
+        </div>
+    </div>
+</body>
+</html>
