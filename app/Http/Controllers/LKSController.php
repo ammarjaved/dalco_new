@@ -19,7 +19,7 @@ use App\Models\ImageShutdownAttachments;
 use App\Models\SAT;
 use App\Models\SATAttachments; 
 use Exception;
-use Barryvdh\DomPDF\Facade\Pdf;
+use PDF;
 
 class LKSController extends Controller{
 
@@ -38,6 +38,12 @@ class LKSController extends Controller{
       $projectName = $usr_info->project;
     $survey = SiteSurvey::findOrFail($id);
     $toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->get()[0];
+    //  return $toolboxtalk;
+   // $appUrl = config('app.url');
+
+   return  view('LKS.site_survey_tbk', compact('toolboxtalk','survey','projectName'));
+
+
     $html = view('LKS.site_survey_tbk', compact('toolboxtalk','survey','projectName'))->render();
     $html = preg_replace_callback(
       '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
@@ -48,21 +54,44 @@ class LKSController extends Controller{
       $html
   );
 
-    $filename = 'site_survey_tbk_' . $id . '.pdf';
+    $directory = 'assets/debug_html';
 
-  try {
-    $pdf = Pdf::loadHTML($html);
-    
-    // Optional: Set paper size and orientation
-    $pdf->setPaper('A4', 'portrait');
-    return $pdf->download($filename);
+    $filename = 'site_survey_tbk_' . $id . '.html';
 
-} catch (\Exception $e) {
-    return response()->json([
-        'error' => 'PDF generation failed',
-        'message' => $e->getMessage()
-    ], 500);
-}
+    $htmlFilePath=$directory . '/' . $filename;
+
+    if (!file_exists($directory)) {
+      mkdir($directory, 0755, true);
+  }
+  file_put_contents($htmlFilePath, $html);
+
+
+
+
+  $pdfFilePath='assets/debug_html'.'/'.'site_survey_tbk_' . $id . '.pdf';
+
+  $wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
+ // $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+ $command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+
+  // Execute the command
+  //$output = shell_exec($command);
+
+  $return_var = 0;
+exec($command, 'site_survey_tbk.pdf', $return_var);
+
+  // Check if the PDF was generated
+  if (file_exists($pdfFilePath)) {
+      // Return the PDF file for download
+      return response()->download($pdfFilePath, 'site_survey_tbk.pdf')->deleteFileAfterSend(true);
+      } else {
+          // If PDF generation failed, return the error output
+          return response()->json([
+              'error' => 'PDF generation failed',
+              'output' => $output
+          ], 500);
+      }
+
 
   }
 
