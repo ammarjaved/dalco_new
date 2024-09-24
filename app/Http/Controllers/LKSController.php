@@ -501,7 +501,8 @@ public function Precable_Piw($id)
   $usr_info = \Auth::user();
   $projectName = $usr_info->project;
   $survey = SiteSurvey::findOrFail($id);
-  $Piw = PreCabling::where('site_survey_id', $survey->id)->get();
+  $Piw = PreCabling::where('site_survey_id', $survey->id)->get()[0];
+
 
   return  view('LKS.PreCabling_PIW', compact('survey','Piw','projectName'));
 
