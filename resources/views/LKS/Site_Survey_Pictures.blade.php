@@ -114,35 +114,7 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
     <h4 class="title center-text">PICTURE LIST FORM<br>(SITE VISIT)</h4>
 
     <div class="container-fluid">
-        <div class="row row-cols-2 right-margin left-margin">
-            <div class="col border">
-                <p class="left-margin">1 Substation (FL)</p>
-                <div class="right-element">
-
-                </div>
-            </div>
-            <div class="col border">
-                <p class="left-margin">2 Existing Switchgear</p>
-                <div class="right-element">
-
-                </div>
-            </div>
-        </div>
-
-        <div class="row row-cols-2 right-margin left-margin">
-            <div class="col border">
-                <p class="left-margin">1 Substation (FL)</p>
-                <div class="right-element">
-
-                </div>
-            </div>
-            <div class="col border">
-                <p class="left-margin">2 Existing Switchgear</p>
-                <div class="right-element">
-
-                </div>
-            </div>
-        </div>
+       
 
         <div class="row row-cols-2 right-margin left-margin">
             <div class="col border">

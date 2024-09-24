@@ -104,7 +104,7 @@
 </head>
 <body>
 
-    <div class="container-fluid"></div>
+    <div class="container-fluid">
         <div class="row">
             <div class="col border overall-margin" style="margin-left: 10px;">
                 <img class="logo" src='/assets/web-images/tnblogo.png' alt="TNB Logo">
@@ -113,13 +113,22 @@
                     40000 Shah Alam, Selangor</p>
             </div>
             <div class="col border overall-margin" style="margin-right: 10px;">
+                @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
                 <img class="logo" src='/assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
                 <p class="center-text">AEROSYNERGY SOLUTIONS SDN BHD<br>
                     NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
+                @elseif($projectName === 'ARAS-JOHOR')
+                <img class="logo" src='/assets/web-images/araslogo.png' alt="ARAS Kejuruteraan Logo">
+                <p class="center-text">ARAS KEJURUTERAAN SDN BHD<br>
+                    1st Floor No 72, Jalan SS 21/1, Damansara Utama, 47400 Petaling Jaya, Selangor</p>
+                @else
+                <img class="logo" src='/assets/web-images/defaultlogo.png' alt="Default Logo">
+                <p class="center-text">Default Company Name<br>
+                    Default Address</p>
+                @endif
             </div>
         </div>
     </div>
-
     
 
 

@@ -44,6 +44,8 @@ use App\Models\PreCablingImages;
 use App\Models\SAT;
 use App\Models\SATAttachments;
 
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -260,7 +262,7 @@ Route::get('/sat_images/{id}', [LKSController::class, 'SAT_Images'])->name('sat_
     
 
 
-
+    Route::resource('users', UserController::class);
 
 
 
