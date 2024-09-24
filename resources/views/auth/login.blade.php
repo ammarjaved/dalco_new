@@ -28,26 +28,26 @@
         </div>
  
          <!-- Remember Me -->
-         <div class="block mt-4">
+         {{-- <div class="block mt-4">
             <label for="remember_me" class="checkbox-label">
                 <md-checkbox touch-target="wrapper" id="remember_me" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember"></md-checkbox>
                 <span class="text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>
-        </div>
+        </div> --}}
     
             <div class="flex items-center justify-end mt-4"> 
-                @if (Route::has('password.request'))
+                {{-- @if (Route::has('password.request'))
                    <md-text-button class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                         {{ __('Forgot your password') }}
                     </md-text-button>
-                @endif 
+                @endif  --}}
                 
-                <a>
+                {{-- <a>
                     <md-text-button class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="">
                         Admin Dashboard
                     </md-text-button>
 
-                </a>    
+                </a>     --}}
                
     
                 <md-filled-tonal-button>
@@ -64,30 +64,27 @@
 </x-guest-layout>
 
 
-    <style>
-       body {
+<style>
+    body {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
         margin: 0;
-        background-color:#bb8fce;
-
+        background-color: #bb8fce;
     }
-
 
     .form-group {
         margin-bottom: 20px; /* Adjust the value as needed */
     }
-    
+
     .card {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         transition: 0.3s;
-        max-width: 500px;
-        width: 100%;
+        width: 400px; /* Set a fixed width */
+        height: 400px;
         margin: auto;
         color: #f8f9f9;
-        /* optional */
         padding: 20px;
         border-radius: 15px;
     }
@@ -103,7 +100,6 @@
     .checkbox-label {
         display: flex;
         align-items: center;
-
     }
 
     .checkbox-label span {
@@ -118,8 +114,8 @@
         margin: auto;
         padding: 10px;
     }
-      </style>
-      
+</style>
+
     {{-- <form method="POST" action="{{ route('login') }}">
         @csrf
        

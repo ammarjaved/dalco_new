@@ -104,7 +104,7 @@ exec($command, 'site_survey_tbk.pdf', $return_var);
 
       //$toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->get()[0];
     //  return $toolboxtalk;
-   // return view('LKS.Site_Survey_Info', compact('survey','projectName'));
+    return view('LKS.Site_Survey_Info', compact('survey','projectName'));
     $html=  view('LKS.Site_Survey_Info', compact('survey','projectName'))->render();
     $html = preg_replace_callback(
       '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
@@ -159,7 +159,7 @@ exec($command, 'site_survey_tbk.pdf', $return_var);
 
       //$toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->get()[0];
     //  return $toolboxtalk;
-  //  return view('LKS.Site_Survey_Pictures', compact('survey','pictureData','projectName'));
+    return view('LKS.Site_Survey_Pictures', compact('survey','pictureData','projectName'));
     $html=  view('LKS.Site_Survey_Pictures', compact('survey','pictureData','projectName'))->render();
     $html = preg_replace_callback(
       '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
@@ -225,181 +225,193 @@ if (file_exists($pdfFilePath)) {
 
         $PreCablks = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','CABLING')->get()[0];
 
-        $html =  view('LKS.PreCabling_ToolboxTalk', compact('PreCablks','survey','projectName'))->render();
+        return view ('LKS.PreCabling_ToolboxTalk', compact('PreCablks','survey','projectName'));
 
-        $html = preg_replace_callback(
-          '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
-          function ($matches) {
-              $path = public_path(ltrim($matches[2], '/'));
-              return str_replace($matches[2], $path, $matches[0]);
-          },
-          $html
-      );
-    
-        $directory = 'assets/debug_html';
-    
-        $filename = 'PreCabling_ToolboxTalk_' . $id . '.html';
-    
-        $htmlFilePath=$directory . '/' . $filename;
-    
-        if (!file_exists($directory)) {
-          mkdir($directory, 0755, true);
-      }
-      file_put_contents($htmlFilePath, $html);
-    
-    
-    
-    
-      $pdfFilePath='assets/debug_html'.'/'.'PreCabling_ToolboxTalk_' . $id . '.pdf';
-    
-      $wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
-     // $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
-     $command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
-    
-      // Execute the command
-      $output = shell_exec($command);
-    
-      // Check if the PDF was generated
-      if (file_exists($pdfFilePath)) {
-          // Return the PDF file for download
-          return response()->download($pdfFilePath, 'PreCabling_ToolboxTalk.pdf')->deleteFileAfterSend(true);
-          } else {
-              // If PDF generation failed, return the error output
-              return response()->json([
-                  'error' => 'PDF generation failed',
-                  'output' => $output
-              ], 500);
-    
-    }
+        $html = view('LKS.PreCabling_ToolboxTalk', compact('PreCablks','survey','projectName'))->render();
+  $html = preg_replace_callback(
+    '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
+    function ($matches) {
+        $path = public_path(ltrim($matches[2], '/'));
+        return str_replace($matches[2], $path, $matches[0]);
+    },
+    $html
+);
 
-    }
+  $directory = 'assets/debug_html';
+
+  $filename = 'PreCabling_ToolboxTalk_' . $id . '.html';
+
+  $htmlFilePath=$directory . '/' . $filename;
+
+  if (!file_exists($directory)) {
+    mkdir($directory, 0755, true);
+}
+file_put_contents($htmlFilePath, $html);
 
 
 
 
+$pdfFilePath='assets/debug_html'.'/'.'PreCabling_ToolboxTalk_' . $id . '.pdf';
 
-    public function ShutdownToolboxTalk($id)
-    {
-      $usr_info = \Auth::user();
-      $projectName = $usr_info->project;
-      $survey = SiteSurvey::findOrFail($id);
+$wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
+// $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+$command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
 
-      
+// Execute the command
+//$output = shell_exec($command);
 
-      $ImageShutdownlks = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','OUTAGE')->get()[0];
+$return_var = 0;
+exec($command, 'PreCabling_ToolboxTalk.pdf', $return_var);
 
-        $html =  view('LKS.Shutdown_ToolboxTalk', compact('ImageShutdownlks','survey','projectName'))->render();
-
-        $html = preg_replace_callback(
-          '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
-          function ($matches) {
-              $path = public_path(ltrim($matches[2], '/'));
-              return str_replace($matches[2], $path, $matches[0]);
-          },
-          $html
-      );
-    
-        $directory = 'assets/debug_html';
-    
-        $filename = 'Shutdown_ToolboxTalk_' . $id . '.html';
-    
-        $htmlFilePath=$directory . '/' . $filename;
-    
-        if (!file_exists($directory)) {
-          mkdir($directory, 0755, true);
-      }
-      file_put_contents($htmlFilePath, $html);
-    
-    
-    
-    
-      $pdfFilePath='assets/debug_html'.'/'.'Shutdown_ToolboxTalk_' . $id . '.pdf';
-    
-      $wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
-     // $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
-     $command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
-    
-      // Execute the command
-      $output = shell_exec($command);
-    
-      // Check if the PDF was generated
-      if (file_exists($pdfFilePath)) {
-          // Return the PDF file for download
-          return response()->download($pdfFilePath, 'Shutdown_ToolboxTalk.pdf')->deleteFileAfterSend(true);
-          } else {
-              // If PDF generation failed, return the error output
-              return response()->json([
-                  'error' => 'PDF generation failed',
-                  'output' => $output
-              ], 500);
-    
-    }
-
-    }
-    
-
-    public function SATToolboxTalk($id)
-    {
-
-      $usr_info = \Auth::user();
-      $projectName = $usr_info->project;
-      $survey = SiteSurvey::findOrFail($id);
-
-      
-
-      $SATlks = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SAT')->get()[0];
-
-        $html =  view('LKS.SAT_ToolboxTalk', compact('SATlks','survey','projectName'))->render();
-
-        $html = preg_replace_callback(
-          '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
-          function ($matches) {
-              $path = public_path(ltrim($matches[2], '/'));
-              return str_replace($matches[2], $path, $matches[0]);
-          },
-          $html
-      );
-    
-        $directory = 'assets/debug_html';
-    
-        $filename = 'SAT_ToolboxTalk_' . $id . '.html';
-    
-        $htmlFilePath=$directory . '/' . $filename;
-    
-        if (!file_exists($directory)) {
-          mkdir($directory, 0755, true);
-      }
-      file_put_contents($htmlFilePath, $html);
-    
-    
-    
-    
-      $pdfFilePath='assets/debug_html'.'/'.'SAT_ToolboxTalk_' . $id . '.pdf';
-    
-      $wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
-     // $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
-     $command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
-    
-      // Execute the command
-      $output = shell_exec($command);
-    
-      // Check if the PDF was generated
-      if (file_exists($pdfFilePath)) {
-          // Return the PDF file for download
-          return response()->download($pdfFilePath, 'SAT_ToolboxTalk.pdf')->deleteFileAfterSend(true);
-          } else {
-              // If PDF generation failed, return the error output
-              return response()->json([
-                  'error' => 'PDF generation failed',
-                  'output' => $output
-              ], 500);
-    
+// Check if the PDF was generated
+if (file_exists($pdfFilePath)) {
+    // Return the PDF file for download
+    return response()->download($pdfFilePath, 'PreCabling_ToolboxTalk.pdf')->deleteFileAfterSend(true);
+    } else {
+        // If PDF generation failed, return the error output
+        return response()->json([
+            'error' => 'PDF generation failed',
+            'output' => $output
+        ], 500);
     }
 
 
+}
+
+
+
+
+
+
+public function ShutdownToolboxTalk($id)
+{
+  $usr_info = \Auth::user();
+  $projectName = $usr_info->project;
+  $survey = SiteSurvey::findOrFail($id);
+
+  
+
+  $ImageShutdownlks = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','OUTAGE')->get()[0];
+
+    return view('LKS.Shutdown_ToolboxTalk', compact('ImageShutdownlks','survey','projectName'));
+
+    $html = view('LKS.Shutdown_ToolboxTalk', compact('ImageShutdownlks','survey','projectName'))->render();
+
+    $html = preg_replace_callback(
+    '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
+    function ($matches) {
+        $path = public_path(ltrim($matches[2], '/'));
+        return str_replace($matches[2], $path, $matches[0]);
+    },
+    $html
+);
+
+  $directory = 'assets/debug_html';
+
+  $filename = 'Shutdown_ToolboxTalk_' . $id . '.html';
+
+  $htmlFilePath=$directory . '/' . $filename;
+
+  if (!file_exists($directory)) {
+    mkdir($directory, 0755, true);
+}
+file_put_contents($htmlFilePath, $html);
+
+
+
+
+$pdfFilePath='assets/debug_html'.'/'.'Shutdown_ToolboxTalk_' . $id . '.pdf';
+
+$wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
+// $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+$command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+
+// Execute the command
+//$output = shell_exec($command);
+
+$return_var = 0;
+exec($command, 'Shutdown_ToolboxTalk.pdf', $return_var);
+
+// Check if the PDF was generated
+if (file_exists($pdfFilePath)) {
+    // Return the PDF file for download
+    return response()->download($pdfFilePath, 'Shutdown_ToolboxTalk.pdf')->deleteFileAfterSend(true);
+    } else {
+        // If PDF generation failed, return the error output
+        return response()->json([
+            'error' => 'PDF generation failed',
+            'output' => $output
+        ], 500);
     }
 
 
+}
+
+
+public function SATToolboxTalk($id)
+{
+
+  $usr_info = \Auth::user();
+  $projectName = $usr_info->project;
+  $survey = SiteSurvey::findOrFail($id);
+
+  
+
+  $SATlks = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SAT')->get()[0];
+
+   return view('LKS.SAT_ToolboxTalk', compact('SATlks','survey','projectName'));
+
+    $html =  view('LKS.SAT_ToolboxTalk', compact('SATlks','survey','projectName'))->render();
+
+    $html = preg_replace_callback(
+      '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
+      function ($matches) {
+          $path = public_path(ltrim($matches[2], '/'));
+          return str_replace($matches[2], $path, $matches[0]);
+      },
+      $html
+  );
+
+  $directory = 'assets/debug_html';
+
+$filename = 'SAT_ToolboxTalk_' . $id . '.html';
+
+$htmlFilePath=$directory . '/' . $filename;
+
+if (!file_exists($directory)) {
+  mkdir($directory, 0755, true);
+}
+file_put_contents($htmlFilePath, $html);
+
+
+
+
+$pdfFilePath='assets/debug_html'.'/'.'SAT_ToolboxTalk_' . $id . '.pdf';
+
+$wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
+// $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+$command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+
+// Execute the command
+//$output = shell_exec($command);
+
+$return_var = 0;
+exec($command, 'SAT_ToolboxTalk.pdf', $return_var);
+
+// Check if the PDF was generated
+if (file_exists($pdfFilePath)) {
+  // Return the PDF file for download
+  return response()->download($pdfFilePath, 'SAT_ToolboxTalk.pdf')->deleteFileAfterSend(true);
+  } else {
+      // If PDF generation failed, return the error output
+      return response()->json([
+          'error' => 'PDF generation failed',
+          'output' => $output
+      ], 500);
+  }
+
+
+}
     public function PreCabling_Attachments($id){
       $survey = SiteSurvey::findOrFail($id);
       $PreCableFiles=PreCablingAttachments::where('site_survey_id', $survey->id)->get();
@@ -442,6 +454,9 @@ public function Material_Selection($id){
   $survey = SiteSurvey::findOrFail($id);
  
   $projectMaterials = ProjectMaterial::where('site_survey_id', $survey->id)->get();
+
+  return view('LKS.Material_Selection', compact('survey','projectMaterials','projectName'));
+
 
   $html =  view('LKS.Material_Selection', compact('survey','projectMaterials','projectName'))->render();
   $html = preg_replace_callback(
@@ -498,115 +513,124 @@ public function Precable_Piw($id)
   $usr_info = \Auth::user();
   $projectName = $usr_info->project;
   $survey = SiteSurvey::findOrFail($id);
-  $Piw = PreCabling::where('site_survey_id', $survey->id)->first();
+ 
+  $Piw = PreCabling::where('site_survey_id', $survey->id)->get()[0];
+
+
+
+ 
+ 
+
+  return  view('LKS.PreCabling_PIW', compact('survey','Piw','projectName'));
 
   $html =  view('LKS.PreCabling_PIW', compact('survey','Piw','projectName'))->render();
 
   $html = preg_replace_callback(
-    '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
-    function ($matches) {
-        $path = public_path(ltrim($matches[2], '/'));
-        return str_replace($matches[2], $path, $matches[0]);
-    },
-    $html
-);
+      '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
+      function ($matches) {
+          $path = public_path(ltrim($matches[2], '/'));
+          return str_replace($matches[2], $path, $matches[0]);
+      },
+      $html
+  );
+    
+    $directory = 'assets/debug_html';
 
-  $directory = 'assets/debug_html';
+    $filename = 'PreCabling_PIW' . $id . '.html';
 
-  $filename = 'PreCabling_PIW_' . $id . '.html';
+    $htmlFilePath=$directory . '/' . $filename;
 
-  $htmlFilePath=$directory . '/' . $filename;
+    if (!file_exists($directory)) {
+      mkdir($directory, 0755, true);
+  }
+  file_put_contents($htmlFilePath, $html);
 
-  if (!file_exists($directory)) {
-    mkdir($directory, 0755, true);
-}
-file_put_contents($htmlFilePath, $html);
+  $pdfFilePath='assets/debug_html'.'/'.'PreCabling_PIW_' . $id . '.pdf';
 
+  $wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
+ // $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+ $command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
 
+  // Execute the command
+  $output = shell_exec($command);
 
-
-$pdfFilePath='assets/debug_html'.'/'.'PreCabling_PIW_' . $id . '.pdf';
-
-$wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
-// $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
-$command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
-
-// Execute the command
-$output = shell_exec($command);
-
-// Check if the PDF was generated
-if (file_exists($pdfFilePath)) {
-    // Return the PDF file for download
-    return response()->download($pdfFilePath, 'PreCabling_PIW.pdf')->deleteFileAfterSend(true);
-    } else {
-        // If PDF generation failed, return the error output
-        return response()->json([
-            'error' => 'PDF generation failed',
-            'output' => $output
-        ], 500);
-
-}
-
-}
+  // Check if the PDF was generated
+  if (file_exists($pdfFilePath)) {
+      // Return the PDF file for download
+      return response()->download($pdfFilePath, 'PreCabling_PIW.pdf')->deleteFileAfterSend(true);
+      } else {
+          // If PDF generation failed, return the error output
+          return response()->json([
+              'error' => 'PDF generation failed',
+              'output' => $output
+          ], 500);
+      }
 
 
 
-public function Precable_Shutdown($id)
-{
-  $usr_info = \Auth::user();
-  $projectName = $usr_info->project;
-  $survey = SiteSurvey::findOrFail($id);
-  $PreShutdown= PreCablingShutDown::where('site_survey_id', $survey->id)->first();
-
-  $html =  view('LKS.PreCabling_PreShutdown', compact('survey','PreShutdown','projectName'))->render();
-
-  $html = preg_replace_callback(
-    '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
-    function ($matches) {
-        $path = public_path(ltrim($matches[2], '/'));
-        return str_replace($matches[2], $path, $matches[0]);
-    },
-    $html
-);
-
-  $directory = 'assets/debug_html';
-
-  $filename = 'PreCabling_PreShutdown_' . $id . '.html';
-
-  $htmlFilePath=$directory . '/' . $filename;
-
-  if (!file_exists($directory)) {
-    mkdir($directory, 0755, true);
-}
-file_put_contents($htmlFilePath, $html);
+    }
 
 
 
 
-$pdfFilePath='assets/debug_html'.'/'.'PreCabling_PreShutdown_' . $id . '.pdf';
-
-$wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
-// $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
-$command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
-
-// Execute the command
-$output = shell_exec($command);
-
-// Check if the PDF was generated
-if (file_exists($pdfFilePath)) {
-    // Return the PDF file for download
-    return response()->download($pdfFilePath, 'PreCabling_PreShutdown.pdf')->deleteFileAfterSend(true);
-    } else {
-        // If PDF generation failed, return the error output
-        return response()->json([
-            'error' => 'PDF generation failed',
-            'output' => $output
-        ], 500);
-
-}
-
-}
-
+    public function Precable_Shutdown($id)
+    {
+      $usr_info = \Auth::user();
+      $projectName = $usr_info->project;
+      $survey = SiteSurvey::findOrFail($id);
+      $PreShutdown= PreCablingShutDown::where('site_survey_id', $survey->id)->first();
+     
+    
+      return view('LKS.PreCabling_PreShutdown', compact('survey','PreShutdown','projectName'));
+    
+    
+      $html =  view('LKS.PreCabling_PreShutdown', compact('survey','PreShutdown','projectName'))->render();
+    
+      $html = preg_replace_callback(
+          '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
+          function ($matches) {
+              $path = public_path(ltrim($matches[2], '/'));
+              return str_replace($matches[2], $path, $matches[0]);
+          },
+          $html
+      );
+        
+        $directory = 'assets/debug_html';
+    
+        $filename = 'PreCabling_PreShutdown' . $id . '.html';
+    
+        $htmlFilePath=$directory . '/' . $filename;
+    
+        if (!file_exists($directory)) {
+          mkdir($directory, 0755, true);
+      }
+      file_put_contents($htmlFilePath, $html);
+    
+      $pdfFilePath='assets/debug_html'.'/'.'PreCabling_PreShutdown_' . $id . '.pdf';
+    
+      $wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
+     // $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+     $command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+    
+      // Execute the command
+      $output = shell_exec($command);
+    
+      // Check if the PDF was generated
+      if (file_exists($pdfFilePath)) {
+          // Return the PDF file for download
+          return response()->download($pdfFilePath, 'PreCabling_PreShutdown.pdf')->deleteFileAfterSend(true);
+          } else {
+              // If PDF generation failed, return the error output
+              return response()->json([
+                  'error' => 'PDF generation failed',
+                  'output' => $output
+              ], 500);
+          }
+    
+    
+    
+        }
+    
 
 
 public function Precable_Images($id)
@@ -615,6 +639,10 @@ public function Precable_Images($id)
   $projectName = $usr_info->project;
   $survey = SiteSurvey::findOrFail($id);
   $PreCablmages=PreCablingImages::where('site_survey_id', $survey->id)->get();
+
+  if ($PreCablmages->isEmpty()) {
+    return redirect()->back()->withErrors(['message' => 'No images found for this survey.']);
+}
 
   $html =  view('LKS.PreCabling_Images', compact('survey','PreCablmages','projectName'))->render();
 

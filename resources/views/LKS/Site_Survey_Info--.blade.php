@@ -1,3 +1,7 @@
+
+
+
+
 <style>
 
 .header {
@@ -96,25 +100,29 @@
     
  <div class="header" >
         <div class="logo">
-<<<<<<< HEAD
-            <img src='D:\delco\public\assets/web-images/tnblogo.png' alt="TNB Logo">
-=======
-            <img src='D:\dalco_new\public\assets/web-images/tnblogo.png' alt="TNB Logo">
->>>>>>> a01dda5d7e75bfce73f39f80a6e0dcecbd3489c3
+            <img src='/assets/web-images/tnblogo.png' alt="TNB Logo">
 
             <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
             Level 2, Jalan Air Hitam, Kawasan 16,<br>
             40000 Shah Alam, Selangor</p>
         </div>
           <div class="logo">
-<<<<<<< HEAD
-                            <img src='D:\delco\public\assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
-=======
-                            <img src='D:\dalco_new\public\assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
->>>>>>> a01dda5d7e75bfce73f39f80a6e0dcecbd3489c3
+            @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
+                <img src='/assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
                 <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
                NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
-                    </div>
+            @elseif($projectName === 'ARAS-JOHOR')
+                <img src='/assets/web-images/araslogo.png' alt="ARAS Kejuruteraan Logo">
+                <p>ARAS KEJURUTERAAN SDN BHD<br>
+                1st Floor No 72, Jalan SS 21/1, Damansara<br>
+                Utama, 47400 Petaling Jaya, Selangor</p>
+            @else
+                <!-- Default logo or empty state -->
+                <img src='/assets/web-images/defaultlogo.png' alt="Default Logo">
+                <p>Default Company Name<br>
+                Default Address</p>
+            @endif
+        </div>
     </div>
     
     <h1 style="margin-left: -150px">SENARAI SEMAK LAWATAN TAPAK PROJEK SCADA DA</h1>
@@ -122,43 +130,43 @@
     <table class="form-table">
         <tr>
             <td class="label">Nama Pencawang</td>
-            <td class="input">Bandar Sunway</td>
+            <td class="input">{{ $survey->nama_pe }}</td>
         </tr>
         <tr>
             <td class="label">Kawasan / Negeri</td>
-            <td class="input">KL</td>
+            <td class="input">{{ $survey->kawasan }}</td>
         </tr>
         <tr>
             <td class="label">No. Functional Location (FL)</td>
-            <td class="input"></td>
+            <td class="input">{{ $survey->fl }}</td>
         </tr>
         <tr>
             <td class="label">PE Jenis</td>
             
-                <td class="input">STAND-ALONE</td>
+                <td class="input">{{ $survey->jenis }}</td>
             </td>
         </tr>
         <tr>
             <td class="label">Pepatit (Trench) Berpagar?</td>
-            <td class="input">yes</td>
+            <td class="input">{{  $survey->peparit }}</td>
             </td>
         </tr>
         <tr>
             <td class="label">Jenis Kompaun</td>
             <td class="input">
-                <span class="checkboxs checkeds"></span> Simen
-                <span class="checkboxs "></span> Rumput
-                <span class="checkboxs "></span> Inter-locking
-                <span class="checkboxs "></span> Crusher Run
-                <span class="checkboxs "></span> Tidak
+                <span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'simen' ? 'checkeds' : '' }}"></span> Simen
+                <span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'rumput' ? 'checkeds' : '' }}"></span> Rumput
+                <span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'inter-locking' ? 'checkeds' : '' }}"></span> Inter-locking
+                <span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'crusher run' ? 'checkeds' : '' }}"></span> Crusher Run
+                <span class="checkboxs {{ strtolower($survey->jenis_kompaun) == 'tidak' ? 'checkeds' : '' }}"></span> Tidak
             </td>
         </tr>
         <tr>
             <td class="label">Jenis Perkakasuis</td>
             <td class="input">
-                <span class="checkboxs "></span> VCB
-                <span class="checkboxs checkeds"></span> RMU
-                <span class="checkboxs "></span> CSU
+                <span class="checkboxs {{ $survey->jenis_perkakasuis == 'VCB' ? 'checkeds' : '' }}"></span> VCB
+                <span class="checkboxs {{ $survey->jenis_perkakasuis == 'RMU' ? 'checkeds' : '' }}"></span> RMU
+                <span class="checkboxs {{ $survey->jenis_perkakasuis == 'CSU' ? 'checkeds' : '' }}"></span> CSU
             </td>
         </tr>
         
@@ -166,159 +174,93 @@
         
         <tr>
             <td class="label">Konfigurasi</td>
-            <td class="input">2S+1F</td>
+            <td class="input">{{ $survey->konfigurasi}}</td>
         </tr>
 
         <tr>
             <td class="label">Konfigurasi Other</td>
-            <td class="input"></td>
+            <td class="input">{{ $survey->konfigurasi_other}}</td>
         </tr>
         
         <tr>
             <td class="label">Jenama Alatsuis</td>
-            <td class="input">pp</td>
+            <td class="input">{{ $survey->jenama_alatsuis }}</td>
         </tr>
         <tr>
             <td class="label">Jenis Model</td>
-            <td class="input">pp</td>
+            <td class="input">{{ $survey->jenis_model }}</td>
         </tr>
         <tr>
             <td class="label">Tahun Pembinaan</td>
-            <td class="input"></td>
+            <td class="input">{{ $survey->tahun_pembinaan }}</td>
         </tr>
         <tr>
             <td class="label">Siri Alatsuis</td>
                 
-            <td class="input">test</td>
+            <td class="input">{{ $survey->siri_alatsuis }}</td>
               
             </td>
         </tr>
-                <tr>
-            <td class="label">Suis No 1</td>
-            <td class="input">test</td>
+        @for ($i = 1; $i <= 5; $i++)
+        <tr>
+            <td class="label">Suis No {{ $i }}</td>
+            <td class="input">{{ $survey->{'suis_no' . $i} }}</td>
         </tr>
         <tr>
-            <td class="label">Suis Label 1</td>
-            <td class="input">test</td>
+            <td class="label">Suis Label {{ $i }}</td>
+            <td class="input">{{ $survey->{'suis_label' . $i} }}</td>
         </tr>
         <tr>
-            <td class="label">Kabel Jenis 1</td>
-            <td class="input">PILC</td>
+            <td class="label">Kabel Jenis {{ $i }}</td>
+            <td class="input">{{ $survey->{'kabel_jenis' . $i} }}</td>
             
         </tr>
         <tr>
-            <td class="label">Kabel Saiz 1</td>
-            <td class="input">185MM</td>
+            <td class="label">Kabel Saiz {{ $i }}</td>
+            <td class="input">{{ $survey->{'kabel_saiz' . $i} }}</td>
         </tr>
-            <tr>
-            <td class="label">Suis No 2</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Suis Label 2</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Kabel Jenis 2</td>
-            <td class="input">PILC</td>
-            
-        </tr>
-        <tr>
-            <td class="label">Kabel Saiz 2</td>
-            <td class="input">185MM</td>
-        </tr>
-            <tr>
-            <td class="label">Suis No 3</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Suis Label 3</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Kabel Jenis 3</td>
-            <td class="input">PILC</td>
-            
-        </tr>
-        <tr>
-            <td class="label">Kabel Saiz 3</td>
-            <td class="input">70MM</td>
-        </tr>
-            <tr>
-            <td class="label">Suis No 4</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Suis Label 4</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Kabel Jenis 4</td>
-            <td class="input">XLPE</td>
-            
-        </tr>
-        <tr>
-            <td class="label">Kabel Saiz 4</td>
-            <td class="input">70MM</td>
-        </tr>
-            <tr>
-            <td class="label">Suis No 5</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Suis Label 5</td>
-            <td class="input">test</td>
-        </tr>
-        <tr>
-            <td class="label">Kabel Jenis 5</td>
-            <td class="input">PILC</td>
-            
-        </tr>
-        <tr>
-            <td class="label">Kabel Saiz 5</td>
-            <td class="input">70MM</td>
-        </tr>
-            <!-- Repeat similar structure for Suis No 2 to 5 -->
+    @endfor
+        <!-- Repeat similar structure for Suis No 2 to 5 -->
         <tr>
             <td class="label">Fius Saiz</td>
-            <td class="input">test</td>
+            <td class="input">{{ $survey->fius_saiz }}</td>
         </tr>
         <tr>
             <td class="label">CT Saiz Protection</td>
-            <td class="input">test</td>
+            <td class="input">{{ $survey->ct_saiz_protection }}</td>
         </tr>
         <tr>
             <td class="label">CT Saiz Metering</td>
-            <td class="input">test</td>
+            <td class="input">{{ $survey->ct_saiz_metering }}</td>
         </tr>
         <tr>
             <td class="label">SCADA Status</td>
-            <td class="input">yes</td>
+            <td class="input">{{ $survey->scada_status }}</td>
         </tr>
         <tr>
             <td class="label">Bekalan LV</td>
-            <td class="input">yes</td>
+            <td class="input">{{ $survey->bekalan_lv }}</td>
         </tr>
         <tr>
             <td class="label">Bacaan Beban</td>
-            <td class="input">test</td>
+            <td class="input">{{ $survey->bacaan_beban }}</td>
         </tr>
         <tr>
             <td class="label">Genset</td>
-            <td class="input">test</td>
+            <td class="input">{{ $survey->genset }}</td>
         </tr>
         <tr>
             <td class="label">Jenis LVDB</td>
-            <td class="input">DIN</td>
+            <td class="input">{{ $survey->jenis_lvdb }}</td>
         </tr>
 
         <tr>
             <td class="label">Jenis fius</td>
-            <td class="input"></td>
+            <td class="input">{{ $survey->jenis_fius }}</td>
         </tr>
         <tr>
             <td class="label">Keperluan Khas Kerja</td>
-            <td class="input">test</td>
+            <td class="input">{{ $survey->keperluan_khas_kerja }}</td>
         </tr>
        
         
