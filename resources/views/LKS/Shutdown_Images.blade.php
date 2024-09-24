@@ -110,14 +110,16 @@
                     <img class="survey-images" src='{{ asset($image->image_url) }}' 
                          alt="{{ $image->image_name }}" alt="Switchgear nameplate image">
                 </div>
-                <div class="row border center">
+                <div class="row border w-100 justify-content-center">
                     <!-- Display the image name -->
-                    <p> Name: {{ ucfirst(str_replace('_', ' ', $image->image_name)) }}</p>
+                    <p class="text-center">Name: {{ ucfirst(str_replace('_', ' ', $image->image_name)) }}</p>
                 </div>
-                <div class="row border center">
-                    <!-- Display the image description -->
-                    <p>Type: {{ $image->image_type ?? 'No description available' }}</p>
+                
+                <div class="row border w-100 justify-content-center">
+                    <!-- Display the image type -->
+                    <p class="text-center">Type: {{ $image->image_type ?? 'No description available' }}</p>
                 </div>
+                
             </div>
             @endforeach
         @else
@@ -128,5 +130,23 @@
 
 
 </div>
+
+<script>
+    window.onload = function () {
+        window.print();
+        // const element = document.getElementById('content');
+        // const opt = {
+        //     margin: 1,
+        //     filename: 'site_survey_toolboxtalk.pdf',
+        //     image: { type: 'jpeg', quality: 0.98 },
+        //     html2canvas: { scale: 2 },
+        //     jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        // };
+
+        // html2pdf().set(opt).from(element).save().then(function () {
+        //     console.log('PDF downloaded');
+        // });
+    };
+</script>
 
 
