@@ -343,7 +343,8 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
                     alt="{{ ucfirst(str_replace('_', ' ', $field)) }}" alt="Switchgear nameplate image2">
             </div>
             <div class="row border center">
-                <p>{{ ucfirst(str_replace('_', ' ', $field)) }}</p>
+                <p style="display: block; text-align: center; width: 100%;">{{ ucfirst(str_replace('_', ' ', $field)) }}</p>
+
             </div>
         </div>
         @endif
@@ -355,10 +356,30 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
         @if(!empty($toolbox->$field))
         <div class="picture-item">
             <img src='/{{$toolbox->$field }}' alt="{{ ucfirst(str_replace('_', ' ', $field)) }}">
-            <p>{{ ucfirst(str_replace('_', ' ', $field)) }}</p>
+            <p style="display: block; text-align: center; width: 100%;">{{ ucfirst(str_replace('_', ' ', $field)) }}</p>
+
         </div>
         @endif
         @endforeach
         @endif
     </div>
 </div>
+
+
+<script>
+    window.onload = function () {
+        window.print();
+        // const element = document.getElementById('content');
+        // const opt = {
+        //     margin: 1,
+        //     filename: 'site_survey_toolboxtalk.pdf',
+        //     image: { type: 'jpeg', quality: 0.98 },
+        //     html2canvas: { scale: 2 },
+        //     jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        // };
+
+        // html2pdf().set(opt).from(element).save().then(function () {
+        //     console.log('PDF downloaded');
+        // });
+    };
+</script>

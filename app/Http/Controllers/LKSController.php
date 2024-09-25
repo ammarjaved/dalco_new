@@ -763,6 +763,7 @@ public function Precable_Piw($id)
             $projectName = $usr_info->project;
             $survey = SiteSurvey::findOrFail($id);
             $ImageShutImages=ImageShutdown::where('site_survey_id', $survey->id)->get();
+          
             return view ('LKS.Shutdown_Images', compact('survey','ImageShutImages','projectName'));
           
             $html =  view('LKS.Shutdown_Images', compact('survey','ImageShutImages','projectName'))->render();

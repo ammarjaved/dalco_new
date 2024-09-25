@@ -89,39 +89,14 @@
             border-radius: 5px;
         }
 
-        .signature {
-            text-align: right;
-            margin-top: 50px;
-        }
-
-        .signature p {
-            margin: 0;
-            font-size: 16px;
-        }
-
-        .footer {
+        .signature-section {
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
+            margin-top: 30px;
+          
         }
-
-        .stamp {
-            width: 100px;
-            height: 100px;
-            border: 1px solid #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-        }
-
-        .footer div {
+        .signature {
             text-align: center;
-            margin-top: 20px;
-        }
-
-        .footer div p {
-            margin: 5px 0;
         }
 
         .logo {
@@ -466,7 +441,7 @@
                 <img src='/{{$toolboxtalk->toolbox_image2}}' alt="Toolbox Talk Image 2">
             </div>
 
-            <div class="signature">
+            {{-- <div class="signature">
                 <p><strong>Supervisor:</strong></p>
                 <p>Nama:</p>
             </div>
@@ -476,16 +451,29 @@
                     <p><strong>Approved By:</strong></p>
                     <p>Name</p>
                 </div>
-                <div class="stamp">
-                    <p>STAMP</p>
-                </div>
-            </div>
+                
+            </div> --}}
+
+
+                
+    <div class="signature-section">
+        <div class="signature">
+           <strong> <p>Supervisor:</p></strong>
+           
+            <p>Nama:</p>
+        </div>
+        <div class="signature">
+            <strong><p>Approved By:</p></strong>
+            
+            <p>Name</p>
+        </div>
+    </div>
         </div>
     </div>
 
     <script>
         window.onload = function () {
-            //window.print();
+            window.print();
             // const element = document.getElementById('content');
             // const opt = {
             //     margin: 1,

@@ -57,6 +57,47 @@
   .center {
       text-align: center;
   }
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    gap: 10px; /* Space between columns */
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.column {
+    border: 1px solid black; /* Borders for each column */
+    padding: 10px;
+}
+
+h3 {
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.image-container {
+    border: 1px solid black; /* Border around each image */
+    padding: 5px;
+    margin-bottom: 10px;
+    height: 250px; /* Fix height for images to maintain uniform grid */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure that image covers the container without distorting */
+}
+
+@media screen and (max-width: 768px) {
+    .image-grid {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    }
+}
 
 
 </style>
@@ -101,35 +142,80 @@
 
 
 
-    <div class="row row-cols-2 right-margin left-margin">
-        @if(isset($SATImages) && $SATImages->isNotEmpty())
-            @foreach($SATImages as $image)
-            <div class="col">
-                @if(in_array($image->image_type, ['BEFORE', 'AFTER', 'DURING']))
-                    <div class="row border">
-                        <!-- Display the image -->
-                        <img class="survey-images" src="{{ asset($image->image_url) }}" 
-                             alt="{{ $image->image_name }}" >
-                    </div>
-                    <div class="row border center">
-                        <!-- Display the image name -->
-                        <p>Name: {{ ucfirst(str_replace('_', ' ', $image->image_name)) }}</p>
-                    </div>
-                    <div class="row border center">
-                        <!-- Display the image description -->
-                        <p>Type: {{ $image->image_type ?? 'No description available' }}</p>
-                    </div>
-                @endif
-            </div>
-            
-            @endforeach
-        @else
-            <p>No images available for display.</p>
-        @endif
+    <div class="image-grid">
+        <!-- Sebelum Column -->
+        <div class="column">
+            <h3><u>SEBELUM</u></h3>
+            @if(isset($SATImages) && $SATImages->isNotEmpty())
+                @foreach($SATImages as $image)
+                    @if(strtolower($image->image_type) === 'before')
+                        <div class="image-container">
+                            <!-- Display the image -->
+                            <img src="{{ asset($image->image_url) }}" alt="{{ $image->image_name }}">
+                        </div>
+                    @endif
+                @endforeach
+            @else
+                <p>No images available for Sebelum.</p>
+            @endif
+        </div>
+    
+        <!-- Semasa Column -->
+        <div class="column">
+            <h3><u>SEMASA</u></h3>
+            @if(isset($SATImages) && $SATImages->isNotEmpty())
+                @foreach($SATImages as $image)
+                    @if(strtolower($image->image_type) === 'during')
+                        <div class="image-container">
+                            <!-- Display the image -->
+                            <img src="{{ asset($image->image_url) }}" alt="{{ $image->image_name }}">
+                        </div>
+                    @endif
+                @endforeach
+            @else
+                <p>No images available for Semasa.</p>
+            @endif
+        </div>
+    
+        <!-- Selepas Column -->
+        <div class="column">
+            <h3><u>SELEPAS</u></h3>
+            @if(isset($SATImages) && $SATImages->isNotEmpty())
+                @foreach($SATImages as $image)
+                    @if(strtolower($image->image_type) === 'after')
+                        <div class="image-container">
+                            <!-- Display the image -->
+                            <img src="{{ asset($image->image_url) }}" alt="{{ $image->image_name }}">
+                        </div>
+                    @endif
+                @endforeach
+            @else
+                <p>No images available for Selepas.</p>
+            @endif
+        </div>
     </div>
+    
     
 
 
 </div>
 
+
+<script>
+    window.onload = function () {
+        window.print();
+        // const element = document.getElementById('content');
+        // const opt = {
+        //     margin: 1,
+        //     filename: 'site_survey_toolboxtalk.pdf',
+        //     image: { type: 'jpeg', quality: 0.98 },
+        //     html2canvas: { scale: 2 },
+        //     jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        // };
+
+        // html2pdf().set(opt).from(element).save().then(function () {
+        //     console.log('PDF downloaded');
+        // });
+    };
+</script>
 
