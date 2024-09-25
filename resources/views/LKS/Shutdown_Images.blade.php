@@ -58,6 +58,48 @@
       text-align: center;
   }
 
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    gap: 10px; /* Space between columns */
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.column {
+    border: 1px solid black; /* Borders for each column */
+    padding: 10px;
+}
+
+h3 {
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.image-container {
+    border: 1px solid black; /* Border around each image */
+    padding: 5px;
+    margin-bottom: 10px;
+    height: 250px; /* Fix height for images to maintain uniform grid */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure that image covers the container without distorting */
+}
+
+@media screen and (max-width: 768px) {
+    .image-grid {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    }
+}
+
 
 </style>
 
@@ -101,31 +143,57 @@
 
 
 
-    <div class="row row-cols-2 right-margin left-margin">
-        @if(isset($ImageShutImages) && $ImageShutImages->isNotEmpty())
-            @foreach($ImageShutImages as $image)
-            <div class="col">
-                <div class="row border">
-                    <!-- Display the image -->
-                    <img class="survey-images" src='{{ asset($image->image_url) }}' 
-                         alt="{{ $image->image_name }}" alt="Switchgear nameplate image">
-                </div>
-                <div class="row border w-100 justify-content-center">
-                    <!-- Display the image name -->
-                    <p class="text-center">Name: {{ ucfirst(str_replace('_', ' ', $image->image_name)) }}</p>
-                </div>
-                
-                <div class="row border w-100 justify-content-center">
-                    <!-- Display the image type -->
-                    <p class="text-center">Type: {{ $image->image_type ?? 'No description available' }}</p>
-                </div>
-                
-            </div>
-            @endforeach
-        @else
-            <p>No images available for display.</p>
-        @endif
+    <div class="image-grid">
+        <!-- Sebelum Column -->
+        <div class="column">
+            <h3><u>SEBELUM</u></h3>
+            @if(isset($ImageShutImages) && $ImageShutImages->isNotEmpty())
+                @foreach($ImageShutImages as $image)
+                    @if(strtolower($image->image_type) === 'before')
+                        <div class="image-container">
+                            <img src="{{ asset($image->image_url) }}" alt="{{ $image->image_name }}">
+                        </div>
+                    @endif
+                @endforeach
+            @else
+                <p>No images available for Sebelum.</p>
+            @endif
+        </div>
+    
+        <!-- Semasa Column -->
+        <div class="column">
+            <h3><u>SEMASA</u></h3>
+            @if(isset($ImageShutImages) && $ImageShutImages->isNotEmpty())
+                @foreach($ImageShutImages as $image)
+                    @if(strtolower($image->image_type) === 'during')
+                        <div class="image-container">
+                            <img src="{{ asset($image->image_url) }}" alt="{{ $image->image_name }}">
+                        </div>
+                    @endif
+                @endforeach
+            @else
+                <p>No images available for Semasa.</p>
+            @endif
+        </div>
+    
+        <!-- Selepas Column -->
+        <div class="column">
+            <h3><u>SELEPAS</u></h3>
+            @if(isset($ImageShutImages) && $ImageShutImages->isNotEmpty())
+                @foreach($ImageShutImages as $image)
+                    @if(strtolower($image->image_type) === 'after')
+                        <div class="image-container">
+                            <img src="{{ asset($image->image_url) }}" alt="{{ $image->image_name }}">
+                        </div>
+                    @endif
+                @endforeach
+            @else
+                <p>No images available for Selepas.</p>
+            @endif
+        </div>
     </div>
+    
+    
     
 
 
