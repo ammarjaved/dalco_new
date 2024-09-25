@@ -1,5 +1,21 @@
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <title>Toolbox Talk Form</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+
+
+</head>
 <style>
+
+
 
 
 .header {
@@ -47,110 +63,178 @@
         }
 
 
+        .logo {
+            height: 100px;
+            width: 200px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            object-fit: contain;
+        }
+
+        .center-text {
+            text-align: center;
+            align-self: center;
+            float: center;
+        }
+
+        .overall-margin {
+            margin-top: 10px;
+        }
+
+        .left-margin {
+            margin-left: 10px;
+        }
+
+        .right-margin {
+            margin-right: 10px;
+        }
+
+        .even-margin {
+            margin: 10px;
+        }
+
+        .right-element {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .checkbox-margins {
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+
+        .survey-images {
+            height: 300px;
+            width: 300px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            object-fit: contain;
+        }
+
+        .center {
+            text-align: center;
+        }
+
 </style>
 
 
+<body>
 
 
-<div class="header">
-    <div class="logo">
-        <img src='/assets/web-images/tnblogo.png' alt="TNB Logo">
-        <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
-            Level 2, Jalan Air Hitam, Kawasan 16,<br>
-            40000 Shah Alam, Selangor</p>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col border overall-margin" style="margin-left: 10px;">
+                <img class="logo" src='/assets/web-images/tnblogo.png' alt="TNB Logo">
+                <p class="center-text">TNB ENERGY SERVICES SDN BHD (234667-M)<br>
+                    Level 2, Jalan Air Hitam, Kawasan 16,<br>
+                    40000 Shah Alam, Selangor</p>
+            </div>
+            <div class="col border overall-margin" style="margin-right: 10px;">
+                @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
+                <img class="logo" src='/assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
+                <p class="center-text">AEROSYNERGY SOLUTIONS SDN BHD<br>
+                    NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
+                @elseif($projectName === 'ARAS-JOHOR')
+                <img class="logo" src='/assets/web-images/araslogo.png' alt="ARAS Kejuruteraan Logo">
+                <p class="center-text">ARAS KEJURUTERAAN SDN BHD<br>
+                    1st Floor No 72, Jalan SS 21/1, Damansara Utama, 47400 Petaling Jaya, Selangor</p>
+                @else
+                <img class="logo" src='/assets/web-images/defaultlogo.png' alt="Default Logo">
+                <p class="center-text">Default Company Name<br>
+                    Default Address</p>
+                @endif
+            </div>
+        </div>
     </div>
-    <div class="logo">
-        @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
-            <img src='/assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
-            <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
-            NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
-        @elseif($projectName === 'ARAS-JOHOR')
-            <img src='/assets/web-images/araslogo.png' alt="ARAS Kejuruteraan Logo">
-            <p>ARAS KEJURUTERAAN SDN BHD<br>
-            1st Floor No 72, Jalan SS 21/1, Damansara Utama, 47400 Petaling Jaya, Selangor</p>
-        @else
-            <img src='/assets/web-images/defaultlogo.png' alt="Default Logo">
-            <p>Default Company Name<br>
-            Default Address</p>
-        @endif
-    </div>
-</div>
-
-<div style="padding-top: 100px">
-    <h1>JADUAL ANGGARAN DAN PENGGUNAAN BAHAN</h1>
-    {{-- <table>
-        <tr>
-            <th>PROJEK PEMBINAAN:</th>
-            <td colspan="3">PROJEK TAMAN DESA COPIAWALA - PKT MUTIARA IMAN NO.5</td>
-        </tr>
-        <tr>
-            <th>TAJUK KERJA:</th>
-            <td colspan="3">TAMAN DESA COPIAWALA</td>
-        </tr>
-        <tr>
-            <th>NO. PESANAN:</th>
-            <td colspan="3">PO REF: LKT0052/2022</td>
-        </tr>
-        <tr>
-            <th>KONTRAKTOR:</th>
-            <td colspan="3">JAYA KEJURUTERAAN SDN BHD</td>
-        </tr>
-    </table> --}}
-    <table>
-        <tr>
-            <th>Bil.</th>
-            <th>No. Rujukan</th>
-            <th>Keterangan Barang</th>
-            <th>Kuantiti</th>
-            <th>Unit</th>
-            <th>Remarks</th>
-        </tr>
     
-        @foreach ($projectMaterials as $item)
+    <div class="container-fluid" style="padding-top:40px">
+        <p><strong>NAMA PE:&emsp;&emsp;</strong> {{$survey->nama_pe}}</p>
+       
+    </div>
+    
+    <div style="padding-top: 50px">
+        <h1>JADUAL ANGGARAN DAN PENGGUNAAN BAHAN</h1>
+        {{-- <table>
             <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $item->material->mat_code }}</td> 
-                <td>{{ $item->material->mat_desc }}</td>
-                <td>{{ $item->quantity }}</td>
-                <td>{{ $item->material->bun }}</td>
-                <td>{{ $item->remarks }}</td>
-                
+                <th>PROJEK PEMBINAAN:</th>
+                <td colspan="3">PROJEK TAMAN DESA COPIAWALA - PKT MUTIARA IMAN NO.5</td>
             </tr>
-        @endforeach
-    </table>
+            <tr>
+                <th>TAJUK KERJA:</th>
+                <td colspan="3">TAMAN DESA COPIAWALA</td>
+            </tr>
+            <tr>
+                <th>NO. PESANAN:</th>
+                <td colspan="3">PO REF: LKT0052/2022</td>
+            </tr>
+            <tr>
+                <th>KONTRAKTOR:</th>
+                <td colspan="3">JAYA KEJURUTERAAN SDN BHD</td>
+            </tr>
+        </table> --}}
+        <table>
+            <tr>
+                <th>Bil.</th>
+                <th>No. Rujukan</th>
+                <th>Keterangan Barang</th>
+                <th>Kuantiti</th>
+                <th>Unit</th>
+                <th>Remarks</th>
+            </tr>
+        
+            @foreach ($projectMaterials as $item)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $item->material->mat_code }}</td> 
+                    <td>{{ $item->material->mat_desc }}</td>
+                    <td>{{ $item->quantity }}</td>
+                    <td>{{ $item->material->bun }}</td>
+                    <td>{{ $item->remarks }}</td>
+                    
+                </tr>
+            @endforeach
+        </table>
+        
+        
+        {{-- <div class="footer">
+            <div class="signature">
+               
+        <p>Nama : </p>
+            </div>
+            <div class="signature">
+                
+                <p>Jurutera</p>
+                <p>NAMA:</p>
+            </div>
+        </div> --}}
+    </div>
     
     
-    {{-- <div class="footer">
-        <div class="signature">
-           
-    <p>Nama : </p>
-        </div>
-        <div class="signature">
-            
-            <p>Jurutera</p>
-            <p>NAMA:</p>
-        </div>
-    </div> --}}
-</div>
-
-
-<script>
-    window.onload = function () {
-        window.print();
-        // const element = document.getElementById('content');
-        // const opt = {
-        //     margin: 1,
-        //     filename: 'site_survey_toolboxtalk.pdf',
-        //     image: { type: 'jpeg', quality: 0.98 },
-        //     html2canvas: { scale: 2 },
-        //     jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-        // };
-
-        // html2pdf().set(opt).from(element).save().then(function () {
-        //     console.log('PDF downloaded');
-        // });
-    };
-</script>
+    <script>
+        window.onload = function () {
+            window.print();
+            // const element = document.getElementById('content');
+            // const opt = {
+            //     margin: 1,
+            //     filename: 'site_survey_toolboxtalk.pdf',
+            //     image: { type: 'jpeg', quality: 0.98 },
+            //     html2canvas: { scale: 2 },
+            //     jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            // };
+    
+            // html2pdf().set(opt).from(element).save().then(function () {
+            //     console.log('PDF downloaded');
+            // });
+        };
+    </script>
 
 
 
+
+
+
+
+
+</body>

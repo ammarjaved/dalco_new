@@ -1,66 +1,57 @@
 @extends('layouts.app')
 
+
 <style>
-  
-    .gallery-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
+   .gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Consistent gap between items */
+}
 
-    .gallery-item {
-        flex: 0 0 30%;
-        margin-bottom: 20px;
-        text-align: center;
-    }
+.gallery-item {
+    flex: 1 0 calc(25% - 15px); /* Grow and shrink as needed, initial basis of 25% minus gap */
+    min-width: 200px; /* Minimum width to prevent too narrow items */
+    max-width: calc(25% - 15px); /* Maximum width to maintain 4 columns when possible */
+    margin-bottom: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
-    .gallery-item img {
-        max-width: 70%;
-        height: auto;
-        border-radius: 3px;
-    }
+.gallery-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 3px;
+}
 
-    .button-group {
-        margin-top: 15px;
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-    }
 
-    .button-group a,
-    .button-group button {
-        padding: 10px 20px;
-        border-radius: 4px;
-        background-color: #8e44ad;
-        color: white;
-        text-decoration: none;
-        border: none;
-        font-family: inherit;
-        font-size: 14px;
-        cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.1s ease;
-    }
-
-    .button-group a:hover,
-    .button-group button:hover {
-        background-color: #9b59b6;
-        color: white;
-    }
-
-    .button-group a:active,
-    .button-group button:active,
-    .button-group a:focus,
-    .button-group button:focus {
-        background-color: #8e44ad;
-        outline: none;
-        transform: scale(0.98);
-    }
+   
 
     .no-images {
         text-align: center;
         margin: 20px 0;
         color: #888;
         font-size: 18px;
+    }
+
+    /* Ensure that gallery-item's height is consistent */
+    .gallery-item {
+        min-height: 300px; /* Adjust to fit content */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .button-group {
+        position: relative;
+        top: -20px; /* Adjust this value to move buttons higher or lower */
+    }
+    md-filled-tonal-button {
+        margin-right: 10px;
     }
 </style>
 
@@ -104,10 +95,10 @@
                                         @endif
 
                                         <div class="button-group">
-                                            <a href="{{ asset($satRecord->image_url) }}" target="_blank" class="btn">View</a>
+                                            <md-filled-tonal-button href="{{ asset($satRecord->image_url) }}" target="_blank"> View</md-filled-tonal-button>
                                             <form action="{{ route('sat.download', $satRecord->id) }}" method="GET" style="display: inline;">
                                                 @csrf
-                                                <button type="submit" class="btn">Download</button>
+                                                <md-filled-tonal-button type="submit" >Download</md-filled-tonal-button>
                                             </form>
                                         </div>
                                     </div>

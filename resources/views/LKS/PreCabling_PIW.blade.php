@@ -87,7 +87,12 @@
         </div>
     </div>
 
-    <h1>PIW CHECKLIST</h1>
+    <h1>PIW CHECKLIST</h1> 
+    <div class="container-fluid" style="padding-top:40px;">
+        <p><strong>NAMA PE:&emsp;&emsp;</strong> {{$survey->nama_pe}}</p>
+       
+    </div>
+    
     
     <table>
         <tr>

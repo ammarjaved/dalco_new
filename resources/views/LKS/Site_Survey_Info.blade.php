@@ -182,24 +182,28 @@
                     <td >{{ $survey->suis_no2 }}</td>
                     <td >{{ $survey->suis_no3 }}</td>
                     <td >{{ $survey->suis_no4 }}</td>
+                    <td >{{ $survey->suis_no5 }}</td>
                     </tr>
                     <tr>
                         <td>{{$survey->suis_label1}}</td>
                         <td>{{$survey->suis_label2}}</td>
                         <td>{{$survey->suis_label3}}</td>
                         <td>{{$survey->suis_label4}}</td>
+                        <td>{{$survey->suis_label5}}</td>
                     </tr>
                     <tr>
                         <td>{{$survey->kabel_jenis1}}</td>
                         <td>{{$survey->kabel_jenis2}}</td>
                         <td>{{$survey->kabel_jenis3}}</td>
                         <td>{{$survey->kabel_jenis4}}</td>
+                        <td>{{$survey->kabel_jenis5}}</td>
                     </tr>
                     <tr>
                         <td>{{$survey->kabel_saiz1}}</td>
                         <td>{{$survey->kabel_saiz2}}</td>
                         <td>{{$survey->kabel_saiz3}}</td>
                         <td>{{$survey->kabel_saiz4}}</td>
+                        <td>{{$survey->kabel_saiz5}}</td>
                     </tr>
                 </table>
             </td>

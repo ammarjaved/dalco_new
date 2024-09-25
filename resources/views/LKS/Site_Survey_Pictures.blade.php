@@ -111,6 +111,11 @@ $toolboxImageFields = ['toolbox_image1', 'toolbox_image2'];
         </div>
     </div>
 
+    <div class="container-fluid">
+        <p><strong>PE NAME:&emsp;</strong> {{$survey->nama_pe}}</p>
+       
+    </div>
+
     <h4 class="title center-text">PICTURE LIST FORM<br>(SITE VISIT)</h4>
 
     <div class="container-fluid">

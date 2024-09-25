@@ -133,6 +133,10 @@
 
 
     <h1>LKS PRE-SHUTDOWN FORM (PIW)</h1>
+    <div class="container-fluid" style="padding-top:40px;">
+        <p><strong>NAMA PE:&emsp;&emsp;</strong> {{$survey->nama_pe}}</p>
+       
+    </div>
     <table>
         <tr>
             <th colspan="3">Remote Control Box</th>
