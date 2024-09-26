@@ -243,13 +243,13 @@ if (file_exists($pdfFilePath)) {
       $survey = SiteSurvey::findOrFail($id);
 
       
+      $PreCablks = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja', '=', 'CABLING')->first();
 
-        $PreCablks = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','CABLING')->get()[0];
-
-        if (!$PreCablks) {
+      if (!$PreCablks) {
           // Redirect back if PreCabling data is not found or is empty
-          return redirect()->route('LKS.index', ['id' => $id])
-                           ->with('error', ' Pre cable ToolboxTalk data is missing.');
+          session()->flash('error', 'Pre cable ToolboxTalk data is missing.');
+          return redirect()->route('LKS.index', ['id' => $id]);
+                           
       }
 
         return view ('LKS.PreCabling_ToolboxTalk', compact('PreCablks','survey','projectName'));
