@@ -214,19 +214,17 @@ function addData() {
             method: 'GET',
             success: function(data) {
                 if (data.length > 0) {
-                    
-                        var i = $('#myTable tr').length; // Define i as the number of table rows
-                        var str = '<tr>' +
+                    var i = $('#mat_sel tr').length; // Set index based on number of rows
+                    var str = '<tr>' +
                               '<td><input type="text" name="data[' + i + '][id]" value="' + data[0].id + '" /></td>' +
                               '<td><input type="text" name="data[' + i + '][mat_code]" value="' + data[0].mat_code + '" /></td>' +
                               '<td><input type="text" name="data[' + i + '][mat_desc]" value="' + data[0].mat_desc + '" /></td>' +
                               '<td><input type="text" name="data[' + i + '][bun]" value="' + data[0].bun + '" /></td>' +
                               '<td><input type="number" name="data[' + i + '][quantity]" value="0" /></td>' +
-                              '<td><input type="text" name="data[' + i + '][remarks]" value="" /></td>' + <!-- New input for remarks -->
+                              '<td><input type="text" name="data[' + i + '][remarks]" value="" /></td>' +
                               '</tr>';
-                        $("#mat_sel").append(str);
-                        $('#search_input1').val(''); // Clear the search input
-                   // }
+                    $("#mat_sel").append(str);
+                    $('#search_input1').val(''); // Clear the search input
                 } else {
                     alert('No material found');
                 }
@@ -240,6 +238,7 @@ function addData() {
         alert("Please select a material first.");
     }
 }
+
 
 $(document).ready(function() {
     const $search = $('#search_input1');
