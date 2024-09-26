@@ -19,6 +19,18 @@
     <div class="container">
         <h2>LKS</h2>
 
+     @if(session('error'))
+    <div id="errorAlert" class="alert alert-danger">
+        {{ session('error') }}
+        <button type="button" class="close-btn" onclick="closeAlert()">×</button>
+    </div>
+    <script>
+        function closeAlert() {
+            document.getElementById('errorAlert').style.display = 'none';
+        }
+    </script>
+    @endif
+
         <div class="card" style="background-color:#fef7ff;">
           
 

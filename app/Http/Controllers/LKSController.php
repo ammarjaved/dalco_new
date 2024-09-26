@@ -552,68 +552,22 @@ if (file_exists($pdfFilePath)) {
 
 public function Precable_Piw($id)
 {
+  try{
   $usr_info = \Auth::user();
   $projectName = $usr_info->project;
   $survey = SiteSurvey::findOrFail($id);
  
   $Piw = PreCabling::where('site_survey_id', $survey->id)->first();
 
-
-  if (!$Piw) {
-    // Redirect back if PreCabling data is not found or is empty
-    return redirect()->route('LKS.index', ['id' => $id])
-                     ->with('error', 'PreCabling data is missing.');
-}
-
-
   return  view('LKS.PreCabling_PIW', compact('survey','Piw','projectName'));
-
-  $html =  view('LKS.PreCabling_PIW', compact('survey','Piw','projectName'))->render();
-
-  $html = preg_replace_callback(
-      '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
-      function ($matches) {
-          $path = public_path(ltrim($matches[2], '/'));
-          return str_replace($matches[2], $path, $matches[0]);
-      },
-      $html
-  );
-    
-    $directory = 'assets/debug_html';
-
-    $filename = 'PreCabling_PIW' . $id . '.html';
-
-    $htmlFilePath=$directory . '/' . $filename;
-
-    if (!file_exists($directory)) {
-      mkdir($directory, 0755, true);
+  }catch(\Exception $e){
+   // Redirect back if PreCabling data is not found or is empty
+   return redirect()->route('LKS.index', ['id' => $id])
+   ->with('error', 'PreCabling data is missing.');
   }
-  file_put_contents($htmlFilePath, $html);
-
-  $pdfFilePath='assets/debug_html'.'/'.'PreCabling_PIW_' . $id . '.pdf';
-
-  $wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
- // $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
- $command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
-
-  // Execute the command
-  $output = shell_exec($command);
-
-  // Check if the PDF was generated
-  if (file_exists($pdfFilePath)) {
-      // Return the PDF file for download
-      return response()->download($pdfFilePath, 'PreCabling_PIW.pdf')->deleteFileAfterSend(true);
-      } else {
-          // If PDF generation failed, return the error output
-          return response()->json([
-              'error' => 'PDF generation failed',
-              'output' => $output
-          ], 500);
-      }
 
 
-
-    }
+  }
 
 
 
