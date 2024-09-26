@@ -559,6 +559,13 @@ public function Precable_Piw($id)
  
   $Piw = PreCabling::where('site_survey_id', $survey->id)->first();
 
+  if (!$Piw) {
+    return redirect()->route('LKS.index', ['id' => $id])
+        ->with('error', 'PreCabling data is missing.');
+  }
+
+ // return  $Piw;
+
   return  view('LKS.PreCabling_PIW', compact('survey','Piw','projectName'));
   }catch(\Exception $e){
    // Redirect back if PreCabling data is not found or is empty
