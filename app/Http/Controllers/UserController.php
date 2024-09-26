@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+
+
 
 class UserController extends Controller
 {
@@ -11,7 +14,13 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+        $usr=\Auth::user();
+        if(!$usr->type){
         return view('admin.users.index', compact('users'));
+        }else{
+           return  Redirect::route('delco-summary');
+  
+        }
     }
 
     // Show the form for creating a new user
