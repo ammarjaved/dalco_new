@@ -1,6 +1,7 @@
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+        <title>ShutDown Images_{{$survey->nama_pe}} </title>
   </head>
 
 <style>
@@ -138,7 +139,7 @@ h3 {
         <p><strong>NO FUNCTIONAL LOCATION:&emsp;</strong> JJBUPJCOEH00621</p>
     </div>
   
-    <h4 class="title center-text"><u>PICTURE OF Shutdown</u></h4>
+    <h4 class="title center-text"><u>PICTURE OF SHUTDOWN</u></h4>
 
 
 

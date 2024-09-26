@@ -1,6 +1,7 @@
 <head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
       integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+      <title> PreCabling Pictures_{{$survey->nama_pe}}</title>
 </head>
 
 <style>
@@ -93,7 +94,7 @@
       <p><strong>NO FUNCTIONAL LOCATION:&emsp;</strong> JJBUPJCOEH00621</p>
   </div>
 
-  <h4 class="title center-text"><u>PICTURE OF Pre Cabling</u></h4>
+  <h4 class="title center-text"><u>PICTURE OF PRECABLING</u></h4>
   
   <div class="row row-cols-2 right-margin left-margin">
     @if(isset($PreCablmages) && $PreCablmages->isNotEmpty())

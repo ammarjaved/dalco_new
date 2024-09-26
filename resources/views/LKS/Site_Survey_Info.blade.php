@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tenaga Nasional Berhad - Electrical Installation Form</title>
+    <title>SENARAI SEMAK_{{$survey->nama_pe}} </title>
     <style>
         body { font-family: Arial, sans-serif; font-size: 12px; }
         table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
