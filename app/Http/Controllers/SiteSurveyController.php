@@ -266,7 +266,8 @@ class SiteSurveyController extends Controller
     {
         $siteSurvey = SiteSurvey::find($id);
         $siteSurvey1 = SitePicture::where('site_survey_id',$id)->get()[0];
-        $toolboxTalk = toolboxTalk::where('site_survey_id', $id)->first();
+        $toolboxTalk = toolboxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->first();
+
         $sql='select st_x(geom) as x,st_y(geom) as y from tbl_site_survey where id='.$id;
         $location=DB::select($sql)[0];
 
