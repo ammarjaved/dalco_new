@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LKS PRE-SHUTDOWN FORM (PIW)</title>
+    <title>PRE-SHUTDOWN FORM (PIW)_ {{$survey->nama_pe}}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <style>
@@ -133,6 +133,10 @@
 
 
     <h1>LKS PRE-SHUTDOWN FORM (PIW)</h1>
+    <div class="container-fluid" style="padding-top:40px;">
+        <p><strong>NAMA PE:&emsp;&emsp;</strong> {{$survey->nama_pe}}</p>
+       
+    </div>
     <table>
         <tr>
             <th colspan="3">Remote Control Box</th>
