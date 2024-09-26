@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <title>PIW CHECKLIST</title>
+    <title>PIW CHECKLIST_{{$survey->nama_pe}}</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         body {
@@ -63,21 +63,36 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col border" style="margin-left: 10px;">
+            <div class="col border overall-margin" style="margin-left: 10px;">
                 <img class="logo" src='/assets/web-images/tnblogo.png' alt="TNB Logo">
                 <p class="center-text">TNB ENERGY SERVICES SDN BHD (234667-M)<br>
                     Level 2, Jalan Air Hitam, Kawasan 16,<br>
                     40000 Shah Alam, Selangor</p>
             </div>
-            <div class="col border" style="margin-right: 10px;">
+            <div class="col border overall-margin" style="margin-right: 10px;">
+                @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
                 <img class="logo" src='/assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
                 <p class="center-text">AEROSYNERGY SOLUTIONS SDN BHD<br>
                     NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
+                @elseif($projectName === 'ARAS-JOHOR')
+                <img class="logo" src='/assets/web-images/araslogo.png' alt="ARAS Kejuruteraan Logo">
+                <p class="center-text">ARAS KEJURUTERAAN SDN BHD<br>
+                    1st Floor No 72, Jalan SS 21/1, Damansara Utama, 47400 Petaling Jaya, Selangor</p>
+                @else
+                <img class="logo" src='/assets/web-images/defaultlogo.png' alt="Default Logo">
+                <p class="center-text">Default Company Name<br>
+                    Default Address</p>
+                @endif
             </div>
         </div>
     </div>
 
-    <h1>PIW CHECKLIST</h1>
+    <h1>PIW CHECKLIST</h1> 
+    <div class="container-fluid" style="padding-top:40px;">
+        <p><strong>NAMA PE:&emsp;&emsp;</strong> {{$survey->nama_pe}}</p>
+       
+    </div>
+    
     
     <table>
         <tr>
@@ -216,3 +231,22 @@
     </div>
 </body>
 </html>
+
+
+<script>
+    window.onload = function () {
+        window.print();
+        // const element = document.getElementById('content');
+        // const opt = {
+        //     margin: 1,
+        //     filename: 'site_survey_toolboxtalk.pdf',
+        //     image: { type: 'jpeg', quality: 0.98 },
+        //     html2canvas: { scale: 2 },
+        //     jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        // };
+
+        // html2pdf().set(opt).from(element).save().then(function () {
+        //     console.log('PDF downloaded');
+        // });
+    };
+</script>

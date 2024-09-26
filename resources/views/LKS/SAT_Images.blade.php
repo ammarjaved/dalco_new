@@ -1,97 +1,222 @@
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+        <title>SAT Images_{{$survey->nama_pe}} </title>
+  </head>
+
 <style>
-.image-containers {
-            text-align: center;
-            margin-bottom: 50px; /* Adjust spacing between images */
-        }
+  .logo {
+      height: 100px;
+      width: 200px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      object-fit: contain;
+  }
 
- .gallery-images {
-            max-width: 90%;
-            max-height: 80vh;
-            margin: 0 auto;
-            display: block;
-        }
+  .center-text {
+      text-align: center;
+      align-self: center;
+      float: center;
+  }
 
-        .image-descriptions {
-            margin-top: 10px;
-            font-size: 16px;
-            color: #333;
-        }
+  .overall-margin {
+      margin-top: 10px;
+  }
 
-        .header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 50px;
-    align-items: center; /* Add this line to vertically center the logos */
+  .left-margin {
+      margin-left: 10px;
+  }
+
+  .right-margin {
+      margin-right: 10px;
+  }
+
+  .even-margin {
+      margin: 10px;
+  }
+
+  .right-element {
+      display: flex;
+      justify-content: flex-end;
+  }
+
+  .checkbox-margins {
+      margin-right: 5px;
+      margin-left: 5px;
+  }
+
+  .survey-images {
+      height: 300px;
+      width: 300px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      object-fit: contain;
+  }
+
+  .center {
+      text-align: center;
+  }
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    gap: 10px; /* Space between columns */
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
 }
 
-.logo {
-    width: 45%;
-    display: inline-block; /* Add this line to make the logos display inline */
-    vertical-align: middle; /* Add this line to vertically center the logos */
+.column {
+    border: 1px solid black; /* Borders for each column */
+    padding: 10px;
 }
 
-.logo img {
-    max-width: 80%; /* Reduce the image size to 80% of the parent container */
-    height: auto;
+h3 {
     margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
 }
-    .header .logo p {
-        margin: 0;
-        font-size: 14px;
-        line-height: 1.4;
-    }
 
+.image-container {
+    border: 1px solid black; /* Border around each image */
+    padding: 5px;
+    margin-bottom: 10px;
+    height: 250px; /* Fix height for images to maintain uniform grid */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure that image covers the container without distorting */
+}
+
+@media screen and (max-width: 768px) {
+    .image-grid {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    }
+}
 
 
 </style>
 
 
-<div class="header">
-    <div class="logo">
-        <img src='/assets/web-images/tnblogo.png' alt="TNB Logo">
-        <p>TNB ENERGY SERVICES SDN BHD (234667-M)<br>
-            Level 2, Jalan Air Hitam, Kawasan 16,<br>
-            40000 Shah Alam, Selangor</p>
-    </div>
-    <div class="logo">
-        @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
-            <img src='/assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
-            <p>AEROSYNERGY SOLUTIONS SDN BHD<br>
-            NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
-        @elseif($projectName === 'ARAS-JOHOR')
-            <img src='/assets/web-images/araslogo.png' alt="ARAS Kejuruteraan Logo">
-            <p>ARAS KEJURUTERAAN SDN BHD<br>
-            1st Floor No 72, Jalan SS 21/1, Damansara Utama, 47400 Petaling Jaya, Selangor</p>
-        @else
-            <img src='/assets/web-images/defaultlogo.png' alt="Default Logo">
-            <p>Default Company Name<br>
-            Default Address</p>
-        @endif
-    </div>
-</div>
 
+<div style="break-after:page">
 
-
-
-<div class="pictures-grids">
-    <h2>SAT Images</h2>
-    <h3 class="survey-titles">Nama Pe: {{ $survey->nama_pe }}</h3> <!-- You can replace this variable accordingly -->
-    
-    <div class="gallery-container">
-        @foreach($SATImages as $SATData)
-            <div class="image-containers">
-                <!-- Image Thumbnail -->
-                <img class="gallery-images" src='/{{ $SATData->image_url }}' alt="{{ $SATData->image_name }}">
-
-                <!-- Image Information -->
-                <div class="image-info">
-                    <h3>Image Name: {{ $SATData->image_name }}</h3>
-                    <h4 class="image-descriptions">Image Type: {{ $SATData->image_type }}</h4>
-                </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col border overall-margin" style="margin-left: 10px;">
+                <img class="logo" src='/assets/web-images/tnblogo.png' alt="TNB Logo">
+                <p class="center-text">TNB ENERGY SERVICES SDN BHD (234667-M)<br>
+                    Level 2, Jalan Air Hitam, Kawasan 16,<br>
+                    40000 Shah Alam, Selangor</p>
             </div>
-        @endforeach
-        
+            <div class="col border overall-margin" style="margin-right: 10px;">
+                @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
+                <img class="logo" src='/assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
+                <p class="center-text">AEROSYNERGY SOLUTIONS SDN BHD<br>
+                    NO. 12B, 2, Jalan PJS 8/12a 46150 Petaling Jaya Selangor</p>
+                @elseif($projectName === 'ARAS-JOHOR')
+                <img class="logo" src='/assets/web-images/araslogo.png' alt="ARAS Kejuruteraan Logo">
+                <p class="center-text">ARAS KEJURUTERAAN SDN BHD<br>
+                    1st Floor No 72, Jalan SS 21/1, Damansara Utama, 47400 Petaling Jaya, Selangor</p>
+                @else
+                <img class="logo" src='/assets/web-images/defaultlogo.png' alt="Default Logo">
+                <p class="center-text">Default Company Name<br>
+                    Default Address</p>
+                @endif
+            </div>
+        </div>
     </div>
+
+    <div class="container-fluid">
+        <p><strong>SUBSTATION NAME:&emsp;&emsp;&emsp;&emsp;&emsp;</strong> {{$survey->nama_pe}}</p>
+        <p><strong>NO FUNCTIONAL LOCATION:&emsp;</strong> JJBUPJCOEH00621</p>
+    </div>
+  
+    <h4 class="title center-text"><u>PICTURES OF SAT</u></h4>
+
+
+
+
+    <div class="image-grid">
+        <!-- Sebelum Column -->
+        <div class="column">
+            <h3><u>SEBELUM</u></h3>
+            @if(isset($SATImages) && $SATImages->isNotEmpty())
+                @foreach($SATImages as $image)
+                    @if(strtolower($image->image_type) === 'before')
+                        <div class="image-container">
+                            <!-- Display the image -->
+                            <img src="{{ asset($image->image_url) }}" alt="{{ $image->image_name }}">
+                        </div>
+                    @endif
+                @endforeach
+            @else
+                <p>No images available for Sebelum.</p>
+            @endif
+        </div>
+    
+        <!-- Semasa Column -->
+        <div class="column">
+            <h3><u>SEMASA</u></h3>
+            @if(isset($SATImages) && $SATImages->isNotEmpty())
+                @foreach($SATImages as $image)
+                    @if(strtolower($image->image_type) === 'during')
+                        <div class="image-container">
+                            <!-- Display the image -->
+                            <img src="{{ asset($image->image_url) }}" alt="{{ $image->image_name }}">
+                        </div>
+                    @endif
+                @endforeach
+            @else
+                <p>No images available for Semasa.</p>
+            @endif
+        </div>
+    
+        <!-- Selepas Column -->
+        <div class="column">
+            <h3><u>SELEPAS</u></h3>
+            @if(isset($SATImages) && $SATImages->isNotEmpty())
+                @foreach($SATImages as $image)
+                    @if(strtolower($image->image_type) === 'after')
+                        <div class="image-container">
+                            <!-- Display the image -->
+                            <img src="{{ asset($image->image_url) }}" alt="{{ $image->image_name }}">
+                        </div>
+                    @endif
+                @endforeach
+            @else
+                <p>No images available for Selepas.</p>
+            @endif
+        </div>
+    </div>
+    
+    
+
+
 </div>
 
+
+<script>
+    window.onload = function () {
+        window.print();
+        // const element = document.getElementById('content');
+        // const opt = {
+        //     margin: 1,
+        //     filename: 'site_survey_toolboxtalk.pdf',
+        //     image: { type: 'jpeg', quality: 0.98 },
+        //     html2canvas: { scale: 2 },
+        //     jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        // };
+
+        // html2pdf().set(opt).from(element).save().then(function () {
+        //     console.log('PDF downloaded');
+        // });
+    };
+</script>
 

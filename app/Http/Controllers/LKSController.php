@@ -37,9 +37,15 @@ class LKSController extends Controller{
       $usr_info = \Auth::user();
       $projectName = $usr_info->project;
     $survey = SiteSurvey::findOrFail($id);
-    $toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->get()[0];
+    $toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->first();
     //  return $toolboxtalk;
    // $appUrl = config('app.url');
+   
+   if (!$toolboxtalk) {
+    // Redirect back if PreCabling data is not found or is empty
+    return redirect()->route('LKS.index', ['id' => $id])
+                     ->with('error', ' siteSurvey ToolboxTalk is missing.');
+}
 
    return  view('LKS.site_survey_tbk', compact('toolboxtalk','survey','projectName'));
 
@@ -102,6 +108,13 @@ exec($command, 'site_survey_tbk.pdf', $return_var);
      //return $projectName;
         $survey = SiteSurvey::findOrFail($id);
 
+        if (!$survey) {
+          // Redirect back if PreCabling data is not found or is empty
+          return redirect()->route('LKS.index', ['id' => $id])
+                           ->with('error', ' siteSurvey  is missing.');
+      }
+      
+
       //$toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->get()[0];
     //  return $toolboxtalk;
     return view('LKS.Site_Survey_Info', compact('survey','projectName'));
@@ -156,6 +169,14 @@ exec($command, 'site_survey_tbk.pdf', $return_var);
       $projectName = $usr_info->project;
         $survey = SiteSurvey::findOrFail($id);
         $pictureData = SitePicture::where('site_survey_id', $survey->id)->first();
+
+        if (!$pictureData) {
+          // Redirect back if PreCabling data is not found or is empty
+          return redirect()->route('LKS.index', ['id' => $id])
+                           ->with('error', ' siteSurvey Pics are missing.');
+      }
+
+        
 
       //$toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->get()[0];
     //  return $toolboxtalk;
@@ -222,8 +243,14 @@ if (file_exists($pdfFilePath)) {
       $survey = SiteSurvey::findOrFail($id);
 
       
+      $PreCablks = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja', '=', 'CABLING')->first();
 
-        $PreCablks = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','CABLING')->get()[0];
+      if (!$PreCablks) {
+          // Redirect back if PreCabling data is not found or is empty
+          session()->flash('error', 'Pre cable ToolboxTalk data is missing.');
+          return redirect()->route('LKS.index', ['id' => $id]);
+                           
+      }
 
         return view ('LKS.PreCabling_ToolboxTalk', compact('PreCablks','survey','projectName'));
 
@@ -291,7 +318,14 @@ public function ShutdownToolboxTalk($id)
 
   
 
-  $ImageShutdownlks = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','OUTAGE')->get()[0];
+  $ImageShutdownlks = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','OUTAGE')->first();
+
+  if (!$ImageShutdownlks) {
+    // Redirect back if PreCabling data is not found or is empty
+    return redirect()->route('LKS.index', ['id' => $id])
+                     ->with('error', ' Shutdown ToolboxTalk data is missing.');
+}
+
 
     return view('LKS.Shutdown_ToolboxTalk', compact('ImageShutdownlks','survey','projectName'));
 
@@ -357,7 +391,15 @@ public function SATToolboxTalk($id)
 
   
 
-  $SATlks = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SAT')->get()[0];
+  $SATlks = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SAT')->first();
+
+  if (!$SATlks) {
+    // Redirect back if PreCabling data is not found or is empty
+    return redirect()->route('LKS.index', ['id' => $id])
+                     ->with('error', ' SAT ToolboxTalk data is missing.');
+}
+
+
 
    return view('LKS.SAT_ToolboxTalk', compact('SATlks','survey','projectName'));
 
@@ -514,7 +556,15 @@ public function Precable_Piw($id)
   $projectName = $usr_info->project;
   $survey = SiteSurvey::findOrFail($id);
  
-  $Piw = PreCabling::where('site_survey_id', $survey->id)->get()[0];
+  $Piw = PreCabling::where('site_survey_id', $survey->id)->first();
+
+
+  if (!$Piw) {
+    // Redirect back if PreCabling data is not found or is empty
+    return redirect()->route('LKS.index', ['id' => $id])
+                     ->with('error', 'PreCabling data is missing.');
+}
+
 
   return  view('LKS.PreCabling_PIW', compact('survey','Piw','projectName'));
 
@@ -574,6 +624,13 @@ public function Precable_Piw($id)
       $projectName = $usr_info->project;
       $survey = SiteSurvey::findOrFail($id);
       $PreShutdown= PreCablingShutDown::where('site_survey_id', $survey->id)->first();
+
+      if (!$PreShutdown) {
+        // Redirect back if PreCabling data is not found or is empty
+        return redirect()->route('LKS.index', ['id' => $id])
+                         ->with('error', 'PreCabling data is missing.');
+    }
+    
      
     
       return view('LKS.PreCabling_PreShutdown', compact('survey','PreShutdown','projectName'));
@@ -628,182 +685,182 @@ public function Precable_Piw($id)
     
 
 
-public function Precable_Images($id)
-{
-  $usr_info = \Auth::user();
-  $projectName = $usr_info->project;
-  $survey = SiteSurvey::findOrFail($id);
-  $PreCablmages=PreCablingImages::where('site_survey_id', $survey->id)->get();
+        public function Precable_Images($id)
+        {
+          $usr_info = \Auth::user();
+          $projectName = $usr_info->project;
+          $survey = SiteSurvey::findOrFail($id);
+          $PreCablmages=PreCablingImages::where('site_survey_id', $survey->id)->get();
+         
+         
+          if (!$PreCablmages) {
+            // Redirect back if PreCabling data is not found or is empty
+            return redirect()->route('LKS.index', ['id' => $id])
+                             ->with('error', 'PreCabling data is missing.');
+        }
+         
+         
+        
+        //    if ($PreCablmages->isEmpty()) {
+        //     return redirect()->back()->withErrors(['message' => 'No images found for this survey.']);
+        // } 
+        
+          return view('LKS.PreCabling_Images', compact('survey','PreCablmages','projectName'));
+        
+          $html =  view('LKS.PreCabling_Images', compact('survey','PreCablmages','projectName'))->render();
+        
+          $html = preg_replace_callback(
+            '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
+            function ($matches) {
+                $path = public_path(ltrim($matches[2], '/'));
+                return str_replace($matches[2], $path, $matches[0]);
+            },
+            $html
+        );
+        
+        $directory = 'assets/debug_html';
+        
+        $filename = 'PreCabling_Images' . $id . '.html';
+        
+        $htmlFilePath=$directory . '/' . $filename;
+        
+        if (!file_exists($directory)) {
+          mkdir($directory, 0755, true);
+        }
+        file_put_contents($htmlFilePath, $html);
+        
+        $pdfFilePath='assets/debug_html'.'/'.'PreCabling_Images_' . $id . '.pdf';
+        
+        $wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
+        // $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+        $command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+        
+        // Execute the command
+        $output = shell_exec($command);
+        
+        // Check if the PDF was generated
+        if (file_exists($pdfFilePath)) {
+          // Return the PDF file for download
+          return response()->download($pdfFilePath, 'PreCabling_Images.pdf')->deleteFileAfterSend(true);
+          } else {
+              // If PDF generation failed, return the error output
+              return response()->json([
+                  'error' => 'PDF generation failed',
+                  'output' => $output
+              ], 500);
+          }
+        
+          }
 
-  if ($PreCablmages->isEmpty()) {
-    return redirect()->back()->withErrors(['message' => 'No images found for this survey.']);
-}
-
-  $html =  view('LKS.PreCabling_Images', compact('survey','PreCablmages','projectName'))->render();
-
-  $html = preg_replace_callback(
-    '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
-    function ($matches) {
-        $path = public_path(ltrim($matches[2], '/'));
-        return str_replace($matches[2], $path, $matches[0]);
-    },
-    $html
-);
-
-  $directory = 'assets/debug_html';
-
-  $filename = 'PreCabling_Images_' . $id . '.html';
-
-  $htmlFilePath=$directory . '/' . $filename;
-
-  if (!file_exists($directory)) {
-    mkdir($directory, 0755, true);
-}
-file_put_contents($htmlFilePath, $html);
-
-
-
-
-$pdfFilePath='assets/debug_html'.'/'.'PreCabling_Images_' . $id . '.pdf';
-
-$wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
-// $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
-$command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
-
-// Execute the command
-$output = shell_exec($command);
-
-// Check if the PDF was generated
-if (file_exists($pdfFilePath)) {
-    // Return the PDF file for download
-    return response()->download($pdfFilePath, 'PreCabling_Images.pdf')->deleteFileAfterSend(true);
-    } else {
-        // If PDF generation failed, return the error output
-        return response()->json([
-            'error' => 'PDF generation failed',
-            'output' => $output
-        ], 500);
-
-}
-
-}
-
-
-public function Shutdown_Images($id)
-{
-  $usr_info = \Auth::user();
-  $projectName = $usr_info->project;
-  $survey = SiteSurvey::findOrFail($id);
-  $ImageShutImages=ImageShutdown::where('site_survey_id', $survey->id)->get();
-
-  $html =  view('LKS.Shutdown_Images', compact('survey','ImageShutImages','projectName'))->render();
-
-  $html = preg_replace_callback(
-    '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
-    function ($matches) {
-        $path = public_path(ltrim($matches[2], '/'));
-        return str_replace($matches[2], $path, $matches[0]);
-    },
-    $html
-);
-
-  $directory = 'assets/debug_html';
-
-  $filename = 'Shutdown_Images_' . $id . '.html';
-
-  $htmlFilePath=$directory . '/' . $filename;
-
-  if (!file_exists($directory)) {
-    mkdir($directory, 0755, true);
-}
-file_put_contents($htmlFilePath, $html);
-
-
-
-
-$pdfFilePath='assets/debug_html'.'/'.'Shutdown_Images_' . $id . '.pdf';
-
-$wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
-// $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
-$command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
-
-// Execute the command
-$output = shell_exec($command);
-
-// Check if the PDF was generated
-if (file_exists($pdfFilePath)) {
-    // Return the PDF file for download
-    return response()->download($pdfFilePath, 'Shutdown_Images.pdf')->deleteFileAfterSend(true);
-    } else {
-        // If PDF generation failed, return the error output
-        return response()->json([
-            'error' => 'PDF generation failed',
-            'output' => $output
-        ], 500);
-
-}
-
-}
-
-
-
-
-public function SAT_Images($id)
-{
-  $usr_info = \Auth::user();
-  $projectName = $usr_info->project;
-  $survey = SiteSurvey::findOrFail($id);
-  $SATImages=SAT::where('site_survey_id', $survey->id)->get();
-
-  $html =  view('LKS.SAT_Images', compact('survey','SATImages','projectName'))->render();
-
-  $html = preg_replace_callback(
-    '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
-    function ($matches) {
-        $path = public_path(ltrim($matches[2], '/'));
-        return str_replace($matches[2], $path, $matches[0]);
-    },
-    $html
-);
-
-  $directory = 'assets/debug_html';
-
-  $filename = 'SAT_Images_' . $id . '.html';
-
-  $htmlFilePath=$directory . '/' . $filename;
-
-  if (!file_exists($directory)) {
-    mkdir($directory, 0755, true);
-}
-file_put_contents($htmlFilePath, $html);
+          public function Shutdown_Images($id)
+          {
+            $usr_info = \Auth::user();
+            $projectName = $usr_info->project;
+            $survey = SiteSurvey::findOrFail($id);
+            $ImageShutImages=ImageShutdown::where('site_survey_id', $survey->id)->get();
+          
+            return view ('LKS.Shutdown_Images', compact('survey','ImageShutImages','projectName'));
+          
+            $html =  view('LKS.Shutdown_Images', compact('survey','ImageShutImages','projectName'))->render();
+          
+            $html = preg_replace_callback(
+              '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
+              function ($matches) {
+                  $path = public_path(ltrim($matches[2], '/'));
+                  return str_replace($matches[2], $path, $matches[0]);
+              },
+              $html
+          );
+          
+          $directory = 'assets/debug_html';
+          
+          $filename = 'Shutdown_Images' . $id . '.html';
+          
+          $htmlFilePath=$directory . '/' . $filename;
+          
+          if (!file_exists($directory)) {
+            mkdir($directory, 0755, true);
+          }
+          file_put_contents($htmlFilePath, $html);
+          
+          $pdfFilePath='assets/debug_html'.'/'.'Shutdown_Images_' . $id . '.pdf';
+          
+          $wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
+          // $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+          $command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+          
+          // Execute the command
+          $output = shell_exec($command);
+          
+          // Check if the PDF was generated
+          if (file_exists($pdfFilePath)) {
+            // Return the PDF file for download
+            return response()->download($pdfFilePath, 'Shutdown_Images.pdf')->deleteFileAfterSend(true);
+            } else {
+                // If PDF generation failed, return the error output
+                return response()->json([
+                    'error' => 'PDF generation failed',
+                    'output' => $output
+                ], 500);
+            }
+          
+            }
 
 
 
-
-$pdfFilePath='assets/debug_html'.'/'.'SAT_Images_' . $id . '.pdf';
-
-$wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
-// $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
-$command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
-
-// Execute the command
-$output = shell_exec($command);
-
-// Check if the PDF was generated
-if (file_exists($pdfFilePath)) {
-    // Return the PDF file for download
-    return response()->download($pdfFilePath, 'SAT_Images.pdf')->deleteFileAfterSend(true);
-    } else {
-        // If PDF generation failed, return the error output
-        return response()->json([
-            'error' => 'PDF generation failed',
-            'output' => $output
-        ], 500);
-
-}
-
-}
-
+            public function SAT_Images($id)
+            {
+              $usr_info = \Auth::user();
+              $projectName = $usr_info->project;
+              $survey = SiteSurvey::findOrFail($id);
+              $SATImages=SAT::where('site_survey_id', $survey->id)->get();
+            
+              return view('LKS.SAT_Images', compact('survey','SATImages','projectName'));
+            
+              $html =  view('LKS.SAT_Images', compact('survey','SATImages','projectName'))->render();
+            
+              $html = preg_replace_callback(
+                '/<img[^>]+src=([\'"])?(?!http|https|ftp|data:)([^"\']+)([\'"])/',
+                function ($matches) {
+                    $path = public_path(ltrim($matches[2], '/'));
+                    return str_replace($matches[2], $path, $matches[0]);
+                },
+                $html
+            );
+            
+            $directory = 'assets/debug_html';
+            
+            $filename = 'SAT_Images' . $id . '.html';
+            
+            $htmlFilePath=$directory . '/' . $filename;
+            
+            if (!file_exists($directory)) {
+              mkdir($directory, 0755, true);
+            }
+            file_put_contents($htmlFilePath, $html);
+            
+            $pdfFilePath='assets/debug_html'.'/'.'SAT_Images_' . $id . '.pdf';
+            
+            $wkhtmltopdfPath = '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'; // Adjust this path as needed
+            // $command = "{$wkhtmltopdfPath} --lowquality \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+            $command = "{$wkhtmltopdfPath} --enable-local-file-access --javascript-delay 1000 --no-stop-slow-scripts --debug-javascript \"{$htmlFilePath}\" \"{$pdfFilePath}\"";
+            
+            // Execute the command
+            $output = shell_exec($command);
+            
+            // Check if the PDF was generated
+            if (file_exists($pdfFilePath)) {
+              // Return the PDF file for download
+              return response()->download($pdfFilePath, 'SAT_Images.pdf')->deleteFileAfterSend(true);
+              } else {
+                  // If PDF generation failed, return the error output
+                  return response()->json([
+                      'error' => 'PDF generation failed',
+                      'output' => $output
+                  ], 500);
+              }
+            
+              }
 
 
 
