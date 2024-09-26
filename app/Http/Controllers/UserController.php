@@ -66,19 +66,19 @@ class UserController extends Controller
             'project' => 'required',
             'vendor' => 'required',
         ]);
-
+    
         $data = $request->all();
         if ($request->filled('password')) {
             $data['password'] = bcrypt($data['password']);
         } else {
             unset($data['password']);
         }
-
+    
         $user->update($data);
-
+    
         return redirect()->route('users.index')->with('success', 'User updated successfully');
     }
-
+    
     // Remove the specified user from storage
     public function destroy(User $user)
     {

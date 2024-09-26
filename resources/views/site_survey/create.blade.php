@@ -438,81 +438,26 @@
 
             <div class="col-md-4">
                 <div class="form-group">
-                    <!-- Bekalan LV Label -->
-                    <md-label style="display: block; margin-bottom: 5px;">Bekalan LV:</md-label>
-            
-                    <!-- Tabs for Bekalan LV -->
-                    <md-tabs id="tab-bekalan_lv" class="toggle-btn">
-                        <!-- Yes Tab -->
-                        <md-secondary-tab 
-                            value="yes" 
-                            id="val-tab-bekalan_lv-yes" 
-                            onclick="updateFieldValue('bekalan_lv', 'yes')"
-                            {{ ($siteSurvey->bekalan_lv ?? old('bekalan_lv', 'no')) === 'yes' ? 'active' : '' }}
-                        >
-                            Yes
-                            <input type="radio" id="yes-bekalan_lv" name="bekalan_lv" value="yes" style="display:none;" 
-                            {{ ($siteSurvey->bekalan_lv ?? old('bekalan_lv', 'no')) === 'yes' ? 'checked' : '' }}>
-                        </md-secondary-tab>
-            
-                        <!-- No Tab -->
-                        <md-secondary-tab 
-                            value="no" 
-                            id="val-tab-bekalan_lv-no" 
-                            onclick="updateFieldValue('bekalan_lv', 'no')"
-                            {{ ($siteSurvey->bekalan_lv ?? old('bekalan_lv', 'no')) === 'no' ? 'active' : '' }}
-                        >
-                            No
-                            <input type="radio" id="no-bekalan_lv" name="bekalan_lv" value="no" style="display:none;" 
-                            {{ ($siteSurvey->bekalan_lv ?? old('bekalan_lv', 'no')) === 'no' ? 'checked' : '' }}>
-                        </md-secondary-tab>
-                    </md-tabs>
+                    {{-- <label for="genset">Genset</label> --}}
+                    <md-outlined-text-field class="label" type="text" label="Genset"  id="genset" name="genset" value="{{ $siteSurvey->genset ?? old('genset') }}">
                 </div>
-            </div>
-            
+                </div>
 
 
 
-        <div class="col-md-4">
-            <div class="form-group">
-                <!-- SCADA Status Label -->
-                <md-label style="display: block; margin-bottom: 5px;">SCADA Status:</md-label>
-        
-                <!-- Tabs for SCADA Status -->
-                <md-tabs id="tab-scada_status" class="toggle-btn">
-                    <!-- Yes Tab -->
-                    <md-secondary-tab 
-                        value="yes" 
-                        id="val-tab-scada_status-yes" 
-                        onclick="updateFieldValue('scada_status', 'yes')"
-                        {{ ($siteSurvey->scada_status ?? old('scada_status', 'no')) === 'yes' ? 'active' : '' }}
-                    >
-                        Yes
-                        <input type="radio" id="yes-scada_status" name="scada_status" value="yes" style="display:none;" 
-                        {{ ($siteSurvey->scada_status ?? old('scada_status', 'no')) === 'yes' ? 'checked' : '' }}>
-                    </md-secondary-tab>
-        
-                    <!-- No Tab -->
-                    <md-secondary-tab 
-                        value="no" 
-                        id="val-tab-scada_status-no" 
-                        onclick="updateFieldValue('scada_status', 'no')"
-                        {{ ($siteSurvey->scada_status ?? old('scada_status', 'no')) === 'no' ? 'active' : '' }}
-                    >
-                        No
-                        <input type="radio" id="no-scada_status" name="scada_status" value="no" style="display:none;" 
-                        {{ ($siteSurvey->scada_status ?? old('scada_status', 'no')) === 'no' ? 'checked' : '' }}>
-                    </md-secondary-tab>
-                </md-tabs>
-            </div>
-        </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        {{-- <label for="keperluan_khas_kerja">Keperluan Khas Kerja</label> --}}
+                        <md-outlined-text-field class="label" type="text" label="Keperluan Khas Kerja"  id="keperluan_khas_kerja" name="keperluan_khas_kerja" value="{{ $siteSurvey->keperluan_khas_kerja ?? old('keperluan_khas_kerja') }}">
+                    </div>
+                    </div>
         
 
 
         <div class="col-md-4">
             <div class="form-group">
                 <!-- Jenis LVDB Label -->
-                <md-label style="display: block; margin-top:-20px">Jenis LVDB:</md-label>
+                <md-label style="display: block; ">Jenis LVDB:</md-label>
         
                 <!-- Tabs for Jenis LVDB -->
                 <md-tabs id="tab-jenis-lvdb" class="toggle-btn">
@@ -544,18 +489,49 @@
         </div>
         
 
-        
         <div class="col-md-4">
             <div class="form-group">
-                {{-- <label for="genset">Genset</label> --}}
-                <md-outlined-text-field class="label" type="text" label="Genset"  id="genset" name="genset" value="{{ $siteSurvey->genset ?? old('genset') }}">
+                <!-- Bekalan LV Label -->
+                <md-label style="display: block; ">Bekalan LV:</md-label>
+        
+                <!-- Tabs for Bekalan LV -->
+                <md-tabs id="tab-bekalan_lv" class="toggle-btn">
+                    <!-- Yes Tab -->
+                    <md-secondary-tab 
+                        value="yes" 
+                        id="val-tab-bekalan_lv-yes" 
+                        onclick="updateFieldValue('bekalan_lv', 'yes')"
+                        {{ ($siteSurvey->bekalan_lv ?? old('bekalan_lv', 'no')) === 'yes' ? 'active' : '' }}
+                    >
+                        Yes
+                        <input type="radio" id="yes-bekalan_lv" name="bekalan_lv" value="yes" style="display:none;" 
+                        {{ ($siteSurvey->bekalan_lv ?? old('bekalan_lv', 'no')) === 'yes' ? 'checked' : '' }}>
+                    </md-secondary-tab>
+        
+                    <!-- No Tab -->
+                    <md-secondary-tab 
+                        value="no" 
+                        id="val-tab-bekalan_lv-no" 
+                        onclick="updateFieldValue('bekalan_lv', 'no')"
+                        {{ ($siteSurvey->bekalan_lv ?? old('bekalan_lv', 'no')) === 'no' ? 'active' : '' }}
+                    >
+                        No
+                        <input type="radio" id="no-bekalan_lv" name="bekalan_lv" value="no" style="display:none;" 
+                        {{ ($siteSurvey->bekalan_lv ?? old('bekalan_lv', 'no')) === 'no' ? 'checked' : '' }}>
+                    </md-secondary-tab>
+                </md-tabs>
             </div>
-            </div>
+        </div>
+        
+
+
+        
+      
 
             <div class="col-md-4">
                 <div class="form-group">
                     <!-- Jenis LVDB Label -->
-                    <md-label style="display: block; margin-top:-20px">Jenis Fius</md-label>
+                    <md-label style="display: block; ">Jenis Fius</md-label>
             
                     <!-- Tabs for Jenis LVDB -->
                     <md-tabs id="tab-jenis-fius" class="toggle-btn">
@@ -587,14 +563,44 @@
             </div>
     
 
+            <div class="col-md-4">
+                <div class="form-group">
+                    <!-- SCADA Status Label -->
+                    <md-label style="display: block; ">SCADA Status:</md-label>
+            
+                    <!-- Tabs for SCADA Status -->
+                    <md-tabs id="tab-scada_status" class="toggle-btn">
+                        <!-- Yes Tab -->
+                        <md-secondary-tab 
+                            value="yes" 
+                            id="val-tab-scada_status-yes" 
+                            onclick="updateFieldValue('scada_status', 'yes')"
+                            {{ ($siteSurvey->scada_status ?? old('scada_status', 'no')) === 'yes' ? 'active' : '' }}
+                        >
+                            Yes
+                            <input type="radio" id="yes-scada_status" name="scada_status" value="yes" style="display:none;" 
+                            {{ ($siteSurvey->scada_status ?? old('scada_status', 'no')) === 'yes' ? 'checked' : '' }}>
+                        </md-secondary-tab>
+            
+                        <!-- No Tab -->
+                        <md-secondary-tab 
+                            value="no" 
+                            id="val-tab-scada_status-no" 
+                            onclick="updateFieldValue('scada_status', 'no')"
+                            {{ ($siteSurvey->scada_status ?? old('scada_status', 'no')) === 'no' ? 'active' : '' }}
+                        >
+                            No
+                            <input type="radio" id="no-scada_status" name="scada_status" value="no" style="display:none;" 
+                            {{ ($siteSurvey->scada_status ?? old('scada_status', 'no')) === 'no' ? 'checked' : '' }}>
+                        </md-secondary-tab>
+                    </md-tabs>
+                </div>
+            </div>
+    
+    
+    
 
-
-        <div class="col-md-4">
-        <div class="form-group">
-            {{-- <label for="keperluan_khas_kerja">Keperluan Khas Kerja</label> --}}
-            <md-outlined-text-field class="label" type="text" label="Keperluan Khas Kerja"  id="keperluan_khas_kerja" name="keperluan_khas_kerja" value="{{ $siteSurvey->keperluan_khas_kerja ?? old('keperluan_khas_kerja') }}">
-        </div>
-        </div>
+     
         </div>
 
          <div class="row">
