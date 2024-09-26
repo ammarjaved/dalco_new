@@ -1197,7 +1197,7 @@ function updateButtons() {
             <md-select-option value="SSU">SSU</md-select-option>
             <md-select-option value="SS">SS</md-select-option>
             <md-select-option value="PE">PE</md-select-option>
-            <md-select-option value="Other">Other</md-select-option>
+            <md-select-option value="OTHER">Other</md-select-option>
         `;
         $("#konfigurasi").prop('disabled', false);
     } else if (selectedValue === 'CSU') {
@@ -1223,7 +1223,7 @@ function updateButtons() {
 }
 
 function showOtherField(selectedKonfigurasi) {
-    if (selectedKonfigurasi === 'Other') {
+    if (selectedKonfigurasi === 'OTHER') {
         document.getElementById('konfigurasi_other_field').style.display = 'block';
     } else {
         document.getElementById('konfigurasi_other_field').style.display = 'none';

@@ -1084,7 +1084,7 @@ function konfiDisable(selectedValue) {
             <md-select-option value="SSU">SSU</md-select-option>
             <md-select-option value="SS">SS</md-select-option>
             <md-select-option value="PE">PE</md-select-option>
-            <md-select-option value="Other">Other</md-select-option>
+            <md-select-option value="OTHER">Other</md-select-option>
         `;
         $("#konfigurasi").prop('disabled', false);
     } else if (selectedValue === 'CSU') {
@@ -1113,7 +1113,7 @@ function konfiDisable(selectedValue) {
 
 // Function to handle 'Other' selection and display the input field
 function showOtherField(selectedKonfigurasi) {
-    if (selectedKonfigurasi === 'Other') {
+    if (selectedKonfigurasi === 'OTHER') {
         document.getElementById('konfigurasi_other_field').style.display = 'block';
     } else {
         document.getElementById('konfigurasi_other_field').style.display = 'none';
@@ -1136,7 +1136,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // If 'Other' was previously selected and has a value, show the 'Other' input box with pre-filled value
-    if (currentJenisPerkakasuis === 'VCB' && currentKonfigurasi === 'Other' && otherKonfigurasiValue !== '') {
+    if (currentJenisPerkakasuis === 'VCB' && currentKonfigurasi === 'OTHER' && otherKonfigurasiValue !== '') {
         document.getElementById('konfigurasi_other_field').style.display = 'block';
         document.getElementById('konfigurasi_other').value = otherKonfigurasiValue;
     }
