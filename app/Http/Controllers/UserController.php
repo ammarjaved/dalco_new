@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+
+
 
 class UserController extends Controller
 {
@@ -11,7 +14,13 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+        $usr=\Auth::user();
+        if(!$usr->type){
         return view('admin.users.index', compact('users'));
+        }else{
+           return  Redirect::route('delco-summary');
+  
+        }
     }
 
     // Show the form for creating a new user
@@ -57,19 +66,19 @@ class UserController extends Controller
             'project' => 'required',
             'vendor' => 'required',
         ]);
-
+    
         $data = $request->all();
         if ($request->filled('password')) {
             $data['password'] = bcrypt($data['password']);
         } else {
             unset($data['password']);
         }
-
+    
         $user->update($data);
-
+    
         return redirect()->route('users.index')->with('success', 'User updated successfully');
     }
-
+    
     // Remove the specified user from storage
     public function destroy(User $user)
     {

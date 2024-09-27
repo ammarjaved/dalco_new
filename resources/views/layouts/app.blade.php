@@ -30,7 +30,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed" >
-    <div class="wrapper">
+    <div class="wrapper" style="margin: 10px">
       
         <div class="content-wrapper" style="margin-left:5px;!important">
 

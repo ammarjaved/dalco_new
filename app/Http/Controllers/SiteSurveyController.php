@@ -38,6 +38,7 @@ class SiteSurveyController extends Controller
                     DB::raw('ST_X(geom) as x'),
                     DB::raw('ST_Y(geom) as y')
                 )
+                ->orderBy('created_at', 'desc') 
                 ->where('project', $usr_info->project)
                 ->get();
     

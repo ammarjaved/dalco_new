@@ -174,6 +174,7 @@
                 <td colspan="3">JAYA KEJURUTERAAN SDN BHD</td>
             </tr>
         </table> --}}
+        <div class="container-fluid">
         <table>
             <tr>
                 <th>Bil.</th>
@@ -196,6 +197,7 @@
                 </tr>
             @endforeach
         </table>
+        </div>
         
         
         {{-- <div class="footer">
