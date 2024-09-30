@@ -3,6 +3,8 @@
 
 
 <style>
+
+    
     .thead-purple {
   background-color: #8e44ad; /* Purple background */
   color: white; /* White text for better contrast */
@@ -50,6 +52,56 @@
     text-overflow: ellipsis;
     padding: 0 10px;
 }
+
+
+.form-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: stretch;
+        }
+        .form-field {
+            flex: 1 1 300px;
+            display: flex;
+            flex-direction: column;
+        }
+        .file-upload-wrapper {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .file-upload-input {
+            width: 100%;
+            height: 100%;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+        }
+        .file-upload-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            color: #6c757d;
+        }
+        md-outlined-text-field,
+        md-outlined-select,
+        .file-upload-wrapper {
+            height: 56px; /* Adjust this value to match your material design components */
+        }
+        md-label {
+            margin-bottom: 8px;
+        }
+        @media (max-width: 768px) {
+            .form-field {
+                flex-basis: 100%;
+            }
+        }
 
 
 </style>
@@ -104,33 +156,29 @@
                             @csrf
                             <input type="hidden" name="site_survey_id" value="{{ $survey->id }}">
                             
-                            <div class="form-group row">
+                            <div class="form-group">
                                 <!-- Image Name -->
-                                <div class="col-md-4">
-                                    {{-- <label for="image_name">Image Name</label> --}}
-                                    <md-outlined-text-field label="Image Name" class="label" type="text" class="form-control" id="image_name" name="image_name" required>
+                                <div class="form-field">
+                                    <md-outlined-text-field label="Image Name" class="label" type="text" id="image_name" name="image_name" required></md-outlined-text-field>
                                 </div>
-
+                        
                                 <!-- Upload Image -->
-                                <div class="col-md-4 mb-3" style="margin-top: -16px">
-                                    <md-label for="image_url" class="form-label">Upload Image</md-label>
+                                <div class="col-md-4 col-12 mb-3" style="margin-top: -16px">
+                                    <md-label for="image_url">Upload Image</md-label>
                                     <div class="file-upload-wrapper">
-                                        <input type="file" class="file-upload-input form-control" id="image_url" name="image_url" accept="image/*" required>
+                                        <input type="file" class="file-upload-input" id="image_url" name="image_url" accept="image/*" required>
                                         <span class="file-upload-text">Choose an image or drag it here</span>
                                     </div>
                                 </div>
-                                
-
+                        
                                 <!-- Image Type -->
-                                <div class="col-md-4">
+                                <div class="form-field">
                                     <md-outlined-select label="Image Type" class="label" onchange="setType(this.value)" id="image_type" name="image_type" required>
-                                        <!-- Options for BEFORE, DURING, and AFTER -->
                                         <md-select-option value="BEFORE">BEFORE</md-select-option>
                                         <md-select-option value="DURING">DURING</md-select-option>
                                         <md-select-option value="AFTER">AFTER</md-select-option>
                                     </md-outlined-select>
                                 </div>
-                                
                             </div>
 
                             <!-- Submit and Cancel Buttons -->
@@ -143,6 +191,9 @@
                         @if($imageShutdowns->isEmpty())
                             <p>No image shutdowns found for this survey.</p>
                         @else
+
+
+                        <div class="table-responsive">
                            
                         <table id="myTable" class="table table-bordered table-hover data-table">
                                     <thead class="thead-purple">
@@ -169,18 +220,29 @@
                                                         No image
                                                     @endif
                                                 </td>
-                                                <td>
-                                                    <md-filled-tonal-button href="{{ route('image-shutdown.edit', $imageShutdown->id) }}" >Edit</md-filled-tonal-button>
-                                                    <form action="{{ route('image-shutdown.destroy', $imageShutdown->id) }}" method="POST" style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <md-filled-tonal-button type="submit" >Delete</md-filled-tonal-button>
-                                                    </form>
+                                                <td class="button-container">
+                                                    <div class="button-group">
+                                                        <!-- Edit Button -->
+                                                        <md-filled-tonal-button href="{{ route('image-shutdown.edit', $imageShutdown->id) }}">
+                                                            Edit
+                                                        </md-filled-tonal-button>
+                                                
+                                                        <!-- Delete Form -->
+                                                        <form action="{{ route('image-shutdown.destroy', $imageShutdown->id) }}" method="POST" style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <md-filled-tonal-button type="submit">
+                                                                Delete
+                                                            </md-filled-tonal-button>
+                                                        </form>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+
+                        </div>
                             
                         @endif
                     </div>
@@ -195,6 +257,14 @@
 
 
 <style>
+
+@media (max-width: 768px) {
+    .button-container md-filled-tonal-button,
+    .button-container form {
+     
+        margin-bottom: 10px; /* Add space between buttons */
+    }
+}
 
     .dataTables_filter {
         float: right !important;

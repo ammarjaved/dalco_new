@@ -108,6 +108,8 @@
         </span>
     </div>
     @else
+
+    <div class="table-responsive">
        
     <table id="myTable" class="table table-bordered table-hover data-table">
                 <thead class="thead-purple">
@@ -126,22 +128,26 @@
                             <td>{{ $siteSurvey->nama_pe }}</td>
                             <td><a href="{{ asset($file->file_path) }}" target="_blank">{{ $file->file_name }}</a></td>
                             <td>{{ $file->description }}</td>
-                            <td>
-                                <md-filled-tonal-button href="{{ asset($file->file_path) }}" target="_blank" >
-                                    <i class="fas fa-eye"></i> view
-                                </md-filled-tonal-button>
-                                <form action="{{ route('sat-attachments.destroy', $file->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure you want to delete this file?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <md-filled-tonal-button type="submit" style="margin-top:-16px">
-                                        <i class="fas fa-trash-alt"></i> Delete
-                                    </md-filled-tonal-button>
-                                </form>
-                            </td>
+                            <td  class="text-center">
+                                <div class="d-flex flex-column flex-md-row align-items-start">
+                                                            <md-filled-tonal-button href="{{ asset($file->file_path) }}" target="_blank"  class="mb-2 mb-md-0 me-md-2">
+                                                                <i class="fas fa-eye"></i> view
+                                                            </md-filled-tonal-button>
+                                                            <form action="{{ route('sat-attachments.destroy', $file->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure you want to delete this file?');">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <md-filled-tonal-button type="submit">
+                                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                                </md-filled-tonal-button>
+                                                            </form>
+                                </div>
+                                                        </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+
+    </div>
         
     @endif
 </div>

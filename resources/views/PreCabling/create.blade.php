@@ -2,11 +2,12 @@
 
 <style>
 
+
 .label{
-    min-width: 300px;
-    max-width: 300px;
-    
+
 }
+
+
 .toggle-btn {
       border-width: 2px;
       margin: auto;
@@ -88,12 +89,12 @@
                     </div> --}}
                     
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-12 col-md-4 mb-3">
                             <div class="form-group">
                                 <md-outlined-text-field 
                                     label="Kontraktor PIW" 
                                     type="text"  
-                                     class="label"
+                                    class="label"
                                     id="kontraktor_piw" 
                                     name="kontraktor_piw" 
                                     value="{{!isset($site_survey_id) ? $piw->kontraktor_piw : Auth::user()->project }}" 
@@ -103,11 +104,11 @@
                             </div>
                         </div>
                         
-                        <div class="col-md-4">
+                        <div class="col-12 col-md-4 mb-3">
                             <div class="form-group">
                                 <md-outlined-text-field 
                                     type="text" 
-                                     class="label"
+                                    class="label"
                                     label="Kontraktor RTU" 
                                     id="kontraktor_rtu" 
                                     name="kontraktor_rtu" 
@@ -117,13 +118,13 @@
                                 </md-outlined-text-field>
                             </div>
                         </div>
-                   
-                        <div class="col-md-4">
+                    
+                        <div class="col-12 col-md-4 mb-3">
                             <div class="form-group">
                                 <md-outlined-text-field  
                                     type="text" 
                                     label="Nama PE" 
-                                     class="label"
+                                    class="label"
                                     id="nama_pe" 
                                     name="pe_name" 
                                     value="{{!isset($site_survey_id) ? $piw->pe_name : $nama_pe }}" 

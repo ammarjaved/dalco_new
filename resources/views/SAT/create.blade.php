@@ -90,16 +90,15 @@
                         <form action="{{ route('sat.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="site_survey_id" value="{{ $survey->id }}">
-                            
                             <div class="form-group row">
                                 <!-- Image Name -->
-                                <div class="col-md-4">
-                                    {{-- <label for="image_name">Image Name</label> --}}
-                                    <md-outlined-text-field class="label" label="Image Name" type="text"  id="image_name" name="image_name" required>
+                                <div class="col-md-4 col-sm-6 col-12 mb-3">
+                                    <md-outlined-text-field class="label" label="Image Name" type="text" id="image_name" name="image_name" required>
+                                    </md-outlined-text-field>
                                 </div>
-
+                            
                                 <!-- Upload Image -->
-                                <div class="col-md-4 mb-3" style="margin-top: -20px">
+                                <div class="col-md-4 col-sm-6 col-12 mb-3" style="margin-top: -20px;">
                                     <md-label for="image_url" class="form-label">Upload New Image</md-label>
                                     <div class="file-upload-wrapper">
                                         <input type="file" class="file-upload-input" id="image_url" name="image_url" accept="image/*">
@@ -107,19 +106,17 @@
                                     </div>
                                     <small class="form-text text-muted">Leave empty if you do not want to change the image.</small>
                                 </div>
-                                
+                            
                                 <!-- Image Type -->
-                                <div class="col-md-4">
-                                    {{-- <label for="image_type">Image Type</label> --}}
-                                    <md-outlined-select label="Image Type"  class="label" onchange="setType(this.value)" id="image_type" name="image_type" required>
-                                       
+                                <div class="col-md-4 col-sm-6 col-12">
+                                    <md-outlined-select label="Image Type" class="label" onchange="setType(this.value)" id="image_type" name="image_type" required>
                                         <md-select-option value="BEFORE">BEFORE</md-select-option>
                                         <md-select-option value="DURING">DURING</md-select-option>
                                         <md-select-option value="AFTER">AFTER</md-select-option>
                                     </md-outlined-select>
                                 </div>
                             </div>
-
+                            
                             <!-- Submit and Cancel Buttons -->
                             <md-filled-tonal-button type="submit" class=" mt-3">Save</md-filled-tonal-button>
                             {{-- <a href="{{ url()->previous() }}" class="btn btn-secondary mt-3">Cancel</a> --}}
@@ -130,6 +127,8 @@
                         @if($satRecords->isEmpty())
                             <p>No SAT images found for this survey.</p>
                         @else
+
+                        <div class="table-responsive">
                            
                         <table id="myTable" class="table table-bordered table-hover data-table">
                                     <thead class=" thead-purple">
@@ -156,18 +155,22 @@
                                                         No image
                                                     @endif
                                                 </td>
-                                                <td>
+                                                <td class="button-container">
+                                                    <div class="button-group">
                                                     <md-filled-tonal-button href="{{ route('sat.edit', $satRecord->id) }}">Edit</md-filled-tonal-button> 
                                                     <form action="{{ route('sat.destroy', $satRecord->id) }}" method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <md-filled-tonal-button type="submit" >Delete</md-filled-tonal-button>
                                                     </form>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+
+                        </div>
                            
                         @endif
                     </div>
@@ -181,6 +184,16 @@
 
 
 <style>
+    
+
+    @media (max-width: 768px) {
+        .button-container md-filled-tonal-button,
+         .button-container form {
+                                                     
+            margin-bottom: 10px; /* Add space between buttons */
+              }
+            }
+
 
     .dataTables_filter {
         float: right !important;

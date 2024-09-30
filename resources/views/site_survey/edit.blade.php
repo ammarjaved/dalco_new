@@ -3,6 +3,123 @@
 @section('content')
 
 
+<style>
+
+
+.dropdown {
+    position: relative;
+}
+.labels{
+    width: 70vw;
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 100%; /* This positions the menu to the left of the icon */
+    top: 0;
+    display: none;
+    
+    
+    border-radius: 4px;
+    padding: 5px 0;
+    z-index: 1000; /* Ensures the menu appears above other elements */
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 5px 15px;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+   
+    border: 0;
+}
+
+
+.three-dots-icon{
+    cursor: pointer;
+}
+
+/* Adjust the positioning of the dropdown to the right */
+.dropdown-menu {
+    right: -20px; /* Moves the dropdown more to the right */
+    position: absolute;
+}
+
+.dropdown-item:hover {
+    background-color: #e2e6ea;
+    border-radius: 5px;
+}
+
+.dropdown-menu {
+    min-width: 150px;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+        @media (max-width: 1024px) {
+            .row {
+                flex-direction: column;
+            }
+            .col-md-4, .col-md-3 {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            md-tabs {
+                flex-direction: column;
+            }
+            md-secondary-tab {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            md-outlined-text-field,
+            md-outlined-select {
+                width: 100%;
+            }
+            .input-container {
+                width: 100%;
+            }
+            input[type="date"] {
+                width: 100% !important;
+            }
+        }
+
+        /* General improvements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        md-outlined-text-field,
+        md-outlined-select,
+        .input-container {
+            width: 100%;
+            max-width: 100%;
+        }
+        .toggle-btn {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        md-secondary-tab {
+            flex: 1;
+            min-width: 100px;
+        }
+
+</style>
+
+
+</style>
+
+
 @php
 
     $navContent = Blade::render(
@@ -63,20 +180,17 @@
             font-size: 14px;
         }
 
-        .labels{
-            max-width: 200px;
-        }
+      
 
     </style>
 
 
 
   <style>
-
 .label{
-    min-width: 300px;
-    max-width: 300px;
+    width: 70vw;
 }
+
 
 .labelfortoolbox{[
     min-width: 200px;
@@ -258,7 +372,7 @@
         <div class="col-md-4">     
                 
             <input type="date" id="tahun_pembinaan" 
-            style="height:50px !important;border-radius: 5px !important;width:90% !important;" 
+            class="label" 
             name="tahun_pembinaan" 
             value="{{ isset($siteSurvey->tahun_pembinaan) ? \Carbon\Carbon::parse($siteSurvey->tahun_pembinaan)->format('Y-m-d') : old('tahun_pembinaan') }}">
      
@@ -588,14 +702,14 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="input-container" style="margin-top:5px">
-                    <input  type="date" style=" height:50px !important;border-radius: 5px !important;width:60% !important;" id="tarikh" name="tarikh" value="{{ $toolboxTalk->tarikh ?? old('tarikh') }}" required>
+                    <input class="label"  type="date"  id="tarikh" name="tarikh" value="{{ $toolboxTalk->tarikh ?? old('tarikh') }}" required>
                     <label>Tarikh</label>
                 </div>
             </div>
             
             <div class="col-md-6">
                 <div class="form-group">
-                    <md-outlined-text-field type="text" label="Skop Kerja" id="skop_kerja" name="skop_kerja" class="label" value="SITE-SURVEY" readonly>
+                    <md-outlined-text-field class="label" type="text" label="Skop Kerja" id="skop_kerja" name="skop_kerja" class="label" value="SITE-SURVEY" readonly>
                 </div>
             </div>
         </div>

@@ -2,10 +2,12 @@
 
 <style>
 
-.label{
+<style>
+.label {
     min-width: 300px;
     max-width: 300px;
 }
+
 .file-upload-wrapper {
     position: relative;
     width: 100%;
@@ -43,6 +45,15 @@
     text-overflow: ellipsis;
     padding: 0 10px;
 }
+
+/* Media query for responsive spacing */
+@media (max-width: 1200px) and (min-width: 768px) {
+    .col-md-4.form-group {
+        margin-bottom: 20px; /* Add space below each form group */
+    }
+}
+</style>
+
 
 </style>
 

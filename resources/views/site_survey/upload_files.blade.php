@@ -51,6 +51,17 @@
             text-overflow: ellipsis;
             padding: 0 10px;
         }
+        @media (max-width: 768px) { /* Apply styles for screens smaller than 768px */
+    td md-filled-tonal-button {
+        margin-top: 5px !important; /* Adjust the spacing for mobile screens */
+        /* Stack the buttons vertically */
+    }
+
+    td form {
+        margin-top: 10px !important; /* Add spacing between the buttons */
+    }
+}
+
 </style>
 
 @section('content')
@@ -114,7 +125,7 @@
         </span>
     </div>
     @else
-        
+    <div class="table-responsive">
             <table id="myTable" class="table table-bordered  data-table">
                 <thead class="thead-purple">
                     <tr>
@@ -133,21 +144,25 @@
                             <td><a href="{{ asset($file->file_path) }}" target="_blank">{{ $file->file_name }}</a></td>
                             <td>{{ $file->description }}</td>
                             <td>
-                                <md-filled-tonal-button href="{{ asset($file->file_path) }}" target="_blank" style="margin-top:-4px; ">
+                                <md-filled-tonal-button href="{{ asset($file->file_path) }}" target="_blank" style="margin-top:-4px;">
                                     <i class="fas fa-eye"></i> view
                                 </md-filled-tonal-button>
+                                
                                 <form action="{{ route('siteFileUpload.destroy', $file->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure you want to delete this file?');">
                                     @csrf
                                     @method('DELETE')
-                                    <md-filled-tonal-button type="submit" style="margin-top:-20px ">
+                                    <md-filled-tonal-button type="submit" style="margin-top:-20px;">
                                         <i class="fas fa-trash-alt"></i> Delete
                                     </md-filled-tonal-button>
                                 </form>
                             </td>
+                            
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+
+    </div>
        
     @endif
 </div>

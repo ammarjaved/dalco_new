@@ -2,50 +2,78 @@
 
 
 <style>
-
-    .label{
-        min-width: 300px;
-        max-width: 300px;
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: -10px;
+    }
+    .col-md-4 {
+        flex: 0 0 calc(33.333% - 20px);
+        max-width: calc(33.333% - 20px);
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    .label {
+        width: 100%;
+        max-width: 100%;
     }
     .file-upload-wrapper {
-    position: relative;
-    width: 100%;
-    height: 50px;
-    border: 2px dashed #8e44ad;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f8f8ff;
-    transition: background-color 0.3s ease;
-}
+        position: relative;
+        width: 100%;
+        height: 50px;
+        border: 2px dashed #8e44ad;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f8ff;
+        transition: background-color 0.3s ease;
+    }
+    .file-upload-wrapper:hover {
+        background-color: #ece0f0;
+    }
+    .file-upload-input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+        opacity: 0;
+    }
+    .file-upload-text {
+        color: #333;
+        font-weight: 600;
+        width: 100%;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 0 10px;
+    }
+    md-label {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+    .form-text {
+        display: block;
+        margin-top: 0.25rem;
+        font-size: 0.875em;
+    }
+    @media (max-width: 768px) {
+        .col-md-4 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+        .file-upload-wrapper {
+            height: 60px;
+        }
+    }
+</style>
 
-.file-upload-wrapper:hover {
-    background-color: #ece0f0;
-}
-
-.file-upload-input {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    cursor: pointer;
-    opacity: 0;
-}
-
-.file-upload-text {
-    color: #333;
-    font-weight: 600;
-    width: 100%;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 0 10px;
-}
-
-    </style>
 
 @section('content')
 
@@ -88,31 +116,27 @@
                 <div class="row">
                     <!-- Image Name -->
                     <div class="col-md-4 form-group">
-                        {{-- <label for="image_name">Image Name</label> --}}
-                        <md-outlined-text-field type="text" class="label" label="Image Name" id="image_name" name="image_name" value="{{ $imageShutdown->image_name }}" required>
+                        <md-outlined-text-field type="text" class="label" label="Image Name" id="image_name" name="image_name" value="{{ $imageShutdown->image_name }}" required></md-outlined-text-field>
                     </div>
-
+            
                     <!-- Image Type -->
                     <div class="col-md-4 form-group">
                         <md-outlined-select class="label" label="Image Type" id="image_type" name="image_type" required>
-                            
                             <md-select-option value="BEFORE" {{ $imageShutdown->image_type == 'BEFORE' ? 'selected' : '' }}>BEFORE</md-select-option>
                             <md-select-option value="DURING" {{ $imageShutdown->image_type == 'DURING' ? 'selected' : '' }}>DURING</md-select-option>
                             <md-select-option value="AFTER" {{ $imageShutdown->image_type == 'AFTER' ? 'selected' : '' }}>AFTER</md-select-option>
                         </md-outlined-select>
                     </div>
-                    
-
+            
                     <!-- Upload New Image -->
-                    <div class="col-md-4 mb-3" style="margin-top: -16px">
-                        <md-label for="image_url" class="form-label">Upload New Image </md-label>
+                    <div class="col-md-4 col-12 mb-3" style="margin-top: -23px">
+                        <md-label for="image_url" class="form-label">Upload New Image</md-label>
                         <div class="file-upload-wrapper">
                             <input type="file" class="file-upload-input" id="image_url" name="image_url" accept="image/*">
                             <span class="file-upload-text">Choose an image or drag it here</span>
                         </div>
                         <small class="form-text text-muted">Leave empty if you do not want to change the image.</small>
                     </div>
-                    
                 </div>
 
                 <!-- Existing Image Display -->
