@@ -6,7 +6,7 @@
     position: relative;
 }
 .labels{
-    max-width: 200px;
+    width: 70vw;
 }
 
 .dropdown-menu {
@@ -57,7 +57,58 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
+        @media (max-width: 1024px) {
+            .row {
+                flex-direction: column;
+            }
+            .col-md-4, .col-md-3 {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+        }
 
+        @media (max-width: 768px) {
+            md-tabs {
+                flex-direction: column;
+            }
+            md-secondary-tab {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            md-outlined-text-field,
+            md-outlined-select {
+                width: 100%;
+            }
+            .input-container {
+                width: 100%;
+            }
+            input[type="date"] {
+                width: 100% !important;
+            }
+        }
+
+        /* General improvements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        md-outlined-text-field,
+        md-outlined-select,
+        .input-container {
+            width: 100%;
+            max-width: 100%;
+        }
+        .toggle-btn {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        md-secondary-tab {
+            flex: 1;
+            min-width: 100px;
+        }
 
 </style>
 
@@ -160,8 +211,7 @@
   <style>
 
 .label{
-    min-width: 300px;
-    max-width: 300px;
+    width: 70vw;
 }
 
 .labelfortoolbox{[
@@ -344,7 +394,7 @@
                 
     <div class="input-container" style="margin-top:5px">
                     {{-- <label for="tahun_pembinaan">Tahun Pembinaan</label> --}}
-                    <input  type="date"  id="tahun_pembinaan" style=" height:50px !important;border-radius: 5px !important;width:90% !important;" name="tahun_pembinaan" value="{{ $siteSurvey->tahun_pembinaan ?? old('tahun_pembinaan') }}">
+                    <input  type="date" class="label"  id="tahun_pembinaan"  name="tahun_pembinaan" value="{{ $siteSurvey->tahun_pembinaan ?? old('tahun_pembinaan') }}">
                     <label>Tahun Pembinaan</label>
                 </div>
         </div>
@@ -676,14 +726,14 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="input-container" style="margin-top:5px">
-                    <input  type="date" style=" height:50px !important;border-radius: 5px !important;width:60% !important;" id="tarikh" name="tarikh" value="{{ $toolboxTalk->tarikh ?? old('tarikh') }}" required>
+                    <input  type="date" class="label" id="tarikh" name="tarikh" value="{{ $toolboxTalk->tarikh ?? old('tarikh') }}" required>
                     <label>Tarikh</label>
                 </div>
             </div>
             
             <div class="col-md-6">
                 <div class="form-group">
-                    <md-outlined-text-field type="text" label="Skop Kerja" id="skop_kerja" name="skop_kerja" class="label" value="SITE-SURVEY" readonly>
+                    <md-outlined-text-field class="label" type="text" label="Skop Kerja" id="skop_kerja" name="skop_kerja" class="label" value="SITE-SURVEY" readonly>
                 </div>
             </div>
         </div>

@@ -106,19 +106,21 @@ table.dataTable thead .sorting_desc:after {
 
     <div class="row">
         <div style="background-color: white">
-            <md-outlined-text-field type="text" label="Search" style="min-width: 500px;margin:2px" name="search" id="search_input1" placeholder="Search by material"></md-outlined-text-field>
+            <md-outlined-text-field type="text" label="Search" style="min-width: 60vw ;margin:2px" name="search" id="search_input1" placeholder="Search by material"></md-outlined-text-field>
         </div>
         {{-- <div class="col-sm-1">
             <md-filled-tonal-button style="horizontal-align: center; margin:5px" type="button" onclick="addData()">Add</md-filled-tonal-button>
         </div> --}}
     </div>
    
-    <div class="row">
+    <div  class="row">
         <div id="search-results"></div>
     </div>
 
     <form action="{{ route('material-selection.save', ['id' => $siteSurvey->id]) }}" method="POST">
         @csrf
+
+        <div class="table-responsive">
         
         <table class="table" style="background-color:#fef7ff;">
             <thead>
@@ -134,6 +136,7 @@ table.dataTable thead .sorting_desc:after {
             <tbody id='mat_sel'>
             </tbody>
         </table>
+        </div>
 
         <md-filled-tonal-button type="submit">Save Selections</md-filled-tonal-button>
     </form>
@@ -141,6 +144,8 @@ table.dataTable thead .sorting_desc:after {
 
 <div class="container">
     <h2>Data Table</h2>
+
+    <div class="table-responsive">
     
    
         <table id="myTable"  style="background-color:#fef7ff;" class="table table-bordered table-hover data-table">
@@ -176,6 +181,7 @@ table.dataTable thead .sorting_desc:after {
             @endforeach
         </tbody>
     </table>
+    </div>
 </div>
 
 @endsection

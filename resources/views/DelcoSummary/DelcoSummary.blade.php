@@ -143,6 +143,9 @@ style="background-color: #8e44ad;margin-left:20px; color:white">Add Site Survey<
    
     <div class="row">
      <div class="col-md-6">
+
+
+        <div class="table-responsive">
         
     <table id="myTable" class="table table-bordered table-hover data-table">
 
@@ -279,6 +282,7 @@ style="background-color: #8e44ad;margin-left:20px; color:white">Add Site Survey<
         @endforeach
     </tbody>
 </table>
+        </div>
 
     </div>
     <div class="col-md-6">

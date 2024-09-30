@@ -1,25 +1,103 @@
-<nav class="main-header navbar navbar-expand navbar-light d-flex justify-content-between" style="background-color: #8e44ad;margin-left:1px;">
+<style>
+
+
+    .mnb {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin: 20px 0;
+            }
+    
+    
+            .mnb div {
+                height: auto;
+                width: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              
+               
+            }
+    
+    .mnb md-filled-button{
+        width: 120px;
+    }
+    
+    
+    .topnav {
+      background-color: #333;
+      height: auto;
+      
+    
+    }
+    
+    /* Style the links inside the navigation bar */
+    
+      
+        md-filled-tonal-button, md-filled-button {
+            --md-sys-color-primary: #D7b4f3;
+            --md-sys-color-on-primary: white;
+        }
+    
+        .main-header {
+        padding: 10px 15px; /* Adjust padding for spacing */
+        display: flex; /* Use flexbox for layout */
+        justify-content: space-between; /* Space out logo and buttons */
+        align-items: center; /* Center items vertically */
+        background-color: #8e44ad; /* Background color */
+    }
+    
+    .nav-logo {
+        display: flex;
+        align-items: center; /* Center logo and text */
+    }
+    
+    
+    .navbar .nav-item {
+        margin-right: 40px; /* Reduced space between buttons */
+    }
+    
+    .md-filled-button {
+        padding: 6px 10px; /* Adjust button padding */
+        font-size: 14px; /* Font size */
+    }
+    
+    .d-flex {
+        display: flex; /* Ensure flex display */
+        align-items: center; /* Center items vertically */
+    }
+    
+    </style>
+    
+    
+
+<nav class="main-header topnav navbar navbar-expand navbar-light d-flex justify-content-between" style="background-color: #8e44ad;margin-left:1px;">
     <ul class="navbar-nav">
         <li class="nav-item d-sm-inline-block">
             <img src="{{ asset('assets/web-images/main-logo.png') }}" height="35" alt="">  <span style="color: black">PE: {{ $survey->nama_pe }}</span>
         </li>
-    </ul>
+    </ul>  
 
-    <div class="d-flex">
+    <div class="mnb" >
         
         
-
-
-        <a href="{{ route('delco-summary') }}" style="text-decoration: none;">
-            <md-filled-button style="margin-top:17px;margin: 16px;">
-                ◄ Summary
+       
+        <div>
+            <a href="{{ route('delco-summary') }}" style="text-decoration: none;">
+            <md-filled-button>
+                
+                Summary
+           
             </md-filled-button>
         </a>
+       
+        </div>
 
 
      
 
-        <div style="margin: 16px;">
+        <div>
             <md-filled-button id="usage-document-anchor6">Site Survey</md-filled-button>
           </div>
               <md-menu positioning="document" id="usage-document6" anchor="usage-document-anchor6">
@@ -48,7 +126,7 @@
         
         
 
-    <div style="margin: 16px;">
+    <div >
     <md-filled-button id="usage-document-anchor">Material</md-filled-button>
     </div>
 
@@ -64,7 +142,7 @@
     anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
 </script>
         <!-- <md-menu-button id="pre-cabling-menu"> -->
-        <div style="margin: 16px;">
+        <div>
           <md-filled-button id="usage-document-anchor1">Pre Cabling </md-filled-button>
         </div>
             <md-menu positioning="document" id="usage-document1" anchor="usage-document-anchor1">
@@ -116,7 +194,7 @@
     anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
 </script>
 
-<div style="margin: 16px;">
+<div >
     <md-filled-button id="usage-document-anchor2">Shutdown</md-filled-button>
   </div>
       <md-menu positioning="document" id="usage-document2" anchor="usage-document-anchor2">
@@ -151,7 +229,7 @@ anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
 
 
        
-<div style="margin: 16px;">
+<div >
     <md-filled-button id="usage-document-anchor3">SAT</md-filled-button>
   </div>
       <md-menu positioning="document" id="usage-document3" anchor="usage-document-anchor3">
@@ -174,9 +252,7 @@ anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
               Add SAT Attachments
           </md-menu-item>
 
-        
-         
-
+    
          
       </md-menu>
   <!-- </md-menu-button> -->
@@ -187,7 +263,7 @@ const menuEl = document.body.querySelector('#usage-document3');
 anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
 </script>
 
-<div style="margin: 16px;">
+<div >
     <md-filled-button id="usage-document-anchor4">LKS</md-filled-button>
   </div>
       <md-menu positioning="document" id="usage-document4" anchor="usage-document-anchor4">
@@ -206,7 +282,7 @@ anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
 </script>
 
 
-<div style="margin: 16px;">
+<div >
     <md-filled-button id="usage-document-anchor9">Gallery</md-filled-button>
 </div>
 <md-menu positioning="document" id="usage-document9" anchor="usage-document-anchor9">
@@ -223,7 +299,7 @@ anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
 
 
 
-<div style="margin: 16px;">
+<div >
     <md-filled-button id="usage-document-anchor5">
       {{ Auth::user()->name }}
       <md-icon slot="trailing-icon">expand_more</md-icon>
@@ -255,41 +331,4 @@ anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
   
     </div>
 </nav>
-
-<style>
-  
-    md-filled-tonal-button, md-filled-button {
-        --md-sys-color-primary: #D7b4f3;
-        --md-sys-color-on-primary: white;
-    }
-
-    .main-header {
-    padding: 10px 15px; /* Adjust padding for spacing */
-    display: flex; /* Use flexbox for layout */
-    justify-content: space-between; /* Space out logo and buttons */
-    align-items: center; /* Center items vertically */
-    background-color: #8e44ad; /* Background color */
-}
-
-.nav-logo {
-    display: flex;
-    align-items: center; /* Center logo and text */
-}
-
-
-.navbar .nav-item {
-    margin-right: 40px; /* Reduced space between buttons */
-}
-
-.md-filled-button {
-    padding: 6px 10px; /* Adjust button padding */
-    font-size: 14px; /* Font size */
-}
-
-.d-flex {
-    display: flex; /* Ensure flex display */
-    align-items: center; /* Center items vertically */
-}
-
-</style>
 

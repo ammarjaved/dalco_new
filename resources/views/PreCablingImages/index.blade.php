@@ -6,10 +6,29 @@
     color: white; /* White text for better contrast */
 }
 
-.label{
-    min-width: 300px;
-    max-width: 300px;
+.label {
+    width: 100%; /* Make label take full width */
+    max-width: 300px; /* Optional: Maximum width */
 }
+/* Existing styles for form elements */
+.form-label {
+    font-weight: bold; /* Make labels bold for better visibility */
+    display: block; /* Ensure labels are block elements */
+    margin-bottom: 0.5rem; /* Space between label and input */
+}
+
+.md-outlined-select, 
+.md-outlined-text-field {
+    width: 100%; /* Full width for input fields */
+}
+
+/* Media query for smaller devices */
+@media (max-width: 768px) {
+    .image-description {
+        margin-top: 1rem; /* Add a gap above the Image Description field */
+    }
+}
+
 .file-upload-wrapper {
     position: relative;
     width: 100%;
@@ -103,10 +122,8 @@
                             
                             <div class="form-group row">
                                 <!-- Image Name -->
-                                <div class="col-md-4">
-                                   
-                                    <md-outlined-select class="label"   label="Image Name" id="image_name" name="image_name" required>
-                                    
+                                <div class="col-md-4 col-12">
+                                    <md-outlined-select class="label" label="Image Name" id="image_name" name="image_name" required>
                                         <md-select-option value="RCB">RCB</md-select-option>
                                         <md-select-option value="RCB-2">RCB-2</md-select-option>
                                         <md-select-option value="RCB-SERIAL-NUMBER">RCB-SERIAL-NUMBER</md-select-option>
@@ -130,37 +147,26 @@
                                     </md-outlined-select>
                                 </div>
                                 
-
-                                <div class="col-md-4">
-
+                                <br> <br> <br> 
+                            
+                                <div class="col-md-4 col-12">
                                     <div class="form-group">
-
-                                       <md-outlined-text-field class="label" label="Image Description" type="text" class="form-control" id="image_desc" name="image_desc"   required>
-                                      </div>
+                                        <md-outlined-text-field class="label" label="Image Description" type="text" class="form-control" id="image_desc" name="image_desc" required>
+                                        </md-outlined-text-field>
                                     </div>
+                                </div>
+                              
+                            
                                 <!-- Upload Image -->
-                                <div class="col-md-4 mb-3" style="margin-top: -16px">
+                                <div class="col-md-4 col-12 mb-3" style="margin-top: -16px">
                                     <md-label for="image_url" class="form-label">Upload Image</md-label>
                                     <div class="file-upload-wrapper">
                                         <input type="file" class="file-upload-input" id="image_url" name="image_url" accept="image/*" required>
                                         <span class="file-upload-text">Choose an image or drag it here</span>
                                     </div>
                                 </div>
-                                
-
-                                
-
-                                <!-- Image Type -->
-                                {{-- <div class="col-md-4">
-                                    <label for="image_type">Image Type</label>
-                                    <select class="form-control" id="image_type" name="image_type" required>
-                                        <option value="" disabled selected>Select Type</option>
-                                        <option value="before">Before</option>
-                                        <option value="during">During</option>
-                                        <option value="after">After</option>
-                                    </select>
-                                </div> --}}
                             </div>
+                            
 
                             <!-- Submit and Cancel Buttons -->
                             <md-filled-tonal-button type="submit" class=" mt-3">Save</md-filled-tonal-button>
@@ -172,6 +178,8 @@
                         @if($imageShutdowns->isEmpty())
                             <p>No image shutdowns found for this survey.</p>
                         @else
+
+                        <div class="table-responsive">
                             
                         <table id="myTable" class="table table-bordered table-hover data-table">
                                     <thead class="thead-purple">
@@ -198,18 +206,24 @@
                                                         No image
                                                     @endif
                                                 </td>
-                                                <td>
-                                                    <md-filled-tonal-button href="{{ route('pre-cabling-images.edit', $imageShutdown->id) }}" >Edit</md-filled-tonal-button>
+                                                <td class="button-container">
+                                                    <md-filled-tonal-button href="{{ route('pre-cabling-images.edit', $imageShutdown->id) }}">
+                                                        Edit
+                                                    </md-filled-tonal-button>
                                                     <form action="{{ route('pre-cabling-images.destroy', $imageShutdown->id) }}" method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <md-filled-tonal-button type="submit" >Delete</md-filled-tonal-button>
+                                                        <md-filled-tonal-button type="submit">
+                                                            Delete
+                                                        </md-filled-tonal-button>
                                                     </form>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+
+                        </div>
                            
                         @endif
                     </div>
@@ -222,6 +236,14 @@
 
 
 <style>
+
+@media (max-width: 768px) {
+    .button-container md-filled-tonal-button,
+    .button-container form {
+     
+        margin-bottom: 10px; /* Add space between buttons */
+    }
+}
 
     .dataTables_filter {
         float: right !important;

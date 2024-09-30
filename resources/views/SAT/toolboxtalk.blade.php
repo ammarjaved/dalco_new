@@ -35,6 +35,10 @@
             font-size: 14px;
         }
 
+        .label{
+            width: 70vw;
+        }
+
 
 </style>
 
@@ -83,7 +87,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="input-container" style="margin-top:5px">
-            <input type="date" style=" height:50px !important;border-radius: 5px !important;width:60% !important;" id="tarikh" name="tarikh" value="{{ $toolboxTalk->tarikh ?? old('tarikh') }}" required>
+            <input type="date" class="label" id="tarikh" name="tarikh" value="{{ $toolboxTalk->tarikh ?? old('tarikh') }}" required>
             <label for="tarikh">Tarikh</label>
         </div>
     </div>

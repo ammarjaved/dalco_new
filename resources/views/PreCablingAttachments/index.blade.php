@@ -114,7 +114,7 @@
     </div>
     @else
         
-            
+    <div class="table-responsive">
                 <table id="myTable" class="table table-bordered table-hover data-table">
                 <thead class="thead-purple">
                     <tr>
@@ -132,22 +132,26 @@
                             <td>{{ $siteSurvey->nama_pe }}</td>
                             <td><a href="{{ asset($file->file_path) }}" target="_blank">{{ $file->file_name }}</a></td>
                             <td>{{ $file->description }}</td>
-                            <td>
-                                <md-filled-tonal-button href="{{ asset($file->file_path) }}" target="_blank" style="margin-top:-4px">
-                                    <i class="fas fa-eye"></i> view
-                                </md-filled-tonal-button>
-                                <form action="{{ route('pre-cabling-attachments.destroy', $file->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure you want to delete this file?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <md-filled-tonal-button type="submit" style="margin-top:-20px">
-                                        <i class="fas fa-trash-alt"></i> Delete
+                            <td class="text-center">
+                                <div class="d-flex flex-column flex-md-row align-items-start">
+                                    <md-filled-tonal-button href="{{ asset($file->file_path) }}" target="_blank" class="mb-2 mb-md-0 me-md-2">
+                                        <i class="fas fa-eye"></i> View
                                     </md-filled-tonal-button>
-                                </form>
+                                    <form action="{{ route('pre-cabling-attachments.destroy', $file->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure you want to delete this file?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <md-filled-tonal-button type="submit" class="mb-2 mb-md-0" >
+                                            <i class="fas fa-trash-alt"></i> Delete
+                                        </md-filled-tonal-button>
+                                    </form>
+                                </div>
                             </td>
+                            
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+    </div>
         
     @endif
 </div>

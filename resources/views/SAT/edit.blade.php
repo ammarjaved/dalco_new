@@ -47,6 +47,38 @@
     .form-text.text-muted {
         margin-top: 0.5rem;
     }
+
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+    @media (min-width: 768px) {
+        .form-group {
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+
+    .file-upload-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        width: 100%;
+    }
+    .file-upload-input {
+        width: 100%;
+        padding: 8px;
+        cursor: pointer;
+    }
+    .file-upload-text {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: #888;
+    }
 </style>
 
 @section('content')
@@ -73,30 +105,29 @@
 
                 <div class="row">
                     <!-- Image Name -->
-                    <div class="col-md-4 form-group">
+                    <div class="col-lg-4 col-md-6 col-12 form-group">
                         <md-outlined-text-field class="label" label="Image Name" type="text" class="form-control" id="image_name" name="image_name" value="{{ old('image_name', $satRecord->image_name) }}" required>
                         </md-outlined-text-field>
                     </div>
-
+                
                     <!-- Image Type -->
-                    <div class="col-md-4 form-group">
+                    <div class="col-lg-4 col-md-6 col-12 form-group">
                         <md-outlined-select class="label" label="Image Type" id="image_type" name="image_type" required>
                             <md-select-option value="BEFORE" {{ old('image_type', $satRecord->image_type) == 'BEFORE' ? 'selected' : '' }}>BEFORE</md-select-option>
                             <md-select-option value="DURING" {{ old('image_type', $satRecord->image_type) == 'DURING' ? 'selected' : '' }}>DURING</md-select-option>
                             <md-select-option value="AFTER" {{ old('image_type', $satRecord->image_type) == 'AFTER' ? 'selected' : '' }}>AFTER</md-select-option>
                         </md-outlined-select>
                     </div>
-
+                
                     <!-- Upload New Image -->
-                    <div class="col-md-4 mb-3" style="margin-top: -20px">
-                        <label for="image_url" class="form-label">Upload New Image</label>
+                    <div class="col-lg-4 col-md-12 col-12 mb-3" style="">
+                        <md-label for="image_url" class="form-label">Upload New Image</md-label>
                         <div class="file-upload-wrapper">
                             <input type="file" class="file-upload-input" id="image_url" name="image_url" accept="image/*">
                             <span class="file-upload-text">Choose an image or drag it here</span>
                         </div>
                         <small class="form-text text-muted">Leave empty if you do not want to change the image.</small>
                     </div>
-                    
                 </div>
 
                 <!-- Existing Image Display -->
