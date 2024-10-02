@@ -991,49 +991,35 @@
                 <!-- Yes Radio Button -->
                 <md-secondary-tab 
                     value="yes" 
-                    id="val-tab-picture_during_toolbox-yes" 
-                    onclick="toggleToolboxImageUpload('picture_during_toolbox', true, 'yes')" 
-                    {{ !isset($toolboxTalk) || $toolboxTalk->picture_during_toolbox != 'no' ? 'active' : '' }}
+                    id="val-tab-picture_during_toolbox_yes" 
+                    onclick="document.getElementById('picture_during_toolbox_yes').checked = true; document.getElementById('picture_during_toolbox_no').checked = false; document.getElementById('picture_during_toolbox_images').style.display = 'block';" 
+                    {{ ($toolboxTalk->picture_during_toolbox ?? old('picture_during_toolbox', 'yes')) === 'yes' ? 'active' : '' }}
                 >
                     Yes
-                    <input 
-                        type="radio" 
-                        id="yes-picture_during_toolbox" 
-                        name="picture_during_toolbox" 
-                        value="yes" 
-                        style="display:none;" 
-                        {{ !isset($toolboxTalk) || $toolboxTalk->picture_during_toolbox != 'no' ? 'checked' : '' }}
-                    >
+                    <input type="radio" id="picture_during_toolbox_yes" name="picture_during_toolbox" value="yes" style="display:none;" {{ ($toolboxTalk->picture_during_toolbox ?? old('picture_during_toolbox', 'yes')) === 'yes' ? 'checked' : '' }}>
                 </md-secondary-tab>
             
                 <!-- No Radio Button -->
                 <md-secondary-tab 
                     value="no" 
-                    id="val-tab-picture_during_toolbox-no" 
-                    onclick="toggleToolboxImageUpload('picture_during_toolbox', false, 'no')" 
-                    {{ isset($toolboxTalk) && $toolboxTalk->picture_during_toolbox == 'no' ? 'active' : '' }}
+                    id="val-tab-picture_during_toolbox_no" 
+                    onclick="document.getElementById('picture_during_toolbox_no').checked = true; document.getElementById('picture_during_toolbox_yes').checked = false; document.getElementById('picture_during_toolbox_images').style.display = 'none';" 
+                    {{ ($toolboxTalk->picture_during_toolbox ?? old('picture_during_toolbox', 'yes')) === 'no' ? 'active' : '' }}
                 >
                     No
-                    <input 
-                        type="radio" 
-                        id="no-picture_during_toolbox" 
-                        name="picture_during_toolbox" 
-                        value="no" 
-                        style="display:none;" 
-                        {{ isset($toolboxTalk) && $toolboxTalk->picture_during_toolbox == 'no' ? 'checked' : '' }}
-                    >
+                    <input type="radio" id="picture_during_toolbox_no" name="picture_during_toolbox" value="no" style="display:none;" {{ ($toolboxTalk->picture_during_toolbox ?? old('picture_during_toolbox', 'yes')) === 'no' ? 'checked' : '' }}>
                 </md-secondary-tab>
             </md-tabs>
 
             <!-- Image Uploads Section -->
-            <div id="picture_during_toolbox_images" style="{{ (isset($toolboxTalk) && $toolboxTalk->picture_during_toolbox === 'yes') ? 'display: block;' : 'display: none;' }}">
+            <div id="picture_during_toolbox_images" style="{{ ($toolboxTalk->picture_during_toolbox ?? old('picture_during_toolbox', 'yes')) === 'yes' ? 'display: block;' : 'display: none;' }}">
                 @for ($i = 1; $i <= 2; $i++)
                     <div class="form-group">
                         <md-label for="toolbox_image{{ $i }}">
                             Toolbox Image {{ $i }}
                         </md-label>
-                        <input type="file" onchange="previewImage(this, 'img_toolbox{{ $i }}')" hidden class="form-control-file" id="toolbox_image{{ $i }}" name="toolbox_image{{ $i }}">
-                        @if (isset($toolboxTalk) && $toolboxTalk->{"toolbox_image{$i}"} && $toolboxTalk->{"toolbox_image{$i}"} != '')
+                        <input type="file" class="form-control-file" id="toolbox_image{{ $i }}" name="toolbox_image{{ $i }}" onchange="previewImage(this, 'img_toolbox{{ $i }}')" {{ isset($toolboxTalk->{"toolbox_image{$i}"}) ? '' : 'hidden' }}>
+                        @if (isset($toolboxTalk->{"toolbox_image{$i}"}) && $toolboxTalk->{"toolbox_image{$i}"} != '')
                             <img onclick="document.getElementById('toolbox_image{{ $i }}').click();" src="{{ asset($toolboxTalk->{"toolbox_image{$i}"}) }}" id="img_toolbox{{ $i }}" alt="Toolbox Image {{ $i }}" class="img-thumbnail mt-2" style="max-width: 200px;">
                         @else
                             <img onclick="document.getElementById('toolbox_image{{ $i }}').click();" src="{{ URL::asset('assets/web-images/download.png') }}" id="img_toolbox{{ $i }}" alt="Toolbox Image {{ $i }}" class="img-thumbnail mt-2" style="max-width: 200px;">
@@ -1047,9 +1033,10 @@
 
 
 
+
     
 </div>
-<md-filled-tonal-button type="submit"  id="submitBtn">{{ isset($siteSurvey) ? 'Update' : 'Create' }}</md-filled-tonal-button>
+<md-filled-tonal-button  type="submit"  id="submitBtn">{{ isset($siteSurvey) ? 'Update' : 'Create' }}</md-filled-tonal-button>
 
 
 
@@ -1073,8 +1060,7 @@
     </div>
 
    
-    </div>
-	</div>
+   
     </section>
 @endsection
 
