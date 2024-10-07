@@ -36,18 +36,20 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'type' => 'required',
             'area' => 'required',
             'project' => 'required',
             'vendor' => 'required',
         ]);
-
+    
         $data = $request->all();
         $data['password'] = bcrypt($data['password']);
+        $data['type'] = true; // Set the 'type' field to true
+    
         User::create($data);
-
+    
         return redirect()->route('users.index')->with('success', 'User created successfully');
     }
+    
 
     // Show the form for editing the specified user
     public function edit(User $user)
@@ -61,19 +63,24 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'type' => 'required',
             'area' => 'required',
             'project' => 'required',
             'vendor' => 'required',
         ]);
     
         $data = $request->all();
+    
+        // Set type to true by default, no need for user input
+        $data['type'] = true;
+    
+        // Check if password field is filled and hash it
         if ($request->filled('password')) {
             $data['password'] = bcrypt($data['password']);
         } else {
-            unset($data['password']);
+            unset($data['password']); // Remove password field if not filled
         }
     
+        // Update user data
         $user->update($data);
     
         return redirect()->route('users.index')->with('success', 'User updated successfully');

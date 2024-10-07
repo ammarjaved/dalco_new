@@ -1,15 +1,24 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container">
-        <h1>Users</h1>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4" style="font-size: 2.5rem; font-weight: 600; color: #343a40;">Manage Users</h1>
 
-        <md-filled-tonal-button style="margin-bottom: 10px" href="{{ route('users.create') }}">Create New User</md-filled-tonal-button>
+        <!-- Create New User Button -->
+        <div class="justify-content-end mb-4">
+            <md-filled-tonal-button 
+                href="{{ route('users.create') }}" 
+                
+               >
+                + Create New User
+            </md-filled-tonal-button>
+        </div>
 
+        <!-- Success or Error Message -->
         @if(session('success'))
             <div class="alert 
                 {{ session('success') === 'User created successfully' || session('success') === 'User updated successfully' ? 'alert-success' : 'alert-danger' }} 
-                alert-dismissible fade show" role="alert">
+                alert-dismissible fade show text-center" role="alert">
                 <strong>&#10004; {{ session('success') === 'User created successfully' ? 'Success:' : (session('success') === 'User updated successfully' ? 'Updated:' : 'Deleted:') }}</strong> 
                 {{ session('success') }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -18,55 +27,61 @@
             </div>
 
             <script>
-                // Automatically close the alert after 2 seconds
                 setTimeout(function() {
                     $('.alert').alert('close');
                 }, 2000);
             </script>
         @endif
 
-        <table id="myTable" class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Type</th>
-                    <th>Area</th>
-                    <th>Project</th>
-                    <th>Vendor</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($users as $user)
+        <!-- Responsive Table -->
+        <div class="table-responsive shadow-lg p-3 mb-5 bg-white rounded">
+            <table id="myTable" class="table table-hover table-striped table-bordered" style="font-size: 1rem;">
+                <thead class="thead-dark" style="background-color: #343a40; color: #fff;">
                     <tr>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->type }}</td>
-                        <td>{{ $user->area }}</td>
-                        <td>{{ $user->project }}</td>
-                        <td>{{ $user->vendor }}</td>
-                        <td>
-                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">Edit</a>
-                            <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </td>
+                        <th>Name</th>
+                        <th>Email</th>
+                        
+                        <th>Area</th>
+                        <th>Project</th>
+                        <th>Vendor</th>
+                        <th class="text-center">Actions</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach($users as $user)
+                        <tr>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                          
+                            <td>{{ $user->area }}</td>
+                            <td>{{ $user->project }}</td>
+                            <td>{{ $user->vendor }}</td>
+                            <td class="text-center">
+                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-sm">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash-alt"></i> Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection
 
 @section('script')
-    <!-- DataTables CSS and JS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    
+    <!-- Latest DataTables CSS and JS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable({
@@ -83,9 +98,63 @@
                 ordering: true,
                 order: [[0, 'asc']],
                 columnDefs: [
-                    { orderable: false, targets: [6] } // Disable ordering on the Actions column
+                    { orderable: false, targets: [6] }
                 ]
             });
         });
     </script>
+
+    <!-- Additional styling for better appearance -->
+    <style>
+        /* Styling for buttons, tables, and responsiveness */
+        .btn {
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .table {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+        .table thead th {
+            background-color: #343a40;
+            color: white;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+        .table td, .table th {
+            padding: 15px;
+        }
+        .table-bordered th, .table-bordered td {
+            border: none;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .table-responsive {
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .table {
+                font-size: 0.9rem;
+            }
+            td {
+                word-wrap: break-word;
+            }
+            .btn-sm {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
 @endsection
