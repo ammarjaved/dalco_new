@@ -77,12 +77,7 @@
                     <md-outlined-text-field label="Password (leave blank to keep current)" type="password" id="password" name="password"></md-outlined-text-field>
                 </div>
 
-                <div class="form-row">
-                    <md-outlined-select label="Type" id="type" name="type" required>
-                        <md-select-option value="true" {{ $user->type === 'true' ? 'selected' : '' }}>True</md-select-option>
-                        <md-select-option value="false" {{ $user->type === 'false' ? 'selected' : '' }}>False</md-select-option>
-                    </md-outlined-select>
-                </div>
+                
 
                 <div class="form-row">
                     <md-outlined-select label="Area" id="area" name="area" required onchange="updateProjectAndCompany()">

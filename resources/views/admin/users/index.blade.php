@@ -40,7 +40,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Type</th>
+                        
                         <th>Area</th>
                         <th>Project</th>
                         <th>Vendor</th>
@@ -52,7 +52,7 @@
                         <tr>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->type }}</td>
+                          
                             <td>{{ $user->area }}</td>
                             <td>{{ $user->project }}</td>
                             <td>{{ $user->vendor }}</td>

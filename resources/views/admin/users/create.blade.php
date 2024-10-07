@@ -54,10 +54,7 @@
                 <md-outlined-text-field label="Email" type="email" id="email" name="email" required></md-outlined-text-field>
                 <md-outlined-text-field label="Password" type="password" id="password" name="password" required></md-outlined-text-field>
                 
-                <md-outlined-select label="Type" id="type" name="type" required>
-                    <md-select-option value="true">True</md-select-option>
-                    <md-select-option value="false">False</md-select-option>
-                </md-outlined-select>
+               
                 
                 <md-outlined-select label="Area" id="area" name="area" required onchange="updateProjectAndCompany()">
                     <md-select-option value="KL">KL</md-select-option>
