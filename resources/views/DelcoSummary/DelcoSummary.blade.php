@@ -175,7 +175,7 @@ style="background-color: #8e44ad;margin-left:20px; color:white">Add Site Survey<
 
 
                 <td class="align-middle text-center">
-                    @if ($data->nama_pe)
+                    @if ($data->nama_pe && $data->geom!=null)
                         <span class="check "
                             style="font-weight: 600; color: green;">&#x2713;</span>
                     

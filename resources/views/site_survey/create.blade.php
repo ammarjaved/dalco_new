@@ -685,15 +685,15 @@
                     </md-label>
                     <md-tabs id="tab-{{$field}}" class="toggle-btn">
                         <!-- Yes Radio Button -->
-                        <md-secondary-tab   value="yes" id="val-tab-{{$field}}" onclick="toggleFileUpload('{{ $field }}', true, 'yes')" {{ isset($siteSurvey1) && $siteSurvey1->$field == 'yes' ? 'active' : '' }}>
+                        <md-secondary-tab   value="yes" id="val-tab-{{$field}}" onclick="toggleFileUpload('{{ $field }}', true, 'yes')" {{ isset($siteSurvey1->$field) && $siteSurvey1->$field == 'yes' ? 'active' : '' }}>
                             Yes
-                            <input type="radio" id="yes-{{$field}}" name="{{ $field }}" value="yes" style="display:none;" {{ isset($siteSurvey1) && $siteSurvey1->$field == 'yes' ? 'checked' : '' }}>
+                            <input type="radio" id="yes-{{$field}}" name="{{ $field }}" value="yes" style="display:none;" {{ isset($siteSurvey1->$field) && $siteSurvey1->$field == 'yes' ? 'checked' : '' }}>
                         </md-secondary-tab>
 
                         <!-- No Radio Button -->
-                        <md-secondary-tab  value="no" id="val-tab-{{$field}}"  onclick="toggleFileUpload('{{ $field }}', false, 'no')" {{ !isset($siteSurvey1) || $siteSurvey1->$field == 'no' ? 'active' : '' }}>
+                        <md-secondary-tab  value="no" id="val-tab-{{$field}}"  onclick="toggleFileUpload('{{ $field }}', false, 'no')" {{ !isset($siteSurvey1->$field) || $siteSurvey1->$field == 'no' ? 'active' : '' }}>
                             No
-                            <input type="radio" id="no-{{$field}}"  name="{{ $field }}" value="no" style="display:none;" {{ !isset($siteSurvey1) || $siteSurvey1->$field == 'no' ? 'checked' : '' }}>
+                            <input type="radio" id="no-{{$field}}"  name="{{ $field }}" value="no" style="display:none;" {{ !isset($siteSurvey1->$field) || $siteSurvey1->$field == 'no' ? 'checked' : '' }}>
                         </md-secondary-tab>
                     </md-tabs>
 
