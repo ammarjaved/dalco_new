@@ -79,9 +79,9 @@
                         
                         <tbody id="myTable2">
                             <h3>PreCabling</h3>
-                            <tr>
+                            <!-- <tr>
                               <th>PreCabling ToolboxTalk</th><td><a href="/pc_tbk/{{$id}}" target="_blank"> Download PreCabling ToolboxTalk</a></td> 
-                            </tr>  
+                            </tr>   -->
 
                             <tr>
                                 <th>PreCabling PIW</th><td><a href="/precbale_piw/{{$id}}" target="_blank"> Download PreCabling PIW</a></td> 
@@ -113,9 +113,9 @@
                         
                         <tbody id="myTable3">
                             <h3>Shutdown</h3>
-                            <tr>
+                            <!-- <tr>
                               <th>Shutdown ToolboxTalk</th><td><a href="/sd_tbk/{{$id}}" target="_blank"> Download Shutdown ToolboxTalk</a></td> 
-                            </tr>  
+                            </tr>   -->
 
                             <tr>
                                 <th>Shutdown Images</th><td><a href="/shutdown_images/{{$id}}" target="_blank"> Download Shutdown Images</a></td> 
@@ -128,7 +128,7 @@
                     </table>
 
 
-                    
+<!--                     
                     <table  class="table table-bordered table-hover data-table">
                         
                         <tbody id="myTable4">
@@ -146,7 +146,7 @@
                             </tr>
                            
                         </tbody>
-                    </table>
+                    </table> -->
                    
                 </div>
             </div>

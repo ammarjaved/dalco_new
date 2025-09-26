@@ -69,6 +69,11 @@ Route::middleware('auth')->group(function () {
 
    Route::get('site_survey/create', [SiteSurveyController::class,'create'])->name('site_survey.create');
    Route::get('site_survey/{id}/edit', [SiteSurveyController::class, 'edit'])->name('site_survey.edit');
+   Route::get('site_survey/{id}/ss_images', [SiteSurveyController::class, 'ss_images'])->name('site_survey.ss_images');
+   Route::post('site_survey/ss_image_store', [SiteSurveyController::class, 'ss_image_store'])->name('site_survey.ss_image_store');
+   Route::delete('site_survey/del_ss_image/{id}', [SiteSurveyController::class, 'del_ss_image'])->name('site_survey.del_ss_image');
+
+
    Route::resource('site_survey', SiteSurveyController::class,['except' => ['create','edit']]);
 
     Route::resource('toolbox_talks', ToolboxTalkController::class);

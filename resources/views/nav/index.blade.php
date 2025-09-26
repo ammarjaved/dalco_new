@@ -110,6 +110,10 @@
                      Show Site Survey
                   </md-menu-item>
 
+                  <md-menu-item href="{{ route('site_survey.ss_images', $survey->id) }}">
+                     Add Site Survey PICS
+                  </md-menu-item>
+
 
                   <md-menu-item href="{{ route('siteFileUploadView.index', ['id' => $survey->id]) }}">
                     Attach Site Suvey Files 
@@ -119,9 +123,9 @@
           <!-- </md-menu-button> -->
         
           <script type="module">
-        const anchorEl = document.body.querySelector('#usage-document-anchor6');
-        const menuEl = document.body.querySelector('#usage-document6');
-        anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
+        const anchorEl6 = document.body.querySelector('#usage-document-anchor6');
+        const menuEl6 = document.body.querySelector('#usage-document6');
+        anchorEl6.addEventListener('click', () => { menuEl6.open = !menuEl6.open; });
         </script>
         
         
@@ -137,9 +141,9 @@
     </md-menu>
      
 <script type="module">
-    const anchorEl = document.body.querySelector('#usage-document-anchor');
-    const menuEl = document.body.querySelector('#usage-document');
-    anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
+    const anchorEl7 = document.body.querySelector('#usage-document-anchor');
+    const menuEl7 = document.body.querySelector('#usage-document');
+    anchorEl7.addEventListener('click', () => { menuEl7.open = !menuEl7.open; });
 </script>
         <!-- <md-menu-button id="pre-cabling-menu"> -->
         <div>
@@ -147,7 +151,7 @@
         </div>
             <md-menu positioning="document" id="usage-document1" anchor="usage-document-anchor1">
 
-                @if ($survey->ToolBoxTalk)
+                <!-- @if ($survey->ToolBoxTalk)
                 <md-menu-item href="{{ route('PreCabling.toolboxtalkedit', $survey->ToolBoxTalk->id) }}">
                     Edit Toolbox Talk
                 </md-menu-item>
@@ -155,7 +159,7 @@
                 <md-menu-item href="{{ route('PreCabling.toolboxtalk', ['id' => $id]) }}">
                     Toolbox Talk
                 </md-menu-item>
-            @endif
+            @endif -->
 
                 @if ($survey->PreCabling)
                     <md-menu-item href="{{ route('pre-cabling.edit', $survey->PreCabling->id) }}">
@@ -189,9 +193,9 @@
         <!-- </md-menu-button> -->
 
         <script type="module">
-    const anchorEl = document.body.querySelector('#usage-document-anchor1');
-    const menuEl = document.body.querySelector('#usage-document1');
-    anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
+    const anchorEl8 = document.body.querySelector('#usage-document-anchor1');
+    const menuEl8 = document.body.querySelector('#usage-document1');
+    anchorEl8.addEventListener('click', () => { menuEl8.open = !menuEl8.open; });
 </script>
 
 <div >
@@ -199,7 +203,7 @@
   </div>
       <md-menu positioning="document" id="usage-document2" anchor="usage-document-anchor2">
          
-        @if ($survey->toolBoxTalkOutage)
+        <!-- @if ($survey->toolBoxTalkOutage)
         <md-menu-item href="{{ route('image_shutdown.toolboxtalkedit', $survey->toolBoxTalkOutage->id) }}">
             Edit Toolbox Talk
         </md-menu-item>
@@ -207,7 +211,7 @@
         <md-menu-item href="{{ route('image_shutdown.toolboxtalk', ['id' => $id]) }}">
             Toolbox Talk
         </md-menu-item>
-    @endif
+    @endif -->
          
 
           <md-menu-item href="{{ route('image-shutdown.create', ['id' => $id]) }}">
@@ -222,13 +226,13 @@
   <!-- </md-menu-button> -->
 
   <script type="module">
-const anchorEl = document.body.querySelector('#usage-document-anchor2');
-const menuEl = document.body.querySelector('#usage-document2');
-anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
+const anchorEl9 = document.body.querySelector('#usage-document-anchor2');
+const menuEl9 = document.body.querySelector('#usage-document2');
+anchorEl9.addEventListener('click', () => { menuEl9.open = !menuEl9.open; });
 </script>
 
 
-       
+<!--        
 <div >
     <md-filled-button id="usage-document-anchor3">SAT</md-filled-button>
   </div>
@@ -254,14 +258,14 @@ anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
 
     
          
-      </md-menu>
+      </md-menu> -->
   <!-- </md-menu-button> -->
 
-  <script type="module">
+  <!-- <script type="module">
 const anchorEl = document.body.querySelector('#usage-document-anchor3');
 const menuEl = document.body.querySelector('#usage-document3');
 anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
-</script>
+</script> -->
 
 <div >
     <md-filled-button id="usage-document-anchor4">LKS</md-filled-button>
@@ -276,9 +280,9 @@ anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
   <!-- </md-menu-button> -->
 
   <script type="module">
-const anchorEl = document.body.querySelector('#usage-document-anchor4');
-const menuEl = document.body.querySelector('#usage-document4');
-anchorEl.addEventListener('click', () => { menuEl.open = !menuEl.open; });
+const anchorEl33 = document.body.querySelector('#usage-document-anchor4');
+const menuEl33= document.body.querySelector('#usage-document4');
+anchorEl33.addEventListener('click', () => { menuEl33.open = !menuEl33.open; });
 </script>
 
 

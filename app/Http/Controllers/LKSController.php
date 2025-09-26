@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FileUpload;
 use App\Models\SitePicture;
+use App\Models\SSImages;
 use App\Models\SiteSurvey;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,7 @@ class LKSController extends Controller{
     public function siteSurveyToolboxTalk($id){
       try{
         
-          $usr_info = \Auth::user();
+          $usr_info = Auth::user();
           $projectName = $usr_info->project;
         $survey = SiteSurvey::findOrFail($id);
         $toolboxtalk = ToolBoxTalk::where('site_survey_id', $id)->where('skop_kerja','=','SITE-SURVEY')->first();
@@ -44,7 +45,7 @@ class LKSController extends Controller{
                          ->with('error', ' siteSurvey ToolboxTalk is missing.');
     }
     
-       return  view('LKS.site_survey_tbk', compact('toolboxtalk','survey','projectName'));
+       return  view('LKS.site_survey_tbk1', compact('toolboxtalk','survey','projectName'));
     
     }catch(\Exception $e){
     
@@ -58,7 +59,7 @@ class LKSController extends Controller{
 
   public function siteSurvey($id){
     try{
-        $usr_info = \Auth::user();
+        $usr_info = Auth::user();
         $projectName = $usr_info->project;
      
           $survey = SiteSurvey::findOrFail($id);
@@ -69,7 +70,8 @@ class LKSController extends Controller{
                              ->with('error', ' siteSurvey data is missing.');
         }
         
-      return view('LKS.Site_Survey_Info', compact('survey','projectName'));
+    //    return  $survey;
+      return view('LKS.Site_Survey_Info1', compact('survey','projectName'));
      
       }catch(\Exception $e)
       {
@@ -81,10 +83,12 @@ class LKSController extends Controller{
 
    public function siteSurveyPics($id){
   try{
-      $usr_info = \Auth::user();
+      $usr_info = Auth::user();
       $projectName = $usr_info->project;
         $survey = SiteSurvey::findOrFail($id);
         $pictureData = SitePicture::where('site_survey_id', $survey->id)->first();
+        $SSImages = SSImages::where('site_survey_id', $survey->id)->get();
+        
 
         if (!$pictureData) {
         
@@ -95,7 +99,7 @@ class LKSController extends Controller{
         
 
     
-    return view('LKS.Site_Survey_Pictures', compact('survey','pictureData','projectName'));
+    return view('LKS.Site_Survey_Pictures1', compact('survey','pictureData','projectName','SSImages'));
   }catch(\Exception $e)
   {
     return redirect()->route('LKS.index', ['id' => $id])
@@ -116,7 +120,7 @@ class LKSController extends Controller{
     public function PrecableToolboxTalk($id)
     {
       try{
-      $usr_info = \Auth::user();
+      $usr_info = Auth::user();
       $projectName = $usr_info->project;
       $survey = SiteSurvey::findOrFail($id);
 
@@ -148,7 +152,7 @@ class LKSController extends Controller{
 public function ShutdownToolboxTalk($id)
 {
   try{
-  $usr_info = \Auth::user();
+  $usr_info = Auth::user();
   $projectName = $usr_info->project;
   $survey = SiteSurvey::findOrFail($id);
 
@@ -178,7 +182,7 @@ public function SATToolboxTalk($id)
 {
   try{
 
-  $usr_info = \Auth::user();
+  $usr_info = Auth::user();
   $projectName = $usr_info->project;
   $survey = SiteSurvey::findOrFail($id);
 
@@ -233,11 +237,12 @@ return $SATFiles;
 
 
 public function Material_Selection($id){
-  $usr_info = \Auth::user();
+  $usr_info = Auth::user();
   $projectName = $usr_info->project;
   $survey = SiteSurvey::findOrFail($id);
  
   $projectMaterials = ProjectMaterial::where('site_survey_id', $survey->id)->get();
+ 
 
   return view('LKS.Material_Selection', compact('survey','projectMaterials','projectName'));
 }
@@ -245,7 +250,7 @@ public function Material_Selection($id){
 public function Precable_Piw($id)
 {
   try{
-  $usr_info = \Auth::user();
+  $usr_info = Auth::user();
   $projectName = $usr_info->project;
   $survey = SiteSurvey::findOrFail($id);
  
@@ -256,7 +261,7 @@ public function Precable_Piw($id)
         ->with('error', 'PreCabling data is missing.');
   }
 
-  return  view('LKS.PreCabling_PIW', compact('survey','Piw','projectName'));
+  return  view('LKS.PreCabling_PIW1', compact('survey','Piw','projectName'));
   }catch(\Exception $e){
    
    return redirect()->route('LKS.index', ['id' => $id])
@@ -269,7 +274,7 @@ public function Precable_Piw($id)
 
     public function Precable_Shutdown($id)
     { try{
-      $usr_info = \Auth::user();
+      $usr_info = Auth::user();
       $projectName = $usr_info->project;
       $survey = SiteSurvey::findOrFail($id);
       $PreShutdown= PreCablingShutDown::where('site_survey_id', $survey->id)->first();
@@ -282,7 +287,7 @@ public function Precable_Piw($id)
     
      
     
-      return view('LKS.PreCabling_PreShutdown', compact('survey','PreShutdown','projectName'));
+      return view('LKS.PreCabling_PreShutdown1', compact('survey','PreShutdown','projectName'));
   }catch(\Exception $e)
   {
   
@@ -298,7 +303,7 @@ public function Precable_Piw($id)
  public function Precable_Images($id)
 {
     try {
-        $usr_info = \Auth::user();
+        $usr_info = Auth::user();
         $projectName = $usr_info->project;
         $survey = SiteSurvey::findOrFail($id);
         $PreCablmages = PreCablingImages::where('site_survey_id', $survey->id)->get();
@@ -309,7 +314,7 @@ public function Precable_Piw($id)
                              ->with('error', 'PreCabling Image is missing.');
         }
         
-        return view('LKS.PreCabling_Images', compact('survey', 'PreCablmages', 'projectName'));
+        return view('LKS.PreCabling_Images1', compact('survey', 'PreCablmages', 'projectName'));
     } catch (\Exception $e) {
         return redirect()->route('LKS.index', ['id' => $id])
                          ->with('error', 'An error occurred: ' . $e->getMessage());
@@ -321,7 +326,7 @@ public function Precable_Piw($id)
 public function Shutdown_Images($id)
 {
   try{
-  $usr_info = \Auth::user();
+  $usr_info = Auth::user();
   $projectName = $usr_info->project;
   $survey = SiteSurvey::findOrFail($id);
   $ImageShutImages=ImageShutdown::where('site_survey_id', $survey->id)->get();
@@ -331,7 +336,7 @@ public function Shutdown_Images($id)
                    ->with('error', 'Shutdown Image is missing.');
 }
 
-  return view ('LKS.Shutdown_Images', compact('survey','ImageShutImages','projectName'));
+  return view ('LKS.Shutdown_Images1', compact('survey','ImageShutImages','projectName'));
 }catch(\Exception $e){
 return redirect()->route('LKS.index', ['id' => $id])
 ->with('error', 'Shutdown Image is missing.');
@@ -343,7 +348,7 @@ return redirect()->route('LKS.index', ['id' => $id])
   public function SAT_Images($id)
 {
     try {
-        $usr_info = \Auth::user();
+        $usr_info = Auth::user();
         $projectName = $usr_info->project;
         $survey = SiteSurvey::findOrFail($id);
         

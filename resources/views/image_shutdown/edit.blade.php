@@ -125,6 +125,8 @@
                             <md-select-option value="BEFORE" {{ $imageShutdown->image_type == 'BEFORE' ? 'selected' : '' }}>BEFORE</md-select-option>
                             <md-select-option value="DURING" {{ $imageShutdown->image_type == 'DURING' ? 'selected' : '' }}>DURING</md-select-option>
                             <md-select-option value="AFTER" {{ $imageShutdown->image_type == 'AFTER' ? 'selected' : '' }}>AFTER</md-select-option>
+                            <md-select-option value="ANY" {{ $imageShutdown->image_type == 'ANY' ? 'selected' : '' }}>ANY</md-select-option>
+
                         </md-outlined-select>
                     </div>
             

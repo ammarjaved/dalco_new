@@ -25,8 +25,8 @@ class MaterialSelectionController extends Controller
         // Fetch the materials data
         $data = DB::select(DB::raw("
             WITH foo AS (SELECT * FROM project_material)
-            SELECT a.id, c.nama_pe, mat_desc, mat_code, bun, a.quantity, a.remarks
-            FROM material b
+            SELECT a.id, c.nama_pe, mat_desc,mat_type, mat_code, bun, a.quantity, a.remarks
+            FROM material1 b
             JOIN foo a ON a.material_id = b.id
             JOIN tbl_site_survey c ON a.site_survey_id = c.id
             WHERE c.id = ?

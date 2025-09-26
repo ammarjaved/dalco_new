@@ -9,6 +9,7 @@ use App\Models\ToolBoxTalk;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\SiteVisitRepository;
+use App\Models\SSImages;
 
 
 
@@ -90,6 +91,74 @@ class SiteSurveyController extends Controller
         return view('site_survey.index',compact('surveys')); //compact('surveys') is equivalent to ['surveys' => $surveys].
 
     }
+
+
+    public function ss_images($id)
+    {
+        //
+        $survey = SiteSurvey::findOrFail($id);
+        $imageShutdowns = SSImages::where('site_survey_id', $id)->get(); // Get related image shutdowns
+        
+
+        return view('site_survey.ss_images', [
+            'survey' => $survey,
+            'imageShutdowns' => $imageShutdowns,
+            'site_survey'=>$id
+            
+        ]);
+    }
+
+    public function ss_image_store(Request $request)
+    {
+        //
+        try {
+            //code...
+            //         $request->validate([
+            //             'image_name' => 'required|string|max:255',
+            //             'image_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            //             'site_survey_id' => 'required|exists:tbl_site_survey,id',
+            //         ]);
+
+            $imagePath = '';
+            $destinationPath = 'assets/images/';
+            if ($request->hasFile('image_url')) {
+                $file = $request->file('image_url');
+                $filename = time() . '-' . $file->getClientOriginalName();
+
+                $request->file('image_url')->move($destinationPath, $filename);
+                $imagePath = $destinationPath . $filename;
+            }
+
+            // Create the ImageShutdown record
+            SSImages::create([
+                'image_name' => $request->input('image_name'),
+                'image_url' => $imagePath,
+                'site_survey_id' => $request->input('site_survey_id'),
+                'created_by' => auth()->user()->id,
+            ]);
+
+            // Redirect with success message
+            return redirect()
+                ->route('site_survey.ss_images', ['id' => $request->site_survey_id])
+                ->with('success', 'Image uploaded successfully.');
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+            return redirect()
+                ->route('site_survey.ss_images', ['id' => $request->site_survey_id])
+                ->with('failed', 'Image uploading failed.');
+        }
+    }
+
+
+    public function del_ss_image($id)
+    {
+        $imageShutdown = SSImages::findOrFail($id);
+        $imageShutdown->delete();
+
+        return redirect()->back()->with('success', 'Image deleted successfully.');
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -178,38 +247,38 @@ class SiteSurveyController extends Controller
 
     
             // Handle file uploads
-            $imageFields = [
-                'substation_fl_image1', 'substation_fl_image2',
-                'existing_switchgear_image1', 'existing_switchgear_image2',
-                'switchgear_nameplate_image1', 'switchgear_nameplate_image2',
-                'distribution_board_image1', 'distribution_board_image2',
-                'battery_charger_image1', 'battery_charger_image2',
-                'battery_charger_nameplate_image1', 'battery_charger_nameplate_image2',
-                'ceiling_tray_image1', 'ceiling_tray_image2',
-                'civil_location_image1', 'civil_location_image2',
-                'substation_entrance_image1', 'substation_entrance_image2',
-                'cable_route_image1', 'cable_route_image2',
-                'genset_location_image1', 'genset_location_image2',
-                'feeder_tx_image1', 'feeder_tx_image2',
-                'trench_view_image1', 'trench_view_image2',
-                'rtu_image1', 'rtu_image2',
-                'rcb_image1', 'rcb_image2',
-                'efi_image1', 'efi_image2',
-                'other_image1', 'other_image2', 'other_image3', 'other_image4'
-            ];
-            $destinationPath = 'assets/images/';
+            // $imageFields = [
+            //     'substation_fl_image1', 'substation_fl_image2',
+            //     'existing_switchgear_image1', 'existing_switchgear_image2',
+            //     'switchgear_nameplate_image1', 'switchgear_nameplate_image2',
+            //     'distribution_board_image1', 'distribution_board_image2',
+            //     'battery_charger_image1', 'battery_charger_image2',
+            //     'battery_charger_nameplate_image1', 'battery_charger_nameplate_image2',
+            //     'ceiling_tray_image1', 'ceiling_tray_image2',
+            //     'civil_location_image1', 'civil_location_image2',
+            //     'substation_entrance_image1', 'substation_entrance_image2',
+            //     'cable_route_image1', 'cable_route_image2',
+            //     'genset_location_image1', 'genset_location_image2',
+            //     'feeder_tx_image1', 'feeder_tx_image2',
+            //     'trench_view_image1', 'trench_view_image2',
+            //     'rtu_image1', 'rtu_image2',
+            //     'rcb_image1', 'rcb_image2',
+            //     'efi_image1', 'efi_image2',
+            //     'other_image1', 'other_image2', 'other_image3', 'other_image4'
+            // ];
+            // $destinationPath = 'assets/images/';
 
 
     
-                foreach ($imageFields as $field) {
-                    if ($request->hasFile($field)) {
-                        $img_ext =$request->file($field)->getClientOriginalExtension();
-                        $filename =$field . '-' . strtotime(now()) . '.' . $img_ext;
-                        $request->file($field)->move($destinationPath, $filename);
-                       // $pictureData[$field] = $request->file($field)->store('images', 'public');
-                       $pictureData[$field] =$destinationPath . $filename;
-                    }
-                }
+                // foreach ($imageFields as $field) {
+                //     if ($request->hasFile($field)) {
+                //         $img_ext =$request->file($field)->getClientOriginalExtension();
+                //         $filename =$field . '-' . strtotime(now()) . '.' . $img_ext;
+                //         $request->file($field)->move($destinationPath, $filename);
+                //        // $pictureData[$field] = $request->file($field)->store('images', 'public');
+                //        $pictureData[$field] =$destinationPath . $filename;
+                //     }
+                // }
 
 
 
@@ -320,36 +389,36 @@ class SiteSurveyController extends Controller
             $pictureData['other'] = $request->other;
     
             // Handle file uploads
-            $imageFields = [
-                'substation_fl_image1', 'substation_fl_image2',
-                'existing_switchgear_image1', 'existing_switchgear_image2',
-                'switchgear_nameplate_image1', 'switchgear_nameplate_image2',
-                'distribution_board_image1', 'distribution_board_image2',
-                'battery_charger_image1', 'battery_charger_image2',
-                'battery_charger_nameplate_image1', 'battery_charger_nameplate_image2',
-                'ceiling_tray_image1', 'ceiling_tray_image2',
-                'civil_location_image1', 'civil_location_image2',
-                'substation_entrance_image1', 'substation_entrance_image2',
-                'cable_route_image1', 'cable_route_image2',
-                'genset_location_image1', 'genset_location_image2',
-                'feeder_tx_image1', 'feeder_tx_image2',
-                'trench_view_image1', 'trench_view_image2',
-                'rtu_image1', 'rtu_image2',
-                'rcb_image1', 'rcb_image2',
-                'efi_image1', 'efi_image2',
-                'other_image1', 'other_image2', 'other_image3', 'other_image4'
-            ];
-            $destinationPath = 'assets/images/';
+            // $imageFields = [
+            //     'substation_fl_image1', 'substation_fl_image2',
+            //     'existing_switchgear_image1', 'existing_switchgear_image2',
+            //     'switchgear_nameplate_image1', 'switchgear_nameplate_image2',
+            //     'distribution_board_image1', 'distribution_board_image2',
+            //     'battery_charger_image1', 'battery_charger_image2',
+            //     'battery_charger_nameplate_image1', 'battery_charger_nameplate_image2',
+            //     'ceiling_tray_image1', 'ceiling_tray_image2',
+            //     'civil_location_image1', 'civil_location_image2',
+            //     'substation_entrance_image1', 'substation_entrance_image2',
+            //     'cable_route_image1', 'cable_route_image2',
+            //     'genset_location_image1', 'genset_location_image2',
+            //     'feeder_tx_image1', 'feeder_tx_image2',
+            //     'trench_view_image1', 'trench_view_image2',
+            //     'rtu_image1', 'rtu_image2',
+            //     'rcb_image1', 'rcb_image2',
+            //     'efi_image1', 'efi_image2',
+            //     'other_image1', 'other_image2', 'other_image3', 'other_image4'
+            // ];
+            // $destinationPath = 'assets/images/';
 
-            foreach ($imageFields as $field) {
-                if ($request->hasFile($field)) {
-                    $img_ext =$request->file($field)->getClientOriginalExtension();
-                    $filename =$field . '-' . strtotime(now()) . '.' . $img_ext;
-                    $request->file($field)->move($destinationPath, $filename);
-                   // $pictureData[$field] = $request->file($field)->store('images', 'public');
-                   $pictureData[$field] =$destinationPath . $filename;
-                }
-            }
+            // foreach ($imageFields as $field) {
+            //     if ($request->hasFile($field)) {
+            //         $img_ext =$request->file($field)->getClientOriginalExtension();
+            //         $filename =$field . '-' . strtotime(now()) . '.' . $img_ext;
+            //         $request->file($field)->move($destinationPath, $filename);
+            //        // $pictureData[$field] = $request->file($field)->store('images', 'public');
+            //        $pictureData[$field] =$destinationPath . $filename;
+            //     }
+            // }
 
 
             $usr_info=\Auth::user();

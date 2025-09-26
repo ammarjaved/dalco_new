@@ -251,7 +251,7 @@
 
         <md-tabs id="myTab">
             <md-primary-tab onclick="handleNavigation1('tab1-tab')" id="tab1-tab" active>Site Survey Info</md-primary-tab>
-            <md-primary-tab onclick="handleNavigation1('tab2-tab')" id="tab2-tab">Site Survey Pic</md-primary-tab>
+            <md-primary-tab onclick="handleNavigation1('tab2-tab')" id="tab2-tab">Site Survey Pic Check</md-primary-tab>
             <md-primary-tab onclick="handleNavigation1('tab3-tab')" id="tab3-tab">Tool Box Talk</md-primary-tab>
         </md-tabs>
 
@@ -698,7 +698,7 @@
                     </md-tabs>
 
                     <!-- Image Uploads Section -->
-                    <div id="{{ $field }}_images" style="{{ (isset($siteSurvey1) && $siteSurvey1->$field == 'yes') ? '' : 'display: none;' }}">
+                    <!-- <div id="{{ $field }}_images" style="{{ (isset($siteSurvey1) && $siteSurvey1->$field == 'yes') ? '' : 'display: none;' }}">
                         @for ($i = 1; $i <= ($field == 'other' ? 4 : 2); $i++)
                             <div class="form-group">
                                 <md-label for="{{ $field }}_image{{ $i }}">
@@ -710,9 +710,9 @@
                                 @else
                                     <img onclick="document.getElementById('{{ $field }}_image{{ $i }}').click();" src="{{ URL::asset('assets/web-images/download.png') }}" id="img_{{ $field }}{{ $i }}" alt="{{ ucwords(str_replace('_', ' ', $field)) }} Image {{ $i }}" class="img-thumbnail mt-2" style="max-width: 200px;">
                                 @endif
-                            </div>
+                         </div>
                         @endfor
-                    </div>
+                    </div> -->
                 </div>
             </div>
         @endforeach
@@ -980,15 +980,14 @@
 
 <br>
 
-<h4><span style="background-color: #fef7ff; color: #8e44ad; padding: 0 5px;">TOOLBOX PICTURE</span></h4>
-<div class="row">
+<!-- <h4><span style="background-color: #fef7ff; color: #8e44ad; padding: 0 5px;">TOOLBOX PICTURE</span></h4> -->
+<!-- <div class="row">
     <div class="col-md-4">
         <div class="form-group">
             <md-label style="display: block; margin-bottom: 5px;">
                 Picture During Toolbox:
             </md-label>
             <md-tabs id="tab-picture_during_toolbox" class="toggle-btn">
-                <!-- Yes Radio Button -->
                 <md-secondary-tab 
                     value="yes" 
                     id="val-tab-picture_during_toolbox_yes" 
@@ -999,7 +998,6 @@
                     <input type="radio" id="picture_during_toolbox_yes" name="picture_during_toolbox" value="yes" style="display:none;" {{ ($toolboxTalk->picture_during_toolbox ?? old('picture_during_toolbox', 'yes')) === 'yes' ? 'checked' : '' }}>
                 </md-secondary-tab>
             
-                <!-- No Radio Button -->
                 <md-secondary-tab 
                     value="no" 
                     id="val-tab-picture_during_toolbox_no" 
@@ -1011,7 +1009,6 @@
                 </md-secondary-tab>
             </md-tabs>
 
-            <!-- Image Uploads Section -->
             <div id="picture_during_toolbox_images" style="{{ ($toolboxTalk->picture_during_toolbox ?? old('picture_during_toolbox', 'yes')) === 'yes' ? 'display: block;' : 'display: none;' }}">
                 @for ($i = 1; $i <= 2; $i++)
                     <div class="form-group">
@@ -1024,11 +1021,11 @@
                         @else
                             <img onclick="document.getElementById('toolbox_image{{ $i }}').click();" src="{{ URL::asset('assets/web-images/download.png') }}" id="img_toolbox{{ $i }}" alt="Toolbox Image {{ $i }}" class="img-thumbnail mt-2" style="max-width: 200px;">
                         @endif
-                    </div>
+            </div>
                 @endfor
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 
@@ -1165,8 +1162,8 @@ function updateFieldValue(field, value) {
 
 function toggleFileUpload(field, show, val) {
 
-    var fileUploadDiv = document.getElementById(field + '_images');
-    fileUploadDiv.style.display = show ? 'block' : 'none';
+    // var fileUploadDiv = document.getElementById(field + '_images');
+    // fileUploadDiv.style.display = show ? 'block' : 'none';
     if(val==="yes")
 {
     document.getElementById(`yes-${field}`).checked=true;

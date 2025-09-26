@@ -124,14 +124,17 @@
 
 
     <div class="container-fluid">
-        <div class="row">
-            <div class="col border overall-margin" style="margin-left: 10px;">
+
+        <div style="float: right;width:400;height:400px;">
+        <img src="/assets/web-images/tenegalogofull.jfif" class="logo">
+
+            <!-- <div class="col border overall-margin" style="margin-left: 10px;">
                 <img class="logo" src='/assets/web-images/tnblogo.png' alt="TNB Logo">
                 <p class="center-text">TNB ENERGY SERVICES SDN BHD (234667-M)<br>
                     Level 2, Jalan Air Hitam, Kawasan 16,<br>
                     40000 Shah Alam, Selangor</p>
-            </div>
-            <div class="col border overall-margin" style="margin-right: 10px;">
+            </div> -->
+            <!-- <div class="col border overall-margin" style="margin-right: 10px;">
                 @if($projectName === 'AERO-KL' || $projectName === 'AERO-JOHOR')
                 <img class="logo" src='/assets/web-images/main-logo.png' alt="Aerosynergy Solutions Logo">
                 <p class="center-text">AEROSYNERGY SOLUTIONS SDN BHD<br>
@@ -145,13 +148,18 @@
                 <p class="center-text">Default Company Name<br>
                     Default Address</p>
                 @endif
-            </div>
+            </div> -->
+
         </div>
     </div>
     
-    <div class="container-fluid" style="padding-top:40px">
-        <p><strong>NAMA PE:&emsp;&emsp;</strong> {{$survey->nama_pe}}</p>
-       
+    <div class="container-fluid" style="padding-top:150px">
+        <!-- <p><strong>NAMA PE:&emsp;&emsp;</strong> {{$survey->nama_pe}}</p> -->
+        <p><strong>REKOD PENGGUNAAN BARANG - BARANG</strong></p>
+        <p><strong>TAJUK PROJEK:</strong>  {{$survey->nama_pe}}</p>
+        <p><strong>TARIKH MULA:</strong> _______________</p>
+        <p><strong>NO PESANAN:</strong> _______________</p>
+        <p><strong>KONTRAKTOR:</strong> AEROSYNERGY SOLUTION SDN BHD</p>
     </div>
     
     <div style="padding-top: 50px">
@@ -178,39 +186,52 @@
         <table>
             <tr>
                 <th>Bil.</th>
-                <th>No. Rujukan</th>
+                <th>No Katalog</th>
                 <th>Keterangan Barang</th>
+                <th>Kod unit</th>
                 <th>Kuantiti</th>
-                <th>Unit</th>
-                <th>Remarks</th>
+                <th>BRAMOS MRMU</th>
             </tr>
         
-            @foreach ($projectMaterials as $item)
+            @php
+                $groupedMaterials = $projectMaterials->groupBy('material.mat_type');
+                $counter = 1;
+            @endphp
+            
+            @foreach ($groupedMaterials as $matType => $materials)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->material->mat_code }}</td> 
-                    <td>{{ $item->material->mat_desc }}</td>
-                    <td>{{ $item->quantity }}</td>
-                    <td>{{ $item->material->bun }}</td>
-                    <td>{{ $item->remarks }}</td>
-                    
+                    <td colspan="6" style="background-color: #f0f0f0; font-weight: bold; text-align: center;">
+                        {{ strtoupper($matType) }}
+                    </td>
                 </tr>
+                @foreach ($materials as $item)
+                    <tr>
+                        <td>{{ $counter++ }}</td>
+                        <td>{{ $item->material->mat_code }}</td> 
+                        <td>{{ $item->material->mat_desc }}</td>
+                        <td>{{ $item->material->bun }}</td>
+                        <td>{{ $item->quantity }}</td>
+                        <td>{{ $item->remarks }}</td>
+                    </tr>
+                @endforeach
             @endforeach
         </table>
         </div>
         
         
-        {{-- <div class="footer">
-            <div class="signature">
+        <!-- Signature Section -->
+        <div style="margin-top: 50px; display: flex; justify-content: space-between;">
+            <div style="text-align: center;">
+                <p><strong>Penyelia/Juruteknik: </strong></p>
+                <p>Tarikh: </p>
                
-        <p>Nama : </p>
             </div>
-            <div class="signature">
-                
-                <p>Jurutera</p>
-                <p>NAMA:</p>
+            <div style="text-align: center;">
+               
+                <p><strong>Jurutera:</strong></p>
+                <p>Tarikh: </p>
             </div>
-        </div> --}}
+        </div>
     </div>
     
     

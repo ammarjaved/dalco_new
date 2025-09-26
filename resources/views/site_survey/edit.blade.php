@@ -674,7 +674,7 @@
                     </md-tabs>
 
                     <!-- Image Uploads Section -->
-                    <div id="{{ $field }}_images" style="{{ (isset($siteSurvey1) && $siteSurvey1->$field == 'yes') ? '' : 'display: none;' }}">
+                    <!-- <div id="{{ $field }}_images" style="{{ (isset($siteSurvey1) && $siteSurvey1->$field == 'yes') ? '' : 'display: none;' }}">
                         @for ($i = 1; $i <= ($field == 'other' ? 4 : 2); $i++)
                             <div class="form-group">
                                 <md-label for="{{ $field }}_image{{ $i }}">
@@ -688,7 +688,7 @@
                                 @endif
                             </div>
                         @endfor
-                    </div>
+                    </div> -->
                 </div>
             </div>
         @endforeach
@@ -956,28 +956,25 @@
 
 <br>
 
-<h4><span style="background-color: #fef7ff; color: #8e44ad; padding: 0 5px;">TOOLBOX PICTURE</span></h4>
-<div class="row">
+<!-- <h4><span style="background-color: #fef7ff; color: #8e44ad; padding: 0 5px;">TOOLBOX PICTURE</span></h4> -->
+<!-- <div class="row">
     <div class="col-md-4">
         <div class="form-group">
             <md-label style="display: block; margin-bottom: 5px;">
                 Picture During Toolbox:
             </md-label>
             <md-tabs id="tab-picture_during_toolbox" class="toggle-btn">
-                <!-- Yes Radio Button -->
                 <md-secondary-tab value="yes" id="val-tab-picture_during_toolbox" onclick="toggleToolboxImageUpload('picture_during_toolbox', true, 'yes')" {{ isset($toolboxTalk) && $toolboxTalk->picture_during_toolbox == 'yes' ? 'active' : '' }}>
                     Yes
                     <input type="radio" id="yes-picture_during_toolbox" name="picture_during_toolbox" value="yes" style="display:none;" {{ isset($toolboxTalk) && $toolboxTalk->picture_during_toolbox == 'yes' ? 'checked' : '' }}>
                 </md-secondary-tab>
 
-                <!-- No Radio Button -->
                 <md-secondary-tab value="no" id="val-tab-picture_during_toolbox" onclick="toggleToolboxImageUpload('picture_during_toolbox', false, 'no')" {{ !isset($toolboxTalk) || $toolboxTalk->picture_during_toolbox == 'no' ? 'active' : '' }}>
                     No
                     <input type="radio" id="no-picture_during_toolbox" name="picture_during_toolbox" value="no" style="display:none;" {{ !isset($toolboxTalk) || $toolboxTalk->picture_during_toolbox == 'no' ? 'checked' : '' }}>
                 </md-secondary-tab>
             </md-tabs>
 
-            <!-- Image Uploads Section -->
             <div id="picture_during_toolbox_images" style="{{ (isset($toolboxTalk) && $toolboxTalk->picture_during_toolbox == 'yes') ? '' : 'display: none;' }}">
                 @for ($i = 1; $i <= 2; $i++)
                     <div class="form-group">
@@ -994,7 +991,7 @@
                 @endfor
             </div>
         </div>
-    </div>
+    </div> -->
     
 </div>
 <md-filled-tonal-button type="submit"  id="submitBtn">{{ isset($siteSurvey) ? 'Update' : 'Create' }}</md-filled-tonal-button>
@@ -1127,8 +1124,8 @@ function updateFieldValue(field, value) {
 
 function toggleFileUpload(field, show, val) {
 
-    var fileUploadDiv = document.getElementById(field + '_images');
-    fileUploadDiv.style.display = show ? 'block' : 'none';
+    // var fileUploadDiv = document.getElementById(field + '_images');
+    // fileUploadDiv.style.display = show ? 'block' : 'none';
     if(val==="yes")
 {
     document.getElementById(`yes-${field}`).checked=true;

@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-<style>
 
 <style>
 .label {
@@ -98,7 +97,7 @@
 
                 <div class="row">
                     <!-- Image Name -->
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-6 form-group">
                         {{-- <label for="image_name">Image Name</label> --}}
                         <md-outlined-select class="label" label="Image Name" id="image_name" name="image_name" required>
                             <md-select-option value="RCB" {{ $imageShutdown->image_name == 'RCB' ? 'selected' : '' }}>RCB</md-select-option>
@@ -126,25 +125,17 @@
                     
                     
 
-                    <div class="col-md-4 form-group">
+                    <!-- <div class="col-md-4 form-group">
                         {{-- <label for="image_desc">Image Description</label> --}}
                         <md-outlined-text-field class="label" type="text" label="Image Description" id="image_desc" name="image_desc" value="{{ $imageShutdown->image_desc }}" required>
-                    </div>
+                    </div> -->
                     
 
-                    <!-- Image Type -->
-                    {{-- <div class="col-md-4 form-group">
-                        <label for="image_type">Image Type</label>
-                        <select class="form-control" id="image_type" name="image_type" required>
-                            <option value="" disabled>Select Type</option>
-                            <option value="before" {{ $imageShutdown->image_type == 'before' ? 'selected' : '' }}>Before</option>
-                            <option value="during" {{ $imageShutdown->image_type == 'during' ? 'selected' : '' }}>During</option>
-                            <option value="after" {{ $imageShutdown->image_type == 'after' ? 'selected' : '' }}>After</option>
-                        </select>
-                    </div> --}}
+               
+                   
 
                     <!-- Upload New Image -->
-                    <div class="col-md-4 mb-3" style="margin-top: -16px">
+                    <div class="col-md-6 mb-3" >
                         <md-label for="image_url" class="form-label">Upload Image</md-label>
                         <div class="file-upload-wrapper">
                             <input type="file" class="file-upload-input" id="image_url" name="image_url" accept="image/*" required>
@@ -152,7 +143,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <md-label for="existing_image">Existing Image</md-label>
                         <br><br>
                         <img src="{{ asset($imageShutdown->image_url) }}" alt="Existing Image" class="img-fluid" style="max-width: 300px;">

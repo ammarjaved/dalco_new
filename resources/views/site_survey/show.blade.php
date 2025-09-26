@@ -671,7 +671,7 @@
                     </md-tabs>
 
                     <!-- Image Uploads Section -->
-                    <div id="{{ $field }}_images" style="{{ (isset($siteSurvey1) && $siteSurvey1->$field == 'yes') ? '' : 'display: none;' }}">
+                    <!-- <div id="{{ $field }}_images" style="{{ (isset($siteSurvey1) && $siteSurvey1->$field == 'yes') ? '' : 'display: none;' }}">
                         @for ($i = 1; $i <= ($field == 'other' ? 4 : 2); $i++)
                             <div class="form-group">
                                 <md-label for="{{ $field }}_image{{ $i }}">
@@ -685,7 +685,7 @@
                                 @endif
                             </div>
                         @endfor
-                    </div>
+                    </div> -->
                 </div>
             </div>
         @endforeach

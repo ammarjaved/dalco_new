@@ -36,6 +36,8 @@ Route::post('/upload-site-images/{id}',[uploadImagesContoller::class,"uploadImag
 Route::post('/upload-toolbox-images/{id}/{type}',[uploadImagesContoller::class,"uploadImagesToolBox"]);
 
 Route::post('/upload-precbl-images',[uploadImagesContoller::class,"preCblImage"]);
+Route::post('/upload-ss-images',[uploadImagesContoller::class,"SSImage"]);
+
 Route::post('/upload-shutdown-images',[uploadImagesContoller::class,"shutdownImage"]);
 Route::post('/upload-sat-images',[uploadImagesContoller::class,"satImage"]);
 Route::post('/update-shutdown-images/{id}',[uploadImagesContoller::class,"updateShutdownImage"]);

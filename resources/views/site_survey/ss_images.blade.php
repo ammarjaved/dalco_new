@@ -103,7 +103,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 style="color: #8e44ad;">Add Image PreCabling</h1>
+                <h1 style="color: #8e44ad;">Add Image Site Survey</h1>
             </div>
         </div>
     </div>
@@ -116,7 +116,7 @@
                 <div class="card">
                     <div class="card-body">
                         <!-- Form to Add Image Shutdown -->
-                        <form action="{{ route('pre-cabling-images.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('site_survey.ss_image_store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="site_survey_id" value="{{ $survey->id }}">
                             
@@ -126,30 +126,19 @@
                                 
                                 <div class="col-md-4 col-12">
                                     <md-outlined-select class="label" label="Image Name" id="image_name" name="image_name" required>
-                                        <md-select-option value="RCB">RCB</md-select-option>
-                                        <md-select-option value="RCB-2">RCB-2</md-select-option>
-                                        <md-select-option value="RCB-SERIAL-NUMBER">RCB-SERIAL-NUMBER</md-select-option>
-                                        <md-select-option value="RCB-SERIAL-NUMBER-2">RCB-SERIAL-NUMBER-2</md-select-option>
-                                        <md-select-option value="TERMINATION-OF-RCB">TERMINATION-OF-RCB</md-select-option>
-                                        <md-select-option value="TERMINATION-OF-RCB-2">TERMINATION-OF-RCB-2</md-select-option>
-                                        <md-select-option value="SCADA-CABLE-ROUTE">SCADA-CABLE-ROUTE</md-select-option>
-                                        <md-select-option value="SCADA-CABLE-ROUTE-2">SCADA-CABLE-ROUTE-2</md-select-option>
-                                        <md-select-option value="BATTERY-CHARGER">BATTERY-CHARGER</md-select-option>
-                                        <md-select-option value="BATTERY-CHARGER-2">BATTERY-CHARGER-2</md-select-option>
-                                        <md-select-option value="PLATE-BATTERY-CHARGER">PLATE-BATTERY-CHARGER</md-select-option>
-                                        <md-select-option value="PLATE-BATTERY-CHARGER-2">PLATE-BATTERY-CHARGER-2</md-select-option>
-                                        <md-select-option value="EFI">EFI</md-select-option>
-                                        <md-select-option value="EFI-2">EFI-2</md-select-option>
-                                        <md-select-option value="EFI-3">EFI-3</md-select-option>
-                                        <md-select-option value="EFI-SERIAL-NUMBER">EFI-SERIAL-NUMBER</md-select-option>
-                                        <md-select-option value="EFI-SERIAL-NUMBER-2">EFI-SERIAL-NUMBER-2</md-select-option>
-                                        <md-select-option value="EFI-SERIAL-NUMBER-3">EFI-SERIAL-NUMBER-3</md-select-option>
-                                        <md-select-option value="EFI-SERIAL-NUMBER-4">EFI-SERIAL-NUMBER-4</md-select-option>
-                                        <md-select-option value="EFI-SERIAL-NUMBER-5">EFI-SERIAL-NUMBER-5</md-select-option>
-                                        <md-select-option value="RTU">RTU</md-select-option>
-                                        <md-select-option value="RTU-2">RTU-2</md-select-option>
-                                        <md-select-option value="RTU-BRAND">RTU-BRAND</md-select-option>
-                                        <md-select-option value="RTU-BRAND-2">RTU-BRAND-2</md-select-option>
+                                        <md-select-option value="Di Hadapan Pencawang Elektrik">Di Hadapan Pencawang Elektrik</md-select-option>
+                                        <md-select-option value="Dari Sisi Kiri Pencawang Elektrik">Dari Sisi Kiri Pencawang Elektrik</md-select-option>
+                                        <md-select-option value="Bahagian Hadapan Gear RMU ">Bahagian Hadapan Gear RMU </md-select-option>
+                                        <md-select-option value="Plat Besi RMU">Plat Besi RMU</md-select-option>
+                                        <md-select-option value="LVDB">LVDB</md-select-option>
+                                        <md-select-option value="TX">TX</md-select-option>
+                                        <md-select-option value="Plat Besi TX">Plat Besi TX</md-select-option>
+                                        <md-select-option value="Laluan Peparit">Laluan Peparit</md-select-option>
+                                        <md-select-option value="Lokasi Straight Through">Lokasi Straight Through</md-select-option>
+                                        <md-select-option value="Lokasi Joint Pit Straight Through">Lokasi Joint Pit Straight Through</md-select-option>
+                                        <md-select-option value="Diluar Kompaun Pencawang Elektrik">Diluar Kompaun Pencawang Elektrik</md-select-option>
+                                        <md-select-option value="Lokasi Genset">Lokasi Genset</md-select-option>
+                                       
                                     </md-outlined-select>
                                 </div>
                                 
@@ -180,9 +169,9 @@
                         </form>
 
                         <!-- Table of Saved Image Shutdowns -->
-                        <h3 class="mt-4">Saved Image PreCabling</h3>
+                        <h3 class="mt-4">Saved Image Site Survey</h3>
                         @if($imageShutdowns->isEmpty())
-                            <p>No image shutdowns found for this survey.</p>
+                            <p>No image  found for this survey.</p>
                         @else
 
                         <div class="table-responsive">
@@ -213,10 +202,10 @@
                                                     @endif
                                                 </td>
                                                 <td class="button-container">
-                                                    <md-filled-tonal-button href="{{ route('pre-cabling-images.edit', $imageShutdown->id) }}">
+                                                    <!-- <md-filled-tonal-button href="{{ route('pre-cabling-images.edit', $imageShutdown->id) }}">
                                                         Edit
-                                                    </md-filled-tonal-button>
-                                                    <form action="{{ route('pre-cabling-images.destroy', $imageShutdown->id) }}" method="POST" style="display:inline;">
+                                                    </md-filled-tonal-button> -->
+                                                    <form action="{{ route('site_survey.del_ss_image', $imageShutdown->id) }}" method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <md-filled-tonal-button type="submit">

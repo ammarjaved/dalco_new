@@ -128,6 +128,7 @@ table.dataTable thead .sorting_desc:after {
                     <th>Id</th>
                     <th>Material Code</th>
                     <th>Description</th>
+                    <th>Type</th>
                     <th>Bun</th>
                     <th>Quantity</th>
                     <th>Remarks</th>
@@ -155,6 +156,7 @@ table.dataTable thead .sorting_desc:after {
                 <th>PE Name</th>
                 <th>Material Code</th> 
                 <th>Description</th>
+                <th>Type</th>
                 <th>Bun</th>
                 <th>Quantity</th>
                 <th>Remarks</th>
@@ -167,6 +169,7 @@ table.dataTable thead .sorting_desc:after {
                     <td>{{ $item->nama_pe }}</td>
                     <td>{{ $item->mat_code }}</td>
                     <td>{{ $item->mat_desc }}</td>
+                    <td>{{ $item->mat_type }}</td>
                     <td>{{ $item->bun }}</td>
                     <td>{{ $item->quantity }}</td>
                     <td>{{ $item->remarks }}</td>
@@ -225,8 +228,9 @@ function addData() {
                               '<td><input type="text" name="data[' + i + '][id]" value="' + data[0].id + '" /></td>' +
                               '<td><input type="text" name="data[' + i + '][mat_code]" value="' + data[0].mat_code + '" /></td>' +
                               '<td><input type="text" name="data[' + i + '][mat_desc]" value="' + data[0].mat_desc + '" /></td>' +
+                              '<td><input type="text" name="data[' + i + '][mat_desc]" value="' + data[0].mat_type + '" /></td>' +
                               '<td><input type="text" name="data[' + i + '][bun]" value="' + data[0].bun + '" /></td>' +
-                              '<td><input type="number" name="data[' + i + '][quantity]" value="0" /></td>' +
+                              '<td><input type="text" name="data[' + i + '][quantity]" value="0" /></td>' +
                               '<td><input type="text" name="data[' + i + '][remarks]" value="" /></td>' +
                               '</tr>';
                     $("#mat_sel").append(str);
